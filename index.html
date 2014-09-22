@@ -3,15 +3,31 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Progress</title>
-        <meta name="description" content="Circle progress bar">
+        <title>Progresspath.js</title>
+        <meta name="description" content="Beautiful progress bar using animated SVG paths">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="main.css">
+        <script src="progresspath.js"></script>
     </head>
     <body>
         <div id="progress-container"></div>
 
-        <script src="circle.js"></script>
+
+        <script>
+            function randInt(min, max) {
+                return Math.floor(Math.random()*(max-min+1)+min);
+            }
+
+            var element = document.getElementById('progress-container');
+            var progress = new ProgressPath(element);
+
+            progress.animate(50);
+
+            element.onclick = function() {
+                progress.animate(randInt(0, 100));
+            };
+
+        </script>
     </body>
 </html>

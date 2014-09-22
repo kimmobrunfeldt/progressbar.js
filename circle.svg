@@ -1,0 +1,7 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <path d="M 50,50 m 0,-47 a 47,47 0 0 1 0,94 a 47,47 0 0 1 0,-94 " stroke="#ddd" stroke-width="3" fill-opacity="0"/>
+
+    <path class="progress-bar" d="M 50,50 m 0,-47 a 47,47 0 0 1 0,94 a 47,47 0 0 1 0,-94 " stroke="#555" stroke-width="3" fill-opacity="0"/>
+</svg>
+
+<button>Start</button>
