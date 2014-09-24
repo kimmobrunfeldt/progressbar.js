@@ -7,6 +7,12 @@ Create beautiful and responsive progress bars with animated SVG paths.
 
 # API
 
+[**ProgressPath**](#-progresspathcontainer-options)
+
+* [animate(progress, options)](#-animateprogress-options)
+* [destroy()](#-destroy)
+
+
 ## # ProgressPath(container, options)
 
 Initializes a new `ProgressPath` object.
