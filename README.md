@@ -7,8 +7,6 @@ Create beautiful and responsive progress bars with animated SVG paths.
 
 # API
 
-<br>
-
 ## # ProgressPath(container, options)
 
 Initializes a new `ProgressPath` object.
@@ -48,7 +46,6 @@ var progress = new ProgressPath(container, {
 ```
 
 <br>
-<br>
 
 ## # .animate(progress, options)
 
@@ -78,7 +75,6 @@ progress.animate(30, {
 });
 ```
 
-<br>
 <br>
 
 ## # .destroy()
