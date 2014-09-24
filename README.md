@@ -12,8 +12,8 @@ Create beautiful and responsive progress bars with animated SVG paths.
 * [animate(progress, options)](#-animateprogress-options)
 * [destroy()](#-destroy)
 * [views](#-views)
-    * [circle(options)](#-views-circleoptions)
-    * [square(options)](#-views-squareoptions)
+    * [circle(options)](#-viewscircleoptions)
+    * [square(options)](#-viewssquareoptions)
 
 
 ## # ProgressPath(container, options)
