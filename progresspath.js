@@ -1,5 +1,4 @@
-;
-(function() {
+(function(root) {
 
     var browserPrefixes = ['-webkit-', '-moz-', '-o-'];
 
@@ -26,7 +25,7 @@
 
     ProgressPath.prototype.animate = function animate(progress, opts) {
         opts = extend({
-            duration: "800ms",
+            duration: 800,
             easing: "ease-in-out"
         }, opts);
 
@@ -43,7 +42,7 @@
 
         // Define our transition
         this._path.style.transition = this._path.style.WebkitTransition =
-          'stroke-dashoffset ' + opts.duration + ' ' + opts.easing;
+          'stroke-dashoffset ' + opts.duration + ' ' + opts.easing + 'ms';
 
         // Animate
         this._path.style.strokeDashoffset = length - (progress / 100) * length;
@@ -58,89 +57,71 @@
     ProgressPath.prototype.views = ProgressPath.views = {};
 
     ProgressPath.prototype.views.circle = function circle(opts) {
-        opts = extend({
-            color: "#555",
-            strokeWidth: "0.5",
-            trailColor: "#f4f4f4",
-            trailStrokeWidth: "0.4"
-        }, opts);
-
-        // Creates a circle path which fits to 100x100 view box
-        function createCirclePath(strokeColor, strokeWidth) {
-            var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-
-            // Use two arcs to form a circle
-            // See this answer http://stackoverflow.com/a/10477334/1446092
-            var pathString = "M 50,50 m 0,-{r} a {r},{r} 0 1 1 0,{r*2} a {r},{r} 0 1 1 0,-{r*2}";
-            var r = 50 - strokeWidth / 2;
-            pathString = pathString.replace(/\{r\}/g, r);
-            pathString = pathString.replace(/\{r\*2\}/g, r * 2);
-
-            path.setAttributeNS(null, "d", pathString);
-            path.setAttributeNS(null, "stroke", strokeColor);
-            path.setAttributeNS(null, "stroke-width", strokeWidth);
-            path.setAttributeNS(null, "fill-opacity", "0");
-
-            return path;
-        }
-
-        var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("viewBox", "0 0 100 100");
-
-        var trailPath = createCirclePath(opts.trailColor, opts.trailStrokeWidth);
-        svg.appendChild(trailPath);
-
-        var path = createCirclePath(opts.color, opts.strokeWidth);
-        svg.appendChild(path);
-
-        return {
-            path: path,
-            svg: svg
-        };
+        return _createSvg(opts, _circlePathString);
     };
 
     ProgressPath.prototype.views.square = function square(opts) {
+        return _createSvg(opts, _squarePathString);
+    };
+
+    function _circlePathString(opts) {
+        // Use two arcs to form a circle
+        // See this answer http://stackoverflow.com/a/10477334/1446092
+        var pathString = "M 50,50 m 0,-{r} a {r},{r} 0 1 1 0,{r*2} a {r},{r} 0 1 1 0,-{r*2}";
+        var r = 50 - opts.strokeWidth / 2;
+        pathString = pathString.replace(/\{r\}/g, r);
+        pathString = pathString.replace(/\{r\*2\}/g, r * 2);
+        return pathString;
+    }
+
+    function _squarePathString(opts) {
+        var pathString = "M 0,{s/2} L {w},{s/2} L {w},{w} L {s/2},{w} L {s/2},{s}";
+        var w = 100 - opts.strokeWidth / 2;
+        pathString = pathString.replace(/\{w\}/g, w);
+        pathString = pathString.replace(/\{s\}/g, opts.strokeWidth);
+        pathString = pathString.replace(/\{s\/2\}/g, opts.strokeWidth / 2);
+        return pathString;
+    }
+
+    function _createSvg(opts, createPathString) {
         opts = extend({
             color: "#555",
             strokeWidth: "0.5",
-            trailColor: "#f4f4f4",
-            trailStrokeWidth: "0.4"
+            trailColor: "#f4f4f4"
         }, opts);
-
-        // Creates a square path which fits to 100x100 view box
-        function createSquarePath(strokeColor, strokeWidth) {
-            var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-
-            // Use two arcs to form a circle
-            // See this answer http://stackoverflow.com/a/10477334/1446092
-            var pathString = "M 0,{s/2} L {w},{s/2} L {w},{w} L {s/2},{w} L {s/2},{s}";
-            var w = 100 - strokeWidth / 2;
-            pathString = pathString.replace(/\{w\}/g, w);
-            pathString = pathString.replace(/\{s\}/g, strokeWidth);
-            pathString = pathString.replace(/\{s\/2\}/g, strokeWidth / 2);
-
-            path.setAttributeNS(null, "d", pathString);
-            path.setAttributeNS(null, "stroke", strokeColor);
-            path.setAttributeNS(null, "stroke-width", strokeWidth);
-            path.setAttributeNS(null, "fill-opacity", "0");
-
-            return path;
-        }
 
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.setAttribute("viewBox", "0 0 100 100");
 
-        var trailPath = createSquarePath(opts.trailColor, opts.trailStrokeWidth);
-        svg.appendChild(trailPath);
+        var pathString = createPathString(opts);
+        var trailOpts = extend({}, opts);
+        trailOpts.color = opts.trailColor;
 
-        var path = createSquarePath(opts.color, opts.strokeWidth);
+        var trailPath = _createPath(pathString, trailOpts);
+        var path = _createPath(pathString, opts);
+        svg.appendChild(trailPath);
         svg.appendChild(path);
 
         return {
-            path: path,
-            svg: svg
-        };
-    };
+            svg: svg,
+            path: path
+        }
+    }
+
+    function _createPath(pathString, opts) {
+        var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttributeNS(null, "d", pathString);
+        path.setAttributeNS(null, "stroke", opts.color);
+        path.setAttributeNS(null, "stroke-width", opts.strokeWidth);
+
+        if (opts.fill) {
+            path.setAttributeNS(null, "fill", opts.fill);
+        } else {
+            path.setAttributeNS(null, "fill-opacity", "0");
+        }
+
+        return path;
+    }
 
     // Util functions
 
@@ -173,5 +154,5 @@
         return prefixes;
     }
 
-    window.ProgressPath = ProgressPath;
-})();
+    root.ProgressPath = ProgressPath;
+})(window);
