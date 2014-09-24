@@ -42,7 +42,7 @@
 
         // Define our transition
         this._path.style.transition = this._path.style.WebkitTransition =
-          'stroke-dashoffset ' + opts.duration + ' ' + opts.easing + 'ms';
+          'stroke-dashoffset ' + opts.duration + 'ms ' + opts.easing;
 
         // Animate
         this._path.style.strokeDashoffset = length - (progress / 100) * length;
