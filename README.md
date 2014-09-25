@@ -88,8 +88,6 @@ var progressBar = new ProgressBar.Circle('#container', {
 });
 ```
 
-<br>
-
 ## Circle.animate(percent, options)
 
 Animates drawing of circle.
@@ -119,12 +117,12 @@ progressBar.animate(30, {
 });
 ```
 
-<br>
-
 ## Circle.set(percent)
 
 Set progress to a percent instantly without animation.
 
+<br>
+<br>
 
 ## Square(container, options)
 
@@ -185,8 +183,6 @@ var progressBar = new ProgressBar.Square('#container', {
 });
 ```
 
-<br>
-
 ## Square.animate(percent, options)
 
 Animates drawing of square.
@@ -216,8 +212,6 @@ progressBar.animate(30, {
 });
 ```
 
-<br>
-
 ## Square.set(percent)
 
 Set progress to a percent instantly without animation.
@@ -227,8 +221,8 @@ Set progress to a percent instantly without animation.
 
 ## Path(path, options)
 
-`path` shaped progress bar. It's on caller's responsibility to append SVG and
-its path to DOM.
+Custom shaped progress bar. You can create arbitrary shaped progress bars by
+passing a SVG path created with e.g. Adobe Illustrator. It's on caller's responsibility to append SVG to DOM.
 
 **Parameters**
 
@@ -267,8 +261,6 @@ var path = new ProgressBar.Path(svgPath, {
 });
 ```
 
-<br>
-
 ## Path.animate(percent, options)
 
 Animates drawing of path.
@@ -297,9 +289,6 @@ path.animate(30, {
     duration: 800
 });
 ```
-
-<br>
-
 
 ## Path.set(percent)
 
