@@ -1,33 +1,30 @@
 # SVG Progress Bar
 
 <br>
-
 ![Beautiful animation](demo/animation.gif)
 
-
-Beautiful and responsive progress bars with animated SVG paths.
-[Use built-in shapes]() or [create your own paths]().
-
 <br>
+Beautiful and responsive progress bars with animated SVG paths.
+[Use built-in shapes](#circlecontainer-options) or [create your own paths](#pathpath-options).
 
 # API
 
 [**ProgressBar**](#api)
 
 
-* [Circle(container, options)](container, option)
-    * [animate(percent, options)]()
-    * [set(percent)]()
+* [Circle(container, options)](#circlecontainer-options)
+    * [animate(percent, options)](#circleanimatepercent-options)
+    * [set(percent)](#circlesetpercent)
 
 
-* [Square(container, options)]()
-    * [animate(percent, options)]()
-    * [set(percent)]()
+* [Square(container, options)](#squarecontainer-options)
+    * [animate(percent, options)](#squareanimatepercent-options)
+    * [set(percent)](#squaresetpercent)
 
 
-* [Path(path, options)]()
-    * [animate(percent, options)]()
-    * [set(percent)]()
+* [Path(path, options)](#pathpath-options)
+    * [animate(percent, options)](#pathanimatepercent-options)
+    * [set(percent)](#pathsetpercent)
 
 All built-in shapes are drawn on 100x100 square SVG canvas.
 All shapes fill their canvases.
