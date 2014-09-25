@@ -31,11 +31,13 @@
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.setAttribute("viewBox", "0 0 100 100");
 
-        var trailOpts = extend({}, opts);
-        trailOpts.color = opts.trailColor;
-        var trailPath = this._createPath(trailOpts);
-        svg.appendChild(trailPath);
-
+        if (opts.trailColor) {
+            var trailOpts = extend({}, opts);
+            trailOpts.color = opts.trailColor;
+            var trailPath = this._createPath(trailOpts);
+            svg.appendChild(trailPath);
+        }
+        
         var path = this._createPath(opts);
         svg.appendChild(path);
 
