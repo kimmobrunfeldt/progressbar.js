@@ -10,12 +10,23 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto:300,100' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="styles/main.css">
 
+        <link rel="shortcut icon" type="image/png" href="images/svg-progressbar-icon-32.png"/>
+
         <script src="../progressbar.js"></script>
+
+        <!-- Color scheme used -->
+        <!-- https://kuler.adobe.com/Copy-of-Close-to-the-Garden-but-more-Teal-color-theme-4324985/ -->
     </head>
     <body>
 
         <section class="landing">
             <div class="square-progress" id="square-progress"></div>
+
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 400 400" xml:space="preserve">
+                <path fill-opacity="0" stroke-width="0.6" stroke="#f4f4f4" d="M199.7,52.1l47.8,96.9l0.2,0.5l0.5,0.1l106.9,15.5l-77.4,75.4l-0.4,0.4l0.1,0.5l18.3,106.5l-95.6-50.3l-0.5-0.2l-0.5,0.2 l-95.6,50.3l18.3-106.5l0.1-0.5l-0.4-0.4l-77.4-75.4l106.9-15.5l0.5-0.1l0.2-0.5L199.7,52.1"/>
+        	    <path id="star-path" fill-opacity="0" stroke-width="0.6" stroke="#555" d="M199.7,52.1l47.8,96.9l0.2,0.5l0.5,0.1l106.9,15.5l-77.4,75.4l-0.4,0.4l0.1,0.5l18.3,106.5l-95.6-50.3l-0.5-0.2l-0.5,0.2 l-95.6,50.3l18.3-106.5l0.1-0.5l-0.4-0.4l-77.4-75.4l106.9-15.5l0.5-0.1l0.2-0.5L199.7,52.1"/>
+            </svg>
+
         </section>
 
         <script>
@@ -32,6 +43,14 @@
             squareProgress.animate(100, {
                 duration: 1200
             });
+
+            var star = document.getElementById('star-path');
+            var starProgress = new ProgressBar.Path(star);
+
+            starProgress.animate(100, {
+                duration: 1800
+            });
+
         </script>
     </body>
 </html>
