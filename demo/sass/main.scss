@@ -23,27 +23,10 @@ h1 {
     //@include background-image(linear-gradient(#232526, #414345));
 }
 
-.circle-progress {
-    float: left;
-    width: 150px;
-    padding: 40px 0 30px 0;
-}
-
 .square-progress {
     float: left;
     width: 150px;
-    padding: 40px 0 30px 0;
-}
-
-.square2-progress {
-    float: left;
-    width: 150px;
-    padding: 40px 0 30px 0;
-}
-
-.progress-container {
-    width: 100%;
-    padding: 40px 0 30px 0;
+    padding: 40px 0 30px 30px;
 }
 
 svg {

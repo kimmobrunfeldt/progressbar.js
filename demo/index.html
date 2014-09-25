@@ -3,87 +3,35 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Progresspath.js</title>
-        <meta name="description" content="Beautiful progress bar using animated SVG paths">
+        <title>SVG Progress Bar</title>
+        <meta name="description" content="Beautiful and responsive progress bars with animated SVG paths.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link href='http://fonts.googleapis.com/css?family=Roboto:300,100' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="styles/main.css">
 
-        <script src="../progresspath.js"></script>
+        <script src="../progressbar.js"></script>
     </head>
     <body>
 
         <section class="landing">
-
-            <div class="square2-progress" id="square2-progress"></div>
-            <div class="circle-progress" id="circle-progress"></div>
             <div class="square-progress" id="square-progress"></div>
-
-
         </section>
-<div class="progress-container" id="progress-container"></div>
-
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="heart" x="0px" y="0px" viewBox="0 0 100 100">
-            <path fill-opacity="0" stroke-width="0.5" stroke="#f4f4f4" d="M81.495,13.923c-11.368-5.261-26.234-0.311-31.489,11.032C44.74,13.612,29.879,8.657,18.511,13.923  C6.402,19.539,0.613,33.883,10.175,50.804c6.792,12.04,18.826,21.111,39.831,37.379c20.993-16.268,33.033-25.344,39.819-37.379  C99.387,33.883,93.598,19.539,81.495,13.923z"/>
-            <path id="heart-path" fill-opacity="0" stroke-width="0.6" stroke="#555" d="M81.495,13.923c-11.368-5.261-26.234-0.311-31.489,11.032C44.74,13.612,29.879,8.657,18.511,13.923  C6.402,19.539,0.613,33.883,10.175,50.804c6.792,12.04,18.826,21.111,39.831,37.379c20.993-16.268,33.033-25.344,39.819-37.379  C99.387,33.883,93.598,19.539,81.495,13.923z"/>
-        </svg>
 
         <script>
             function randInt(min, max) {
                 return Math.floor(Math.random()*(max-min+1)+min);
             }
 
-            var element = document.getElementById('progress-container');
-            var circle = document.getElementById('circle-progress');
-            var progress = new ProgressPath(circle, {
-                strokeWidth: 1
-            });
-
-            progress.animate(100, {
-                duration: "1200ms"
-            });
-
-            /*
-            var heartProgress = new ProgressPath(element, {
-                view: {
-                    svg: document.getElementById('heart'),
-                    path: document.getElementById('heart-path')
-                }
-            });
-
-            heartProgress.animate(100, {
-                duration: "1200ms"
-            });
-
-            window.onclick = function() {
-                progress.animate(randInt(0, 100));
-                heartProgress.animate(randInt(0, 100));
-                squareProgress.animate(randInt(0, 100));
-            };
-            */
             var square = document.getElementById('square-progress');
-            var squareProgress = new ProgressPath(square, {
-                view: ProgressPath.views.square,
+            var squareProgress = new ProgressBar.Square(square, {
+                color: "#6FD57F",
                 strokeWidth: 1
             });
 
             squareProgress.animate(100, {
-                duration: "1200ms"
+                duration: 1200
             });
-
-            var square2 = document.getElementById('square2-progress');
-            var square2Progress = new ProgressPath(square2, {
-                view: ProgressPath.views.square,
-                strokeWidth: 1
-            });
-
-            square2Progress.animate(100, {
-                duration: "1200ms"
-            });
-
-
-
         </script>
     </body>
 </html>

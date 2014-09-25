@@ -92,11 +92,11 @@ h1 {
 .square-progress {
   float: left;
   width: 150px;
-  padding: 40px 0 30px 0;
+  padding: 40px 0 30px 30px;
 }
 
 /* line 38, ../sass/main.scss */
-.square2-progress {
+.triangle-progress {
   float: left;
   width: 150px;
   padding: 40px 0 30px 0;
