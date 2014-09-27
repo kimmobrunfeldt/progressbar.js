@@ -8,6 +8,12 @@
         if (arguments.length === 0) return;
 
         var svgView = this._createSvgView(opts);
+
+        // If container is an id, get the element
+        if (typeof container === 'string' && container.charAt(0) === '#') {
+          container = document.getElementById(container.slice(1));
+        }
+
         container.appendChild(svgView.svg);
 
         this._path = new Path(svgView.path, opts);
@@ -37,14 +43,14 @@
             var trailPath = this._createPath(trailOpts);
             svg.appendChild(trailPath);
         }
-        
+
         var path = this._createPath(opts);
         svg.appendChild(path);
 
         return {
             svg: svg,
             path: path
-        }
+        };
     };
 
     Progress.prototype._createPath = function _createPath(opts) {
