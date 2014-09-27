@@ -13,18 +13,18 @@ Beautiful and responsive progress bars with animated SVG paths.
 
 
 * [Circle(container, options)](#circlecontainer-options)
-    * [animate(percent, options)](#circleanimatepercent-options)
-    * [set(percent)](#circlesetpercent)
+    * [animate(progress, options)](#circleanimateprogress-options)
+    * [set(progress)](#circlesetprogress)
 
 
 * [Square(container, options)](#squarecontainer-options)
-    * [animate(percent, options)](#squareanimatepercent-options)
-    * [set(percent)](#squaresetpercent)
+    * [animate(progress, options)](#squareanimateprogress-options)
+    * [set(progress)](#squaresetprogress)
 
 
 * [Path(path, options)](#pathpath-options)
-    * [animate(percent, options)](#pathanimatepercent-options)
-    * [set(percent)](#pathsetpercent)
+    * [animate(progress, options)](#pathanimateprogress-options)
+    * [set(progress)](#pathsetprogress)
 
 All built-in shapes are drawn on 100x100 square SVG canvas.
 All shapes fill their canvases.
@@ -88,13 +88,13 @@ var progressBar = new ProgressBar.Circle('#container', {
 });
 ```
 
-## Circle.animate(percent, options)
+## Circle.animate(progress, options)
 
 Animates drawing of circle.
 
 **Parameters**
 
-* `percent` Percent from 0 to 100.
+* `progress` Progress from 0 to 1, where 1 means 100% complete.
 * `options` Animation options. These options override the defaults given in initialization.
 
     ```javascript
@@ -112,14 +112,14 @@ Animates drawing of circle.
 **Example**
 
 ```javascript
-progressBar.animate(30, {
+progressBar.animate(0.3, {
     duration: 800
 });
 ```
 
-## Circle.set(percent)
+## Circle.set(progress)
 
-Set progress to a percent instantly without animation.
+Set progress to the given value between 0 and 1 instantly and without animation.
 
 <br>
 <br>
@@ -183,13 +183,13 @@ var progressBar = new ProgressBar.Square('#container', {
 });
 ```
 
-## Square.animate(percent, options)
+## Square.animate(progress, options)
 
 Animates drawing of square.
 
 **Parameters**
 
-* `percent` Percent from 0 to 100.
+* `progress` Progress from 0 to 1, where 1 means 100% complete.
 * `options` Animation options. These options override the defaults given in initialization.
 
     ```javascript
@@ -207,14 +207,14 @@ Animates drawing of square.
 **Example**
 
 ```javascript
-progressBar.animate(30, {
+progressBar.animate(0.3, {
     duration: 800
 });
 ```
 
-## Square.set(percent)
+## Square.set(progress)
 
-Set progress to a percent instantly without animation.
+Set progress to the given value between 0 and 1 instantly and without animation.
 
 <br>
 <br>
@@ -261,13 +261,13 @@ var path = new ProgressBar.Path(svgPath, {
 });
 ```
 
-## Path.animate(percent, options)
+## Path.animate(progress, options)
 
 Animates drawing of path.
 
 **Parameters**
 
-* `percent` Percent from 0 to 100.
+* `progress` Progress from 0 to 1, where 1 means 100% complete.
 * `options` Animation options. These options override the defaults given in initialization.
 
     ```javascript
@@ -285,11 +285,11 @@ Animates drawing of path.
 **Example**
 
 ```javascript
-path.animate(30, {
+path.animate(0.3, {
     duration: 800
 });
 ```
 
-## Path.set(percent)
+## Path.set(progress)
 
-Set progress to a percent instantly without animation.
+Set progress to the given value between 0 and 1 instantly and without animation.

@@ -37,7 +37,7 @@
             var trailPath = this._createPath(trailOpts);
             svg.appendChild(trailPath);
         }
-        
+
         var path = this._createPath(opts);
         svg.appendChild(path);
 
@@ -118,14 +118,14 @@
         this._path.style.strokeDashoffset = length;
     };
 
-    Path.prototype.set = function set(percent) {
+    Path.prototype.set = function set(progress) {
         this._path.style.transition = this._path.style.WebkitTransition = 'none';
-        this._path.style.strokeDashoffset = length - (percent / 100) * length;
+        this._path.style.strokeDashoffset = length - progress * length;
     };
 
     // Method introduced here:
     // http://jakearchibald.com/2013/animated-line-drawing-svg/
-    Path.prototype.animate = function animate(percent, opts) {
+    Path.prototype.animate = function animate(progress, opts) {
         // Copy default opts to new object so defaults are not modified
         var defaultOpts = extend({}, this._opts);
         opts = extend(defaultOpts, opts);
@@ -142,7 +142,7 @@
         // Animate
         this._path.style.transition = this._path.style.WebkitTransition =
           'stroke-dashoffset ' + opts.duration + 'ms ' + opts.easing;
-        this._path.style.strokeDashoffset = length - (percent / 100) * length;
+        this._path.style.strokeDashoffset = length - progress * length;
     };
 
     // Utility functions
