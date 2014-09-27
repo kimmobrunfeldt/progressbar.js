@@ -261,6 +261,24 @@ var path = new ProgressBar.Path(svgPath, {
 });
 ```
 
+**Working with embedded SVG**
+
+If the SVG was not inline in the HTML but instead in, say, an `<object>` tag, we'd have to take extra steps to wait until it has loaded and then access it differently since it's in a separate DOM tree. Given e.g.:
+
+```html
+<object id="heart" type="image/svg+xml" data="heart.svg">No SVG support :(</object>
+```
+
+we could do
+
+```javascript
+var heart = document.getElementById('heart');
+heart.addEventListener('load', function () {
+var path = new ProgressBar.Path(heartObject.contentDocument.querySelector('#heart-path'), {
+    duration: 300
+});
+```
+
 ## Path.animate(percent, options)
 
 Animates drawing of path.
