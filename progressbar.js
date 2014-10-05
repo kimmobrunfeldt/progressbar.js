@@ -19,6 +19,10 @@
         this._path.animate(percent, opts);
     };
 
+    Progress.prototype.stop = function stop() {
+        this._path.stop();
+    };
+
     Progress.prototype.set = function set(percent) {
         this._path.set(percent);
     };
