@@ -32,7 +32,16 @@ All shapes fill their canvases.
 ## Circle(container, options)
 
 Circle shaped progress bar. Appends SVG to container.
-To make circle resize with its container, set for example following CSS:
+
+**Example**
+
+```javascript
+var progressBar = new ProgressBar.Circle('#container', {
+    strokeWidth: 2
+});
+```
+
+To make circle resize with its container, set for example the following CSS:
 
 ```css
 .container > svg {
@@ -80,17 +89,17 @@ To make circle resize with its container, set for example following CSS:
     }
     ```
 
-**Example**
-
-```javascript
-var progressBar = new ProgressBar.Circle('#container', {
-    strokeWidth: 2
-});
-```
-
 ## Circle.animate(percent, options)
 
 Animates drawing of circle.
+
+**Example**
+
+```javascript
+progressBar.animate(30, {
+    duration: 800
+});
+```
 
 **Parameters**
 
@@ -108,14 +117,6 @@ Animates drawing of circle.
         easing: "linear"
     }
     ```
-
-**Example**
-
-```javascript
-progressBar.animate(30, {
-    duration: 800
-});
-```
 
 ## Circle.set(percent)
 
@@ -127,7 +128,16 @@ Set progress to a percent instantly without animation.
 ## Square(container, options)
 
 Square shaped progress bar. Appends SVG to container.
-To make square resize with its container, set for example following CSS:
+
+**Example**
+
+```javascript
+var progressBar = new ProgressBar.Square('#container', {
+    strokeWidth: 2
+});
+```
+
+To make square resize with its container, set for example the following CSS:
 
 ```css
 .container > svg {
@@ -175,17 +185,17 @@ To make square resize with its container, set for example following CSS:
     }
     ```
 
-**Example**
-
-```javascript
-var progressBar = new ProgressBar.Square('#container', {
-    strokeWidth: 2
-});
-```
-
 ## Square.animate(percent, options)
 
 Animates drawing of square.
+
+**Example**
+
+```javascript
+progressBar.animate(30, {
+    duration: 800
+});
+```
 
 **Parameters**
 
@@ -203,14 +213,6 @@ Animates drawing of square.
         easing: "linear"
     }
     ```
-
-**Example**
-
-```javascript
-progressBar.animate(30, {
-    duration: 800
-});
-```
 
 ## Square.set(percent)
 
@@ -223,23 +225,6 @@ Set progress to a percent instantly without animation.
 
 Custom shaped progress bar. You can create arbitrary shaped progress bars by
 passing a SVG path created with e.g. Adobe Illustrator. It's on caller's responsibility to append SVG to DOM.
-
-**Parameters**
-
-* `path` [SVG Path](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths) object. For example `$('svg > path:first-child')[0]`.
-* `options` Animation options.
-
-    ```javascript
-    {
-        // Duration for animation in milliseconds
-        // Default: 800
-        duration: 1200,
-
-        // Easing for animation. CSS3 easings are supported.
-        // Default: "ease-in-out"
-        easing: "linear"
-    }
-    ```
 
 **Example**
 
@@ -261,9 +246,34 @@ var path = new ProgressBar.Path(svgPath, {
 });
 ```
 
+**Parameters**
+
+* `path` [SVG Path](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths) object. For example `$('svg > path:first-child')[0]`.
+* `options` Animation options.
+
+    ```javascript
+    {
+        // Duration for animation in milliseconds
+        // Default: 800
+        duration: 1200,
+
+        // Easing for animation. CSS3 easings are supported.
+        // Default: "ease-in-out"
+        easing: "linear"
+    }
+    ```
+
 ## Path.animate(percent, options)
 
 Animates drawing of path.
+
+**Example**
+
+```javascript
+path.animate(30, {
+    duration: 800
+});
+```
 
 **Parameters**
 
@@ -281,14 +291,6 @@ Animates drawing of path.
         easing: "linear"
     }
     ```
-
-**Example**
-
-```javascript
-path.animate(30, {
-    duration: 800
-});
-```
 
 ## Path.set(percent)
 
