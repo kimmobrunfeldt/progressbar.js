@@ -79,8 +79,8 @@ To make circle resize with its container, set for example the following CSS:
         // Default: "#f4f4f4"
         trailColor: "#f4f4f4",
 
-        // Fill color for the shape. If undefined, no fill.
-        // Default: undefined
+        // Fill color for the shape. If null, no fill.
+        // Default: null
         fill: "rgba(0, 0, 0, 0.5)",
 
         // Duration for animation in milliseconds
@@ -180,8 +180,8 @@ To make square resize with its container, set for example the following CSS:
         // Default: "#f4f4f4"
         trailColor: "#f4f4f4",
 
-        // Fill color for the shape. If undefined, no fill.
-        // Default: undefined
+        // Fill color for the shape. If null, no fill.
+        // Default: null
         fill: "rgba(0, 0, 0, 0.5)",
 
         // Duration for animation in milliseconds

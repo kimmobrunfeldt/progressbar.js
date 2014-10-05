@@ -35,7 +35,8 @@
         opts = extend({
             color: "#555",
             strokeWidth: "0.5",
-            trailColor: "#f4f4f4"
+            trailColor: "#f4f4f4",
+            fill: null
         }, opts);
 
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
