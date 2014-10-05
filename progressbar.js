@@ -34,7 +34,7 @@
     Progress.prototype._createSvgView = function _createSvgView(opts) {
         opts = extend({
             color: "#555",
-            strokeWidth: "0.5",
+            strokeWidth: 1.0,
             trailColor: "#f4f4f4",
             fill: null
         }, opts);

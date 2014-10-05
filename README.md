@@ -70,7 +70,7 @@ To make circle resize with its container, set for example the following CSS:
 
         // Width of the stroke.
         // Unit is percentage of SVG canvas.
-        // Default: 0.5
+        // Default: 1.0
         strokeWidth: 0.1,
 
         // Color for lighter trail stroke
@@ -171,7 +171,7 @@ To make square resize with its container, set for example the following CSS:
 
         // Width of the stroke.
         // Unit is percentage of SVG canvas.
-        // Default: 0.5
+        // Default: 1.0
         strokeWidth: 0.1,
 
         // Color for lighter trail stroke
