@@ -82,36 +82,22 @@ h1 {
 }
 
 /* line 26, ../sass/main.scss */
-.circle-progress {
-  float: left;
-  width: 150px;
-  padding: 40px 0 30px 0;
-}
-
-/* line 32, ../sass/main.scss */
 .square-progress {
   float: left;
   width: 150px;
   padding: 40px 0 30px 30px;
 }
 
-/* line 38, ../sass/main.scss */
-.triangle-progress {
-  float: left;
-  width: 150px;
-  padding: 40px 0 30px 0;
-}
-
-/* line 44, ../sass/main.scss */
-.progress-container {
-  width: 100%;
-  padding: 40px 0 30px 0;
-}
-
-/* line 49, ../sass/main.scss */
+/* line 32, ../sass/main.scss */
 svg {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 80%;
+}
+
+/* line 41, ../sass/main.scss */
+.please .inline {
+  height: 100%;
+  display: inline;
 }

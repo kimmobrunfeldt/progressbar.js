@@ -12,24 +12,70 @@
 
         <link rel="shortcut icon" type="image/png" href="images/svg-progressbar-icon-32.png"/>
 
-        <script src="../progressbar.js"></script>
-
         <!-- Color scheme used -->
         <!-- https://kuler.adobe.com/Copy-of-Close-to-the-Garden-but-more-Teal-color-theme-4324985/ -->
     </head>
     <body>
 
-        <section class="landing">
-            <div class="circle-progress" id="circle-progress"></div>
+        <section id="landing" class="full-height">
+            <div id="circle-progress"></div>
 
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 400 400" xml:space="preserve">
-                <path fill-opacity="0" stroke-width="0.6" stroke="#f4f4f4" d="M199.7,52.1l47.8,96.9l0.2,0.5l0.5,0.1l106.9,15.5l-77.4,75.4l-0.4,0.4l0.1,0.5l18.3,106.5l-95.6-50.3l-0.5-0.2l-0.5,0.2 l-95.6,50.3l18.3-106.5l0.1-0.5l-0.4-0.4l-77.4-75.4l106.9-15.5l0.5-0.1l0.2-0.5L199.7,52.1"/>
-        	    <path id="star-path" fill-opacity="0" stroke-width="0.6" stroke="#555" d="M199.7,52.1l47.8,96.9l0.2,0.5l0.5,0.1l106.9,15.5l-77.4,75.4l-0.4,0.4l0.1,0.5l18.3,106.5l-95.6-50.3l-0.5-0.2l-0.5,0.2 l-95.6,50.3l18.3-106.5l0.1-0.5l-0.4-0.4l-77.4-75.4l106.9-15.5l0.5-0.1l0.2-0.5L199.7,52.1"/>
+            <div class="float-right-down">
+                <a href="#examples">
+                    <img src="images/arrow-down.svg" alt="Down">
+                </a>
+            </div>
+
+        </section>
+
+        <section id="examples">
+            <h1>Examples</h1>
+
+            <div class="example">
+                <h2>Circle</h2>
+
+                <div class="code">
+
+                </div>
+
+                <div class="result">
+
+                </div>
+
+            </div>
+
+            <div class="example">
+                <h2>Custom shape</h2>
+
+                <div class="code">
+
+                </div>
+
+                <div class="result">
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+        <section id="please" class="full-height">
+
+            <h1>Please
+            <svg class="inline" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 400 400" xml:space="preserve">
+                <path fill="#eeeeee" stroke-width="0.6" stroke="#eeeeee" d="M199.7,52.1l47.8,96.9l0.2,0.5l0.5,0.1l106.9,15.5l-77.4,75.4l-0.4,0.4l0.1,0.5l18.3,106.5l-95.6-50.3l-0.5-0.2l-0.5,0.2 l-95.6,50.3l18.3-106.5l0.1-0.5l-0.4-0.4l-77.4-75.4l106.9-15.5l0.5-0.1l0.2-0.5L199.7,52.1"/>
+                <path id="star-path" fill-opacity="0" stroke-width="0.6" stroke="#555" d="M199.7,52.1l47.8,96.9l0.2,0.5l0.5,0.1l106.9,15.5l-77.4,75.4l-0.4,0.4l0.1,0.5l18.3,106.5l-95.6-50.3l-0.5-0.2l-0.5,0.2 l-95.6,50.3l18.3-106.5l0.1-0.5l-0.4-0.4l-77.4-75.4l106.9-15.5l0.5-0.1l0.2-0.5L199.7,52.1"/>
             </svg>
+            <a href="https://github.com/kimmobrunfeldt/svg-progressbar" class="">on GitHub</a>
+            </h1>
+
 
         </section>
 
         <script src="scripts/lib/fit.js"></script>
+        <script src="../progressbar.js"></script>
+
         <script src="scripts/main.js"></script>
 
     </body>
