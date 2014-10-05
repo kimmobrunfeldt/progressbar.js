@@ -2,9 +2,9 @@ function randInt(min, max) {
     return Math.floor(Math.random()*(max-min+1)+min);
 }
 
-var circle = new ProgressBar.Circle('#circle-progress', {
+var circle = new ProgressBar.Circle('#landing-progress', {
     color: "#6FD57F",
-    strokeWidth: 1,
+    strokeWidth: 0.3,
     trailColor: null
 });
 

@@ -67,37 +67,68 @@ body, html {
   font-weight: 300;
 }
 
-/* line 13, ../sass/main.scss */
-h1 {
+/* line 14, ../sass/main.scss */
+.full-window {
+  height: 100%;
+  width: 100%;
+}
+
+/* line 19, ../sass/main.scss */
+svg {
+  display: block;
+  height: 100%;
+}
+
+/* line 25, ../sass/main.scss */
+.center {
+  /* Internet Explorer 10 */
+  display: -ms-flexbox;
+  -ms-flex-pack: center;
+  -ms-flex-align: center;
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  /* Safari, Opera, and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
+}
+
+/* line 49, ../sass/main.scss */
+#landing .background, #landing .content {
+  width: 100%;
+  height: 100%;
+}
+/* line 54, ../sass/main.scss */
+#landing header {
   font-size: 4em;
   color: #888;
 }
-
-/* line 18, ../sass/main.scss */
-.landing {
-  text-align: center;
-  height: 100%;
-  width: 100%;
-  font-weight: 300;
+/* line 59, ../sass/main.scss */
+#landing .big-background {
+  height: 90%;
+}
+/* line 63, ../sass/main.scss */
+#landing .float-right-down {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 
-/* line 26, ../sass/main.scss */
+/* line 70, ../sass/main.scss */
 .square-progress {
   float: left;
   width: 150px;
   padding: 40px 0 30px 30px;
 }
 
-/* line 32, ../sass/main.scss */
-svg {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
-}
-
-/* line 41, ../sass/main.scss */
-.please .inline {
+/* line 80, ../sass/main.scss */
+#please .inline {
   height: 100%;
   display: inline;
 }
