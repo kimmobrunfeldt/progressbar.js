@@ -1,5 +1,7 @@
 (function(root) {
 
+    var PREFIXES = 'webkit moz o ms'.split(' ');
+
     // Base object for different progress bar shapes
 
     var Progress = function(container, opts) {
@@ -37,7 +39,7 @@
             var trailPath = this._createPath(trailOpts);
             svg.appendChild(trailPath);
         }
-        
+
         var path = this._createPath(opts);
         svg.appendChild(path);
 
@@ -119,8 +121,18 @@
     };
 
     Path.prototype.set = function set(percent) {
-        this._path.style.transition = this._path.style.WebkitTransition = 'none';
+        this._setTransition('none');
+
+        var length = this._path.getTotalLength();
         this._path.style.strokeDashoffset = length - (percent / 100) * length;
+    };
+
+    Path.prototype.stop = function stop() {
+        var computedStyle = window.getComputedStyle(this._path, null);
+        var offset = computedStyle.getPropertyValue('stroke-dashoffset');
+        this._path.style.strokeDashoffset = offset;
+
+        this._setTransition('none');
     };
 
     // Method introduced here:
@@ -130,19 +142,27 @@
         var defaultOpts = extend({}, this._opts);
         opts = extend(defaultOpts, opts);
 
-        var length = this._path.getTotalLength();
-
-        // Clear any previous transition
-        this._path.style.transition = this._path.style.WebkitTransition = 'none';
+        this._setTransition('none');
 
         // Trigger a layout so styles are calculated & the browser
         // picks up the starting position before animating
         this._path.getBoundingClientRect();
 
         // Animate
-        this._path.style.transition = this._path.style.WebkitTransition =
-          'stroke-dashoffset ' + opts.duration + 'ms ' + opts.easing;
+        var transition = 'stroke-dashoffset ' + opts.duration + 'ms ' + opts.easing;
+        this._setTransition(transition);
+
+        var length = this._path.getTotalLength();
         this._path.style.strokeDashoffset = length - (percent / 100) * length;
+    };
+
+    Path.prototype._setTransition = function _setTransition(transition) {
+        for (var i = 0; i < PREFIXES.length; ++i) {
+            var prefix = PREFIXES[i].toUpperCase() + PREFIXES[i].substr(1);
+            this._path.style[prefix + 'Transition'] = transition;
+        }
+
+        this._path.style.transition = transition;
     };
 
     // Utility functions

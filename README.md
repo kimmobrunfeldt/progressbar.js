@@ -15,16 +15,19 @@ Beautiful and responsive progress bars with animated SVG paths.
 * [Circle(container, options)](#circlecontainer-options)
     * [animate(percent, options)](#circleanimatepercent-options)
     * [set(percent)](#circlesetpercent)
+    * [stop()](#circlestop)
 
 
 * [Square(container, options)](#squarecontainer-options)
     * [animate(percent, options)](#squareanimatepercent-options)
     * [set(percent)](#squaresetpercent)
+    * [stop()](#squarestop)
 
 
 * [Path(path, options)](#pathpath-options)
     * [animate(percent, options)](#pathanimatepercent-options)
     * [set(percent)](#pathsetpercent)
+    * [stop()](#pathstop)
 
 All built-in shapes are drawn on 100x100 square SVG canvas.
 All shapes fill their canvases.
@@ -120,7 +123,12 @@ progressBar.animate(30, {
 
 ## Circle.set(percent)
 
-Set progress to a percent instantly without animation.
+Sets progress to a percent instantly without animation. Clears all transitions
+for path.
+
+## Circle.stop()
+
+Stops animation to its current position.
 
 <br>
 <br>
@@ -216,7 +224,12 @@ progressBar.animate(30, {
 
 ## Square.set(percent)
 
-Set progress to a percent instantly without animation.
+Sets progress to a percent instantly without animation. Clears all transitions
+for path.
+
+## Square.stop()
+
+Stops animation to its current position.
 
 <br>
 <br>
@@ -294,4 +307,9 @@ path.animate(30, {
 
 ## Path.set(percent)
 
-Set progress to a percent instantly without animation.
+Set progress to a percent instantly without animation. Clears all transitions
+for path.
+
+## Path.stop()
+
+Stops animation to its current position.
