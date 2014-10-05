@@ -14,20 +14,21 @@ Beautiful and responsive progress bars with animated SVG paths.
 
 * [Circle(container, options)](#circlecontainer-options)
     * [animate(percent, options)](#circleanimatepercent-options)
-    * [set(percent)](#circlesetpercent)
     * [stop()](#circlestop)
+    * [set(percent)](#circlesetpercent)
 
 
 * [Square(container, options)](#squarecontainer-options)
     * [animate(percent, options)](#squareanimatepercent-options)
-    * [set(percent)](#squaresetpercent)
     * [stop()](#squarestop)
+    * [set(percent)](#squaresetpercent)
 
 
 * [Path(path, options)](#pathpath-options)
     * [animate(percent, options)](#pathanimatepercent-options)
-    * [set(percent)](#pathsetpercent)
     * [stop()](#pathstop)
+    * [set(percent)](#pathsetpercent)
+
 
 All built-in shapes are drawn on 100x100 square SVG canvas.
 All shapes fill their canvases.
