@@ -10,7 +10,11 @@
         if (arguments.length === 0) return;
 
         var svgView = this._createSvgView(opts);
-        container.appendChild(svgView.svg);
+        var element = isString(container)
+            ? document.querySelector(container)
+            : container;
+
+        element.appendChild(svgView.svg);
 
         this._path = new Path(svgView.path, opts);
     };
@@ -183,6 +187,10 @@
         }
 
         return destination;
+    }
+
+    function isString(obj) {
+        return typeof obj === 'string' || obj instanceof String;
     }
 
     // Expose modules
