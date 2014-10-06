@@ -3,14 +3,22 @@ function randInt(min, max) {
 }
 
 var circle = new ProgressBar.Circle('#landing-progress', {
-    color: "#6FD57F",
-    strokeWidth: 0.3,
-    trailColor: null
+    color: "#FCB03C",
+    strokeWidth: 1.5,
+    trailColor: null,
+    fill: "#FFF9F0"
 });
 
 circle.animate(100, {
-    duration: 1200
+    duration: 1300
 });
+
+var landingContent = document.querySelector('#landing > .content');
+landingContent.onclick = function() {
+    circle.animate(randInt(0, 100), {
+        duration: 1300
+    });
+}
 
 
 var star = document.getElementById('star-path');
