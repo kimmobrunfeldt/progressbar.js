@@ -3733,7 +3733,7 @@ body, html {
   font-weight: 300;
   min-width: 600px;
   min-height: 600px;
-  background: #068f86;
+  background: #07a197;
 }
 
 /* line 24, ../sass/main.scss */
@@ -3794,15 +3794,20 @@ svg {
   bottom: 20px;
   right: 20px;
 }
+/* line 76, ../sass/main.scss */
+#landing .float-right-down img {
+  width: 50px;
+  height: 50px;
+}
 
-/* line 78, ../sass/main.scss */
+/* line 83, ../sass/main.scss */
 .square-progress {
   float: left;
   width: 150px;
   padding: 40px 0 30px 30px;
 }
 
-/* line 88, ../sass/main.scss */
+/* line 93, ../sass/main.scss */
 #please .inline {
   height: 100%;
   display: inline;

@@ -9,8 +9,9 @@ var circle = new ProgressBar.Circle('#landing-progress', {
     fill: "#FFF9F0"
 });
 
+
 circle.animate(100, {
-    duration: 1200
+    duration: 1300
 }, function() {
     var elements = document.querySelectorAll('.content, .background');
     for (var i = 0; i < elements.length; ++i) {
