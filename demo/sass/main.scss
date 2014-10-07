@@ -3,6 +3,9 @@
 @import "reset.scss";
 @import "animate.scss";
 
+@import "mixins.scss";
+
+// Variables
 $circle-width: 600px;
 $background-color: #068F86;
 
@@ -34,6 +37,10 @@ svg {
     justify-content: center;
 
     font-weight: 100;
+
+    .background, .content {
+        @include animation-duration(400ms);
+    }
 
     .background {
         width: 100%;

@@ -10,13 +10,18 @@ var circle = new ProgressBar.Circle('#landing-progress', {
 });
 
 circle.animate(100, {
-    duration: 1300
+    duration: 1200
+}, function() {
+    var elements = document.querySelectorAll('.content, .background');
+    for (var i = 0; i < elements.length; ++i) {
+        elements[i].className += ' animated pulse';
+    }
 });
 
 var landingContent = document.querySelector('#landing > .content');
 landingContent.onclick = function() {
     circle.animate(randInt(0, 100), {
-        duration: 1300
+        duration: 1300,
     });
 }
 

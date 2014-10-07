@@ -3725,7 +3725,7 @@ Copyright (c) 2014 Daniel Eden
   animation-name: slideOutUp;
 }
 
-/* line 10, ../sass/main.scss */
+/* line 13, ../sass/main.scss */
 body, html {
   width: 100%;
   height: 100%;
@@ -3736,26 +3736,33 @@ body, html {
   background: #068f86;
 }
 
-/* line 21, ../sass/main.scss */
+/* line 24, ../sass/main.scss */
 .full-window {
   height: 100%;
   width: 100%;
 }
 
-/* line 26, ../sass/main.scss */
+/* line 29, ../sass/main.scss */
 svg {
   display: block;
   height: 100%;
 }
 
-/* line 31, ../sass/main.scss */
+/* line 34, ../sass/main.scss */
 #landing {
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 100;
 }
-/* line 38, ../sass/main.scss */
+/* line 41, ../sass/main.scss */
+#landing .background, #landing .content {
+  -webkit-animation-duration: 400ms;
+  -moz-animation-duration: 400ms;
+  -o-animation-duration: 400ms;
+  animation-duration: 400ms;
+}
+/* line 45, ../sass/main.scss */
 #landing .background {
   width: 100%;
   height: 100%;
@@ -3763,7 +3770,7 @@ svg {
   top: 0;
   left: 0;
 }
-/* line 45, ../sass/main.scss */
+/* line 52, ../sass/main.scss */
 #landing .background .landing-progress {
   position: relative;
   width: 600px;
@@ -3771,31 +3778,31 @@ svg {
   top: 50%;
   margin: -300px auto 0 auto;
 }
-/* line 54, ../sass/main.scss */
+/* line 61, ../sass/main.scss */
 #landing .content {
   position: relative;
   color: #FCB03C;
 }
-/* line 58, ../sass/main.scss */
+/* line 65, ../sass/main.scss */
 #landing .content header {
   font-size: 3em;
   cursor: pointer;
 }
-/* line 64, ../sass/main.scss */
+/* line 71, ../sass/main.scss */
 #landing .float-right-down {
   position: absolute;
   bottom: 20px;
   right: 20px;
 }
 
-/* line 71, ../sass/main.scss */
+/* line 78, ../sass/main.scss */
 .square-progress {
   float: left;
   width: 150px;
   padding: 40px 0 30px 30px;
 }
 
-/* line 81, ../sass/main.scss */
+/* line 88, ../sass/main.scss */
 #please .inline {
   height: 100%;
   display: inline;
