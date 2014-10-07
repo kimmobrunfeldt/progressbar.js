@@ -12,28 +12,28 @@ Beautiful and responsive progress bars with animated SVG paths.
 [**ProgressBar**](#api)
 
 
-* [Circle(container, options)](#circlecontainer-options)
-    * [animate(percent, options)](#circleanimatepercent-options)
+* [Circle(container, [*options*])](#circlecontainer-options)
+    * [animate(percent, [*options*], [*cb*])](#circleanimatepercent-options-cb)
     * [stop()](#circlestop)
     * [set(percent)](#circlesetpercent)
 
 
-* [Square(container, options)](#squarecontainer-options)
-    * [animate(percent, options)](#squareanimatepercent-options)
+* [Square(container, [*options*])](#squarecontainer-options)
+    * [animate(percent, [*options*], [*cb*])](#squareanimatepercent-options-cb)
     * [stop()](#squarestop)
     * [set(percent)](#squaresetpercent)
 
 
-* [Path(path, options)](#pathpath-options)
-    * [animate(percent, options)](#pathanimatepercent-options)
+* [Path(path, [*options*])](#pathpath-options)
+    * [animate(percent, [*options*], [*cb*])](#pathanimatepercent-options-cb)
     * [stop()](#pathstop)
     * [set(percent)](#pathsetpercent)
 
+Functions use node-style callback convention. Callback function is always the last given parameter.
 
-All built-in shapes are drawn on 100x100 square SVG canvas.
-All shapes fill their canvases.
+All built-in shapes are drawn on 100x100 square SVG canvas. All shapes fill their canvases.
 
-## Circle(container, options)
+## Circle(container, [*options*])
 
 Circle shaped progress bar. Appends SVG to container.
 
@@ -93,7 +93,7 @@ To make circle resize with its container, set for example the following CSS:
     }
     ```
 
-## Circle.animate(percent, options)
+## Circle.animate(percent, [*options*], [*cb*])
 
 Animates drawing of circle.
 
@@ -102,6 +102,8 @@ Animates drawing of circle.
 ```javascript
 progressBar.animate(30, {
     duration: 800
+}, function() {
+    console.log('Animation has finished');
 });
 ```
 
@@ -122,6 +124,8 @@ progressBar.animate(30, {
     }
     ```
 
+* `cb` Callback function which is called after transition ends.
+
 ## Circle.set(percent)
 
 Sets progress to a percent instantly without animation. Clears all transitions
@@ -134,7 +138,7 @@ Stops animation to its current position.
 <br>
 <br>
 
-## Square(container, options)
+## Square(container, [*options*])
 
 Square shaped progress bar. Appends SVG to container.
 
@@ -194,7 +198,7 @@ To make square resize with its container, set for example the following CSS:
     }
     ```
 
-## Square.animate(percent, options)
+## Square.animate(percent, [*options*], [*cb*])
 
 Animates drawing of square.
 
@@ -203,6 +207,8 @@ Animates drawing of square.
 ```javascript
 progressBar.animate(30, {
     duration: 800
+}, function() {
+    console.log('Animation has finished');
 });
 ```
 
@@ -223,6 +229,8 @@ progressBar.animate(30, {
     }
     ```
 
+* `cb` Callback function which is called after transition ends.
+
 ## Square.set(percent)
 
 Sets progress to a percent instantly without animation. Clears all transitions
@@ -235,7 +243,7 @@ Stops animation to its current position.
 <br>
 <br>
 
-## Path(path, options)
+## Path(path, [*options*])
 
 Custom shaped progress bar. You can create arbitrary shaped progress bars by
 passing a SVG path created with e.g. Adobe Illustrator. It's on caller's responsibility to append SVG to DOM.
@@ -277,7 +285,7 @@ var path = new ProgressBar.Path(svgPath, {
     }
     ```
 
-## Path.animate(percent, options)
+## Path.animate(percent, [*options*], [*cb*])
 
 Animates drawing of path.
 
@@ -286,6 +294,8 @@ Animates drawing of path.
 ```javascript
 path.animate(30, {
     duration: 800
+}, function() {
+    console.log('Animation has finished');
 });
 ```
 
@@ -305,6 +315,8 @@ path.animate(30, {
         easing: "linear"
     }
     ```
+
+* `cb` Callback function which is called after transition ends.
 
 ## Path.set(percent)
 

@@ -19,8 +19,8 @@
         this._path = new Path(svgView.path, opts);
     };
 
-    Progress.prototype.animate = function animate(percent, opts) {
-        this._path.animate(percent, opts);
+    Progress.prototype.animate = function animate(percent, opts, cb) {
+        this._path.animate(percent, opts, cb);
     };
 
     Progress.prototype.stop = function stop() {
@@ -122,6 +122,7 @@
 
         this._path = path;
         this._opts = opts;
+        this._callbacks = {};
 
         // Set up the starting positions
         var length = this._path.getTotalLength();
@@ -146,12 +147,25 @@
 
     // Method introduced here:
     // http://jakearchibald.com/2013/animated-line-drawing-svg/
-    Path.prototype.animate = function animate(percent, opts) {
+    Path.prototype.animate = function animate(percent, opts, cb) {
+        if (isFunction(opts)) {
+            cb = opts;
+            opts = {};
+        }
+
         // Copy default opts to new object so defaults are not modified
         var defaultOpts = extend({}, this._opts);
         opts = extend(defaultOpts, opts);
 
         this._setTransition('none');
+
+        if (cb) {
+            var self = this;
+            this._setCallback('transitionend', function(/* arguments */) {
+                cb.apply(self, arguments);
+                self._removeCallback('transitionend');
+            });
+        }
 
         // Trigger a layout so styles are calculated & the browser
         // picks up the starting position before animating
@@ -174,6 +188,18 @@
         this._path.style.transition = transition;
     };
 
+    Path.prototype._setCallback = function _setCallback(eventName, cb) {
+        this._removeCallback(eventName);
+        this._path.addEventListener(eventName, cb);
+        this._callbacks[eventName] = cb;
+    };
+
+    Path.prototype._removeCallback = function _removeCallback(eventName) {
+        if (this._callbacks.hasOwnProperty(eventName)) {
+            this._path.removeEventListener(eventName, this._callbacks[eventName]);
+        }
+    };
+
     // Utility functions
 
     // Copy all attributes from source object to destination object.
@@ -192,6 +218,10 @@
 
     function isString(obj) {
         return typeof obj === 'string' || obj instanceof String;
+    }
+
+    function isFunction(obj) {
+        return typeof obj === "function";
     }
 
     // Expose modules
