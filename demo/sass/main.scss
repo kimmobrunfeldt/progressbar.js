@@ -3,11 +3,15 @@
 @import "reset.scss";
 @import "animate.scss";
 
+@import "utils.scss";
 @import "mixins.scss";
 
 // Variables
 $circle-width: 600px;
-$background-color: #07A197;
+
+$main-color: #FCB03C;
+$background-color-light: #FFF9F0;
+$background-color-dark: #07A197;
 
 
 body, html {
@@ -17,7 +21,7 @@ body, html {
     font-weight: 300;
     min-width: $circle-width;
     min-height: $circle-width;
-    background: $background-color;
+    background: $background-color-dark;
 }
 
 
@@ -31,15 +35,41 @@ svg {
     height: 100%;
 }
 
+header, h1, h2 {
+    color: $main-color;
+}
+
+h1 {
+    font-size: 2.2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+a:visited {
+    color: $main-color;
+}
+
+a:hover {
+    color: $main-color;
+    cursor: pointer;
+}
+
+a {
+    color: $main-color;
+}
+
 #landing {
     @include display-flex();
     @include align-items(center);
     @include justify-content(center);
 
     font-weight: 100;
+    padding-bottom: 100px;
 
     .background, .content {
-        @include animation-duration(400ms);
+        @include animation-duration(600ms);
     }
 
     .background {
@@ -60,7 +90,6 @@ svg {
 
     .content {
         position: relative;
-        color: #FCB03C;
 
         header {
             font-size: 3em;
@@ -86,18 +115,27 @@ svg {
     }
 }
 
-.square-progress {
-    float: left;
-    width: 150px;
-    padding: 40px 0 30px 30px;
+#examples {
+
+    background: $background-color-light;
+    left: 20px;
+    right: 20px;
+    margin: 0 auto;
+
+    .section-header {
+        height: 50px;
+        padding: 10px;
+    }
+
+    .example {
+
+    }
 }
 
 
-
-
 #please {
-    .inline {
-        height: 100%;
-        display: inline;
+    .inline-icon {
+        height: 50px;
+        display: inline-block;
     }
 }

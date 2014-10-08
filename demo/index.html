@@ -17,7 +17,7 @@
     </head>
     <body>
 
-        <section id="landing" class="full-window">
+        <section id="landing" class="no-user-select full-window">
             <div class="background">
                 <div class="landing-progress" id="landing-progress"></div>
             </div>
@@ -27,7 +27,7 @@
             </div>
 
             <div class="go-down-link">
-                <a href="#examples">
+                <a data-scroll href="#examples">
                     <img src="images/arrow-down.svg" alt="Down">
                 </a>
             </div>
@@ -37,7 +37,10 @@
         </section>
 
         <section id="examples">
-            <h1>Examples</h1>
+
+            <div class="section-header">
+                <h1>Examples</h1>
+            </div>
 
             <div class="example">
                 <h2>Circle</h2>
@@ -68,18 +71,19 @@
 
         <section id="please" class="full-window">
 
-            <h1>Please
-            <svg class="inline" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 400 400" xml:space="preserve">
-                <path fill="#eeeeee" stroke-width="0.6" stroke="#eeeeee" d="M199.7,52.1l47.8,96.9l0.2,0.5l0.5,0.1l106.9,15.5l-77.4,75.4l-0.4,0.4l0.1,0.5l18.3,106.5l-95.6-50.3l-0.5-0.2l-0.5,0.2 l-95.6,50.3l18.3-106.5l0.1-0.5l-0.4-0.4l-77.4-75.4l106.9-15.5l0.5-0.1l0.2-0.5L199.7,52.1"/>
-                <path id="star-path" fill-opacity="0" stroke-width="0.6" stroke="#555" d="M199.7,52.1l47.8,96.9l0.2,0.5l0.5,0.1l106.9,15.5l-77.4,75.4l-0.4,0.4l0.1,0.5l18.3,106.5l-95.6-50.3l-0.5-0.2l-0.5,0.2 l-95.6,50.3l18.3-106.5l0.1-0.5l-0.4-0.4l-77.4-75.4l106.9-15.5l0.5-0.1l0.2-0.5L199.7,52.1"/>
+            <svg class="inline-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 400 400" xml:space="preserve">
+                <path fill="#eeeeee" stroke-width="10" stroke="#eeeeee" d="M199.7,52.1l47.8,96.9l0.2,0.5l0.5,0.1l106.9,15.5l-77.4,75.4l-0.4,0.4l0.1,0.5l18.3,106.5l-95.6-50.3l-0.5-0.2l-0.5,0.2 l-95.6,50.3l18.3-106.5l0.1-0.5l-0.4-0.4l-77.4-75.4l106.9-15.5l0.5-0.1l0.2-0.5L199.7,52.1"/>
+                <path id="star-path" fill-opacity="0" stroke-width="10" stroke="#555" d="M199.7,52.1l47.8,96.9l0.2,0.5l0.5,0.1l106.9,15.5l-77.4,75.4l-0.4,0.4l0.1,0.5l18.3,106.5l-95.6-50.3l-0.5-0.2l-0.5,0.2 l-95.6,50.3l18.3-106.5l0.1-0.5l-0.4-0.4l-77.4-75.4l106.9-15.5l0.5-0.1l0.2-0.5L199.7,52.1"/>
             </svg>
             <a href="https://github.com/kimmobrunfeldt/svg-progressbar" class="">on GitHub</a>
-            </h1>
 
 
         </section>
 
         <script src="scripts/lib/fit.js"></script>
+        <script src="scripts/lib/bind-polyfill.js"></script>
+        <script src="scripts/lib/smooth-scroll.js"></script>
+
         <script src="../progressbar.js"></script>
 
         <script src="scripts/main.js"></script>
