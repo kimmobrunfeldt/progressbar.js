@@ -20,6 +20,7 @@
     };
 
     Progress.prototype.animate = function animate(percent, opts, cb) {
+        this._path.stop();
         this._path.animate(percent, opts, cb);
     };
 
