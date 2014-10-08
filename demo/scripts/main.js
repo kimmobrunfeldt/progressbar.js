@@ -33,7 +33,9 @@ var starProgress = new ProgressBar.Path(star);
 setInterval(function() {
     starProgress.set(0)
     starProgress.animate(100, {
-        duration: 1800
+        duration: 1500
+    }, function() {
+        starProgress.animate(0, {duration: 1500});
     });
 
-}, 2000);
+}, 3200);

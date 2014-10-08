@@ -3750,8 +3750,22 @@ svg {
 
 /* line 34, ../sass/main.scss */
 #landing {
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;
+  /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Chrome */
   display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
   align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
   justify-content: center;
   font-weight: 100;
 }
@@ -3789,25 +3803,31 @@ svg {
   cursor: pointer;
 }
 /* line 71, ../sass/main.scss */
-#landing .float-right-down {
+#landing .go-down-link {
   position: absolute;
   bottom: 20px;
   right: 20px;
 }
 /* line 76, ../sass/main.scss */
-#landing .float-right-down img {
+#landing .go-down-link img {
   width: 50px;
   height: 50px;
 }
+/* line 82, ../sass/main.scss */
+#landing .social-links {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
 
-/* line 83, ../sass/main.scss */
+/* line 89, ../sass/main.scss */
 .square-progress {
   float: left;
   width: 150px;
   padding: 40px 0 30px 30px;
 }
 
-/* line 93, ../sass/main.scss */
+/* line 99, ../sass/main.scss */
 #please .inline {
   height: 100%;
   display: inline;

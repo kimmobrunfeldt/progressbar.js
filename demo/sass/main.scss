@@ -32,9 +32,9 @@ svg {
 }
 
 #landing {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include display-flex();
+    @include align-items(center);
+    @include justify-content(center);
 
     font-weight: 100;
 
@@ -68,7 +68,7 @@ svg {
         }
     }
 
-    .float-right-down {
+    .go-down-link {
         position: absolute;
         bottom: 20px;
         right: 20px;
@@ -77,6 +77,12 @@ svg {
             width: 50px;
             height: 50px;
         }
+    }
+
+    .social-links {
+        position: absolute;
+        top: 20px;
+        right: 20px;
     }
 }
 
