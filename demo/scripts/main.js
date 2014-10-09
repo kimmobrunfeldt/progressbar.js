@@ -1,6 +1,8 @@
+
 function onLoad() {
     initExternalLibs();
     initLanding();
+    initExamples();
     initStar();
 }
 
@@ -44,6 +46,37 @@ function initLanding() {
     }
 }
 
+function initExamples() {
+    var elements = document.querySelectorAll('.example');
+    var elementsArray = Array.prototype.slice.call(elements, 0);
+
+    elementsArray.forEach(function(element) {
+        var codeContainer = element.querySelector('.code');
+
+        var url = 'scripts/' + element.id + '.js';
+        get(url, function(req) {
+            var code = req.responseText;
+
+            codeContainer.innerHTML = '<pre><code data-language="javascript"></code></pre>';
+            element.querySelector('code').innerHTML = code;
+            runExample(code);
+            Rainbow.color();
+        });
+    });
+}
+
+function runExample(code) {
+    // Run code in anonymous function scope
+    var scopedCode = 'var exampleCode = function() {' + code + ';}; exampleCode();';
+
+    try {
+        eval(scopedCode);
+    } catch(err) {
+        var error = err.name + ': ' + err.message;
+        window.alert(error);
+    }
+}
+
 function initStar() {
     var star = document.getElementById('star');
     star.addEventListener('load', function() {
@@ -59,6 +92,21 @@ function initStar() {
             path.animate(100, {duration: 600});
         }
     });
+}
+
+function get(url, cb) {
+    var req = new XMLHttpRequest();
+
+    req.onreadystatechange = function() {
+        if (req.readyState !== XMLHttpRequest.DONE) {
+            return;
+        }
+
+        cb(req);
+    }
+
+    req.open("GET", url, true);
+    req.send();
 }
 
 window.onload = onLoad();

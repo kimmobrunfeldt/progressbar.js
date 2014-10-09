@@ -4009,8 +4009,13 @@ a {
   height: 300px;
   width: 550px;
 }
+/* line 159, ../sass/main.scss */
+#examples .example .example-container {
+  width: 100px;
+  height: 100px;
+}
 
-/* line 161, ../sass/main.scss */
+/* line 166, ../sass/main.scss */
 #please {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -4030,23 +4035,23 @@ a {
   -ms-justify-content: center;
   justify-content: center;
 }
-/* line 166, ../sass/main.scss */
+/* line 171, ../sass/main.scss */
 #please .social-links {
   text-align: center;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
-/* line 171, ../sass/main.scss */
+/* line 176, ../sass/main.scss */
 #please .social-links:hover {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-/* line 176, ../sass/main.scss */
+/* line 181, ../sass/main.scss */
 #please .social-links .github {
   color: #fff9f0;
   font-size: 1.5em;
 }
-/* line 181, ../sass/main.scss */
+/* line 186, ../sass/main.scss */
 #please .social-links .inline-icon {
   transform: translate3d(0, 0, 0);
   height: 300px;
