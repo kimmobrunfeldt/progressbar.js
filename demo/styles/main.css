@@ -3766,30 +3766,33 @@ header, h1, h2 {
 /* line 42, ../sass/main.scss */
 h1 {
   font-size: 2.2em;
+  margin: 20px auto;
 }
 
-/* line 46, ../sass/main.scss */
+/* line 47, ../sass/main.scss */
 h2 {
   font-size: 1.5em;
+  margin: 20px auto;
 }
 
-/* line 50, ../sass/main.scss */
+/* line 52, ../sass/main.scss */
 a:visited {
   color: #fcb03c;
 }
 
-/* line 54, ../sass/main.scss */
+/* line 56, ../sass/main.scss */
 a:hover {
   color: #fcb03c;
   cursor: pointer;
 }
 
-/* line 59, ../sass/main.scss */
+/* line 61, ../sass/main.scss */
 a {
+  text-decoration: none;
   color: #fcb03c;
 }
 
-/* line 63, ../sass/main.scss */
+/* line 66, ../sass/main.scss */
 #landing {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -3811,14 +3814,14 @@ a {
   font-weight: 100;
   padding-bottom: 100px;
 }
-/* line 71, ../sass/main.scss */
+/* line 74, ../sass/main.scss */
 #landing .background, #landing .content {
   -webkit-animation-duration: 600ms;
   -moz-animation-duration: 600ms;
   -o-animation-duration: 600ms;
   animation-duration: 600ms;
 }
-/* line 75, ../sass/main.scss */
+/* line 78, ../sass/main.scss */
 #landing .background {
   width: 100%;
   height: 100%;
@@ -3826,7 +3829,7 @@ a {
   top: 0;
   left: 0;
 }
-/* line 82, ../sass/main.scss */
+/* line 85, ../sass/main.scss */
 #landing .background .landing-progress {
   position: relative;
   width: 600px;
@@ -3834,47 +3837,62 @@ a {
   top: 50%;
   margin: -300px auto 0 auto;
 }
-/* line 91, ../sass/main.scss */
+/* line 94, ../sass/main.scss */
 #landing .content {
   position: relative;
 }
-/* line 94, ../sass/main.scss */
+/* line 97, ../sass/main.scss */
 #landing .content header {
   font-size: 3em;
   cursor: pointer;
 }
-/* line 100, ../sass/main.scss */
+/* line 103, ../sass/main.scss */
 #landing .go-down-link {
   position: absolute;
   bottom: 20px;
   right: 20px;
 }
-/* line 105, ../sass/main.scss */
+/* line 108, ../sass/main.scss */
 #landing .go-down-link img {
   width: 50px;
   height: 50px;
 }
-/* line 111, ../sass/main.scss */
+/* line 114, ../sass/main.scss */
 #landing .social-links {
   position: absolute;
   top: 20px;
   right: 20px;
 }
 
-/* line 118, ../sass/main.scss */
+/* line 121, ../sass/main.scss */
 #examples {
+  padding: 50px 80px 50px 80px;
   background: #fff9f0;
   left: 20px;
   right: 20px;
   margin: 0 auto;
 }
-/* line 125, ../sass/main.scss */
+/* line 129, ../sass/main.scss */
 #examples .section-header {
   height: 50px;
-  padding: 10px;
+}
+/* line 133, ../sass/main.scss */
+#examples .example {
+  margin: 30px auto;
+}
+/* line 136, ../sass/main.scss */
+#examples .example .code {
+  height: 300px;
+  width: 500px;
+  background: #07a197;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
 }
 
-/* line 137, ../sass/main.scss */
+/* line 147, ../sass/main.scss */
 #please .inline-icon {
   height: 50px;
   display: inline-block;

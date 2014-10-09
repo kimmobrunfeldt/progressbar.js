@@ -41,10 +41,12 @@ header, h1, h2 {
 
 h1 {
     font-size: 2.2em;
+    margin: 20px auto;
 }
 
 h2 {
     font-size: 1.5em;
+    margin: 20px auto;
 }
 
 a:visited {
@@ -57,6 +59,7 @@ a:hover {
 }
 
 a {
+    text-decoration: none;
     color: $main-color;
 }
 
@@ -116,6 +119,7 @@ a {
 }
 
 #examples {
+    padding: 50px 80px;
 
     background: $background-color-light;
     left: 20px;
@@ -124,11 +128,17 @@ a {
 
     .section-header {
         height: 50px;
-        padding: 10px;
     }
 
     .example {
+        margin: 30px auto;
 
+        .code {
+            height: 300px;
+            width: 500px;
+            background: $background-color-dark;
+            @include border-radius(5px);
+        }
     }
 }
 
