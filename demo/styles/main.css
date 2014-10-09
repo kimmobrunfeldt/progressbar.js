@@ -3959,56 +3959,58 @@ a {
 }
 /* line 106, ../sass/main.scss */
 #landing .background .landing-progress {
+  transform: translate3d(0, 0, 0);
   position: relative;
   width: 600px;
   height: 600px;
   top: 50%;
   margin: -300px auto 0 auto;
+  cursor: pointer;
 }
-/* line 115, ../sass/main.scss */
+/* line 117, ../sass/main.scss */
 #landing .content {
   position: relative;
   text-align: center;
+  pointer-events: none;
 }
-/* line 119, ../sass/main.scss */
+/* line 122, ../sass/main.scss */
 #landing .content header {
   margin-top: 30px;
   font-size: 3em;
-  cursor: pointer;
 }
-/* line 126, ../sass/main.scss */
+/* line 128, ../sass/main.scss */
 #landing .go-down-link {
   position: absolute;
   bottom: 20px;
   right: 20px;
 }
-/* line 131, ../sass/main.scss */
+/* line 133, ../sass/main.scss */
 #landing .go-down-link img {
   width: 50px;
   height: 50px;
 }
 
-/* line 138, ../sass/main.scss */
+/* line 140, ../sass/main.scss */
 #examples {
   padding: 50px 80px;
   background: #fff9f0;
   margin: 0 auto;
 }
-/* line 144, ../sass/main.scss */
+/* line 146, ../sass/main.scss */
 #examples .section-header {
   height: 50px;
 }
-/* line 148, ../sass/main.scss */
+/* line 150, ../sass/main.scss */
 #examples .example {
   margin: 50px auto;
 }
-/* line 151, ../sass/main.scss */
+/* line 153, ../sass/main.scss */
 #examples .example .code {
   height: 300px;
   width: 550px;
 }
 
-/* line 159, ../sass/main.scss */
+/* line 161, ../sass/main.scss */
 #please {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -4028,24 +4030,25 @@ a {
   -ms-justify-content: center;
   justify-content: center;
 }
-/* line 164, ../sass/main.scss */
+/* line 166, ../sass/main.scss */
 #please .social-links {
   text-align: center;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
-/* line 169, ../sass/main.scss */
+/* line 171, ../sass/main.scss */
 #please .social-links:hover {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-/* line 174, ../sass/main.scss */
+/* line 176, ../sass/main.scss */
 #please .social-links .github {
   color: #fff9f0;
   font-size: 1.5em;
 }
-/* line 179, ../sass/main.scss */
+/* line 181, ../sass/main.scss */
 #please .social-links .inline-icon {
+  transform: translate3d(0, 0, 0);
   height: 300px;
   display: block;
   pointer-events: none;

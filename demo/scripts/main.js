@@ -1,5 +1,7 @@
-function randInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
+function onLoad() {
+    initExternalLibs();
+    initLanding();
+    initStar();
 }
 
 function initExternalLibs() {
@@ -8,25 +10,7 @@ function initExternalLibs() {
     });
 }
 
-function onLoad() {
-    initExternalLibs();
-
-    var star = document.getElementById('star');
-    star.addEventListener('load', function() {
-        var path = new ProgressBar.Path(star.contentDocument.querySelector('#star-path'));
-        path.set(100);
-
-        var element = document.querySelector('.social-links > .github');
-        element.onmouseover = function() {
-            path.animate(0, {duration: 800});
-        }
-
-        element.onmouseout = function() {
-            path.animate(100, {duration: 600});
-        }
-
-    });
-
+function initLanding() {
     var circle = new ProgressBar.Circle('#landing-progress', {
         color: "#FCB03C",
         strokeWidth: 1.5,
@@ -45,12 +29,36 @@ function onLoad() {
         }
     });
 
-    var landingContent = document.querySelector('#landing > .content');
-    landingContent.onclick = function() {
-        circle.animate(randInt(0, 100), {
-            duration: 1300,
+    var element = document.querySelector('#landing .landing-progress');
+    element.onmouseover = function() {
+        circle.animate(0, {
+            duration: 3000,
+            easing: 'linear'
         });
     }
+
+    element.onmouseout = function() {
+        circle.animate(100, {
+            duration: 800
+        });
+    }
+}
+
+function initStar() {
+    var star = document.getElementById('star');
+    star.addEventListener('load', function() {
+        var path = new ProgressBar.Path(star.contentDocument.querySelector('#star-path'));
+        path.set(100);
+
+        var element = document.querySelector('.social-links > .github');
+        element.onmouseover = function() {
+            path.animate(0, {duration: 800});
+        }
+
+        element.onmouseout = function() {
+            path.animate(100, {duration: 600});
+        }
+    });
 }
 
 window.onload = onLoad();

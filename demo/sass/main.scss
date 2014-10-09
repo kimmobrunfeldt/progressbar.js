@@ -104,22 +104,24 @@ a {
         left: 0;
 
         .landing-progress {
+            transform: translate3d(0,0,0);
             position: relative;
             width: $circle-width;
             height: $circle-width;
             top: 50%;
             margin: -300px auto 0 auto;
+            cursor: pointer;
         }
     }
 
     .content {
         position: relative;
         text-align: center;
+        pointer-events: none;
 
         header {
             margin-top: 30px;
             font-size: 3em;
-            cursor: pointer;
         }
     }
 
@@ -177,6 +179,7 @@ a {
         }
 
         .inline-icon {
+            transform: translate3d(0,0,0);
             height: 300px;
             display: block;
             pointer-events: none;
