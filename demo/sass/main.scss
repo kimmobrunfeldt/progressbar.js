@@ -157,7 +157,10 @@ a {
         }
 
         .result {
-            margin: 0 auto;
+            background: $background-color-dark;
+            @include border-radius(5px);
+            padding: 10px;
+            margin: 10px auto;
 
             .example-container {
                 width: 200px;

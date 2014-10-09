@@ -4013,15 +4013,22 @@ a {
 }
 /* line 159, ../sass/main.scss */
 #examples .example .result {
-  margin: 0 auto;
+  background: #07a197;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px auto;
 }
-/* line 162, ../sass/main.scss */
+/* line 165, ../sass/main.scss */
 #examples .example .result .example-container {
   width: 200px;
   height: 200px;
 }
 
-/* line 171, ../sass/main.scss */
+/* line 174, ../sass/main.scss */
 #please {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -4041,23 +4048,23 @@ a {
   -ms-justify-content: center;
   justify-content: center;
 }
-/* line 176, ../sass/main.scss */
+/* line 179, ../sass/main.scss */
 #please .social-links {
   text-align: center;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
-/* line 181, ../sass/main.scss */
+/* line 184, ../sass/main.scss */
 #please .social-links:hover {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-/* line 186, ../sass/main.scss */
+/* line 189, ../sass/main.scss */
 #please .social-links .github {
   color: #fff9f0;
   font-size: 1.5em;
 }
-/* line 191, ../sass/main.scss */
+/* line 194, ../sass/main.scss */
 #please .social-links .inline-icon {
   transform: translate3d(0, 0, 0);
   height: 300px;
