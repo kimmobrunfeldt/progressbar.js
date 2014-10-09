@@ -1,3 +1,8 @@
+// Global state
+var state = {
+    exampleCodes: {}
+};
+
 
 function onLoad() {
     initExternalLibs();
@@ -57,11 +62,19 @@ function initExamples() {
         get(url, function(req) {
             var code = req.responseText;
 
+            runExample(code);
+            state.exampleCodes[element.id] = code;
+
             codeContainer.innerHTML = '<pre><code data-language="javascript"></code></pre>';
             element.querySelector('code').innerHTML = code;
-            runExample(code);
             Rainbow.color();
         });
+
+        var runButton = element.querySelector('button');
+        runButton.onclick = function() {
+            element.querySelector('.example-container').innerHTML = '';
+            runExample(state.exampleCodes[element.id]);
+        };
     });
 }
 

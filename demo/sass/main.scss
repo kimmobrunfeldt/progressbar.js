@@ -20,8 +20,6 @@ body, html {
     height: 100%;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    min-width: $circle-width;
-    min-height: $circle-width;
     background: $background-color-dark;
 }
 
@@ -41,13 +39,17 @@ header, h1, h2, p {
 }
 
 h1 {
-    font-size: 2.2em;
+    font-size: 2.5em;
     margin: 20px auto;
 }
 
 h2 {
-    font-size: 1.5em;
+    font-size: 1.8em;
     margin: 10px auto;
+}
+
+p {
+    padding: 20px 0;
 }
 
 a:visited {
@@ -138,7 +140,7 @@ a {
 }
 
 #examples {
-    padding: 50px 80px;
+    padding: 50px 5%;
 
     background: $background-color-light;
     margin: 0 auto;
@@ -151,15 +153,18 @@ a {
         margin: 50px auto;
 
         .code {
-            height: 300px;
-            width: 550px;
-
+            width: 100%;
         }
 
-        .example-container {
-            width: 100px;
-            height: 100px;
+        .result {
+            margin: 0 auto;
+
+            .example-container {
+                width: 200px;
+                height: 200px;
+            }
         }
+
     }
 }
 

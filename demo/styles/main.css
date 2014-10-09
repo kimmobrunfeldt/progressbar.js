@@ -3846,81 +3846,84 @@ body, html {
   height: 100%;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  min-width: 600px;
-  min-height: 600px;
   background: #07a197;
 }
 
-/* line 29, ../sass/main.scss */
+/* line 27, ../sass/main.scss */
 .full-window {
   height: 100%;
   width: 100%;
 }
 
-/* line 34, ../sass/main.scss */
+/* line 32, ../sass/main.scss */
 svg {
   display: block;
   height: 100%;
 }
 
-/* line 39, ../sass/main.scss */
+/* line 37, ../sass/main.scss */
 header, h1, h2, p {
   color: #fcb03c;
 }
 
-/* line 43, ../sass/main.scss */
+/* line 41, ../sass/main.scss */
 h1 {
-  font-size: 2.2em;
+  font-size: 2.5em;
   margin: 20px auto;
 }
 
-/* line 48, ../sass/main.scss */
+/* line 46, ../sass/main.scss */
 h2 {
-  font-size: 1.5em;
+  font-size: 1.8em;
   margin: 10px auto;
 }
 
-/* line 53, ../sass/main.scss */
+/* line 51, ../sass/main.scss */
+p {
+  padding: 20px 0;
+}
+
+/* line 55, ../sass/main.scss */
 a:visited {
   color: #fcb03c;
 }
 
-/* line 57, ../sass/main.scss */
+/* line 59, ../sass/main.scss */
 a:hover {
   color: #fcb03c;
   cursor: pointer;
 }
 
-/* line 62, ../sass/main.scss */
+/* line 64, ../sass/main.scss */
 a {
   text-decoration: none;
   color: #fcb03c;
 }
 
-/* line 67, ../sass/main.scss */
+/* line 69, ../sass/main.scss */
 ::selection {
   background: #07a197;
 }
 
-/* line 71, ../sass/main.scss */
+/* line 73, ../sass/main.scss */
 ::-moz-selection {
   background: #07a197;
 }
 
-/* line 75, ../sass/main.scss */
+/* line 77, ../sass/main.scss */
 .fixed {
   position: fixed;
   z-index: 1;
   top: 20px;
   right: 23px;
 }
-/* line 81, ../sass/main.scss */
+/* line 83, ../sass/main.scss */
 .fixed .github > .fa-github {
   font-size: 3em;
   color: #fff9f0;
 }
 
-/* line 87, ../sass/main.scss */
+/* line 89, ../sass/main.scss */
 #landing {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -3942,14 +3945,14 @@ a {
   font-weight: 100;
   padding-bottom: 100px;
 }
-/* line 95, ../sass/main.scss */
+/* line 97, ../sass/main.scss */
 #landing .background, #landing .content {
   -webkit-animation-duration: 600ms;
   -moz-animation-duration: 600ms;
   -o-animation-duration: 600ms;
   animation-duration: 600ms;
 }
-/* line 99, ../sass/main.scss */
+/* line 101, ../sass/main.scss */
 #landing .background {
   width: 100%;
   height: 100%;
@@ -3957,7 +3960,7 @@ a {
   top: 0;
   left: 0;
 }
-/* line 106, ../sass/main.scss */
+/* line 108, ../sass/main.scss */
 #landing .background .landing-progress {
   transform: translate3d(0, 0, 0);
   position: relative;
@@ -3967,55 +3970,58 @@ a {
   margin: -300px auto 0 auto;
   cursor: pointer;
 }
-/* line 117, ../sass/main.scss */
+/* line 119, ../sass/main.scss */
 #landing .content {
   position: relative;
   text-align: center;
   pointer-events: none;
 }
-/* line 122, ../sass/main.scss */
+/* line 124, ../sass/main.scss */
 #landing .content header {
   margin-top: 30px;
   font-size: 3em;
 }
-/* line 128, ../sass/main.scss */
+/* line 130, ../sass/main.scss */
 #landing .go-down-link {
   position: absolute;
   bottom: 20px;
   right: 20px;
 }
-/* line 133, ../sass/main.scss */
+/* line 135, ../sass/main.scss */
 #landing .go-down-link img {
   width: 50px;
   height: 50px;
 }
 
-/* line 140, ../sass/main.scss */
+/* line 142, ../sass/main.scss */
 #examples {
-  padding: 50px 80px;
+  padding: 50px 5%;
   background: #fff9f0;
   margin: 0 auto;
 }
-/* line 146, ../sass/main.scss */
+/* line 148, ../sass/main.scss */
 #examples .section-header {
   height: 50px;
 }
-/* line 150, ../sass/main.scss */
+/* line 152, ../sass/main.scss */
 #examples .example {
   margin: 50px auto;
 }
-/* line 153, ../sass/main.scss */
+/* line 155, ../sass/main.scss */
 #examples .example .code {
-  height: 300px;
-  width: 550px;
+  width: 100%;
 }
 /* line 159, ../sass/main.scss */
-#examples .example .example-container {
-  width: 100px;
-  height: 100px;
+#examples .example .result {
+  margin: 0 auto;
+}
+/* line 162, ../sass/main.scss */
+#examples .example .result .example-container {
+  width: 200px;
+  height: 200px;
 }
 
-/* line 166, ../sass/main.scss */
+/* line 171, ../sass/main.scss */
 #please {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -4035,23 +4041,23 @@ a {
   -ms-justify-content: center;
   justify-content: center;
 }
-/* line 171, ../sass/main.scss */
+/* line 176, ../sass/main.scss */
 #please .social-links {
   text-align: center;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
-/* line 176, ../sass/main.scss */
+/* line 181, ../sass/main.scss */
 #please .social-links:hover {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-/* line 181, ../sass/main.scss */
+/* line 186, ../sass/main.scss */
 #please .social-links .github {
   color: #fff9f0;
   font-size: 1.5em;
 }
-/* line 186, ../sass/main.scss */
+/* line 191, ../sass/main.scss */
 #please .social-links .inline-icon {
   transform: translate3d(0, 0, 0);
   height: 300px;
