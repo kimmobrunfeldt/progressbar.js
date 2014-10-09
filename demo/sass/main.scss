@@ -35,7 +35,7 @@ svg {
     height: 100%;
 }
 
-header, h1, h2 {
+header, h1, h2, p {
     color: $main-color;
 }
 
@@ -46,7 +46,7 @@ h1 {
 
 h2 {
     font-size: 1.5em;
-    margin: 20px auto;
+    margin: 10px auto;
 }
 
 a:visited {
@@ -61,6 +61,18 @@ a:hover {
 a {
     text-decoration: none;
     color: $main-color;
+}
+
+.fixed {
+    position: fixed;
+    z-index: 1;
+    top: 20px;
+    right: 23px;
+
+    .github > .fa-github {
+        font-size: 3em;
+        color: $background-color-light;
+    }
 }
 
 #landing {
@@ -93,8 +105,10 @@ a {
 
     .content {
         position: relative;
+        text-align: center;
 
         header {
+            margin-top: 30px;
             font-size: 3em;
             cursor: pointer;
         }
@@ -110,20 +124,12 @@ a {
             height: 50px;
         }
     }
-
-    .social-links {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-    }
 }
 
 #examples {
     padding: 50px 80px;
 
     background: $background-color-light;
-    left: 20px;
-    right: 20px;
     margin: 0 auto;
 
     .section-header {
@@ -131,7 +137,7 @@ a {
     }
 
     .example {
-        margin: 30px auto;
+        margin: 50px auto;
 
         .code {
             height: 300px;
@@ -144,8 +150,31 @@ a {
 
 
 #please {
-    .inline-icon {
-        height: 50px;
-        display: inline-block;
+    @include display-flex();
+    @include align-items(center);
+    @include justify-content(center);
+
+    .social-links {
+        text-align: center;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+
+        .github {
+
+
+            font-size: 1.5em;
+
+        }
+
+        .inline-icon {
+            height: 300px;
+            display: block;
+            pointer-events: none;
+        }
     }
 }

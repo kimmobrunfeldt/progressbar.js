@@ -3759,7 +3759,7 @@ svg {
 }
 
 /* line 38, ../sass/main.scss */
-header, h1, h2 {
+header, h1, h2, p {
   color: #fcb03c;
 }
 
@@ -3772,7 +3772,7 @@ h1 {
 /* line 47, ../sass/main.scss */
 h2 {
   font-size: 1.5em;
-  margin: 20px auto;
+  margin: 10px auto;
 }
 
 /* line 52, ../sass/main.scss */
@@ -3793,6 +3793,19 @@ a {
 }
 
 /* line 66, ../sass/main.scss */
+.fixed {
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  right: 23px;
+}
+/* line 72, ../sass/main.scss */
+.fixed .github > .fa-github {
+  font-size: 3em;
+  color: #fff9f0;
+}
+
+/* line 78, ../sass/main.scss */
 #landing {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -3814,14 +3827,14 @@ a {
   font-weight: 100;
   padding-bottom: 100px;
 }
-/* line 74, ../sass/main.scss */
+/* line 86, ../sass/main.scss */
 #landing .background, #landing .content {
   -webkit-animation-duration: 600ms;
   -moz-animation-duration: 600ms;
   -o-animation-duration: 600ms;
   animation-duration: 600ms;
 }
-/* line 78, ../sass/main.scss */
+/* line 90, ../sass/main.scss */
 #landing .background {
   width: 100%;
   height: 100%;
@@ -3829,7 +3842,7 @@ a {
   top: 0;
   left: 0;
 }
-/* line 85, ../sass/main.scss */
+/* line 97, ../sass/main.scss */
 #landing .background .landing-progress {
   position: relative;
   width: 600px;
@@ -3837,50 +3850,44 @@ a {
   top: 50%;
   margin: -300px auto 0 auto;
 }
-/* line 94, ../sass/main.scss */
+/* line 106, ../sass/main.scss */
 #landing .content {
   position: relative;
+  text-align: center;
 }
-/* line 97, ../sass/main.scss */
+/* line 110, ../sass/main.scss */
 #landing .content header {
+  margin-top: 30px;
   font-size: 3em;
   cursor: pointer;
 }
-/* line 103, ../sass/main.scss */
+/* line 117, ../sass/main.scss */
 #landing .go-down-link {
   position: absolute;
   bottom: 20px;
   right: 20px;
 }
-/* line 108, ../sass/main.scss */
+/* line 122, ../sass/main.scss */
 #landing .go-down-link img {
   width: 50px;
   height: 50px;
 }
-/* line 114, ../sass/main.scss */
-#landing .social-links {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
 
-/* line 121, ../sass/main.scss */
+/* line 129, ../sass/main.scss */
 #examples {
-  padding: 50px 80px 50px 80px;
+  padding: 50px 80px;
   background: #fff9f0;
-  left: 20px;
-  right: 20px;
   margin: 0 auto;
 }
-/* line 129, ../sass/main.scss */
+/* line 135, ../sass/main.scss */
 #examples .section-header {
   height: 50px;
 }
-/* line 133, ../sass/main.scss */
+/* line 139, ../sass/main.scss */
 #examples .example {
-  margin: 30px auto;
+  margin: 50px auto;
 }
-/* line 136, ../sass/main.scss */
+/* line 142, ../sass/main.scss */
 #examples .example .code {
   height: 300px;
   width: 500px;
@@ -3892,8 +3899,44 @@ a {
   border-radius: 5px;
 }
 
-/* line 147, ../sass/main.scss */
-#please .inline-icon {
-  height: 50px;
-  display: inline-block;
+/* line 152, ../sass/main.scss */
+#please {
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;
+  /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Chrome */
+  display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+}
+/* line 157, ../sass/main.scss */
+#please .social-links {
+  text-align: center;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+/* line 162, ../sass/main.scss */
+#please .social-links:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+/* line 167, ../sass/main.scss */
+#please .social-links .github {
+  font-size: 1.5em;
+}
+/* line 174, ../sass/main.scss */
+#please .social-links .inline-icon {
+  height: 300px;
+  display: block;
+  pointer-events: none;
 }

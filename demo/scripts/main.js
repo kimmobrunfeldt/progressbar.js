@@ -1,8 +1,26 @@
 function randInt(min, max) {
-    return Math.floor(Math.random()*(max-min+1)+min);
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function onLoad() {
+    var star = document.getElementById('star');
+    star.addEventListener('load', function() {
+        var path = new ProgressBar.Path(star.contentDocument.querySelector('#star-path'), {
+            duration: 300
+        });
+
+        path.set(100);
+
+        setInterval(function() {
+            path.animate(0, {
+                duration: 1500
+            }, function() {
+                path.animate(100, {duration: 1300});
+            });
+        }, 4000);
+
+    });
+
     smoothScroll.init({
         easing: 'easeOutCubic'
     });
@@ -18,6 +36,7 @@ function onLoad() {
     circle.animate(100, {
         duration: 1300
     }, function() {
+
         var elements = document.querySelectorAll('.content, .background');
         for (var i = 0; i < elements.length; ++i) {
             elements[i].className += ' animated pulse';
@@ -30,20 +49,6 @@ function onLoad() {
             duration: 1300,
         });
     }
-
-
-    var star = document.getElementById('star-path');
-    var starProgress = new ProgressBar.Path(star);
-
-    setInterval(function() {
-        starProgress.set(0)
-        starProgress.animate(100, {
-            duration: 1500
-        }, function() {
-            starProgress.animate(0, {duration: 1500});
-        });
-
-    }, 3200);
 }
 
 window.onload = onLoad();
