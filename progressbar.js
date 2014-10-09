@@ -144,6 +144,7 @@
         this._path.style.strokeDashoffset = offset;
 
         this._setTransition('none');
+        this._removeCallbacks();
     };
 
     // Method introduced here:
@@ -193,6 +194,14 @@
         this._removeCallback(eventName);
         this._path.addEventListener(eventName, cb);
         this._callbacks[eventName] = cb;
+    };
+
+    Path.prototype._removeCallbacks = function _removeCallbacks() {
+        for (var eventName in this._callbacks) {
+            if (this._callbacks.hasOwnProperty(eventName)) {
+                this._removeCallback(eventName);
+            }
+        }
     };
 
     Path.prototype._removeCallback = function _removeCallback(eventName) {
