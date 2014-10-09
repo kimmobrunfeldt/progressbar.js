@@ -2,27 +2,29 @@ function randInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function onLoad() {
-    var star = document.getElementById('star');
-    star.addEventListener('load', function() {
-        var path = new ProgressBar.Path(star.contentDocument.querySelector('#star-path'), {
-            duration: 300
-        });
-
-        path.set(100);
-
-        setInterval(function() {
-            path.animate(0, {
-                duration: 1500
-            }, function() {
-                path.animate(100, {duration: 1300});
-            });
-        }, 4000);
-
-    });
-
+function initExternalLibs() {
     smoothScroll.init({
         easing: 'easeOutCubic'
+    });
+}
+
+function onLoad() {
+    initExternalLibs();
+
+    var star = document.getElementById('star');
+    star.addEventListener('load', function() {
+        var path = new ProgressBar.Path(star.contentDocument.querySelector('#star-path'));
+        path.set(100);
+
+        var element = document.querySelector('.social-links > .github');
+        element.onmouseover = function() {
+            path.animate(0, {duration: 800});
+        }
+
+        element.onmouseout = function() {
+            path.animate(100, {duration: 600});
+        }
+
     });
 
     var circle = new ProgressBar.Circle('#landing-progress', {

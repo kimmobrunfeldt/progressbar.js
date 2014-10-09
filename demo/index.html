@@ -24,6 +24,12 @@
             </a>
         </div>
 
+
+
+        <div class="scroll-meter">
+
+        </div>
+
         <section id="landing" class="no-user-select full-window">
             <div class="background">
                 <div class="landing-progress" id="landing-progress"></div>
@@ -31,7 +37,7 @@
 
             <div class="content">
                 <header>Progress Bar</header>
-                <h2>Examples</h2>
+                <h2>Demonstration</h2>
             </div>
 
             <div class="go-down-link">
@@ -52,7 +58,13 @@
                 <a data-scroll href="#example-circle"><h2>Circle</h2></a>
 
                 <div class="code">
-
+<pre><code data-language="javascript">var circle = new ProgressBar.Circle('#landing-progress', {
+    color: "#FCB03C",
+    strokeWidth: 1.5,
+    trailColor: null,
+    fill: "#FFF9F0"
+});
+</code></pre>
                 </div>
 
                 <div class="result">
@@ -90,8 +102,11 @@
         <script src="scripts/lib/bind-polyfill.js"></script>
         <script src="scripts/lib/smooth-scroll.js"></script>
 
-        <script src="../progressbar.js"></script>
+        <script src="scripts/lib/rainbow.js"></script>
+        <script src="scripts/lib/rainbow-lang-generic.js"></script>
+        <script src="scripts/lib/rainbow-lang-js.js"></script>
 
+        <script src="../progressbar.js"></script>
         <script src="scripts/main.js"></script>
 
     </body>

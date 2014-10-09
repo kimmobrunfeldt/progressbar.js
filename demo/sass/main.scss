@@ -2,6 +2,7 @@
 
 @import "reset.scss";
 @import "animate.scss";
+@import "rainbow-theme.scss";
 
 @import "utils.scss";
 @import "mixins.scss";
@@ -61,6 +62,14 @@ a:hover {
 a {
     text-decoration: none;
     color: $main-color;
+}
+
+::selection {
+    background: $background-color-dark;
+}
+
+::-moz-selection {
+    background: $background-color-dark;
 }
 
 .fixed {
@@ -141,13 +150,11 @@ a {
 
         .code {
             height: 300px;
-            width: 500px;
-            background: $background-color-dark;
-            @include border-radius(5px);
+            width: 550px;
+
         }
     }
 }
-
 
 #please {
     @include display-flex();
@@ -165,10 +172,8 @@ a {
         }
 
         .github {
-
-
+            color: $background-color-light;
             font-size: 1.5em;
-
         }
 
         .inline-icon {
