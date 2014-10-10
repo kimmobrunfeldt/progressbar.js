@@ -13,6 +13,20 @@
     display: flex;
 }
 
+@mixin flex-direction($direction) {
+    -webkit-flex-direction: $direction;
+    -moz-flex-direction: $direction;
+    -ms-flex-direction: $direction;
+    flex-direction: $direction;
+}
+
+@mixin align-self($align) {
+    -webkit-align-self: $align;
+    -moz-align-self: $align;
+    -ms-align-self: $align;
+    align-self: $align;
+}
+
 @mixin align-items($align) {
     -webkit-align-items: $align;
     -moz-align-items: $align;

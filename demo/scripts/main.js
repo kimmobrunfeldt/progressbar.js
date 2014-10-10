@@ -70,7 +70,7 @@ function initExamples() {
             Rainbow.color();
         });
 
-        var runButton = element.querySelector('button');
+        var runButton = element.querySelector('.run');
         runButton.onclick = function() {
             element.querySelector('.example-container').innerHTML = '';
             runExample(state.exampleCodes[element.id]);

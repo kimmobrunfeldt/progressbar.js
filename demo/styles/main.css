@@ -3879,51 +3879,46 @@ h2 {
 }
 
 /* line 51, ../sass/main.scss */
-p {
-  padding: 20px 0;
-}
-
-/* line 55, ../sass/main.scss */
 a:visited {
   color: #fcb03c;
 }
 
-/* line 59, ../sass/main.scss */
+/* line 55, ../sass/main.scss */
 a:hover {
   color: #fcb03c;
   cursor: pointer;
 }
 
-/* line 64, ../sass/main.scss */
+/* line 60, ../sass/main.scss */
 a {
   text-decoration: none;
   color: #fcb03c;
 }
 
-/* line 69, ../sass/main.scss */
+/* line 65, ../sass/main.scss */
 ::selection {
   background: #07a197;
 }
 
-/* line 73, ../sass/main.scss */
+/* line 69, ../sass/main.scss */
 ::-moz-selection {
   background: #07a197;
 }
 
-/* line 77, ../sass/main.scss */
+/* line 73, ../sass/main.scss */
 .fixed {
   position: fixed;
   z-index: 1;
   top: 20px;
   right: 23px;
 }
-/* line 83, ../sass/main.scss */
+/* line 79, ../sass/main.scss */
 .fixed .github > .fa-github {
   font-size: 3em;
   color: #fff9f0;
 }
 
-/* line 89, ../sass/main.scss */
+/* line 85, ../sass/main.scss */
 #landing {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -3945,14 +3940,14 @@ a {
   font-weight: 100;
   padding-bottom: 100px;
 }
-/* line 97, ../sass/main.scss */
+/* line 93, ../sass/main.scss */
 #landing .background, #landing .content {
   -webkit-animation-duration: 600ms;
   -moz-animation-duration: 600ms;
   -o-animation-duration: 600ms;
   animation-duration: 600ms;
 }
-/* line 101, ../sass/main.scss */
+/* line 97, ../sass/main.scss */
 #landing .background {
   width: 100%;
   height: 100%;
@@ -3960,7 +3955,7 @@ a {
   top: 0;
   left: 0;
 }
-/* line 108, ../sass/main.scss */
+/* line 104, ../sass/main.scss */
 #landing .background .landing-progress {
   transform: translate3d(0, 0, 0);
   position: relative;
@@ -3970,65 +3965,90 @@ a {
   margin: -300px auto 0 auto;
   cursor: pointer;
 }
-/* line 119, ../sass/main.scss */
+/* line 115, ../sass/main.scss */
 #landing .content {
   position: relative;
   text-align: center;
   pointer-events: none;
 }
-/* line 124, ../sass/main.scss */
+/* line 120, ../sass/main.scss */
 #landing .content header {
   margin-top: 30px;
   font-size: 3em;
 }
-/* line 130, ../sass/main.scss */
+/* line 126, ../sass/main.scss */
 #landing .go-down-link {
   position: absolute;
   bottom: 20px;
   right: 20px;
 }
-/* line 135, ../sass/main.scss */
+/* line 131, ../sass/main.scss */
 #landing .go-down-link img {
   width: 50px;
   height: 50px;
 }
 
-/* line 142, ../sass/main.scss */
+/* line 138, ../sass/main.scss */
 #examples {
-  padding: 50px 5%;
+  padding: 20px 5%;
   background: #fff9f0;
   margin: 0 auto;
 }
-/* line 148, ../sass/main.scss */
+/* line 144, ../sass/main.scss */
 #examples .section-header {
   height: 50px;
 }
-/* line 152, ../sass/main.scss */
+/* line 148, ../sass/main.scss */
 #examples .example {
   margin: 50px auto;
 }
 /* line 155, ../sass/main.scss */
 #examples .example .code {
+  margin: 30px 0 30px 0;
   width: 100%;
 }
-/* line 159, ../sass/main.scss */
+/* line 160, ../sass/main.scss */
+#examples .example h2 {
+  width: 100%;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #07a197;
+}
+/* line 167, ../sass/main.scss */
+#examples .example .box-info .run {
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  -webkit-transition-property: margin-left;
+  transition-property: margin-left;
+}
+/* line 173, ../sass/main.scss */
+#examples .example .box-info .run:hover {
+  margin-left: 5px;
+}
+/* line 177, ../sass/main.scss */
+#examples .example .box-info .run img {
+  display: inline-block;
+  vertical-align: middle;
+  height: 18px;
+  padding-bottom: 2px;
+  /* Hack */
+}
+/* line 186, ../sass/main.scss */
 #examples .example .result {
-  background: #07a197;
+  background: #FFEFD7;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
-  padding: 10px;
-  margin: 10px auto;
+  padding: 15px;
 }
-/* line 165, ../sass/main.scss */
+/* line 191, ../sass/main.scss */
 #examples .example .result .example-container {
   width: 200px;
   height: 200px;
 }
 
-/* line 174, ../sass/main.scss */
+/* line 200, ../sass/main.scss */
 #please {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -4048,23 +4068,23 @@ a {
   -ms-justify-content: center;
   justify-content: center;
 }
-/* line 179, ../sass/main.scss */
+/* line 205, ../sass/main.scss */
 #please .social-links {
   text-align: center;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
-/* line 184, ../sass/main.scss */
+/* line 210, ../sass/main.scss */
 #please .social-links:hover {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
 }
-/* line 189, ../sass/main.scss */
+/* line 215, ../sass/main.scss */
 #please .social-links .github {
   color: #fff9f0;
   font-size: 1.5em;
 }
-/* line 194, ../sass/main.scss */
+/* line 220, ../sass/main.scss */
 #please .social-links .inline-icon {
   transform: translate3d(0, 0, 0);
   height: 300px;

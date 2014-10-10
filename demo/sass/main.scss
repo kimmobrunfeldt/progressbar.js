@@ -48,10 +48,6 @@ h2 {
     margin: 10px auto;
 }
 
-p {
-    padding: 20px 0;
-}
-
 a:visited {
     color: $main-color;
 }
@@ -140,7 +136,7 @@ a {
 }
 
 #examples {
-    padding: 50px 5%;
+    padding: 20px 5%;
 
     background: $background-color-light;
     margin: 0 auto;
@@ -150,17 +146,47 @@ a {
     }
 
     .example {
+        &:not(:last-child) {
+
+        }
+
         margin: 50px auto;
 
         .code {
+            margin: 30px 0 30px 0;
             width: 100%;
         }
 
+        h2 {
+            width: 100%;
+            padding-bottom: 4px;
+            border-bottom: 1px solid $background-color-dark;
+        }
+
+        .box-info {
+            .run {
+                -webkit-transition: all .2s ease-in-out;
+                transition: all .2s ease-in-out;
+                -webkit-transition-property: margin-left;
+                transition-property: margin-left;
+
+                &:hover {
+                    margin-left: 5px;
+                }
+
+                img {
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 18px;
+                    padding-bottom: 2px;  /* Hack */
+                }
+            }
+        }
+
         .result {
-            background: $background-color-dark;
+            background: #FFEFD7;
             @include border-radius(5px);
-            padding: 10px;
-            margin: 10px auto;
+            padding: 15px;
 
             .example-container {
                 width: 200px;
@@ -182,8 +208,8 @@ a {
         transition: all .2s ease-in-out;
 
         &:hover {
-            -webkit-transform: scale(1.1);
-            transform: scale(1.1);
+            -webkit-transform: scale(1.05);
+            transform: scale(1.05);
         }
 
         .github {
