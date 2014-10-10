@@ -12,73 +12,30 @@ Beautiful and responsive progress bars with animated SVG paths.
 [**ProgressBar**](#api)
 
 
-* [Circle(container, options)](#circlecontainer-options)
-    * [animate(percent, options)](#circleanimatepercent-options)
+* [Circle(container, [*options*])](#circlecontainer-options)
+    * [animate(percent, [*options*], [*cb*])](#circleanimatepercent-options-cb)
+    * [stop()](#circlestop)
     * [set(percent)](#circlesetpercent)
 
 
-* [Square(container, options)](#squarecontainer-options)
-    * [animate(percent, options)](#squareanimatepercent-options)
+* [Square(container, [*options*])](#squarecontainer-options)
+    * [animate(percent, [*options*], [*cb*])](#squareanimatepercent-options-cb)
+    * [stop()](#squarestop)
     * [set(percent)](#squaresetpercent)
 
 
-* [Path(path, options)](#pathpath-options)
-    * [animate(percent, options)](#pathanimatepercent-options)
+* [Path(path, [*options*])](#pathpath-options)
+    * [animate(percent, [*options*], [*cb*])](#pathanimatepercent-options-cb)
+    * [stop()](#pathstop)
     * [set(percent)](#pathsetpercent)
 
-All built-in shapes are drawn on 100x100 square SVG canvas.
-All shapes fill their canvases.
+Functions use node-style callback convention. Callback function is always the last given parameter.
 
-## Circle(container, options)
+All built-in shapes are drawn on 100x100 square SVG canvas. All shapes fill their canvases.
+
+## Circle(container, [*options*])
 
 Circle shaped progress bar. Appends SVG to container.
-To make circle resize with its container, set for example following CSS:
-
-```css
-.container > svg {
-    display: block;
-    width: 100%;
-}
-```
-
-**Parameters**
-
-* `container` Element where SVG is added. Query string or element.
-
-    For example `"#container"` or `document.getElementById("#container")`
-
-* `options` Options for path drawing.
-
-    ```javascript
-    {
-        // Stroke color.
-        // Default: "#555"
-        color: "#3a3a3a",
-
-        // Width of the stroke.
-        // Unit is percentage of SVG canvas.
-        // Default: 0.5
-        strokeWidth: 0.1,
-
-        // Color for lighter trail stroke
-        // underneath the actual progress path.
-        // If null, trail path is not drawn
-        // Default: "#f4f4f4"
-        trailColor: "#f4f4f4",
-
-        // Fill color for the shape. If undefined, no fill.
-        // Default: undefined
-        fill: "rgba(0, 0, 0, 0.5)",
-
-        // Duration for animation in milliseconds
-        // Default: 800
-        duration: 1200,
-
-        // Easing for animation. CSS3 easings are supported.
-        // Default: "ease-in-out"
-        easing: "linear"
-    }
-    ```
 
 **Example**
 
@@ -88,46 +45,7 @@ var progressBar = new ProgressBar.Circle('#container', {
 });
 ```
 
-## Circle.animate(percent, options)
-
-Animates drawing of circle.
-
-**Parameters**
-
-* `percent` Percent from 0 to 100.
-* `options` Animation options. These options override the defaults given in initialization.
-
-    ```javascript
-    {
-        // Duration for animation in milliseconds
-        // Default: 800
-        duration: 1200,
-
-        // Easing for animation. CSS3 easings are supported.
-        // Default: "ease-in-out"
-        easing: "linear"
-    }
-    ```
-
-**Example**
-
-```javascript
-progressBar.animate(30, {
-    duration: 800
-});
-```
-
-## Circle.set(percent)
-
-Set progress to a percent instantly without animation.
-
-<br>
-<br>
-
-## Square(container, options)
-
-Square shaped progress bar. Appends SVG to container.
-To make square resize with its container, set for example following CSS:
+To make circle resize with its container, set for example the following CSS:
 
 ```css
 .container > svg {
@@ -152,7 +70,7 @@ To make square resize with its container, set for example following CSS:
 
         // Width of the stroke.
         // Unit is percentage of SVG canvas.
-        // Default: 0.5
+        // Default: 1.0
         strokeWidth: 0.1,
 
         // Color for lighter trail stroke
@@ -161,8 +79,8 @@ To make square resize with its container, set for example following CSS:
         // Default: "#f4f4f4"
         trailColor: "#f4f4f4",
 
-        // Fill color for the shape. If undefined, no fill.
-        // Default: undefined
+        // Fill color for the shape. If null, no fill.
+        // Default: null
         fill: "rgba(0, 0, 0, 0.5)",
 
         // Duration for animation in milliseconds
@@ -175,17 +93,19 @@ To make square resize with its container, set for example following CSS:
     }
     ```
 
+## Circle.animate(percent, [*options*], [*cb*])
+
+Animates drawing of circle.
+
 **Example**
 
 ```javascript
-var progressBar = new ProgressBar.Square('#container', {
-    strokeWidth: 2
+progressBar.animate(30, {
+    duration: 800
+}, function() {
+    console.log('Animation has finished');
 });
 ```
-
-## Square.animate(percent, options)
-
-Animates drawing of square.
 
 **Parameters**
 
@@ -204,30 +124,98 @@ Animates drawing of square.
     }
     ```
 
+* `cb` Callback function which is called after transition ends.
+
+## Circle.set(percent)
+
+Sets progress to a percent instantly without animation. Clears all transitions
+for path.
+
+## Circle.stop()
+
+Stops animation to its current position.
+
+<br>
+<br>
+
+## Square(container, [*options*])
+
+Square shaped progress bar. Appends SVG to container.
+
+**Example**
+
+```javascript
+var progressBar = new ProgressBar.Square('#container', {
+    strokeWidth: 2
+});
+```
+
+To make square resize with its container, set for example the following CSS:
+
+```css
+.container > svg {
+    display: block;
+    width: 100%;
+}
+```
+
+**Parameters**
+
+* `container` Element where SVG is added. Query string or element.
+
+    For example `"#container"` or `document.getElementById("#container")`
+
+* `options` Options for path drawing.
+
+    ```javascript
+    {
+        // Stroke color.
+        // Default: "#555"
+        color: "#3a3a3a",
+
+        // Width of the stroke.
+        // Unit is percentage of SVG canvas.
+        // Default: 1.0
+        strokeWidth: 0.1,
+
+        // Color for lighter trail stroke
+        // underneath the actual progress path.
+        // If null, trail path is not drawn
+        // Default: "#f4f4f4"
+        trailColor: "#f4f4f4",
+
+        // Fill color for the shape. If null, no fill.
+        // Default: null
+        fill: "rgba(0, 0, 0, 0.5)",
+
+        // Duration for animation in milliseconds
+        // Default: 800
+        duration: 1200,
+
+        // Easing for animation. CSS3 easings are supported.
+        // Default: "ease-in-out"
+        easing: "linear"
+    }
+    ```
+
+## Square.animate(percent, [*options*], [*cb*])
+
+Animates drawing of square.
+
 **Example**
 
 ```javascript
 progressBar.animate(30, {
     duration: 800
+}, function() {
+    console.log('Animation has finished');
 });
 ```
 
-## Square.set(percent)
-
-Set progress to a percent instantly without animation.
-
-<br>
-<br>
-
-## Path(path, options)
-
-Custom shaped progress bar. You can create arbitrary shaped progress bars by
-passing a SVG path created with e.g. Adobe Illustrator. It's on caller's responsibility to append SVG to DOM.
-
 **Parameters**
 
-* `path` [SVG Path](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths) object. For example `$('svg > path:first-child')[0]`.
-* `options` Animation options.
+* `percent` Percent from 0 to 100.
+* `options` Animation options. These options override the defaults given in initialization.
 
     ```javascript
     {
@@ -240,6 +228,25 @@ passing a SVG path created with e.g. Adobe Illustrator. It's on caller's respons
         easing: "linear"
     }
     ```
+
+* `cb` Callback function which is called after transition ends.
+
+## Square.set(percent)
+
+Sets progress to a percent instantly without animation. Clears all transitions
+for path.
+
+## Square.stop()
+
+Stops animation to its current position.
+
+<br>
+<br>
+
+## Path(path, [*options*])
+
+Custom shaped progress bar. You can create arbitrary shaped progress bars by
+passing a SVG path created with e.g. Adobe Illustrator. It's on caller's responsibility to append SVG to DOM.
 
 **Example**
 
@@ -279,9 +286,36 @@ var path = new ProgressBar.Path(heartObject.contentDocument.querySelector('#hear
 });
 ```
 
-## Path.animate(percent, options)
+**Parameters**
+
+* `path` [SVG Path](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths) object. For example `$('svg > path:first-child')[0]`.
+* `options` Animation options.
+
+    ```javascript
+    {
+        // Duration for animation in milliseconds
+        // Default: 800
+        duration: 1200,
+
+        // Easing for animation. CSS3 easings are supported.
+        // Default: "ease-in-out"
+        easing: "linear"
+    }
+    ```
+
+## Path.animate(percent, [*options*], [*cb*])
 
 Animates drawing of path.
+
+**Example**
+
+```javascript
+path.animate(30, {
+    duration: 800
+}, function() {
+    console.log('Animation has finished');
+});
+```
 
 **Parameters**
 
@@ -300,14 +334,13 @@ Animates drawing of path.
     }
     ```
 
-**Example**
-
-```javascript
-path.animate(30, {
-    duration: 800
-});
-```
+* `cb` Callback function which is called after transition ends.
 
 ## Path.set(percent)
 
-Set progress to a percent instantly without animation.
+Set progress to a percent instantly without animation. Clears all transitions
+for path.
+
+## Path.stop()
+
+Stops animation to its current position.

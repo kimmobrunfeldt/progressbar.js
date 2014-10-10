@@ -1,5 +1,7 @@
 (function(root) {
 
+    var PREFIXES = 'webkit moz o ms'.split(' ');
+
     // Base object for different progress bar shapes
 
     var Progress = function(container, opts) {
@@ -8,13 +10,22 @@
         if (arguments.length === 0) return;
 
         var svgView = this._createSvgView(opts);
-        container.appendChild(svgView.svg);
+        var element = isString(container)
+            ? document.querySelector(container)
+            : container;
+
+        element.appendChild(svgView.svg);
 
         this._path = new Path(svgView.path, opts);
     };
 
-    Progress.prototype.animate = function animate(percent, opts) {
-        this._path.animate(percent, opts);
+    Progress.prototype.animate = function animate(percent, opts, cb) {
+        this._path.stop();
+        this._path.animate(percent, opts, cb);
+    };
+
+    Progress.prototype.stop = function stop() {
+        this._path.stop();
     };
 
     Progress.prototype.set = function set(percent) {
@@ -24,8 +35,9 @@
     Progress.prototype._createSvgView = function _createSvgView(opts) {
         opts = extend({
             color: "#555",
-            strokeWidth: "0.5",
-            trailColor: "#f4f4f4"
+            strokeWidth: 1.0,
+            trailColor: "#f4f4f4",
+            fill: null
         }, opts);
 
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -37,7 +49,7 @@
             var trailPath = this._createPath(trailOpts);
             svg.appendChild(trailPath);
         }
-        
+
         var path = this._createPath(opts);
         svg.appendChild(path);
 
@@ -111,6 +123,7 @@
 
         this._path = path;
         this._opts = opts;
+        this._callbacks = {};
 
         // Set up the starting positions
         var length = this._path.getTotalLength();
@@ -119,30 +132,82 @@
     };
 
     Path.prototype.set = function set(percent) {
-        this._path.style.transition = this._path.style.WebkitTransition = 'none';
+        this._setTransition('none');
+
+        var length = this._path.getTotalLength();
         this._path.style.strokeDashoffset = length - (percent / 100) * length;
+    };
+
+    Path.prototype.stop = function stop() {
+        var computedStyle = window.getComputedStyle(this._path, null);
+        var offset = computedStyle.getPropertyValue('stroke-dashoffset');
+        this._path.style.strokeDashoffset = offset;
+
+        this._setTransition('none');
+        this._removeCallbacks();
     };
 
     // Method introduced here:
     // http://jakearchibald.com/2013/animated-line-drawing-svg/
-    Path.prototype.animate = function animate(percent, opts) {
+    Path.prototype.animate = function animate(percent, opts, cb) {
+        if (isFunction(opts)) {
+            cb = opts;
+            opts = {};
+        }
+
         // Copy default opts to new object so defaults are not modified
         var defaultOpts = extend({}, this._opts);
         opts = extend(defaultOpts, opts);
 
-        var length = this._path.getTotalLength();
+        this._setTransition('none');
 
-        // Clear any previous transition
-        this._path.style.transition = this._path.style.WebkitTransition = 'none';
+        if (cb) {
+            var self = this;
+            this._setCallback('transitionend', function(/* arguments */) {
+                cb.apply(self, arguments);
+                self._removeCallback('transitionend');
+            });
+        }
 
         // Trigger a layout so styles are calculated & the browser
         // picks up the starting position before animating
         this._path.getBoundingClientRect();
 
         // Animate
-        this._path.style.transition = this._path.style.WebkitTransition =
-          'stroke-dashoffset ' + opts.duration + 'ms ' + opts.easing;
+        var transition = 'stroke-dashoffset ' + opts.duration + 'ms ' + opts.easing;
+        this._setTransition(transition);
+
+        var length = this._path.getTotalLength();
         this._path.style.strokeDashoffset = length - (percent / 100) * length;
+    };
+
+    Path.prototype._setTransition = function _setTransition(transition) {
+        for (var i = 0; i < PREFIXES.length; ++i) {
+            var prefix = PREFIXES[i].toUpperCase() + PREFIXES[i].substr(1);
+            this._path.style[prefix + 'Transition'] = transition;
+        }
+
+        this._path.style.transition = transition;
+    };
+
+    Path.prototype._setCallback = function _setCallback(eventName, cb) {
+        this._removeCallback(eventName);
+        this._path.addEventListener(eventName, cb);
+        this._callbacks[eventName] = cb;
+    };
+
+    Path.prototype._removeCallbacks = function _removeCallbacks() {
+        for (var eventName in this._callbacks) {
+            if (this._callbacks.hasOwnProperty(eventName)) {
+                this._removeCallback(eventName);
+            }
+        }
+    };
+
+    Path.prototype._removeCallback = function _removeCallback(eventName) {
+        if (this._callbacks.hasOwnProperty(eventName)) {
+            this._path.removeEventListener(eventName, this._callbacks[eventName]);
+        }
     };
 
     // Utility functions
@@ -159,6 +224,14 @@
         }
 
         return destination;
+    }
+
+    function isString(obj) {
+        return typeof obj === 'string' || obj instanceof String;
+    }
+
+    function isFunction(obj) {
+        return typeof obj === "function";
     }
 
     // Expose modules

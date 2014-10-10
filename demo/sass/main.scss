@@ -1,6 +1,18 @@
 @import "compass";
 
 @import "reset.scss";
+@import "animate.scss";
+@import "rainbow-theme.scss";
+
+@import "utils.scss";
+@import "mixins.scss";
+
+// Variables
+$circle-width: 600px;
+
+$main-color: #FCB03C;
+$background-color-light: #FFF9F0;
+$background-color-dark: #07A197;
 
 
 body, html {
@@ -8,30 +20,182 @@ body, html {
     height: 100%;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
+    background: $background-color-dark;
 }
 
-h1 {
-    font-size: 4em;
-    color: #888;
-}
 
-.landing {
-    text-align: center;
+.full-window {
     height: 100%;
     width: 100%;
-    font-weight: 300;
-    //@include background-image(linear-gradient(#232526, #414345));
-}
-
-.square-progress {
-    float: left;
-    width: 150px;
-    padding: 40px 0 30px 30px;
 }
 
 svg {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
+    height: 100%;
+}
+
+header, h1, h2, p {
+    color: $main-color;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin: 20px auto;
+}
+
+h2 {
+    font-size: 1.8em;
+    margin: 10px auto;
+}
+
+p {
+    padding: 20px 0;
+}
+
+a:visited {
+    color: $main-color;
+}
+
+a:hover {
+    color: $main-color;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: $main-color;
+}
+
+::selection {
+    background: $background-color-dark;
+}
+
+::-moz-selection {
+    background: $background-color-dark;
+}
+
+.fixed {
+    position: fixed;
+    z-index: 1;
+    top: 20px;
+    right: 23px;
+
+    .github > .fa-github {
+        font-size: 3em;
+        color: $background-color-light;
+    }
+}
+
+#landing {
+    @include display-flex();
+    @include align-items(center);
+    @include justify-content(center);
+
+    font-weight: 100;
+    padding-bottom: 100px;
+
+    .background, .content {
+        @include animation-duration(600ms);
+    }
+
+    .background {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        .landing-progress {
+            transform: translate3d(0,0,0);
+            position: relative;
+            width: $circle-width;
+            height: $circle-width;
+            top: 50%;
+            margin: -300px auto 0 auto;
+            cursor: pointer;
+        }
+    }
+
+    .content {
+        position: relative;
+        text-align: center;
+        pointer-events: none;
+
+        header {
+            margin-top: 30px;
+            font-size: 3em;
+        }
+    }
+
+    .go-down-link {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
+
+#examples {
+    padding: 50px 5%;
+
+    background: $background-color-light;
+    margin: 0 auto;
+
+    .section-header {
+        height: 50px;
+    }
+
+    .example {
+        margin: 50px auto;
+
+        .code {
+            width: 100%;
+        }
+
+        .result {
+            background: $background-color-dark;
+            @include border-radius(5px);
+            padding: 10px;
+            margin: 10px auto;
+
+            .example-container {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+    }
+}
+
+#please {
+    @include display-flex();
+    @include align-items(center);
+    @include justify-content(center);
+
+    .social-links {
+        text-align: center;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+
+        .github {
+            color: $background-color-light;
+            font-size: 1.5em;
+        }
+
+        .inline-icon {
+            transform: translate3d(0,0,0);
+            height: 300px;
+            display: block;
+            pointer-events: none;
+        }
+    }
 }
