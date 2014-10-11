@@ -31,7 +31,7 @@ function initLanding() {
     circle.animate(100, {
         duration: 1300
     }, function() {
-        var elements = document.querySelectorAll('.content, .background');
+        var elements = document.querySelectorAll('#landing > .content, .background');
         for (var i = 0; i < elements.length; ++i) {
             elements[i].className += ' animated pulse';
         }

@@ -111,6 +111,7 @@ a {
         @include justify-content(center);
 
         .landing-progress {
+            transform: translate3d(0, 0, 0); /* Try to enable HW accleration */
             width: 90%;
             max-width: $circle-width;
             cursor: pointer;
@@ -142,26 +143,35 @@ a {
 .light-section {
     background: $background-color-light;
     margin: 0 auto;
-    padding: 20px 5%;
+    padding: 20px 10%;
 
     p {
         padding: 10px 0 10px 2px;
         line-height: 1.3em;
         max-width: 800px;
     }
+
+    .content {
+        margin: 0 auto;
+        max-width: 1000px;
+    }
 }
 
 #introduction {
+    padding-top: 40px;
+
     .slogan {
         font-style: italic;
-        margin: 20px 0 20px 10px;
+        margin: 40px 0 30px 30px;
         font-size: 1.3em;
         padding: 3px 8px;
-        border-left: 4px solid $main-color-bright;
+        border-left: 2px solid $main-color-bright;
     }
 }
 
 #examples {
+    padding-bottom: 80px;
+
     .example {
         &:not(:first-child) {
             margin: 40px auto;
@@ -201,7 +211,6 @@ a {
                 height: 200px;
             }
         }
-
     }
 }
 
@@ -228,7 +237,7 @@ a {
         }
 
         .inline-icon {
-            transform: translate3d(0,0,0);
+            transform: translate3d(0, 0, 0); /* Try to enable HW accleration */
             width: 100%;
             display: block;
             pointer-events: none;

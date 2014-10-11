@@ -3998,74 +3998,89 @@ a {
 }
 /* line 113, ../sass/page.scss */
 #landing .background .landing-progress {
+  transform: translate3d(0, 0, 0);
+  /* Try to enable HW accleration */
   width: 90%;
   max-width: 600px;
   cursor: pointer;
 }
-/* line 120, ../sass/page.scss */
+/* line 121, ../sass/page.scss */
 #landing .content {
   position: relative;
   text-align: center;
   pointer-events: none;
 }
-/* line 125, ../sass/page.scss */
+/* line 126, ../sass/page.scss */
 #landing .content header {
   margin-top: 30px;
 }
-/* line 130, ../sass/page.scss */
+/* line 131, ../sass/page.scss */
 #landing .go-down-link {
   position: absolute;
   bottom: 20px;
   right: 20px;
 }
-/* line 135, ../sass/page.scss */
+/* line 136, ../sass/page.scss */
 #landing .go-down-link img {
   width: 50px;
   height: 50px;
 }
 
-/* line 142, ../sass/page.scss */
+/* line 143, ../sass/page.scss */
 .light-section {
   background: #fff9f0;
   margin: 0 auto;
-  padding: 20px 5%;
+  padding: 20px 10%;
 }
-/* line 147, ../sass/page.scss */
+/* line 148, ../sass/page.scss */
 .light-section p {
   padding: 10px 0 10px 2px;
   line-height: 1.3em;
   max-width: 800px;
 }
-
-/* line 155, ../sass/page.scss */
-#introduction .slogan {
-  font-style: italic;
-  margin: 20px 0 20px 10px;
-  font-size: 1.3em;
-  padding: 3px 8px;
-  border-left: 4px solid #fcb03c;
+/* line 154, ../sass/page.scss */
+.light-section .content {
+  margin: 0 auto;
+  max-width: 1000px;
 }
 
-/* line 166, ../sass/page.scss */
+/* line 160, ../sass/page.scss */
+#introduction {
+  padding-top: 40px;
+}
+/* line 163, ../sass/page.scss */
+#introduction .slogan {
+  font-style: italic;
+  margin: 40px 0 30px 30px;
+  font-size: 1.3em;
+  padding: 3px 8px;
+  border-left: 2px solid #fcb03c;
+}
+
+/* line 172, ../sass/page.scss */
+#examples {
+  padding-bottom: 80px;
+}
+/* line 176, ../sass/page.scss */
 #examples .example:not(:first-child) {
   margin: 40px auto;
 }
-/* line 170, ../sass/page.scss */
+/* line 180, ../sass/page.scss */
 #examples .example .code {
   margin: 30px 0 30px 0;
   width: 100%;
 }
-/* line 176, ../sass/page.scss */
+/* line 186, ../sass/page.scss */
 #examples .example .box-info .run {
   -webkit-transition: all .2s linear;
   transition: all .2s linear;
   color: #6e6e6e;
 }
-/* line 181, ../sass/page.scss */
+/* line 191, ../sass/page.scss */
 #examples .example .box-info .run:hover {
   color: #fcb03c;
 }
-/* line 185, ../sass/page.scss */
+/* line 195, ../sass/page.scss */
 #examples .example .box-info .run img {
   display: inline-block;
   vertical-align: middle;
@@ -4073,7 +4088,7 @@ a {
   padding-bottom: 2px;
   /* Hack */
 }
-/* line 194, ../sass/page.scss */
+/* line 204, ../sass/page.scss */
 #examples .example .result {
   background: #ffefd7;
   -webkit-border-radius: 5px;
@@ -4083,13 +4098,13 @@ a {
   border-radius: 5px;
   padding: 15px;
 }
-/* line 199, ../sass/page.scss */
+/* line 209, ../sass/page.scss */
 #examples .example .result .example-container {
   width: 200px;
   height: 200px;
 }
 
-/* line 208, ../sass/page.scss */
+/* line 217, ../sass/page.scss */
 #please {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -4109,7 +4124,7 @@ a {
   -ms-justify-content: center;
   justify-content: center;
 }
-/* line 213, ../sass/page.scss */
+/* line 222, ../sass/page.scss */
 #please .social-links {
   width: 90%;
   max-width: 300px;
@@ -4117,19 +4132,20 @@ a {
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
-/* line 220, ../sass/page.scss */
+/* line 229, ../sass/page.scss */
 #please .social-links:hover {
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
 }
-/* line 225, ../sass/page.scss */
+/* line 234, ../sass/page.scss */
 #please .social-links .github {
   color: #fff9f0;
   font-size: 1.5em;
 }
-/* line 230, ../sass/page.scss */
+/* line 239, ../sass/page.scss */
 #please .social-links .inline-icon {
   transform: translate3d(0, 0, 0);
+  /* Try to enable HW accleration */
   width: 100%;
   display: block;
   pointer-events: none;
