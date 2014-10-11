@@ -1,7 +1,7 @@
 # ProgressBar.js
 
 <br>
-![Beautiful animation](demo/animation.gif)
+![Beautiful animation](docs/animation.gif)
 
 <br>
 Beautiful and responsive progress bars with animated SVG paths.
