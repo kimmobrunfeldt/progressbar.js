@@ -41,7 +41,10 @@ module.exports = function(grunt) {
       },
       commitMinified: {
         options: {
-            stdout: true
+            stdout: true,
+            // If minified files do not change on release,
+            // git command fails
+            failOnError: false
         },
         command: 'git add progressbar.min.js progressbar.min.js.map; git commit -m "Add minified script"'
       }
