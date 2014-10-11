@@ -97,19 +97,17 @@ function runExample(code) {
 
 function initStar() {
     var star = document.getElementById('star');
-    star.addEventListener('load', function() {
-        var path = new ProgressBar.Path(star.contentDocument.querySelector('#star-path'));
-        path.set(100);
+    var path = new ProgressBar.Path(star.contentDocument.querySelector('#star-path'));
+    path.set(100);
 
-        var element = document.querySelector('.social-links > .github');
-        element.onmouseover = function() {
-            path.animate(0, {duration: 800});
-        }
+    var element = document.querySelector('.social-links > .github');
+    element.onmouseover = function() {
+        path.animate(0, {duration: 800});
+    }
 
-        element.onmouseout = function() {
-            path.animate(100, {duration: 600});
-        }
-    });
+    element.onmouseout = function() {
+        path.animate(100, {duration: 600});
+    }
 }
 
 function get(url, cb) {

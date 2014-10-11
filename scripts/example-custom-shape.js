@@ -3,7 +3,7 @@ container.innerHTML = '<object id="scene" type="image/svg+xml" data="images/moon
 
 var scene = document.getElementById('scene');
 scene.addEventListener('load', function() {
-    var path = new ProgressBar.Path(scene.contentDocument.querySelector('#star-path'), {
+    var path = new ProgressBar.Path(scene.contentDocument.querySelector('#asterism-path'), {
         duration: 1000
     });
 

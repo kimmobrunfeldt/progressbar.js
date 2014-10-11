@@ -1,9 +1,9 @@
 /*
 Syntax error: Undefined variable: "$background-color-dark".
-        on line 7 of /Users/kbru/code/personal/progressbar.js/demo/sass/page.scss
+        on line 7 of /Users/kbru/code/personal/progressbar.js/sass/page.scss
 
 Backtrace:
-/Users/kbru/code/personal/progressbar.js/demo/sass/page.scss:7
+/Users/kbru/code/personal/progressbar.js/sass/page.scss:7
 /Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/script/variable.rb:49:in `_perform'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/script/node.rb:40:in `perform'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/perform.rb:298:in `visit_prop'
@@ -74,4 +74,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$background-color-dark\".\A         on line 7 of /Users/kbru/code/personal/progressbar.js/demo/sass/page.scss"; }
+  content: "Syntax error: Undefined variable: \"$background-color-dark\".\A         on line 7 of /Users/kbru/code/personal/progressbar.js/sass/page.scss"; }

@@ -7,7 +7,6 @@ body, html {
     background: $background-color-dark;
 }
 
-
 .full-window {
     height: 100%;
     width: 100%;
@@ -71,12 +70,13 @@ a {
 .fixed {
     position: fixed;
     z-index: 1;
+    width: 100%;
+    text-align: right;
+    margin: 0 0 0 -23px;
 
     .github > .fa-github {
-        width: 100%;
-        text-align: right;
-        margin: 10px 0 0 -23px;
         font-size: 3.2em;
+        margin-top: 10px;
     }
 
     .midnightHeader.default .github > .fa-github {

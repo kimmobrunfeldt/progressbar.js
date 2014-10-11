@@ -3849,90 +3849,91 @@ body, html {
   background: #07a197;
 }
 
-/* line 11, ../sass/page.scss */
+/* line 10, ../sass/page.scss */
 .full-window {
   height: 100%;
   width: 100%;
 }
 
-/* line 16, ../sass/page.scss */
+/* line 15, ../sass/page.scss */
 svg {
   display: block;
   height: 100%;
 }
 
-/* line 21, ../sass/page.scss */
+/* line 20, ../sass/page.scss */
 header, h1, h2, h3 {
   color: #fcb03c;
   font-weight: 100;
 }
 
-/* line 26, ../sass/page.scss */
+/* line 25, ../sass/page.scss */
 p {
   color: #6e6e6e;
 }
 
-/* line 30, ../sass/page.scss */
+/* line 29, ../sass/page.scss */
 header {
   font-size: 3em;
 }
 
-/* line 34, ../sass/page.scss */
+/* line 33, ../sass/page.scss */
 h1 {
   font-size: 2.5em;
   margin: 20px auto;
 }
 
-/* line 39, ../sass/page.scss */
+/* line 38, ../sass/page.scss */
 h2 {
   font-size: 1.8em;
   margin: 10px auto;
 }
 
-/* line 44, ../sass/page.scss */
+/* line 43, ../sass/page.scss */
 h3 {
   font-size: 1.7em;
   margin: 10px auto;
 }
 
-/* line 49, ../sass/page.scss */
+/* line 48, ../sass/page.scss */
 a:visited {
   color: #fcb03c;
 }
 
-/* line 53, ../sass/page.scss */
+/* line 52, ../sass/page.scss */
 a:hover {
   color: #fcb03c;
   cursor: pointer;
 }
 
-/* line 58, ../sass/page.scss */
+/* line 57, ../sass/page.scss */
 a {
   text-decoration: none;
   color: #fcb03c;
 }
 
-/* line 63, ../sass/page.scss */
+/* line 62, ../sass/page.scss */
 ::selection {
   background: #07a197;
 }
 
-/* line 67, ../sass/page.scss */
+/* line 66, ../sass/page.scss */
 ::-moz-selection {
   background: #07a197;
 }
 
-/* line 71, ../sass/page.scss */
+/* line 70, ../sass/page.scss */
 .fixed {
   position: fixed;
   z-index: 1;
-}
-/* line 75, ../sass/page.scss */
-.fixed .github > .fa-github {
   width: 100%;
   text-align: right;
-  margin: 10px 0 0 -23px;
+  margin: 0 0 0 -23px;
+}
+/* line 77, ../sass/page.scss */
+.fixed .github > .fa-github {
   font-size: 3.2em;
+  margin-top: 10px;
 }
 /* line 82, ../sass/page.scss */
 .fixed .midnightHeader.default .github > .fa-github {

@@ -35,6 +35,6 @@
 <circle fill="#EFEFEF" cx="141.5" cy="111" r="3.8"/>
 <circle fill="#EFEFEF" cx="193.5" cy="75" r="4.2"/>
 <circle fill="#EFEFEF" cx="189.5" cy="107" r="3.6"/>
-<path id="star-path" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-miterlimit="10" d="M37.5,75 77.5,63 101.5,75 133.5,87 193.5,75 189.5,107
+<path id="asterism-path" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-miterlimit="10" d="M37.5,75 77.5,63 101.5,75 133.5,87 193.5,75 189.5,107
 	141.5,111 133.5,87 "/>
 </svg>
