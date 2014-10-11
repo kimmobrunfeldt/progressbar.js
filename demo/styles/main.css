@@ -4002,28 +4002,27 @@ a {
 }
 
 /* line 153, ../sass/main.scss */
-#examples {
-  padding: 20px 5%;
+.light-section {
   background: #fff9f0;
   margin: 0 auto;
+  padding: 20px 5%;
 }
-/* line 159, ../sass/main.scss */
-#examples .section-header {
-  height: 50px;
-}
-/* line 163, ../sass/main.scss */
-#examples p {
+/* line 158, ../sass/main.scss */
+.light-section p {
   padding: 10px 0 10px 2px;
   line-height: 1.3em;
+  max-width: 800px;
 }
-/* line 168, ../sass/main.scss */
-#examples .slogan {
+
+/* line 166, ../sass/main.scss */
+#introduction .slogan {
   font-style: italic;
   margin: 20px 0 20px 10px;
   font-size: 1.3em;
   padding: 3px 8px;
   border-left: 4px solid #fcb03c;
 }
+
 /* line 177, ../sass/main.scss */
 #examples .example:not(:first-child) {
   margin: 40px auto;

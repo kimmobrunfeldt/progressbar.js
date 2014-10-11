@@ -150,21 +150,19 @@ a {
     }
 }
 
-#examples {
-    padding: 20px 5%;
-
+.light-section {
     background: $background-color-light;
     margin: 0 auto;
-
-    .section-header {
-        height: 50px;
-    }
+    padding: 20px 5%;
 
     p {
         padding: 10px 0 10px 2px;
         line-height: 1.3em;
+        max-width: 800px;
     }
+}
 
+#introduction {
     .slogan {
         font-style: italic;
         margin: 20px 0 20px 10px;
@@ -172,7 +170,9 @@ a {
         padding: 3px 8px;
         border-left: 4px solid $main-color-bright;
     }
+}
 
+#examples {
     .example {
         &:not(:first-child) {
             margin: 40px auto;
