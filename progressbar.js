@@ -1,19 +1,31 @@
-(function(root) {
+(function(root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD
+        define('progressbar', [], function() {
+            return factory();
+        });
+    } else {
+        // Browser globals
+        root.ProgressBar = factory();
+    }
+}(this, function() {
 
     var PREFIXES = 'webkit moz o ms'.split(' ');
 
     // Base object for different progress bar shapes
-
     var Progress = function(container, opts) {
         // Prevent calling constructor without parameters so inheritance
         // works correctly
         if (arguments.length === 0) return;
 
         var svgView = this._createSvgView(opts);
-        var element = isString(container)
-            ? document.querySelector(container)
-            : container;
 
+        var element;
+        if (isString(container)) {
+            element = document.querySelector(container);
+        } else {
+            element = container;
+        }
         element.appendChild(svgView.svg);
 
         this._path = new Path(svgView.path, opts);
@@ -56,7 +68,7 @@
         return {
             svg: svg,
             path: path
-        }
+        };
     };
 
     Progress.prototype._createPath = function _createPath(opts) {
@@ -235,9 +247,11 @@
     }
 
     // Expose modules
-    root.ProgressBar = {
+    var ProgressBar = {
         Circle: Circle,
         Square: Square,
         Path: Path
     };
-})(window);
+
+    return ProgressBar;
+}));
