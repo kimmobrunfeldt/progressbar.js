@@ -17,9 +17,7 @@ function initExternalLibs() {
     });
 
     // jQuery is not needed anywhere else but here
-    $('.fixed').midnight({
-        
-    })
+    $('.fixed').midnight();
 }
 
 function initLanding() {
@@ -30,17 +28,19 @@ function initLanding() {
         fill: "#FFF9F0"
     });
 
-
     circle.animate(100, {
         duration: 1300
     }, function() {
-
         var elements = document.querySelectorAll('.content, .background');
         for (var i = 0; i < elements.length; ++i) {
             elements[i].className += ' animated pulse';
         }
-    });
 
+        initLandingHover(circle);
+    });
+}
+
+function initLandingHover(circle) {
     var element = document.querySelector('#landing .landing-progress');
     element.onmouseover = function() {
         circle.animate(0, {

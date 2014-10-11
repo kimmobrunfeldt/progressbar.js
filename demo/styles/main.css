@@ -3840,7 +3840,7 @@ pre .support.class-name, pre .support.type {
   user-select: none;
 }
 
-/* line 21, ../sass/main.scss */
+/* line 2, ../sass/page.scss */
 body, html {
   width: 100%;
   height: 100%;
@@ -3849,89 +3849,101 @@ body, html {
   background: #07a197;
 }
 
-/* line 30, ../sass/main.scss */
+/* line 11, ../sass/page.scss */
 .full-window {
   height: 100%;
   width: 100%;
 }
 
-/* line 35, ../sass/main.scss */
+/* line 16, ../sass/page.scss */
 svg {
   display: block;
   height: 100%;
 }
 
-/* line 40, ../sass/main.scss */
-header, h1, h2 {
+/* line 21, ../sass/page.scss */
+header, h1, h2, h3 {
   color: #fcb03c;
+  font-weight: 100;
 }
 
-/* line 44, ../sass/main.scss */
+/* line 26, ../sass/page.scss */
 p {
   color: #6e6e6e;
 }
 
-/* line 48, ../sass/main.scss */
+/* line 30, ../sass/page.scss */
+header {
+  font-size: 3em;
+}
+
+/* line 34, ../sass/page.scss */
 h1 {
   font-size: 2.5em;
   margin: 20px auto;
 }
 
-/* line 53, ../sass/main.scss */
+/* line 39, ../sass/page.scss */
 h2 {
   font-size: 1.8em;
   margin: 10px auto;
 }
 
-/* line 58, ../sass/main.scss */
+/* line 44, ../sass/page.scss */
+h3 {
+  font-size: 1.7em;
+  margin: 10px auto;
+}
+
+/* line 49, ../sass/page.scss */
 a:visited {
   color: #fcb03c;
 }
 
-/* line 62, ../sass/main.scss */
+/* line 53, ../sass/page.scss */
 a:hover {
   color: #fcb03c;
   cursor: pointer;
 }
 
-/* line 67, ../sass/main.scss */
+/* line 58, ../sass/page.scss */
 a {
   text-decoration: none;
   color: #fcb03c;
 }
 
-/* line 72, ../sass/main.scss */
+/* line 63, ../sass/page.scss */
 ::selection {
   background: #07a197;
 }
 
-/* line 76, ../sass/main.scss */
+/* line 67, ../sass/page.scss */
 ::-moz-selection {
   background: #07a197;
 }
 
-/* line 80, ../sass/main.scss */
+/* line 71, ../sass/page.scss */
 .fixed {
   position: fixed;
   z-index: 1;
 }
-/* line 84, ../sass/main.scss */
+/* line 75, ../sass/page.scss */
 .fixed .github > .fa-github {
   width: 100%;
   text-align: right;
   margin: 10px 0 0 -23px;
   font-size: 3.2em;
 }
-/* line 91, ../sass/main.scss */
+/* line 82, ../sass/page.scss */
 .fixed .midnightHeader.default .github > .fa-github {
   color: #fff9f0;
 }
-/* line 95, ../sass/main.scss */
+/* line 86, ../sass/page.scss */
 .fixed .midnightHeader.dark .github > .fa-github {
   color: #fcb03c;
 }
 
-/* line 100, ../sass/main.scss */
+/* line 91, ../sass/page.scss */
 #landing {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -3950,71 +3962,82 @@ a {
   -moz-justify-content: center;
   -ms-justify-content: center;
   justify-content: center;
-  font-weight: 100;
   padding-bottom: 100px;
 }
-/* line 108, ../sass/main.scss */
+/* line 98, ../sass/page.scss */
 #landing .background, #landing .content {
   -webkit-animation-duration: 600ms;
   -moz-animation-duration: 600ms;
   -o-animation-duration: 600ms;
   animation-duration: 600ms;
 }
-/* line 112, ../sass/main.scss */
+/* line 102, ../sass/page.scss */
 #landing .background {
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;
+  /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Chrome */
+  display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
 }
-/* line 119, ../sass/main.scss */
+/* line 113, ../sass/page.scss */
 #landing .background .landing-progress {
-  transform: translate3d(0, 0, 0);
-  position: relative;
-  width: 600px;
-  height: 600px;
-  top: 50%;
-  margin: -300px auto 0 auto;
+  width: 90%;
+  max-width: 600px;
   cursor: pointer;
 }
-/* line 130, ../sass/main.scss */
+/* line 120, ../sass/page.scss */
 #landing .content {
   position: relative;
   text-align: center;
   pointer-events: none;
 }
-/* line 135, ../sass/main.scss */
+/* line 125, ../sass/page.scss */
 #landing .content header {
   margin-top: 30px;
-  font-size: 3em;
 }
-/* line 141, ../sass/main.scss */
+/* line 130, ../sass/page.scss */
 #landing .go-down-link {
   position: absolute;
   bottom: 20px;
   right: 20px;
 }
-/* line 146, ../sass/main.scss */
+/* line 135, ../sass/page.scss */
 #landing .go-down-link img {
   width: 50px;
   height: 50px;
 }
 
-/* line 153, ../sass/main.scss */
+/* line 142, ../sass/page.scss */
 .light-section {
   background: #fff9f0;
   margin: 0 auto;
   padding: 20px 5%;
 }
-/* line 158, ../sass/main.scss */
+/* line 147, ../sass/page.scss */
 .light-section p {
   padding: 10px 0 10px 2px;
   line-height: 1.3em;
   max-width: 800px;
 }
 
-/* line 166, ../sass/main.scss */
+/* line 155, ../sass/page.scss */
 #introduction .slogan {
   font-style: italic;
   margin: 20px 0 20px 10px;
@@ -4023,26 +4046,26 @@ a {
   border-left: 4px solid #fcb03c;
 }
 
-/* line 177, ../sass/main.scss */
+/* line 166, ../sass/page.scss */
 #examples .example:not(:first-child) {
   margin: 40px auto;
 }
-/* line 181, ../sass/main.scss */
+/* line 170, ../sass/page.scss */
 #examples .example .code {
   margin: 30px 0 30px 0;
   width: 100%;
 }
-/* line 187, ../sass/main.scss */
+/* line 176, ../sass/page.scss */
 #examples .example .box-info .run {
   -webkit-transition: all .2s linear;
   transition: all .2s linear;
   color: #6e6e6e;
 }
-/* line 192, ../sass/main.scss */
+/* line 181, ../sass/page.scss */
 #examples .example .box-info .run:hover {
   color: #fcb03c;
 }
-/* line 196, ../sass/main.scss */
+/* line 185, ../sass/page.scss */
 #examples .example .box-info .run img {
   display: inline-block;
   vertical-align: middle;
@@ -4050,7 +4073,7 @@ a {
   padding-bottom: 2px;
   /* Hack */
 }
-/* line 205, ../sass/main.scss */
+/* line 194, ../sass/page.scss */
 #examples .example .result {
   background: #ffefd7;
   -webkit-border-radius: 5px;
@@ -4060,13 +4083,13 @@ a {
   border-radius: 5px;
   padding: 15px;
 }
-/* line 210, ../sass/main.scss */
+/* line 199, ../sass/page.scss */
 #examples .example .result .example-container {
   width: 200px;
   height: 200px;
 }
 
-/* line 219, ../sass/main.scss */
+/* line 208, ../sass/page.scss */
 #please {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -4086,26 +4109,102 @@ a {
   -ms-justify-content: center;
   justify-content: center;
 }
-/* line 224, ../sass/main.scss */
+/* line 213, ../sass/page.scss */
 #please .social-links {
+  width: 90%;
+  max-width: 300px;
   text-align: center;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
-/* line 229, ../sass/main.scss */
+/* line 220, ../sass/page.scss */
 #please .social-links:hover {
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
 }
-/* line 234, ../sass/main.scss */
+/* line 225, ../sass/page.scss */
 #please .social-links .github {
   color: #fff9f0;
   font-size: 1.5em;
 }
-/* line 239, ../sass/main.scss */
+/* line 230, ../sass/page.scss */
 #please .social-links .inline-icon {
   transform: translate3d(0, 0, 0);
-  height: 300px;
+  width: 100%;
   display: block;
   pointer-events: none;
+}
+
+@media all and (max-width: 600px) {
+  /* line 4, ../sass/mediaqueries.scss */
+  header {
+    font-size: 2.5em;
+  }
+
+  /* line 8, ../sass/mediaqueries.scss */
+  h1 {
+    font-size: 2.2em;
+  }
+
+  /* line 12, ../sass/mediaqueries.scss */
+  h2 {
+    font-size: 1.6em;
+  }
+
+  /* line 16, ../sass/mediaqueries.scss */
+  h3 {
+    font-size: 1.4em;
+  }
+}
+@media all and (max-width: 450px) {
+  /* line 23, ../sass/mediaqueries.scss */
+  header {
+    font-size: 2.1em;
+  }
+
+  /* line 27, ../sass/mediaqueries.scss */
+  h1 {
+    font-size: 1.9em;
+  }
+
+  /* line 31, ../sass/mediaqueries.scss */
+  h2 {
+    font-size: 1.6em;
+  }
+
+  /* line 35, ../sass/mediaqueries.scss */
+  h3 {
+    font-size: 1.2em;
+  }
+
+  /* line 39, ../sass/mediaqueries.scss */
+  p {
+    font-size: 0.9em;
+  }
+}
+@media all and (max-width: 330px) {
+  /* line 46, ../sass/mediaqueries.scss */
+  header {
+    font-size: 1.7em;
+  }
+
+  /* line 50, ../sass/mediaqueries.scss */
+  h1 {
+    font-size: 1.7em;
+  }
+
+  /* line 54, ../sass/mediaqueries.scss */
+  h2 {
+    font-size: 1.4em;
+  }
+
+  /* line 58, ../sass/mediaqueries.scss */
+  h3 {
+    font-size: 0.9em;
+  }
+
+  /* line 62, ../sass/mediaqueries.scss */
+  p {
+    font-size: 0.9em;
+  }
 }

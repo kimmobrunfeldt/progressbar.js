@@ -1,0 +1,237 @@
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    background: $background-color-dark;
+}
+
+
+.full-window {
+    height: 100%;
+    width: 100%;
+}
+
+svg {
+    display: block;
+    height: 100%;
+}
+
+header, h1, h2, h3 {
+    color: $main-color-bright;
+    font-weight: 100;
+}
+
+p {
+    color: $main-color-dark;
+}
+
+header {
+    font-size: 3em;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin: 20px auto;
+}
+
+h2 {
+    font-size: 1.8em;
+    margin: 10px auto;
+}
+
+h3 {
+    font-size: 1.7em;
+    margin: 10px auto;
+}
+
+a:visited {
+    color: $main-color-bright;
+}
+
+a:hover {
+    color: $main-color-bright;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: $main-color-bright;
+}
+
+::selection {
+    background: $background-color-dark;
+}
+
+::-moz-selection {
+    background: $background-color-dark;
+}
+
+.fixed {
+    position: fixed;
+    z-index: 1;
+
+    .github > .fa-github {
+        width: 100%;
+        text-align: right;
+        margin: 10px 0 0 -23px;
+        font-size: 3.2em;
+    }
+
+    .midnightHeader.default .github > .fa-github {
+        color: $background-color-light;
+    }
+
+    .midnightHeader.dark .github >.fa-github {
+        color: $main-color-bright;
+    }
+}
+
+#landing {
+    @include display-flex();
+    @include align-items(center);
+    @include justify-content(center);
+
+    padding-bottom: 100px;
+
+    .background, .content {
+        @include animation-duration(600ms);
+    }
+
+    .background {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        @include display-flex();
+        @include align-items(center);
+        @include justify-content(center);
+
+        .landing-progress {
+            width: 90%;
+            max-width: $circle-width;
+            cursor: pointer;
+        }
+    }
+
+    .content {
+        position: relative;
+        text-align: center;
+        pointer-events: none;
+
+        header {
+            margin-top: 30px;
+        }
+    }
+
+    .go-down-link {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
+
+.light-section {
+    background: $background-color-light;
+    margin: 0 auto;
+    padding: 20px 5%;
+
+    p {
+        padding: 10px 0 10px 2px;
+        line-height: 1.3em;
+        max-width: 800px;
+    }
+}
+
+#introduction {
+    .slogan {
+        font-style: italic;
+        margin: 20px 0 20px 10px;
+        font-size: 1.3em;
+        padding: 3px 8px;
+        border-left: 4px solid $main-color-bright;
+    }
+}
+
+#examples {
+    .example {
+        &:not(:first-child) {
+            margin: 40px auto;
+        }
+
+        .code {
+            margin: 30px 0 30px 0;
+            width: 100%;
+        }
+
+        .box-info {
+            .run {
+                -webkit-transition: all .2s linear;
+                transition: all .2s linear;
+                color: $main-color-dark;
+
+                &:hover {
+                    color: $main-color-bright;
+                }
+
+                img {
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 18px;
+                    padding-bottom: 2px;  /* Hack */
+                }
+            }
+        }
+
+        .result {
+            background: $result-background;
+            @include border-radius(5px);
+            padding: 15px;
+
+            .example-container {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+    }
+}
+
+#please {
+    @include display-flex();
+    @include align-items(center);
+    @include justify-content(center);
+
+    .social-links {
+        width: 90%;
+        max-width: 300px;
+        text-align: center;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            -webkit-transform: scale(1.05);
+            transform: scale(1.05);
+        }
+
+        .github {
+            color: $background-color-light;
+            font-size: 1.5em;
+        }
+
+        .inline-icon {
+            transform: translate3d(0,0,0);
+            width: 100%;
+            display: block;
+            pointer-events: none;
+        }
+    }
+}
