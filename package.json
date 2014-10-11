@@ -6,6 +6,7 @@
   "main": "",
   "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-contrib-uglify": "^0.6.0",
     "grunt-release": "^0.7.0",
     "grunt-shell": "^1.1.1"
   },

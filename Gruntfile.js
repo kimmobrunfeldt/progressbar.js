@@ -7,6 +7,16 @@ function endsWith(str, suffix) {
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    uglify: {
+      progressbar: {
+        options: {
+          sourceMap: true
+        },
+        files: {
+          'progressbar.min.js': ['progressbar.js']
+        }
+      }
+    },
     jshint: {
       files: ['*.js', 'test/**/*.js'],
         options: {
@@ -28,6 +38,12 @@ module.exports = function(grunt) {
             stdout: true
         },
         command: 'git add bower.json; git commit -m "Update to dev version"'
+      },
+      stageMinified: {
+        options: {
+            stdout: true
+        },
+        command: 'git add progressbar.min.js progressbar.min.js.map'
       }
     },
     extRelease: {
@@ -37,13 +53,13 @@ module.exports = function(grunt) {
         npmtag: false,
         file: 'bower.json',
         // default: 'release <%= version %>'
-        commitMessage: 'Release <%= version %>',
-        tagMessage: 'Tag <%= version %>'
+        commitMessage: 'Release <%= version %>'
       }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-release');
 
@@ -66,9 +82,18 @@ module.exports = function(grunt) {
     grunt.task.run(['shell:updateDevVersion']);
   });
 
+  grunt.registerTask('stageMinified', function() {
+    grunt.task.run(['uglify:progressbar', 'shell:stageMinified']);
+  });
+
   grunt.registerTask('release', function(arg) {
     arg = arg || 'patch';
 
-    grunt.task.run(['jshint', 'extRelease:' + arg, 'updateDevVersion']);
+    grunt.task.run([
+      'jshint',
+      'stageMinified',
+      'extRelease:' + arg,
+      'updateDevVersion'
+    ]);
   });
 };
