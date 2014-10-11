@@ -12,7 +12,7 @@ See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for example
 
 # Get started
 
-*ProgressBar.js* is lightweight and has no dependencies.
+*ProgressBar.js* is lightweight, MIT licensed and has no dependencies.
 
 You can install it with Bower:
 
@@ -358,3 +358,7 @@ for path.
 ## Path.stop()
 
 Stops animation to its current position.
+
+# Contributing
+
+See [documentation for contributors](docs/readme.md).

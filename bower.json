@@ -1,0 +1,33 @@
+{
+  "name": "progressbar.js",
+  "main": "progressbar.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/kimmobrunfeldt/progressbar.js",
+  "authors": [
+    "Kimmo Brunfeldt <kimmobrunfeldt@gmail.com>"
+  ],
+  "description": "Beautiful and responsive progress bars with animated SVG paths",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "progress",
+    "bar",
+    "js",
+    "svg",
+    "circular",
+    "circle",
+    "pace",
+    "radial"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
