@@ -3,15 +3,12 @@ container.innerHTML = '<object id="scene" type="image/svg+xml" data="images/moon
 
 var scene = document.getElementById('scene');
 scene.addEventListener('load', function() {
-    var path = new ProgressBar.Path(scene.contentDocument.querySelector('#meteor-path'));
-    console.log(path)
+    var path = new ProgressBar.Path(scene.contentDocument.querySelector('#star-path'), {
+        duration: 1000
+    });
 
-    path.animate(100, {
-        duration: 300,
-        easing: 'ease-out'
-    },
-    function() {
-        path.set(0);
+    path.animate(100, function() {
+        path.animate(0);
     });
 
 });

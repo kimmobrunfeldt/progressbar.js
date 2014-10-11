@@ -10,9 +10,12 @@
 // Variables
 $circle-width: 600px;
 
-$main-color: #FCB03C;
+$main-color-bright: #FCB03C;
+$main-color-dark: #6E6E6E;
 $background-color-light: #FFF9F0;
 $background-color-dark: #07A197;
+
+$result-background: #FFEFD7;
 
 
 body, html {
@@ -34,8 +37,12 @@ svg {
     height: 100%;
 }
 
-header, h1, h2, p {
-    color: $main-color;
+header, h1, h2 {
+    color: $main-color-bright;
+}
+
+p {
+    color: $main-color-dark;
 }
 
 h1 {
@@ -49,17 +56,17 @@ h2 {
 }
 
 a:visited {
-    color: $main-color;
+    color: $main-color-bright;
 }
 
 a:hover {
-    color: $main-color;
+    color: $main-color-bright;
     cursor: pointer;
 }
 
 a {
     text-decoration: none;
-    color: $main-color;
+    color: $main-color-bright;
 }
 
 ::selection {
@@ -73,12 +80,20 @@ a {
 .fixed {
     position: fixed;
     z-index: 1;
-    top: 20px;
-    right: 23px;
 
     .github > .fa-github {
-        font-size: 3em;
+        width: 100%;
+        text-align: right;
+        margin: 10px 0 0 -23px;
+        font-size: 3.2em;
+    }
+
+    .midnightHeader.default .github > .fa-github {
         color: $background-color-light;
+    }
+
+    .midnightHeader.dark .github >.fa-github {
+        color: $main-color-bright;
     }
 }
 
@@ -145,33 +160,37 @@ a {
         height: 50px;
     }
 
+    p {
+        padding: 10px 0 10px 2px;
+        line-height: 1.3em;
+    }
+
+    .slogan {
+        font-style: italic;
+        margin: 20px 0 20px 10px;
+        font-size: 1.3em;
+        padding: 3px 8px;
+        border-left: 4px solid $main-color-bright;
+    }
+
     .example {
-        &:not(:last-child) {
-
+        &:not(:first-child) {
+            margin: 40px auto;
         }
-
-        margin: 50px auto;
 
         .code {
             margin: 30px 0 30px 0;
             width: 100%;
         }
 
-        h2 {
-            width: 100%;
-            padding-bottom: 4px;
-            border-bottom: 1px solid $background-color-dark;
-        }
-
         .box-info {
             .run {
-                -webkit-transition: all .2s ease-in-out;
-                transition: all .2s ease-in-out;
-                -webkit-transition-property: margin-left;
-                transition-property: margin-left;
+                -webkit-transition: all .2s linear;
+                transition: all .2s linear;
+                color: $main-color-dark;
 
                 &:hover {
-                    margin-left: 5px;
+                    color: $main-color-bright;
                 }
 
                 img {
@@ -184,7 +203,7 @@ a {
         }
 
         .result {
-            background: #FFEFD7;
+            background: $result-background;
             @include border-radius(5px);
             padding: 15px;
 

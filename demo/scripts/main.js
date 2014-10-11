@@ -15,6 +15,11 @@ function initExternalLibs() {
     smoothScroll.init({
         easing: 'easeOutCubic'
     });
+
+    // jQuery is not needed anywhere else but here
+    $('.fixed').midnight({
+        
+    })
 }
 
 function initLanding() {

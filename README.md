@@ -1,4 +1,4 @@
-# SVG Progress Bar
+# ProgressBar.js
 
 <br>
 ![Beautiful animation](demo/animation.gif)
