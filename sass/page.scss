@@ -222,6 +222,7 @@ a {
     .social-links {
         width: 90%;
         max-width: 300px;
+        height: auto;
         text-align: center;
         -webkit-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out;
@@ -239,6 +240,7 @@ a {
         .inline-icon {
             transform: translate3d(0, 0, 0); /* Try to enable HW accleration */
             width: 100%;
+            height: auto;
             display: block;
             pointer-events: none;
         }
