@@ -39,6 +39,17 @@
   p {
       font-size: 0.9em;
   }
+
+  #examples {
+      .example {
+          .result {
+              .example-container {
+                  width: 150px;
+                  height: 150px;
+              }
+          }
+      }
+  }
 }
 
 @media all and (max-width: $circle-width * 0.55) {
@@ -61,5 +72,16 @@
 
   p {
       font-size: 0.9em;
+  }
+
+  #examples {
+      .example {
+          .result {
+              .example-container {
+                  width: 120px;
+                  height: 120px;
+              }
+          }
+      }
   }
 }

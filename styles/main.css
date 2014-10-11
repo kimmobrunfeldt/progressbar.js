@@ -4200,30 +4200,42 @@ a {
   p {
     font-size: 0.9em;
   }
+
+  /* line 46, ../sass/mediaqueries.scss */
+  #examples .example .result .example-container {
+    width: 150px;
+    height: 150px;
+  }
 }
 @media all and (max-width: 330px) {
-  /* line 46, ../sass/mediaqueries.scss */
+  /* line 57, ../sass/mediaqueries.scss */
   header {
     font-size: 1.7em;
   }
 
-  /* line 50, ../sass/mediaqueries.scss */
+  /* line 61, ../sass/mediaqueries.scss */
   h1 {
     font-size: 1.7em;
   }
 
-  /* line 54, ../sass/mediaqueries.scss */
+  /* line 65, ../sass/mediaqueries.scss */
   h2 {
     font-size: 1.4em;
   }
 
-  /* line 58, ../sass/mediaqueries.scss */
+  /* line 69, ../sass/mediaqueries.scss */
   h3 {
     font-size: 0.9em;
   }
 
-  /* line 62, ../sass/mediaqueries.scss */
+  /* line 73, ../sass/mediaqueries.scss */
   p {
     font-size: 0.9em;
+  }
+
+  /* line 80, ../sass/mediaqueries.scss */
+  #examples .example .result .example-container {
+    width: 120px;
+    height: 120px;
   }
 }

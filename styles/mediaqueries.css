@@ -1,11 +1,11 @@
 /*
 Syntax error: Undefined variable: "$circle-width".
-        on line 2 of /Users/kbru/code/personal/svg-progressbar/demo/sass/mediaqueries.scss
+        on line 2 of /Users/kbru/code/personal/progressbar.js/sass/mediaqueries.scss
 
-1: /Users/kbru/code/personal/svg-progressbar/demo/sass/mediaqueries.scss
+1: /Users/kbru/code/personal/progressbar.js/sass/mediaqueries.scss
 
 Backtrace:
-/Users/kbru/code/personal/svg-progressbar/demo/sass/mediaqueries.scss:2
+/Users/kbru/code/personal/progressbar.js/sass/mediaqueries.scss:2
 /Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/script/variable.rb:49:in `_perform'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/script/node.rb:40:in `perform'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/tree/visitors/perform.rb:398:in `block in run_interp_no_strip'
@@ -70,4 +70,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$circle-width\".\A         on line 2 of /Users/kbru/code/personal/svg-progressbar/demo/sass/mediaqueries.scss\A \A 1: /Users/kbru/code/personal/svg-progressbar/demo/sass/mediaqueries.scss"; }
+  content: "Syntax error: Undefined variable: \"$circle-width\".\A         on line 2 of /Users/kbru/code/personal/progressbar.js/sass/mediaqueries.scss\A \A 1: /Users/kbru/code/personal/progressbar.js/sass/mediaqueries.scss"; }
