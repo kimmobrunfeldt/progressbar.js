@@ -33,6 +33,7 @@
         </nav>
 
         <section id="landing" class="no-user-select full-window">
+
             <div class="background">
                 <div class="landing-progress" id="landing-progress"></div>
             </div>
@@ -51,65 +52,67 @@
         </section>
 
         <section id="introduction" class="light-section" data-midnight="dark">
+            <div class="content">
+                <a data-scroll href="#introduction">
+                    <h1>ProgressBar.js</h1>
+                </a>
+                <p class="slogan">Beautiful and responsive progress bars with animated SVG paths.</p>
 
-            <a data-scroll href="#introduction">
-                <h1>ProgressBar.js</h1>
-            </a>
-            <p class="slogan">Beautiful and responsive progress bars with animated SVG paths.</p>
+                <p>
+                    With animated SVG paths, it's easy to create arbitrary shaped progress bars.
+                    ProgressBar.js provides a few built&#8209;in shapes like
+                    <a href="https://github.com/kimmobrunfeldt/progressbar.js#circlecontainer-options">Circle</a>
+                    and
+                    <a href="https://github.com/kimmobrunfeldt/progressbar.js#squarecontainer-options">Square</a>.
+                    You can also create your own progress bars with Illustrator or any vector graphic editor.
+                </p>
 
-            <p>
-                With animated SVG paths, it's easy to create arbitrary shaped progress bars.
-                ProgressBar.js provides a few built&#8209;in shapes like
-                <a href="https://github.com/kimmobrunfeldt/progressbar.js#circlecontainer-options">Circle</a>
-                and
-                <a href="https://github.com/kimmobrunfeldt/progressbar.js#squarecontainer-options">Square</a>.
-                You can also create your own progress bars with Illustrator or any vector graphic editor.
-            </p>
-
-            <p>For detailed usage, see <a href="https://github.com/kimmobrunfeldt/progressbar.js#api">API documentation in GitHub</a>.</p>
+                <p>For detailed usage, see <a href="https://github.com/kimmobrunfeldt/progressbar.js#api">API documentation in GitHub</a>.</p>
+            </div>
         </section>
 
         <section id="examples" class="light-section" data-midnight="dark">
-            <a data-scroll href="#examples">
-                <h1>Examples</h1>
-            </a>
+            <div class="content">
+                <a data-scroll href="#examples">
+                    <h1>Examples</h1>
+                </a>
 
-            <div id="example-circle" class="example">
-                <a data-scroll href="#example-circle"><h2>Circle</h2></a>
-                <p>Simple example of animating a built&#8209;in Circle progress bar.</p>
+                <div id="example-circle" class="example">
+                    <a data-scroll href="#example-circle"><h2>Circle</h2></a>
+                    <p>Simple example of animating a built&#8209;in Circle progress bar.</p>
 
-                <div class="code"></div>
+                    <div class="code"></div>
 
-                <div class="box-info">
-                    <!-- Play by Alex Fuller from The Noun Project -->
-                    <a class="no-user-select run">
-                        <img src="images/play.svg" alt="Run"> Run
-                    </a>
+                    <div class="box-info">
+                        <!-- Play by Alex Fuller from The Noun Project -->
+                        <a class="no-user-select run">
+                            <img src="images/play.svg" alt="Run"> Run
+                        </a>
+                    </div>
+                    <div class="result">
+                        <div class="example-container" id="example-1-container"></div>
+                    </div>
                 </div>
-                <div class="result">
-                    <div class="example-container" id="example-1-container"></div>
+
+                <div id="example-custom-shape" class="example">
+                    <a data-scroll href="#example-custom-shape"><h2>Custom shaped path</h2></a>
+                    <p>Example of animating path inside a complex SVG scene.
+                    If you need to do more complicated animations, use SVG animation library like <a href="http://snapsvg.io/">Snap.svg</a>.</p>
+
+                    <div class="code"></div>
+
+                    <div class="box-info">
+
+                        <a class="no-user-select run">
+                            <img src="images/play.svg" alt="Run"> Run
+                        </a>
+                    </div>
+                    <div class="result">
+                        <div class="example-container" id="example-2-container"></div>
+                    </div>
+
                 </div>
             </div>
-
-            <div id="example-custom-shape" class="example">
-                <a data-scroll href="#example-custom-shape"><h2>Custom shaped path</h2></a>
-                <p>Example of animating path inside a complex SVG scene.
-                If you need to do more complicated animations, use SVG animation library like <a href="http://snapsvg.io/">Snap.svg</a>.</p>
-
-                <div class="code"></div>
-
-                <div class="box-info">
-
-                    <a class="no-user-select run">
-                        <img src="images/play.svg" alt="Run"> Run
-                    </a>
-                </div>
-                <div class="result">
-                    <div class="example-container" id="example-2-container"></div>
-                </div>
-
-            </div>
-
         </section>
 
         <section id="please" class="full-window">

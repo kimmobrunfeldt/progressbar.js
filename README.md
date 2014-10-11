@@ -7,6 +7,20 @@
 Beautiful and responsive progress bars with animated SVG paths.
 [Use built-in shapes](#circlecontainer-options) or [create your own paths](#pathpath-options).
 
+See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for examples.
+
+
+# Get started
+
+*ProgressBar.js* is lightweight and has no dependencies.
+
+You can install it with Bower:
+
+    bower install progressbar.js
+
+Or just by including [*progressbar.js*](progressbar.js) or [progressbar.min.js](progressbar.min.js) from latest tag to your project.
+
+
 # API
 
 [**ProgressBar**](#api)
