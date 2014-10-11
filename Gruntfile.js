@@ -63,12 +63,12 @@ module.exports = function(grunt) {
     var prettyJson = JSON.stringify(bowerJson, null, 2);
     grunt.file.write('bower.json', prettyJson);
 
-    grunt.task.run(['shell:commitDevVersion']);
+    grunt.task.run(['shell:updateDevVersion']);
   });
 
   grunt.registerTask('release', function(arg) {
     arg = arg || 'patch';
 
-    grunt.task.run(['jshint', 'extRelease:' + arg, 'shell:updateDevVersion']);
+    grunt.task.run(['jshint', 'extRelease:' + arg, 'updateDevVersion']);
   });
 };
