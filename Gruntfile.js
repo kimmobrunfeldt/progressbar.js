@@ -49,7 +49,7 @@ module.exports = function(grunt) {
         command: 'git add progressbar.min.js progressbar.min.js.map; git commit -m "Add minified script"'
       }
     },
-    extRelease: {
+    release: {
       options: {
         // Don't release to NPM
         npm: false,
