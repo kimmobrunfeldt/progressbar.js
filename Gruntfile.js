@@ -52,12 +52,17 @@ module.exports = function(grunt) {
     // https://github.com/geddski/grunt-release/issues/84
     release: {
       options: {
+        npm: false,
         npmtag: false,
-        commitMessage: 'Release <%= version %>'
+        commitMessage: 'Release <%= version %>',
+        file: 'bower.json'
       }
     },
     extRelease: {
       options: {
+        npm: false,
+        npmtag: false,
+        commitMessage: 'Release <%= version %>',
         file: 'bower.json'
       }
     }
