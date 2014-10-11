@@ -24,10 +24,10 @@ module.exports = function(grunt) {
         command: 'mocha'
       },
       updateDevVersion: {
-          options: {
-              stdout: true
-          },
-          command: 'git add bower.json; git commit -m "Update to dev version"'
+        options: {
+            stdout: true
+        },
+        command: 'git add bower.json; git commit -m "Update to dev version"'
       }
     },
     extRelease: {
@@ -67,6 +67,8 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('release', function(arg) {
+    arg = arg || 'patch';
+
     grunt.task.run(['jshint', 'extRelease:' + arg, 'shell:updateDevVersion']);
   });
 };
