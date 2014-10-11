@@ -18,7 +18,7 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: ['*.js', 'test/**/*.js'],
+      files: ['progressbar.js', 'test/**/*.js'],
         options: {
           globals: {
             jQuery: true,
@@ -39,11 +39,11 @@ module.exports = function(grunt) {
         },
         command: 'git add bower.json; git commit -m "Update to dev version"'
       },
-      stageMinified: {
+      commitMinified: {
         options: {
             stdout: true
         },
-        command: 'git add progressbar.min.js progressbar.min.js.map'
+        command: 'git add progressbar.min.js progressbar.min.js.map; git commit -m "Add minified script"'
       }
     },
     extRelease: {
@@ -82,8 +82,8 @@ module.exports = function(grunt) {
     grunt.task.run(['shell:updateDevVersion']);
   });
 
-  grunt.registerTask('stageMinified', function() {
-    grunt.task.run(['uglify:progressbar', 'shell:stageMinified']);
+  grunt.registerTask('commitMinified', function() {
+    grunt.task.run(['uglify:progressbar', 'shell:commitMinified']);
   });
 
   grunt.registerTask('release', function(arg) {
@@ -91,7 +91,7 @@ module.exports = function(grunt) {
 
     grunt.task.run([
       'jshint',
-      'stageMinified',
+      'commitMinified',
       'extRelease:' + arg,
       'updateDevVersion'
     ]);
