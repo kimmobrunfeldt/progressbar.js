@@ -50,7 +50,7 @@ module.exports = function(grunt) {
       }
     },
     // https://github.com/geddski/grunt-release/issues/84
-    release {
+    release: {
       options: {
         npmtag: false,
         commitMessage: 'Release <%= version %>'
