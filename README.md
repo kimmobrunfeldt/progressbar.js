@@ -5,10 +5,10 @@
 
 <br>
 Beautiful and responsive progress bars with animated SVG paths.
-[Use built-in shapes](#circlecontainer-options) or [create your own paths](#pathpath-options).
+[Use built-in shapes](#circlecontainer-options) or [create your own paths](#pathpath-options). See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for examples.
 
-See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for examples.
 
+*Read [Jake Archibald's blog post](http://jakearchibald.com/2013/animated-line-drawing-svg/) to see how the animation works under the hood*.
 
 # Get started
 
