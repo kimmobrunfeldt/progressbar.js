@@ -182,10 +182,13 @@
 
         var computedStyle = window.getComputedStyle(this._path, null);
         var offset = computedStyle.getPropertyValue('stroke-dashoffset');
+        // Remove 'px' suffix
+        offset = parseFloat(offset, 10);
 
         var length = this._path.getTotalLength();
         var newOffset = length - progress * length;
 
+        self = this;
         this._tweenable = new Tweenable();
         this._tweenable.tween({
             from: { offset: offset },
@@ -193,11 +196,15 @@
             duration: opts.duration,
             easing: this._easing(opts.easing),
             step: function(state) {
-                this._path.style.strokeDashoffset = state.offset;
+                self._path.style.strokeDashoffset = state.offset;
             },
             finish: function(state) {
-                this._path.style.strokeDashoffset = state.offset;
-                cb();
+                // step function is not called on the last step of animation
+                self._path.style.strokeDashoffset = state.offset;
+
+                if (isFunction(cb)) {
+                    cb();
+                }
             }
         });
     };
@@ -206,7 +213,7 @@
         if (this._tweenable !== null) {
             this._tweenable.stop();
             this._tweenable.dispose();
-            delete this._tweenable;
+            this._tweenable = null;
         }
     };
 
