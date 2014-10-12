@@ -27,21 +27,21 @@ Or just by including [*progressbar.js*](progressbar.js) or [progressbar.min.js](
 
 
 * [Circle(container, [*options*])](#circlecontainer-options)
-    * [animate(percent, [*options*], [*cb*])](#circleanimatepercent-options-cb)
+    * [animate(progress, [*options*], [*cb*])](#circleanimateprogress-options-cb)
     * [stop()](#circlestop)
-    * [set(percent)](#circlesetpercent)
+    * [set(progress)](#circlesetprogress)
 
 
 * [Square(container, [*options*])](#squarecontainer-options)
-    * [animate(percent, [*options*], [*cb*])](#squareanimatepercent-options-cb)
+    * [animate(progress, [*options*], [*cb*])](#squareanimateprogress-options-cb)
     * [stop()](#squarestop)
-    * [set(percent)](#squaresetpercent)
+    * [set(progress)](#squaresetprogress)
 
 
 * [Path(path, [*options*])](#pathpath-options)
-    * [animate(percent, [*options*], [*cb*])](#pathanimatepercent-options-cb)
+    * [animate(progress, [*options*], [*cb*])](#pathanimateprogress-options-cb)
     * [stop()](#pathstop)
-    * [set(percent)](#pathsetpercent)
+    * [set(progress)](#pathsetprogress)
 
 Functions use node-style callback convention. Callback function is always the last given parameter.
 
@@ -83,7 +83,7 @@ To make circle resize with its container, set for example the following CSS:
         color: "#3a3a3a",
 
         // Width of the stroke.
-        // Unit is percentage of SVG canvas.
+        // Unit is percentage of SVG canvas' size.
         // Default: 1.0
         strokeWidth: 0.1,
 
@@ -107,14 +107,14 @@ To make circle resize with its container, set for example the following CSS:
     }
     ```
 
-## Circle.animate(percent, [*options*], [*cb*])
+## Circle.animate(progress, [*options*], [*cb*])
 
 Animates drawing of circle.
 
 **Example**
 
 ```javascript
-progressBar.animate(30, {
+progressBar.animate(0.3, {
     duration: 800
 }, function() {
     console.log('Animation has finished');
@@ -123,7 +123,7 @@ progressBar.animate(30, {
 
 **Parameters**
 
-* `percent` Percent from 0 to 100.
+* `progress` progress from 0 to 1.
 * `options` Animation options. These options override the defaults given in initialization.
 
     ```javascript
@@ -140,9 +140,9 @@ progressBar.animate(30, {
 
 * `cb` Callback function which is called after transition ends.
 
-## Circle.set(percent)
+## Circle.set(progress)
 
-Sets progress to a percent instantly without animation. Clears all transitions
+Sets progress instantly without animation. Clears all transitions
 for path.
 
 ## Circle.stop()
@@ -188,7 +188,7 @@ To make square resize with its container, set for example the following CSS:
         color: "#3a3a3a",
 
         // Width of the stroke.
-        // Unit is percentage of SVG canvas.
+        // Unit is percentage of SVG canvas' size.
         // Default: 1.0
         strokeWidth: 0.1,
 
@@ -212,14 +212,14 @@ To make square resize with its container, set for example the following CSS:
     }
     ```
 
-## Square.animate(percent, [*options*], [*cb*])
+## Square.animate(progress, [*options*], [*cb*])
 
 Animates drawing of square.
 
 **Example**
 
 ```javascript
-progressBar.animate(30, {
+progressBar.animate(0.3, {
     duration: 800
 }, function() {
     console.log('Animation has finished');
@@ -228,7 +228,7 @@ progressBar.animate(30, {
 
 **Parameters**
 
-* `percent` Percent from 0 to 100.
+* `progress` progress from 0 to 1.
 * `options` Animation options. These options override the defaults given in initialization.
 
     ```javascript
@@ -245,9 +245,9 @@ progressBar.animate(30, {
 
 * `cb` Callback function which is called after transition ends.
 
-## Square.set(percent)
+## Square.set(progress)
 
-Sets progress to a percent instantly without animation. Clears all transitions
+Sets progress instantly without animation. Clears all transitions
 for path.
 
 ## Square.stop()
@@ -317,14 +317,14 @@ var path = new ProgressBar.Path(heartObject.contentDocument.querySelector('#hear
     }
     ```
 
-## Path.animate(percent, [*options*], [*cb*])
+## Path.animate(progress, [*options*], [*cb*])
 
 Animates drawing of path.
 
 **Example**
 
 ```javascript
-path.animate(30, {
+path.animate(0.3, {
     duration: 800
 }, function() {
     console.log('Animation has finished');
@@ -333,7 +333,7 @@ path.animate(30, {
 
 **Parameters**
 
-* `percent` Percent from 0 to 100.
+* `progress` progress from 0 to 1.
 * `options` Animation options. These options override the defaults given in initialization.
 
     ```javascript
@@ -350,9 +350,9 @@ path.animate(30, {
 
 * `cb` Callback function which is called after transition ends.
 
-## Path.set(percent)
+## Path.set(progress)
 
-Set progress to a percent instantly without animation. Clears all transitions
+Set progress instantly without animation. Clears all transitions
 for path.
 
 ## Path.stop()

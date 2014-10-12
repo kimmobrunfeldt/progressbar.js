@@ -31,17 +31,17 @@
         this._path = new Path(svgView.path, opts);
     };
 
-    Progress.prototype.animate = function animate(percent, opts, cb) {
+    Progress.prototype.animate = function animate(progress, opts, cb) {
         this._path.stop();
-        this._path.animate(percent, opts, cb);
+        this._path.animate(progress, opts, cb);
     };
 
     Progress.prototype.stop = function stop() {
         this._path.stop();
     };
 
-    Progress.prototype.set = function set(percent) {
-        this._path.set(percent);
+    Progress.prototype.set = function set(progress) {
+        this._path.set(progress);
     };
 
     Progress.prototype._createSvgView = function _createSvgView(opts) {
@@ -143,11 +143,11 @@
         this._path.style.strokeDashoffset = length;
     };
 
-    Path.prototype.set = function set(percent) {
+    Path.prototype.set = function set(progress) {
         this._setTransition('none');
 
         var length = this._path.getTotalLength();
-        this._path.style.strokeDashoffset = length - (percent / 100) * length;
+        this._path.style.strokeDashoffset = length - progress * length;
     };
 
     Path.prototype.stop = function stop() {
@@ -161,7 +161,7 @@
 
     // Method introduced here:
     // http://jakearchibald.com/2013/animated-line-drawing-svg/
-    Path.prototype.animate = function animate(percent, opts, cb) {
+    Path.prototype.animate = function animate(progress, opts, cb) {
         if (isFunction(opts)) {
             cb = opts;
             opts = {};
@@ -190,7 +190,7 @@
         this._setTransition(transition);
 
         var length = this._path.getTotalLength();
-        this._path.style.strokeDashoffset = length - (percent / 100) * length;
+        this._path.style.strokeDashoffset = length - progress * length;
     };
 
     Path.prototype._setTransition = function _setTransition(transition) {
