@@ -18,7 +18,8 @@ You can install it with Bower:
 
     bower install progressbar.js
 
-Or just by including [*progressbar.js*](progressbar.js) or [progressbar.min.js](progressbar.min.js) from latest tag to your project.
+Or just by including [*dist/progressbar.js*](dist/progressbar.js) or
+[dist/progressbar.min.js](dist/progressbar.min.js) from latest tag to your project.
 
 
 # API
