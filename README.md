@@ -140,14 +140,14 @@ progressBar.animate(0.3, {
 
 * `cb` Callback function which is called after transition ends.
 
+## Circle.stop()
+
+Stops animation to its current position.
+
 ## Circle.set(progress)
 
 Sets progress instantly without animation. Clears all transitions
 for path.
-
-## Circle.stop()
-
-Stops animation to its current position.
 
 <br>
 <br>
@@ -245,14 +245,14 @@ progressBar.animate(0.3, {
 
 * `cb` Callback function which is called after transition ends.
 
+## Square.stop()
+
+Stops animation to its current position.
+
 ## Square.set(progress)
 
 Sets progress instantly without animation. Clears all transitions
 for path.
-
-## Square.stop()
-
-Stops animation to its current position.
 
 <br>
 <br>
@@ -350,14 +350,15 @@ path.animate(0.3, {
 
 * `cb` Callback function which is called after transition ends.
 
+## Path.stop()
+
+Stops animation to its current position.
+
 ## Path.set(progress)
 
 Set progress instantly without animation. Clears all transitions
 for path.
 
-## Path.stop()
-
-Stops animation to its current position.
 
 # Contributing
 
