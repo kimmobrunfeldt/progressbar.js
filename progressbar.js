@@ -1,14 +1,14 @@
 (function(root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD
-        define('progressbar', [], function() {
-            return factory();
+        define('progressbar', ['animation-frame'], function(AnimationFrame) {
+            return factory(AnimationFrame);
         });
     } else {
         // Browser globals
-        root.ProgressBar = factory();
+        root.ProgressBar = factory(AnimationFrame);
     }
-}(this, function() {
+}(this, function(AnimationFrame) {
 
     var PREFIXES = 'webkit moz o ms'.split(' ');
 
