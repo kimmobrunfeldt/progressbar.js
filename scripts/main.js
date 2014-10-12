@@ -28,7 +28,7 @@ function initLanding() {
         fill: "#FFF9F0"
     });
 
-    circle.animate(100, {
+    circle.animate(1, {
         duration: 1300
     }, function() {
         var elements = document.querySelectorAll('#landing > .content, .background');
@@ -50,7 +50,7 @@ function initLandingHover(circle) {
     }
 
     element.onmouseout = function() {
-        circle.animate(100, {
+        circle.animate(1, {
             duration: 800
         });
     }
@@ -98,7 +98,7 @@ function runExample(code) {
 function initStar() {
     var star = document.getElementById('star');
     var path = new ProgressBar.Path(star.contentDocument.querySelector('#star-path'));
-    path.set(100);
+    path.set(1);
 
     var element = document.querySelector('.social-links > .github');
     element.onmouseover = function() {
@@ -106,7 +106,7 @@ function initStar() {
     }
 
     element.onmouseout = function() {
-        path.animate(100, {duration: 600});
+        path.animate(1, {duration: 600});
     }
 }
 

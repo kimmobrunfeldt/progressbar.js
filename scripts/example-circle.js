@@ -6,6 +6,6 @@ var circle = new ProgressBar.Circle(element, {
     fill: "#666"
 });
 
-circle.animate(100, function() {
+circle.animate(1, function() {
     circle.animate(0);
 })
