@@ -9,8 +9,7 @@
   "description": "Beautiful and responsive progress bars with animated SVG paths",
   "moduleType": [
     "amd",
-    "globals",
-    "node"
+    "globals"
   ],
   "keywords": [
     "progress",
