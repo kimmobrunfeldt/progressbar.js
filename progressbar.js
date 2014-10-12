@@ -188,7 +188,10 @@
         var length = this._path.getTotalLength();
         var newOffset = length - progress * length;
 
-        self = this;
+        // Path reference must be created like this instead of var self = this;
+        // Somehow the self references sometimes to incorrect instance if
+        // created like that.
+        var thisPath = this._path;
         this._tweenable = new Tweenable();
         this._tweenable.tween({
             from: { offset: offset },
@@ -196,11 +199,11 @@
             duration: opts.duration,
             easing: this._easing(opts.easing),
             step: function(state) {
-                self._path.style.strokeDashoffset = state.offset;
+                thisPath.style.strokeDashoffset = state.offset;
             },
             finish: function(state) {
                 // step function is not called on the last step of animation
-                self._path.style.strokeDashoffset = state.offset;
+                thisPath.style.strokeDashoffset = state.offset;
 
                 if (isFunction(cb)) {
                     cb();
