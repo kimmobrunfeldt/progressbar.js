@@ -12,7 +12,9 @@ Beautiful and responsive progress bars with animated SVG paths.
 
 # Get started
 
-*ProgressBar.js* is lightweight, MIT licensed and has no dependencies.
+*ProgressBar.js* is lightweight and MIT licensed. It depends on [shifty](https://github.com/jeremyckahn/shifty),
+which is a tweening library.
+
 
 You can install it with Bower:
 
