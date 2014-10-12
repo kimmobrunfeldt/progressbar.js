@@ -7,16 +7,6 @@ function endsWith(str, suffix) {
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    uglify: {
-      progressbar: {
-        options: {
-          sourceMap: true
-        },
-        files: {
-          'progressbar.min.js': ['progressbar.js']
-        }
-      }
-    },
     jshint: {
       files: ['progressbar.js', 'test/**/*.js'],
         options: {
@@ -25,6 +15,26 @@ module.exports = function(grunt) {
             module: true
           }
         }
+    },
+    replace: {
+      bundleShifty: {
+        src: ['progressbar.js'],
+        dest: 'dist/progressbar.js',
+        replacements: [{
+          from: '// #include shifty',
+          to: grunt.file.read('shifty.min.js')
+        }]
+      }
+    },
+    uglify: {
+      progressbar: {
+        options: {
+          sourceMap: true
+        },
+        files: {
+          'dist/progressbar.min.js': ['dist/progressbar.js']
+        }
+      }
     },
     shell: {
       mocha: {
@@ -46,7 +56,7 @@ module.exports = function(grunt) {
             // git command fails
             failOnError: false
         },
-        command: 'git add progressbar.min.js progressbar.min.js.map; git commit -m "Add minified script"'
+        command: 'git add dist/progressbar.js dist/progressbar.min.js dist/progressbar.min.js.map; git commit -m "Add built scripts"'
       }
     },
     // https://github.com/geddski/grunt-release/issues/84
@@ -70,6 +80,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-text-replace');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-release');
 
@@ -101,6 +112,7 @@ module.exports = function(grunt) {
 
     grunt.task.run([
       'jshint',
+      'replace:bundleShifty',
       'commitMinified',
       'extRelease:' + arg,
       'updateDevVersion'

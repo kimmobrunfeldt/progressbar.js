@@ -7,6 +7,11 @@ was the best available release automation tool for a Bower package.
 This package uses npm/node tools just in the developer environment. The actual
 delivered package is only released in Bower.
 
+*ProgressBar.js* depends on tweening library called [shifty](https://github.com/jeremyckahn/shifty).
+*Shifty* is bundled inside the scripts in [dist/](dist/) directory.
+Dependency is bundled inside the files to ease using the library.
+
+
 ## Install environment
 
 Install tools needed for development:

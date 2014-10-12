@@ -1,14 +1,18 @@
 (function(root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD
-        define('progressbar', ['shifty'], function(Tweenable) {
-            return factory(Tweenable);
+        define('progressbar', [], function() {
+            return factory();
         });
     } else {
         // Browser globals
-        root.ProgressBar = factory(Tweenable);
+        root.ProgressBar = factory();
     }
-}(this, function(Tweenable) {
+}(this, function() {
+
+    // The next line will be replaced with minified version of shifty library
+    // in a build step
+    // #include shifty
 
     var EASING_ALIASES = {
         easeIn: 'easeInCubic',

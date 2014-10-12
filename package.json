@@ -9,7 +9,8 @@
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-uglify": "^0.6.0",
     "grunt-release": "^0.7.0",
-    "grunt-shell": "^1.1.1"
+    "grunt-shell": "^1.1.1",
+    "grunt-text-replace": "^0.3.12"
   },
   "scripts": {
     "test": "grunt test"
