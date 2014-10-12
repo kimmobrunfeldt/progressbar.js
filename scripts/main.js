@@ -125,4 +125,4 @@ function get(url, cb) {
     req.send();
 }
 
-window.onload = onLoad();
+$(window).load(onLoad);
