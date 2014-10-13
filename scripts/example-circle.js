@@ -2,8 +2,7 @@ var element = document.getElementById('example-1-container');
 var circle = new ProgressBar.Circle(element, {
     color: "#FCB03C",
     strokeWidth: 5,
-    trailColor: "#aaa",
-    fill: "#666"
+    fill: "#aaa"
 });
 
 circle.animate(1, function() {
