@@ -56,7 +56,7 @@
         opts = extend({
             color: "#555",
             strokeWidth: 1.0,
-            trailColor: "#f4f4f4",
+            trailColor: null,
             fill: null
         }, opts);
 

@@ -101,7 +101,7 @@ To make circle resize with its container, set for example the following CSS:
         // Color for lighter trail stroke
         // underneath the actual progress path.
         // If null, trail path is not drawn
-        // Default: "#f4f4f4"
+        // Default: null
         trailColor: "#f4f4f4",
 
         // Fill color for the shape. If null, no fill.
@@ -206,7 +206,7 @@ To make square resize with its container, set for example the following CSS:
         // Color for lighter trail stroke
         // underneath the actual progress path.
         // If null, trail path is not drawn
-        // Default: "#f4f4f4"
+        // Default: null
         trailColor: "#f4f4f4",
 
         // Fill color for the shape. If null, no fill.
