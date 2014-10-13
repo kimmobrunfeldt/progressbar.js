@@ -28,7 +28,10 @@ function initLanding() {
         fill: "#FFF9F0"
     });
 
-    circle.set(1);    
+    circle.animate(1, {
+        duration: 1200,
+        easing: 'easeInOut'
+    });
 }
 
 function initExamples() {
