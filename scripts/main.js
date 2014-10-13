@@ -28,32 +28,7 @@ function initLanding() {
         fill: "#FFF9F0"
     });
 
-    circle.animate(1, {
-        duration: 1300
-    }, function() {
-        var elements = document.querySelectorAll('#landing > .content, .background');
-        for (var i = 0; i < elements.length; ++i) {
-            elements[i].className += ' animated pulse';
-        }
-
-        initLandingHover(circle);
-    });
-}
-
-function initLandingHover(circle) {
-    var element = document.querySelector('#landing .landing-progress');
-    element.onmouseover = function() {
-        circle.animate(0, {
-            duration: 3000,
-            easing: 'linear'
-        });
-    }
-
-    element.onmouseout = function() {
-        circle.animate(1, {
-            duration: 800
-        });
-    }
+    circle.set(1);    
 }
 
 function initExamples() {
