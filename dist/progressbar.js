@@ -140,7 +140,7 @@
     var Path = function(path, opts) {
         opts = extend({
             duration: 800,
-            easing: "easeInOut"
+            easing: "linear"
         }, opts);
 
         this._path = path;
