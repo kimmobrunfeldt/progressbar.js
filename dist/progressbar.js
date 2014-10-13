@@ -58,7 +58,7 @@
         opts = extend({
             color: "#555",
             strokeWidth: 1.0,
-            trailColor: "#f4f4f4",
+            trailColor: null,
             fill: null
         }, opts);
 
@@ -68,6 +68,10 @@
         if (opts.trailColor) {
             var trailOpts = extend({}, opts);
             trailOpts.color = opts.trailColor;
+
+            // When trail path is set, fill must be set for it instead of the
+            // actual path to prevent trail stroke from clipping
+            opts.fill = null;
             var trailPath = this._createPath(trailOpts);
             svg.appendChild(trailPath);
         }
