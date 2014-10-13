@@ -107,6 +107,10 @@ module.exports = function(grunt) {
     grunt.task.run(['uglify:progressbar', 'shell:commitMinified']);
   });
 
+  // Build distributables to dist folder
+  grunt.registerTask('build', ['replace:bundleShifty', 'uglify:progressbar'])
+  
+  // Test, build, and release library to public
   grunt.registerTask('release', function(arg) {
     arg = arg || 'patch';
 
