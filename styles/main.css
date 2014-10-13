@@ -4156,9 +4156,8 @@ a {
 /* line 1, ../sass/examples.scss */
 #example-3-container {
   position: relative;
-  text-align: center;
 }
-/* line 5, ../sass/examples.scss */
+/* line 4, ../sass/examples.scss */
 #example-3-container #clock-seconds {
   font-size: 4em;
   position: absolute;
