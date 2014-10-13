@@ -20,6 +20,7 @@ $result-background: #FFEFD7;
 
 // The actual styles of page
 @import "page.scss";
+@import "examples.scss";
 
 // Must be on bottom to override actual styles
 @import "mediaqueries.scss";

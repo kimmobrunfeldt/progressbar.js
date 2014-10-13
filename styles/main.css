@@ -4153,6 +4153,22 @@ a {
   pointer-events: none;
 }
 
+/* line 1, ../sass/examples.scss */
+#example-3-container {
+  position: relative;
+  text-align: center;
+}
+/* line 5, ../sass/examples.scss */
+#example-3-container #clock-seconds {
+  font-size: 4em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
 @media all and (max-width: 600px) {
   /* line 4, ../sass/mediaqueries.scss */
   header {
