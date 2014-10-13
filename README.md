@@ -27,7 +27,7 @@ Or just by including [*dist/progressbar.js*](dist/progressbar.js) or
 Progress bars are just regular SVG paths.
 Read [Jake Archibald's blog post](http://jakearchibald.com/2013/animated-line-drawing-svg/) to see how the path drawing works under the hood.
 
-*ProgressBar.js* uses [shifty](jeremyckahn.github.io/shifty/) tweening library to animate path drawing.
+*ProgressBar.js* uses [shifty](https://jeremyckahn.github.io/shifty/) tweening library to animate path drawing.
 So in other words, animation is done with JavaScript using [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame).
 Animating with JS gives more control over the animation and is supported across major browsers. IE [does not support](https://connect.microsoft.com/IE/feedbackdetail/view/920928/ie-11-css-transition-property-not-working-for-svg-elements) animating SVG properties.
 
