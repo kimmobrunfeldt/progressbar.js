@@ -370,6 +370,8 @@ Stops animation to its current position.
 Set progress instantly without animation. Clears all transitions
 for path.
 
+<br>
+<br>
 
 # Parameters in detail
 
@@ -379,10 +381,10 @@ Easing functions [provided with *shifty* are supported](https://github.com/jerem
 
 A few basic easing options:
 
-    * `"linear"`
-    * `"easeIn"`
-    * `"easeOut"`
-    * `"easeInOut"`
+* `"linear"`
+* `"easeIn"`
+* `"easeOut"`
+* `"easeInOut"`
 
 
 # Contributing
