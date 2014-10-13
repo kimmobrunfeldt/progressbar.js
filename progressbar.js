@@ -10,7 +10,15 @@
     }
 }(this, function() {
 
-    var PREFIXES = 'webkit moz o ms'.split(' ');
+    // The next line will be replaced with minified version of shifty library
+    // in a build step
+    // #include shifty
+
+    var EASING_ALIASES = {
+        easeIn: 'easeInCubic',
+        easeOut: 'easeOutCubic',
+        easeInOut: 'easeInOutCubic'
+    };
 
     // Base object for different progress bar shapes
     var Progress = function(container, opts) {
@@ -130,12 +138,12 @@
     var Path = function(path, opts) {
         opts = extend({
             duration: 800,
-            easing: "ease-in-out"
+            easing: "easeInOut"
         }, opts);
 
         this._path = path;
         this._opts = opts;
-        this._callbacks = {};
+        this._tweenable = null;
 
         // Set up the starting positions
         var length = this._path.getTotalLength();
@@ -144,19 +152,18 @@
     };
 
     Path.prototype.set = function set(progress) {
-        this._setTransition('none');
+        this.stop();
 
         var length = this._path.getTotalLength();
         this._path.style.strokeDashoffset = length - progress * length;
     };
 
     Path.prototype.stop = function stop() {
+        this._stopTween();
+
         var computedStyle = window.getComputedStyle(this._path, null);
         var offset = computedStyle.getPropertyValue('stroke-dashoffset');
         this._path.style.strokeDashoffset = offset;
-
-        this._setTransition('none');
-        this._removeCallbacks();
     };
 
     // Method introduced here:
@@ -171,55 +178,58 @@
         var defaultOpts = extend({}, this._opts);
         opts = extend(defaultOpts, opts);
 
-        this._setTransition('none');
-
-        if (cb) {
-            var self = this;
-            this._setCallback('transitionend', function(/* arguments */) {
-                cb.apply(self, arguments);
-                self._removeCallback('transitionend');
-            });
-        }
+        this.stop();
 
         // Trigger a layout so styles are calculated & the browser
         // picks up the starting position before animating
         this._path.getBoundingClientRect();
 
-        // Animate
-        var transition = 'stroke-dashoffset ' + opts.duration + 'ms ' + opts.easing;
-        this._setTransition(transition);
+        var computedStyle = window.getComputedStyle(this._path, null);
+        var offset = computedStyle.getPropertyValue('stroke-dashoffset');
+        // Remove 'px' suffix
+        offset = parseFloat(offset, 10);
 
         var length = this._path.getTotalLength();
-        this._path.style.strokeDashoffset = length - progress * length;
-    };
+        var newOffset = length - progress * length;
 
-    Path.prototype._setTransition = function _setTransition(transition) {
-        for (var i = 0; i < PREFIXES.length; ++i) {
-            var prefix = PREFIXES[i].toUpperCase() + PREFIXES[i].substr(1);
-            this._path.style[prefix + 'Transition'] = transition;
-        }
+        // Path reference must be created like this instead of var self = this;
+        // Somehow the self references sometimes to incorrect instance if
+        // created like that.
+        var thisPath = this._path;
+        this._tweenable = new Tweenable();
+        this._tweenable.tween({
+            from: { offset: offset },
+            to:   { offset: newOffset },
+            duration: opts.duration,
+            easing: this._easing(opts.easing),
+            step: function(state) {
+                thisPath.style.strokeDashoffset = state.offset;
+            },
+            finish: function(state) {
+                // step function is not called on the last step of animation
+                thisPath.style.strokeDashoffset = state.offset;
 
-        this._path.style.transition = transition;
-    };
-
-    Path.prototype._setCallback = function _setCallback(eventName, cb) {
-        this._removeCallback(eventName);
-        this._path.addEventListener(eventName, cb);
-        this._callbacks[eventName] = cb;
-    };
-
-    Path.prototype._removeCallbacks = function _removeCallbacks() {
-        for (var eventName in this._callbacks) {
-            if (this._callbacks.hasOwnProperty(eventName)) {
-                this._removeCallback(eventName);
+                if (isFunction(cb)) {
+                    cb();
+                }
             }
+        });
+    };
+
+    Path.prototype._stopTween = function _stopTween() {
+        if (this._tweenable !== null) {
+            this._tweenable.stop();
+            this._tweenable.dispose();
+            this._tweenable = null;
         }
     };
 
-    Path.prototype._removeCallback = function _removeCallback(eventName) {
-        if (this._callbacks.hasOwnProperty(eventName)) {
-            this._path.removeEventListener(eventName, this._callbacks[eventName]);
+    Path.prototype._easing = function _easing(easing) {
+        if (EASING_ALIASES.hasOwnProperty(easing)) {
+            return EASING_ALIASES[easing];
         }
+
+        return easing;
     };
 
     // Utility functions

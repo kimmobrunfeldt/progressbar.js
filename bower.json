@@ -1,6 +1,6 @@
 {
   "name": "progressbar.js",
-  "main": "progressbar.js",
+  "main": "dist/progressbar.min.js",
   "version": "0.1.0-dev",
   "homepage": "https://github.com/kimmobrunfeldt/progressbar.js",
   "authors": [
@@ -19,7 +19,10 @@
     "circular",
     "circle",
     "pace",
-    "radial"
+    "radial",
+    "line",
+    "loading",
+    "loader"
   ],
   "license": "MIT",
   "ignore": [
