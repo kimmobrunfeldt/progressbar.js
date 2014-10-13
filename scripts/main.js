@@ -97,7 +97,9 @@ function runExample(code) {
 
 function initStar() {
     var star = document.getElementById('star');
-    var path = new ProgressBar.Path(star.contentDocument.querySelector('#star-path'));
+    var path = new ProgressBar.Path(star.contentDocument.querySelector('#star-path'), {
+        easing: "easeInOut"
+    });
     path.set(1);
 
     var element = document.querySelector('.social-links > .github');
