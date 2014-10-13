@@ -12,7 +12,7 @@ See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for example
 
 # Get started
 
-*ProgressBar.js* is lightweight and MIT licensed.
+*ProgressBar.js* is lightweight, MIT licensed and supports all major browsers including **IE9+**.
 
 You can install it with Bower:
 
