@@ -5,10 +5,10 @@
 
 <br>
 Beautiful and responsive progress bars with animated SVG paths.
-[Use built-in shapes](#circlecontainer-options) or [create your own paths](#pathpath-options). See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for examples.
+[Use built-in shapes](#circlecontainer-options) or [create your own paths](#pathpath-options).
 
+See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for examples.
 
-*Read [Jake Archibald's blog post](http://jakearchibald.com/2013/animated-line-drawing-svg/) to see how the animation works under the hood*.
 
 # Get started
 
@@ -20,6 +20,16 @@ You can install it with Bower:
 
 Or just by including [*dist/progressbar.js*](dist/progressbar.js) or
 [dist/progressbar.min.js](dist/progressbar.min.js) from latest tag to your project.
+
+
+# How it works
+
+Progress bars are just regular SVG paths.
+Read [Jake Archibald's blog post](http://jakearchibald.com/2013/animated-line-drawing-svg/) to see how the path drawing works under the hood.
+
+*ProgressBar.js* uses [shifty](jeremyckahn.github.io/shifty/) tweening library to animate path drawing.
+So in other words, animation is done with JavaScript using [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame).
+Animating with JS gives more control over the animation and is supported across major browsers. IE [does not support](https://connect.microsoft.com/IE/feedbackdetail/view/920928/ie-11-css-transition-property-not-working-for-svg-elements) animating SVG properties.
 
 
 # API
@@ -102,9 +112,9 @@ To make circle resize with its container, set for example the following CSS:
         // Default: 800
         duration: 1200,
 
-        // Easing for animation. CSS3 easings are supported.
-        // Default: "ease-in-out"
-        easing: "linear"
+        // Easing for animation. See #easing section.
+        // Default: "linear"
+        easing: "easeIn"
     }
     ```
 
@@ -133,9 +143,9 @@ progressBar.animate(0.3, {
         // Default: 800
         duration: 1200,
 
-        // Easing for animation. CSS3 easings are supported.
-        // Default: "ease-in-out"
-        easing: "linear"
+        // Easing for animation. See #easing section.
+        // Default: "linear"
+        easing: "easeOut"
     }
     ```
 
@@ -207,9 +217,9 @@ To make square resize with its container, set for example the following CSS:
         // Default: 800
         duration: 1200,
 
-        // Easing for animation. CSS3 easings are supported.
-        // Default: "ease-in-out"
-        easing: "linear"
+        // Easing for animation. See #easing section.
+        // Default: "linear"
+        easing: "easeOut"
     }
     ```
 
@@ -238,9 +248,9 @@ progressBar.animate(0.3, {
         // Default: 800
         duration: 1200,
 
-        // Easing for animation. CSS3 easings are supported.
-        // Default: "ease-in-out"
-        easing: "linear"
+        // Easing for animation. See #easing section.
+        // Default: "linear"
+        easing: "easeInOut"
     }
     ```
 
@@ -312,9 +322,9 @@ var path = new ProgressBar.Path(heartObject.contentDocument.querySelector('#hear
         // Default: 800
         duration: 1200,
 
-        // Easing for animation. CSS3 easings are supported.
-        // Default: "ease-in-out"
-        easing: "linear"
+        // Easing for animation. See #easing section.
+        // Default: "linear"
+        easing: "easeIn"
     }
     ```
 
@@ -343,9 +353,9 @@ path.animate(0.3, {
         // Default: 800
         duration: 1200,
 
-        // Easing for animation. CSS3 easings are supported.
-        // Default: "ease-in-out"
-        easing: "linear"
+        // Easing for animation. See #easing section.
+        // Default: "linear"
+        easing: "easeOut"
     }
     ```
 
@@ -359,6 +369,20 @@ Stops animation to its current position.
 
 Set progress instantly without animation. Clears all transitions
 for path.
+
+
+# Parameters in detail
+
+## Easing
+
+Easing functions [provided with *shifty* are supported](https://github.com/jeremyckahn/shifty/blob/master/src/shifty.formulas.js).
+
+A few basic easing options:
+
+    * `"linear"`
+    * `"easeIn"`
+    * `"easeOut"`
+    * `"easeInOut"`
 
 
 # Contributing
