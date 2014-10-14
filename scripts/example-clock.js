@@ -1,4 +1,4 @@
-var element = document.getElementById('example-3-container');
+var element = document.getElementById('example-clock-container');
 element.innerHTML = '<header id="clock-seconds"></header>';
 var textElement = document.getElementById('clock-seconds');
 

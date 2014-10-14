@@ -1,9 +1,9 @@
 /* line 1, ../sass/examples.scss */
-#example-3-container {
+#example-clock-container {
   position: relative;
 }
 /* line 4, ../sass/examples.scss */
-#example-3-container #clock-seconds {
+#example-clock-container #clock-seconds {
   font-size: 4em;
   position: absolute;
   top: 50%;
@@ -11,4 +11,19 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+/* line 17, ../sass/examples.scss */
+#example-line-container {
+  position: relative;
+}
+/* line 20, ../sass/examples.scss */
+#example-line-container svg {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 130%;
+  height: auto;
 }
