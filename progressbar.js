@@ -61,7 +61,7 @@
         }, opts);
 
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("viewBox", "0 0 100 100");
+        this._initializeSvg(svg, opts);
 
         if (opts.trailColor) {
             var trailOpts = extend({}, opts);
@@ -81,6 +81,10 @@
             svg: svg,
             path: path
         };
+    };
+
+    Progress.prototype._initializeSvg = function _initializeSvg(svg, opts) {
+        svg.setAttribute("viewBox", "0 0 100 100");
     };
 
     Progress.prototype._createPath = function _createPath(opts) {
@@ -103,6 +107,25 @@
     };
 
     // Progress bar shapes
+
+    var Line = function(container, options) {
+        Progress.apply(this, arguments);
+    };
+
+    Line.prototype = new Progress();
+    Line.prototype.constructor = Line;
+
+    Line.prototype._initializeSvg = function _initializeSvg(svg, opts) {
+        svg.setAttribute("viewBox", "0 0 100 " + opts.strokeWidth);
+        svg.setAttribute("preserveAspectRatio", "none");
+    };
+
+    Line.prototype._pathString = function _pathString(opts) {
+        var pathString = "M 0,{c} L 100,{c}";
+        var center = opts.strokeWidth / 2;
+        pathString = pathString.replace(/\{c\}/g, center);
+        return pathString;
+    };
 
     var Circle = function(container, options) {
         Progress.apply(this, arguments);
@@ -262,6 +285,7 @@
 
     // Expose modules
     var ProgressBar = {
+        Line: Line,
         Circle: Circle,
         Square: Square,
         Path: Path
