@@ -1,4 +1,4 @@
-var container = document.getElementById('example-2-container');
+var container = document.getElementById('example-custom-container');
 container.innerHTML = '<object id="scene" type="image/svg+xml" data="images/moon-scene.svg"></object>';
 
 var scene = document.getElementById('scene');
