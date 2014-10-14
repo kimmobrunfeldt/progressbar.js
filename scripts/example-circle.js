@@ -1,7 +1,7 @@
 var element = document.getElementById('example-circle-container');
 var circle = new ProgressBar.Circle(element, {
     color: "#FCB03C",
-    strokeWidth: 5,
+    strokeWidth: 2,
     fill: "#aaa"
 });
 

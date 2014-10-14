@@ -1,8 +1,7 @@
 var element = document.getElementById('example-line-container');
 var line = new ProgressBar.Line(element, {
     color: "#FCB03C",
-    strokeWidth: 5,
-    trailColor: "#888"
+    trailColor: "#aaa"
 });
 
 line.animate(1, function() {
