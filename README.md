@@ -396,7 +396,7 @@ Assuming there was SVG object with heart shaped path in HTML
 Initialization would be this easy
 
 ```javascript
-var svgPath = document.getElementById("#heart-path");
+var svgPath = document.getElementById("heart-path");
 var path = new ProgressBar.Path(svgPath, {
     duration: 300
 });
