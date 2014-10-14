@@ -5,7 +5,7 @@
 
 <br>
 Beautiful and responsive progress bars with animated SVG paths.
-[Use built-in shapes](#circlecontainer-options) or [create your own paths](#pathpath-options).
+[Use built-in shapes](#api) or [create your own paths](#pathpath-options).
 
 See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for examples.
 
@@ -36,6 +36,11 @@ Animating with JS gives more control over the animation and is supported across 
 
 [**ProgressBar**](#api)
 
+* [Line(container, [*options*])](#linecontainer-options)
+    * [animate(progress, [*options*], [*cb*])](#lineanimateprogress-options-cb)
+    * [stop()](#linestop)
+    * [set(progress)](#linesetprogress)
+
 
 * [Circle(container, [*options*])](#circlecontainer-options)
     * [animate(progress, [*options*], [*cb*])](#circleanimateprogress-options-cb)
@@ -56,7 +61,111 @@ Animating with JS gives more control over the animation and is supported across 
 
 Functions use node-style callback convention. Callback function is always the last given parameter.
 
-All built-in shapes are drawn on 100x100 square SVG canvas. All shapes fill their canvases.
+All built-in shapes except [Line](#linecontainer-options) are drawn on 100x100 SVG canvas and the shape is fitted exactly to the canvas.
+Line is drawn on 100-width canvas and height depends on the stroke width.
+
+
+## Line(container, [*options*])
+
+Line shaped progress bar. Appends SVG to container.
+
+**Example**
+
+```javascript
+var progressBar = new ProgressBar.Line('#container', {
+    strokeWidth: 2
+});
+```
+
+To make line resize with its container, set for example the following CSS:
+
+```css
+.container > svg {
+    display: block;
+    width: 100%;
+}
+```
+
+**Parameters**
+
+* `container` Element where SVG is added. Query string or element.
+
+    For example `"#container"` or `document.getElementById("#container")`
+
+* `options` Options for path drawing.
+
+    ```javascript
+    {
+        // Stroke color.
+        // Default: "#555"
+        color: "#3a3a3a",
+
+        // Width of the stroke.
+        // Unit is percentage of SVG canvas' size.
+        // Default: 1.0
+        strokeWidth: 0.1,
+
+        // Color for lighter trail stroke
+        // underneath the actual progress path.
+        // If null, trail path is not drawn
+        // Default: null
+        trailColor: "#f4f4f4",
+
+        // Duration for animation in milliseconds
+        // Default: 800
+        duration: 1200,
+
+        // Easing for animation. See #easing section.
+        // Default: "linear"
+        easing: "easeIn"
+    }
+    ```
+
+## Line.animate(progress, [*options*], [*cb*])
+
+Animates drawing of line.
+
+**Example**
+
+```javascript
+progressBar.animate(0.3, {
+    duration: 800
+}, function() {
+    console.log('Animation has finished');
+});
+```
+
+**Parameters**
+
+* `progress` progress from 0 to 1.
+* `options` Animation options. These options override the defaults given in initialization.
+
+    ```javascript
+    {
+        // Duration for animation in milliseconds
+        // Default: 800
+        duration: 1200,
+
+        // Easing for animation. See #easing section.
+        // Default: "linear"
+        easing: "easeOut"
+    }
+    ```
+
+* `cb` Callback function which is called after transition ends.
+
+## Line.stop()
+
+Stops animation to its current position.
+
+## Line.set(progress)
+
+Sets progress instantly without animation. Clears all transitions
+for path.
+
+<br>
+<br>
+
 
 ## Circle(container, [*options*])
 
