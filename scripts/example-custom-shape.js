@@ -10,5 +10,4 @@ scene.addEventListener('load', function() {
     path.animate(1, function() {
         path.animate(0);
     });
-
 });
