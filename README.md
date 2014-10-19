@@ -6,7 +6,7 @@
 <br>
 Beautiful and responsive progress bars with animated SVG paths.
 [Use built-in shapes](#api) or [create your own paths](#pathpath-options).
-[Customize](#customanimations) the animations as you wish.
+[Customize](#custom-animations) the animations as you wish.
 
 See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for examples.
 
@@ -127,7 +127,7 @@ To make line resize with its container, set for example the following CSS:
         // Default: "linear"
         easing: "easeIn",
 
-        // See #customanimations section
+        // See #custom-animations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -174,7 +174,7 @@ progressBar.animate(0.3, {
         // Default: "linear"
         easing: "easeOut",
 
-        // See #customanimations section
+        // See #custom-animations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -256,7 +256,7 @@ To make circle resize with its container, set for example the following CSS:
         // Default: "linear"
         easing: "easeIn",
 
-        // See #customanimations section
+        // See #custom-animations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -303,7 +303,7 @@ progressBar.animate(0.3, {
         // Default: "linear"
         easing: "easeOut",
 
-        // See #customanimations section
+        // See #custom-animations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -384,7 +384,7 @@ To make square resize with its container, set for example the following CSS:
         // Default: "linear"
         easing: "easeOut",
 
-        // See #customanimations section
+        // See #custom-animations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -431,7 +431,7 @@ progressBar.animate(0.3, {
         // Default: "linear"
         easing: "easeInOut",
 
-        // See #customanimations section
+        // See #custom-animations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -512,7 +512,7 @@ var path = new ProgressBar.Path(heartObject.contentDocument.querySelector('#hear
         // Default: "linear"
         easing: "easeIn",
 
-        // See #customanimations section
+        // See #custom-animations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -550,7 +550,7 @@ path.animate(0.3, {
         // Default: "linear"
         easing: "easeOut",
 
-        // See #customanimations section
+        // See #custom-animations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
