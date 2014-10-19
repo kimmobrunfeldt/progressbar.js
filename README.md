@@ -6,7 +6,7 @@
 <br>
 Beautiful and responsive progress bars with animated SVG paths.
 [Use built-in shapes](#api) or [create your own paths](#pathpath-options).
-[Customize](#customizinganimations) the animations as you wish.
+[Customize](#customanimations) the animations as you wish.
 
 See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for examples.
 
@@ -127,7 +127,7 @@ To make line resize with its container, set for example the following CSS:
         // Default: "linear"
         easing: "easeIn",
 
-        // See #customizeanimations section
+        // See #customanimations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -138,11 +138,11 @@ To make line resize with its container, set for example the following CSS:
 
 ## Line.path
 
-Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the actual progress bar.
+Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which represents the actual progress bar.
 
 ## Line.trail
 
-Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the trail of the progress bar.
+Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which represents the trail of the progress bar.
 Returns `null` if trail is not defined.
 
 ## Line.animate(progress, [*options*], [*cb*])
@@ -174,7 +174,7 @@ progressBar.animate(0.3, {
         // Default: "linear"
         easing: "easeOut",
 
-        // See #customizeanimations section
+        // See #customanimations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -256,7 +256,7 @@ To make circle resize with its container, set for example the following CSS:
         // Default: "linear"
         easing: "easeIn",
 
-        // See #customizeanimations section
+        // See #customanimations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -303,7 +303,7 @@ progressBar.animate(0.3, {
         // Default: "linear"
         easing: "easeOut",
 
-        // See #customizeanimations section
+        // See #customanimations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -384,7 +384,7 @@ To make square resize with its container, set for example the following CSS:
         // Default: "linear"
         easing: "easeOut",
 
-        // See #customizeanimations section
+        // See #customanimations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -431,7 +431,7 @@ progressBar.animate(0.3, {
         // Default: "linear"
         easing: "easeInOut",
 
-        // See #customizeanimations section
+        // See #customanimations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -512,7 +512,7 @@ var path = new ProgressBar.Path(heartObject.contentDocument.querySelector('#hear
         // Default: "linear"
         easing: "easeIn",
 
-        // See #customizeanimations section
+        // See #customanimations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -550,7 +550,7 @@ path.animate(0.3, {
         // Default: "linear"
         easing: "easeOut",
 
-        // See #customizeanimations section
+        // See #customanimations section
         from: { color: '#eee' },
         to: { color: '#000' },
         step: function(state, path) {
@@ -586,7 +586,7 @@ A few basic easing options:
 * `"easeOut"`
 * `"easeInOut"`
 
-# Customize animations
+# Custom animations
 
 See [example in demo page](https://kimmobrunfeldt.github.io/progressbar.js#example-custom-animation).
 
@@ -602,7 +602,7 @@ Tweening engine changes defined values over time and calls step function for eac
     {
         // Start from thin gray line
         width: 0.1,
-        color: "#eee",
+        color: "#eee"
     }
     ```
 
