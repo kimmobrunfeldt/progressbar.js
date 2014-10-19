@@ -9,7 +9,7 @@ var circle = new ProgressBar.Circle(element, {
     easing: 'bounce',
     strokeWidth: 5,
 
-    // Set default step function for all animations
+    // Set default step function for all animate calls
     step: function(state, path) {
         path.setAttribute('stroke', state.color);
     }
