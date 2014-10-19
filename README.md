@@ -37,18 +37,24 @@ Animating with JS gives more control over the animation and is supported across 
 [**ProgressBar**](#api)
 
 * [Line(container, [*options*])](#linecontainer-options)
+    * [*path*](#linepath)
+    * [*trail*](#linetrail)
     * [animate(progress, [*options*], [*cb*])](#lineanimateprogress-options-cb)
     * [stop()](#linestop)
     * [set(progress)](#linesetprogress)
 
 
 * [Circle(container, [*options*])](#circlecontainer-options)
+    * [*path*](#circlepath)
+    * [*trail*](#circletrail)
     * [animate(progress, [*options*], [*cb*])](#circleanimateprogress-options-cb)
     * [stop()](#circlestop)
     * [set(progress)](#circlesetprogress)
 
 
 * [Square(container, [*options*])](#squarecontainer-options)
+    * [*path*](#squarepath)
+    * [*trail*](#squaretrail)
     * [animate(progress, [*options*], [*cb*])](#squareanimateprogress-options-cb)
     * [stop()](#squarestop)
     * [set(progress)](#squaresetprogress)
@@ -120,6 +126,15 @@ To make line resize with its container, set for example the following CSS:
         easing: "easeIn"
     }
     ```
+
+## Line.path
+
+Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the actual progress bar.
+
+## Line.trail
+
+Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the trail of the progress bar.
+Returns `null` if trail is not defined.
 
 ## Line.animate(progress, [*options*], [*cb*])
 
@@ -227,6 +242,15 @@ To make circle resize with its container, set for example the following CSS:
     }
     ```
 
+## Circle.path
+
+Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the actual progress bar.
+
+## Circle.trail
+
+Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the trail of the progress bar.
+Returns `null` if trail is not defined.
+
 ## Circle.animate(progress, [*options*], [*cb*])
 
 Animates drawing of circle.
@@ -331,6 +355,15 @@ To make square resize with its container, set for example the following CSS:
         easing: "easeOut"
     }
     ```
+
+## Square.path
+
+Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the actual progress bar.
+
+## Square.trail
+
+Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the trail of the progress bar.
+Returns `null` if trail is not defined.
 
 ## Square.animate(progress, [*options*], [*cb*])
 
