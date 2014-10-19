@@ -234,12 +234,10 @@
             easing: this._easing(opts.easing),
             step: function(state) {
                 self._path.style.strokeDashoffset = state.offset;
-                self._path.setAttribute('stroke', state.color);
             },
             finish: function(state) {
                 // step function is not called on the last step of animation
                 self._path.style.strokeDashoffset = state.offset;
-                self._path.setAttribute('stroke', state.color);
 
                 if (isFunction(cb)) {
                     cb();
