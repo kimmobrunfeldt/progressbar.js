@@ -95,14 +95,14 @@
 
     Progress.prototype._createPath = function _createPath(opts) {
         var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttributeNS(null, "d", this._pathString(opts));
-        path.setAttributeNS(null, "stroke", opts.color);
-        path.setAttributeNS(null, "stroke-width", opts.strokeWidth);
+        path.setAttribute("d", this._pathString(opts));
+        path.setAttribute("stroke", opts.color);
+        path.setAttribute("stroke-width", opts.strokeWidth);
 
         if (opts.fill) {
-            path.setAttributeNS(null, "fill", opts.fill);
+            path.setAttribute("fill", opts.fill);
         } else {
-            path.setAttributeNS(null, "fill-opacity", "0");
+            path.setAttribute("fill-opacity", "0");
         }
 
         return path;
