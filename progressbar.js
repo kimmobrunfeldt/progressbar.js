@@ -171,7 +171,10 @@
     var Path = function(path, opts) {
         opts = extend({
             duration: 800,
-            easing: "linear"
+            easing: "linear",
+            from: {},
+            to: {},
+            step: noop
         }, opts);
 
         this._path = path;
@@ -226,18 +229,21 @@
         var newOffset = length - progress * length;
 
         var self = this;
+
         this._tweenable = new Tweenable();
         this._tweenable.tween({
-            from: { offset: offset },
-            to:   { offset: newOffset },
+            from: extend({ offset: offset }, opts.from),
+            to: extend({ offset: newOffset }, opts.to),
             duration: opts.duration,
             easing: this._easing(opts.easing),
             step: function(state) {
                 self._path.style.strokeDashoffset = state.offset;
+                opts.step(state, self._path);
             },
             finish: function(state) {
                 // step function is not called on the last step of animation
                 self._path.style.strokeDashoffset = state.offset;
+                opts.step(state, self._path);
 
                 if (isFunction(cb)) {
                     cb();
@@ -264,10 +270,13 @@
 
     // Utility functions
 
+    function noop() {}
+
     // Copy all attributes from source object to destination object.
     // destination object is mutated.
     function extend(destination, source) {
         destination = destination || {};
+        source = source || {};
 
         for (var attrName in source) {
             if (source.hasOwnProperty(attrName)) {

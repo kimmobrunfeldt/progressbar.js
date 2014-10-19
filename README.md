@@ -6,6 +6,7 @@
 <br>
 Beautiful and responsive progress bars with animated SVG paths.
 [Use built-in shapes](#api) or [create your own paths](#pathpath-options).
+[Customize](#customizinganimations) the animations as you wish.
 
 See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for examples.
 
@@ -29,7 +30,8 @@ Read [Jake Archibald's blog post](http://jakearchibald.com/2013/animated-line-dr
 
 *ProgressBar.js* uses [shifty](https://jeremyckahn.github.io/shifty/) tweening library to animate path drawing.
 So in other words, animation is done with JavaScript using [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame).
-Animating with JS gives more control over the animation and is supported across major browsers. IE [does not support](https://connect.microsoft.com/IE/feedbackdetail/view/920928/ie-11-css-transition-property-not-working-for-svg-elements) animating SVG properties.
+Animating with JS gives more control over the animation and is supported across major browsers. For example IE [does not support](https://connect.microsoft.com/IE/feedbackdetail/view/920928/ie-11-css-transition-property-not-working-for-svg-elements)
+animating SVG properties with CSS transitions.
 
 
 # API
@@ -123,7 +125,14 @@ To make line resize with its container, set for example the following CSS:
 
         // Easing for animation. See #easing section.
         // Default: "linear"
-        easing: "easeIn"
+        easing: "easeIn",
+
+        // See #customizeanimations section
+        from: { color: '#eee' },
+        to: { color: '#000' },
+        step: function(state, path) {
+            path.setAttribute('stroke', state.color);
+        }
     }
     ```
 
@@ -163,7 +172,14 @@ progressBar.animate(0.3, {
 
         // Easing for animation. See #easing section.
         // Default: "linear"
-        easing: "easeOut"
+        easing: "easeOut",
+
+        // See #customizeanimations section
+        from: { color: '#eee' },
+        to: { color: '#000' },
+        step: function(state, path) {
+            path.setAttribute('stroke', state.color);
+        }
     }
     ```
 
@@ -238,7 +254,14 @@ To make circle resize with its container, set for example the following CSS:
 
         // Easing for animation. See #easing section.
         // Default: "linear"
-        easing: "easeIn"
+        easing: "easeIn",
+
+        // See #customizeanimations section
+        from: { color: '#eee' },
+        to: { color: '#000' },
+        step: function(state, path) {
+            path.setAttribute('stroke', state.color);
+        }
     }
     ```
 
@@ -278,7 +301,14 @@ progressBar.animate(0.3, {
 
         // Easing for animation. See #easing section.
         // Default: "linear"
-        easing: "easeOut"
+        easing: "easeOut",
+
+        // See #customizeanimations section
+        from: { color: '#eee' },
+        to: { color: '#000' },
+        step: function(state, path) {
+            path.setAttribute('stroke', state.color);
+        }
     }
     ```
 
@@ -352,7 +382,14 @@ To make square resize with its container, set for example the following CSS:
 
         // Easing for animation. See #easing section.
         // Default: "linear"
-        easing: "easeOut"
+        easing: "easeOut",
+
+        // See #customizeanimations section
+        from: { color: '#eee' },
+        to: { color: '#000' },
+        step: function(state, path) {
+            path.setAttribute('stroke', state.color);
+        }
     }
     ```
 
@@ -392,7 +429,14 @@ progressBar.animate(0.3, {
 
         // Easing for animation. See #easing section.
         // Default: "linear"
-        easing: "easeInOut"
+        easing: "easeInOut",
+
+        // See #customizeanimations section
+        from: { color: '#eee' },
+        to: { color: '#000' },
+        step: function(state, path) {
+            path.setAttribute('stroke', state.color);
+        }
     }
     ```
 
@@ -466,7 +510,14 @@ var path = new ProgressBar.Path(heartObject.contentDocument.querySelector('#hear
 
         // Easing for animation. See #easing section.
         // Default: "linear"
-        easing: "easeIn"
+        easing: "easeIn",
+
+        // See #customizeanimations section
+        from: { color: '#eee' },
+        to: { color: '#000' },
+        step: function(state, path) {
+            path.setAttribute('stroke', state.color);
+        }
     }
     ```
 
@@ -497,7 +548,14 @@ path.animate(0.3, {
 
         // Easing for animation. See #easing section.
         // Default: "linear"
-        easing: "easeOut"
+        easing: "easeOut",
+
+        // See #customizeanimations section
+        from: { color: '#eee' },
+        to: { color: '#000' },
+        step: function(state, path) {
+            path.setAttribute('stroke', state.color);
+        }
     }
     ```
 
@@ -528,6 +586,58 @@ A few basic easing options:
 * `"easeOut"`
 * `"easeInOut"`
 
+# Customize animations
+
+See [example in demo page](https://kimmobrunfeldt.github.io/progressbar.js#example-custom-animation).
+
+Customizing animations is possible with the help of `from`, `to` and `step` parameters.
+Tweening engine changes defined values over time and calls step function for each animation's frame.
+
+* `from` Object containing values which should be tweened.
+ These values represent the starting values of the animation. Default: `{}`.
+
+    For example
+
+    ```javascript
+    {
+        // Start from thin gray line
+        width: 0.1,
+        color: "#eee",
+    }
+    ```
+
+    Thanks to shifty, you can tween values in formats like `translateX(45px)`, `rgb(0,255,0)` and `#fff`.
+    See all supported string formats from [shifty's documentation](http://jeremyckahn.github.io/shifty/dist/doc/src/shifty.token.js.html#token)
+
+    Easing defined as option for animation applies to all of the specified values.
+
+* `to` Object containing values which should be tweened. These represent the final values after animation is done. Default: `{}`.
+
+    For example
+
+    ```javascript
+    {
+        // Finish to thick black line
+        width: 1,
+        color: "#000"
+    }
+    ```
+
+    *Signature must match `from`*
+
+* `step` Function called for each animation step. Tweened values and reference to progress bar SVG path are passed as parameters. Default: `function() {}`.
+
+    **This function is called multiple times per second.
+    To make sure animations run smoothly, keep it minimal.**
+
+    For example
+
+    ```javascript
+    function(state, path) {
+        path.setAttribute('stroke-width', state.width);
+        path.setAttribute('stroke', state.color);
+    }
+    ```
 
 # Contributing
 
