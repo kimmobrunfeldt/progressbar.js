@@ -39,6 +39,10 @@
         element.appendChild(svgView.svg);
 
         this._path = new Path(svgView.path, opts);
+
+        // Expose public attributes
+        this.path = svgView.path;
+        this.trail = svgView.trail;
     };
 
     Progress.prototype.animate = function animate(progress, opts, cb) {
@@ -65,6 +69,7 @@
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         this._initializeSvg(svg, opts);
 
+        var trailPath = null;
         if (opts.trailColor) {
             var trailOpts = extend({}, opts);
             trailOpts.color = opts.trailColor;
@@ -72,7 +77,7 @@
             // When trail path is set, fill must be set for it instead of the
             // actual path to prevent trail stroke from clipping
             opts.fill = null;
-            var trailPath = this._createPath(trailOpts);
+            trailPath = this._createPath(trailOpts);
             svg.appendChild(trailPath);
         }
 
@@ -81,7 +86,8 @@
 
         return {
             svg: svg,
-            path: path
+            path: path,
+            trail: trailPath
         };
     };
 
@@ -91,14 +97,14 @@
 
     Progress.prototype._createPath = function _createPath(opts) {
         var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttributeNS(null, "d", this._pathString(opts));
-        path.setAttributeNS(null, "stroke", opts.color);
-        path.setAttributeNS(null, "stroke-width", opts.strokeWidth);
+        path.setAttribute("d", this._pathString(opts));
+        path.setAttribute("stroke", opts.color);
+        path.setAttribute("stroke-width", opts.strokeWidth);
 
         if (opts.fill) {
-            path.setAttributeNS(null, "fill", opts.fill);
+            path.setAttribute("fill", opts.fill);
         } else {
-            path.setAttributeNS(null, "fill-opacity", "0");
+            path.setAttribute("fill-opacity", "0");
         }
 
         return path;
@@ -167,7 +173,10 @@
     var Path = function(path, opts) {
         opts = extend({
             duration: 800,
-            easing: "linear"
+            easing: "linear",
+            from: {},
+            to: {},
+            step: noop
         }, opts);
 
         this._path = path;
@@ -221,22 +230,22 @@
         var length = this._path.getTotalLength();
         var newOffset = length - progress * length;
 
-        // Path reference must be created like this instead of var self = this;
-        // Somehow the self references sometimes to incorrect instance if
-        // created like that.
-        var thisPath = this._path;
+        var self = this;
+
         this._tweenable = new Tweenable();
         this._tweenable.tween({
-            from: { offset: offset },
-            to:   { offset: newOffset },
+            from: extend({ offset: offset }, opts.from),
+            to: extend({ offset: newOffset }, opts.to),
             duration: opts.duration,
             easing: this._easing(opts.easing),
             step: function(state) {
-                thisPath.style.strokeDashoffset = state.offset;
+                self._path.style.strokeDashoffset = state.offset;
+                opts.step(state, self._path);
             },
             finish: function(state) {
                 // step function is not called on the last step of animation
-                thisPath.style.strokeDashoffset = state.offset;
+                self._path.style.strokeDashoffset = state.offset;
+                opts.step(state, self._path);
 
                 if (isFunction(cb)) {
                     cb();
@@ -263,10 +272,13 @@
 
     // Utility functions
 
+    function noop() {}
+
     // Copy all attributes from source object to destination object.
     // destination object is mutated.
     function extend(destination, source) {
         destination = destination || {};
+        source = source || {};
 
         for (var attrName in source) {
             if (source.hasOwnProperty(attrName)) {
