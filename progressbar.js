@@ -37,6 +37,10 @@
         element.appendChild(svgView.svg);
 
         this._path = new Path(svgView.path, opts);
+
+        // Expose public attributes
+        this.path = svgView.path;
+        this.trail = svgView.trail;
     };
 
     Progress.prototype.animate = function animate(progress, opts, cb) {
@@ -63,6 +67,7 @@
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         this._initializeSvg(svg, opts);
 
+        var trailPath = null;
         if (opts.trailColor) {
             var trailOpts = extend({}, opts);
             trailOpts.color = opts.trailColor;
@@ -70,7 +75,7 @@
             // When trail path is set, fill must be set for it instead of the
             // actual path to prevent trail stroke from clipping
             opts.fill = null;
-            var trailPath = this._createPath(trailOpts);
+            trailPath = this._createPath(trailOpts);
             svg.appendChild(trailPath);
         }
 
@@ -79,7 +84,8 @@
 
         return {
             svg: svg,
-            path: path
+            path: path,
+            trail: trailPath
         };
     };
 
