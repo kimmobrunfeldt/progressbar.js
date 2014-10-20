@@ -10,9 +10,14 @@
     }
 }(this, function() {
 
+    var oldTweenable = this.Tweenable;
+
     // The next line will be replaced with minified version of shifty library
-    // in a build step
+    // in a build step. Don't expose Tweenable to global scope
     // #include shifty
+
+    var Tweenable = this.Tweenable;
+    this.Tweenable = oldTweenable;
 
     var EASING_ALIASES = {
         easeIn: 'easeInCubic',
