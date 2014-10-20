@@ -104,7 +104,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('commitMinified', function() {
-    grunt.task.run(['uglify:progressbar', 'shell:commitMinified']);
+    grunt.task.run(['shell:commitMinified']);
   });
 
   // Build distributables to dist folder
@@ -116,7 +116,7 @@ module.exports = function(grunt) {
 
     grunt.task.run([
       'jshint',
-      'replace:bundleShifty',
+      'build',
       'commitMinified',
       'extRelease:' + arg,
       'updateDevVersion'
