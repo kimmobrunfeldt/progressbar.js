@@ -49,7 +49,6 @@
     };
 
     Progress.prototype.animate = function animate(progress, opts, cb) {
-        this._path.stop();
         this._path.animate(progress, opts, cb);
     };
 
