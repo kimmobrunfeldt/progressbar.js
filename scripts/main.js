@@ -49,7 +49,7 @@ function initExamples() {
             state.exampleCodes[element.id] = code;
 
             codeContainer.innerHTML = '<pre><code data-language="javascript"></code></pre>';
-            element.querySelector('code').innerHTML = code;
+            element.querySelector('code').innerHTML = escapeEntities(code);
             Rainbow.color();
         });
 
@@ -103,6 +103,10 @@ function get(url, cb) {
 
     req.open("GET", url, true);
     req.send();
+}
+
+function escapeEntities(code) {
+    return code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 $(window).load(onLoad);
