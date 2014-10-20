@@ -41,7 +41,10 @@
         }
         element.appendChild(svgView.svg);
 
-        this._path = new Path(svgView.path, opts);
+        var newOpts = extend({
+            attachment: this
+        }, opts);
+        this._path = new Path(svgView.path, newOpts);
 
         // Expose public attributes
         this.path = svgView.path;
@@ -242,12 +245,12 @@
             easing: this._easing(opts.easing),
             step: function(state) {
                 self._path.style.strokeDashoffset = state.offset;
-                opts.step(state, self._path);
+                opts.step(state, opts.attachment);
             },
             finish: function(state) {
                 // step function is not called on the last step of animation
                 self._path.style.strokeDashoffset = state.offset;
-                opts.step(state, self._path);
+                opts.step(state, opts.attachment);
 
                 if (isFunction(cb)) {
                     cb();

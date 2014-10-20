@@ -128,10 +128,12 @@ To make line resize with its container, set for example the following CSS:
         easing: "easeIn",
 
         // See #custom-animations section
+        // Built-in shape passes reference to itself as attachment
+        // to step function
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, path) {
-            path.setAttribute('stroke', state.color);
+        step: function(state, line) {
+            line.path.setAttribute('stroke', state.color);
         }
     }
     ```
@@ -175,10 +177,12 @@ progressBar.animate(0.3, {
         easing: "easeOut",
 
         // See #custom-animations section
+        // Built-in shape passes reference to itself as attachment
+        // to step function
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, path) {
-            path.setAttribute('stroke', state.color);
+        step: function(state, line) {
+            line.path.setAttribute('stroke', state.color);
         }
     }
     ```
@@ -257,10 +261,12 @@ To make circle resize with its container, set for example the following CSS:
         easing: "easeIn",
 
         // See #custom-animations section
+        // Built-in shape passes reference to itself as attachment
+        // to step function
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, path) {
-            path.setAttribute('stroke', state.color);
+        step: function(state, circle) {
+            circle.path.setAttribute('stroke', state.color);
         }
     }
     ```
@@ -304,10 +310,12 @@ progressBar.animate(0.3, {
         easing: "easeOut",
 
         // See #custom-animations section
+        // Built-in shape passes reference to itself as attachment
+        // to step function
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, path) {
-            path.setAttribute('stroke', state.color);
+        step: function(state, circle) {
+            circle.path.setAttribute('stroke', state.color);
         }
     }
     ```
@@ -385,10 +393,12 @@ To make square resize with its container, set for example the following CSS:
         easing: "easeOut",
 
         // See #custom-animations section
+        // Built-in shape passes reference to itself as attachment
+        // to step function
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, path) {
-            path.setAttribute('stroke', state.color);
+        step: function(state, square) {
+            square.path.setAttribute('stroke', state.color);
         }
     }
     ```
@@ -432,10 +442,12 @@ progressBar.animate(0.3, {
         easing: "easeInOut",
 
         // See #custom-animations section
+        // Built-in shape passes reference to itself as attachment
+        // to step function
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, path) {
-            path.setAttribute('stroke', state.color);
+        step: function(state, square) {
+            square.path.setAttribute('stroke', state.color);
         }
     }
     ```
@@ -512,11 +524,17 @@ var path = new ProgressBar.Path(heartObject.contentDocument.querySelector('#hear
         // Default: "linear"
         easing: "easeIn",
 
+        // Attachment which can be any object
+        // you need to modify within the step function.
+        // Passed as a parameter to step function.
+        // Default: undefined
+        attachment: document.querySelector('#container > svg'),
+
         // See #custom-animations section
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, path) {
-            path.setAttribute('stroke', state.color);
+        step: function(state, attachment) {
+            // Do any modifications to attachment attributes
         }
     }
     ```
@@ -550,11 +568,17 @@ path.animate(0.3, {
         // Default: "linear"
         easing: "easeOut",
 
+        // Attachment which can be any object
+        // you need to modify within the step function.
+        // Passed as a parameter to step function.
+        // Default: undefined
+        attachment: document.querySelector('#container > svg'),
+
         // See #custom-animations section
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, path) {
-            path.setAttribute('stroke', state.color);
+        step: function(state, attachment) {
+            // Do any modifications to attachment attributes
         }
     }
     ```
@@ -625,7 +649,7 @@ Tweening engine changes defined values over time and calls step function for eac
 
     *Signature must match `from`*
 
-* `step` Function called for each animation step. Tweened values and reference to progress bar SVG path are passed as parameters. Default: `function() {}`.
+* `step` Function called for each animation step. Tweened values and reference to attachment are passed as parameters. Attachment can be reference to any object you need to modify within step function. Built-in shapes pass references to their selves as attachment. Default: `function() {}`.
 
     **This function is called multiple times per second.
     To make sure animations run smoothly, keep it minimal.**
@@ -633,9 +657,9 @@ Tweening engine changes defined values over time and calls step function for eac
     For example
 
     ```javascript
-    function(state, path) {
-        path.setAttribute('stroke-width', state.width);
-        path.setAttribute('stroke', state.color);
+    function(state, attachment) {
+        attachment.path.setAttribute('stroke-width', state.width);
+        attachment.path.setAttribute('stroke', state.color);
     }
     ```
 
