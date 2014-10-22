@@ -17,6 +17,15 @@ is not very high quality but works.
 Dependency is bundled in to ease using the library.
 
 
+#### Versioning
+
+Versioning follows [Semantic Versioning 2.0.0](http://semver.org/). The release script makes sure
+that for each release, there exists only one commit in history where version number in *bower.json*
+matches the release's version. That commit is tagged as the release, for example `0.4.1`. Commits after that have -dev suffix(*0.4.1-dev*) in the version number to avoid any possible confusion.
+
+In other words, if you look into *bower.json*, you can tell if the code base is a released version or not.
+
+
 ## Install environment
 
 Install tools needed for development:
