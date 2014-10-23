@@ -18,7 +18,8 @@ var Promise = require('bluebird');
 // Message templates use https://github.com/janl/mustache.js
 var config = {
     indentation: 2,
-    commitMessage: 'Release {{ version }}',
+    releaseMessage: 'Release {{ version }}',
+    backToDevMessage: 'Bump to dev version',
     bumpType: 'patch',
     files: ['package.json', 'bower.json'],
 
@@ -44,7 +45,7 @@ function main() {
 
     gitAdd(config.files)
         .then(function() {
-            var message = Mustache.render(config.commitMessage, {
+            var message = Mustache.render(config.releaseMessage, {
                 version: newVersion
             });
 
@@ -60,6 +61,9 @@ function main() {
         .then(npmPublish)
         .then(function() {
             bumpVersion(config.files, 'dev');
+            return gitCommit(config.backToDevMessage);
+        })
+        .then(function() {
             console.log('');
             status('Release successfully done!');
         })
