@@ -1,14 +1,17 @@
 (function(root, factory) {
     if (typeof define === 'function' && define.amd) {
-        // AMD
-        define('progressbar', [], function() {
-            return factory();
-        });
+        // AMD. Register as an anonymous module.
+        define(['exports'], factory);
+    } else if (typeof exports === 'object') {
+        // CommonJS
+        factory(exports);
     } else {
         // Browser globals
-        root.ProgressBar = factory();
+        root.ProgressBar = {};
+        factory(root.ProgressBar);
     }
-}(this, function() {
+}(this, function(_exports) {
+    // Name it to _exports because Tweenable checks if exports is a function
 
     var oldTweenable = this.Tweenable;
 
@@ -303,12 +306,8 @@
     }
 
     // Expose modules
-    var ProgressBar = {
-        Line: Line,
-        Circle: Circle,
-        Square: Square,
-        Path: Path
-    };
-
-    return ProgressBar;
+    _exports.Line = Line;
+    _exports.Circle = Circle;
+    _exports.Square = Square;
+    _exports.Path = Path;
 }));
