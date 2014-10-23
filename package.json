@@ -1,9 +1,8 @@
 {
   "name": "progressbar.js",
-  "private": true,
-  "version": "0.0.0",
-  "description": "",
-  "main": "",
+  "version": "0.5.0-dev",
+  "description": "Beautiful and responsive progress bars with animated SVG paths",
+  "main": "dist/progressbar.js",
   "devDependencies": {
     "bluebird": "^2.3.6",
     "commander": "^2.4.0",
