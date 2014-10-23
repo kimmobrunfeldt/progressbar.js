@@ -61,6 +61,9 @@ function main() {
         .then(npmPublish)
         .then(function() {
             bumpVersion(config.files, 'dev');
+            return gitAdd(config.files);
+        })
+        .then(function() {
             return gitCommit(config.backToDevMessage);
         })
         .then(function() {
@@ -115,12 +118,14 @@ function run(cmd, msg) {
             return resolve();
         }
 
-        var success = shell.exec(cmd).code === 0;
+        var exec = shell.exec(cmd);
+        var success = exec.code === 0;
 
         if (success) {
             resolve();
         } else {
-            var err = new Error('Error executing: `' + cmd + '`\n');
+            var errMsg = 'Error executing: `' + cmd + '`\nOutput:\n' + exec.output;
+            var err = new Error(errMsg);
             reject(err);
         }
     });
