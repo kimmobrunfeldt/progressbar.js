@@ -8,7 +8,8 @@ Beautiful and responsive progress bars with animated SVG paths.
 [Use built-in shapes](#api) or [create your own paths](#pathpath-options).
 [Customize](#custom-animations) the animations as you wish.
 
-See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for examples.
+See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for examples or
+[**try it in JSFiddle**](http://jsfiddle.net/kimmobrunfeldt/8xa87k31/).
 
 
 # Get started
