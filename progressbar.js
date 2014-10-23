@@ -22,7 +22,9 @@
     var EASING_ALIASES = {
         easeIn: 'easeInCubic',
         easeOut: 'easeOutCubic',
-        easeInOut: 'easeInOutCubic'
+        easeInOut: 'easeInOutCubic',
+        easeBounce: 'easeInOutBounce',
+        easeSticky: 'easeInOutElastic'
     };
 
     // Base object for different progress bar shapes
