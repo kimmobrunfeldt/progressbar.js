@@ -43,37 +43,22 @@ module.exports = function(grunt) {
         },
         command: 'mocha'
       },
-      updateDevVersion: {
-        options: {
-            stdout: true
-        },
-        command: 'git add bower.json; git commit -m "Update to dev version"'
-      },
-      commitMinified: {
+      stageMinified: {
         options: {
             stdout: true,
             // If minified files do not change on release,
             // git command fails
             failOnError: false
         },
-        command: 'git add dist/progressbar.js dist/progressbar.min.js dist/progressbar.min.js.map; git commit -m "Add built scripts"'
-      }
-    },
-    // https://github.com/geddski/grunt-release/issues/84
-    release: {
-      options: {
-        npm: false,
-        npmtag: false,
-        commitMessage: 'Release <%= version %>',
-        file: 'bower.json'
-      }
-    },
-    extRelease: {
-      options: {
-        npm: false,
-        npmtag: false,
-        commitMessage: 'Release <%= version %>',
-        file: 'bower.json'
+        command: 'git add dist/progressbar.js dist/progressbar.min.js dist/progressbar.min.js.map'
+      },
+      release: {
+        options: {
+          stdout: true
+        },
+        command: function(bump) {
+          return './scripts/release.js ' + bump;
+        }
       }
     }
   });
@@ -82,44 +67,23 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-text-replace');
   grunt.loadNpmTasks('grunt-shell');
-  grunt.loadNpmTasks('grunt-release');
 
-  // To be able to register custom release task, rename plugin's task
-  grunt.task.renameTask('release', 'extRelease');
-
-  // Updates version to development version. There should be only one
-  // commit in history where bower.json contains the actual released version.
-  // Other commits contain -dev suffix.
-  grunt.registerTask('updateDevVersion', function() {
-    var bowerJson = grunt.file.readJSON('bower.json');
-    if (endsWith(bowerJson.version, '-dev')) {
-        return;
-    }
-
-    bowerJson.version += '-dev';
-    var prettyJson = JSON.stringify(bowerJson, null, 2);
-    grunt.file.write('bower.json', prettyJson);
-
-    grunt.task.run(['shell:updateDevVersion']);
-  });
-
-  grunt.registerTask('commitMinified', function() {
-    grunt.task.run(['shell:commitMinified']);
+  grunt.registerTask('stageMinified', function() {
+    grunt.task.run(['shell:stageMinified']);
   });
 
   // Build distributables to dist folder
   grunt.registerTask('build', ['replace:bundleShifty', 'uglify:progressbar'])
-  
+
   // Test, build, and release library to public
   grunt.registerTask('release', function(arg) {
-    arg = arg || 'patch';
+    var bump = arg || 'patch';
 
     grunt.task.run([
       'jshint',
       'build',
-      'commitMinified',
-      'extRelease:' + arg,
-      'updateDevVersion'
+      'stageMinified',
+      'shell:release:' + bump
     ]);
   });
 };

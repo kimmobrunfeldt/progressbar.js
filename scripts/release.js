@@ -27,7 +27,7 @@ var config = {
     dryRun: false,
 
     // If true, don't push commits/tags or release to npm
-    noPush: true,
+    noPush: false,
     consolePrefix: '->',
     devSuffix: '-dev'
 }
