@@ -3,6 +3,9 @@
   "version": "0.5.0-dev",
   "description": "Beautiful and responsive progress bars with animated SVG paths",
   "main": "dist/progressbar.js",
+  "dependencies": {
+    "shifty": "1.2.2"
+  },
   "devDependencies": {
     "bluebird": "^2.3.6",
     "commander": "^2.4.0",
@@ -29,5 +32,18 @@
   "bugs": {
     "url": "https://github.com/kimmobrunfeldt/progressbar.js/issues"
   },
-  "homepage": "https://github.com/kimmobrunfeldt/progressbar.js"
+  "homepage": "https://github.com/kimmobrunfeldt/progressbar.js",
+  "keywords": [
+    "progress",
+    "bar",
+    "js",
+    "svg",
+    "circular",
+    "circle",
+    "pace",
+    "radial",
+    "line",
+    "loading",
+    "loader"
+  ]
 }
