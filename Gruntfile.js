@@ -78,6 +78,8 @@ module.exports = function(grunt) {
 
   // Test, build, and release library to public
   grunt.registerTask('release', function(bump) {
+    bump = bump || 'patch';
+
     grunt.task.run([
       'jshint',
       'build',
