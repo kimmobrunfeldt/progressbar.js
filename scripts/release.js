@@ -139,7 +139,7 @@ function run(cmd, msg) {
 // semantic versioning
 function bumpVersion(files, bumpType) {
     status('Bump', bumpType, 'version to files:', files.join(' '));
-    if (config.dryRun) return;
+    if (config.dryRun) return '[not available in dry run]';
 
     var newVersion;
     files.forEach(function(fileName) {

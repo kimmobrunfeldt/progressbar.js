@@ -16,33 +16,7 @@ module.exports = function(grunt) {
           }
         }
     },
-    replace: {
-      bundleShifty: {
-        src: ['progressbar.js'],
-        dest: 'dist/progressbar.js',
-        replacements: [{
-          from: '// #include shifty',
-          to: grunt.file.read('shifty.min.js')
-        }]
-      }
-    },
-    uglify: {
-      progressbar: {
-        options: {
-          sourceMap: true
-        },
-        files: {
-          'dist/progressbar.min.js': ['dist/progressbar.js']
-        }
-      }
-    },
     shell: {
-      mocha: {
-        options: {
-          stdout: true
-        },
-        command: 'mocha'
-      },
       stageMinified: {
         options: {
             stdout: true,
@@ -52,12 +26,36 @@ module.exports = function(grunt) {
         },
         command: 'git add dist/progressbar.js dist/progressbar.min.js dist/progressbar.min.js.map'
       },
+      browserifyDevelopment: {
+        options: {
+          stdout: true
+        },
+        command: 'browserify progressbar.js -o dist/progressbar.js --debug --standalone ProgressBar'
+      },
+      browserifyMinified: {
+        options: {
+          stdout: true
+        },
+        command: 'browserify progressbar.js -o dist/progressbar.min.js --standalone ProgressBar'
+      },
       release: {
         options: {
           stdout: true
         },
         command: function(bump) {
+          bump = bump || 'patch';
           return './scripts/release.js ' + bump;
+        }
+      }
+    },
+    // Uglify must be run after browserify
+    uglify: {
+      progressbar: {
+        options: {
+          sourceMap: true
+        },
+        files: {
+          'dist/progressbar.min.js': ['dist/progressbar.min.js']
         }
       }
     }
@@ -65,7 +63,6 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-text-replace');
   grunt.loadNpmTasks('grunt-shell');
 
   grunt.registerTask('stageMinified', function() {
@@ -73,12 +70,14 @@ module.exports = function(grunt) {
   });
 
   // Build distributables to dist folder
-  grunt.registerTask('build', ['replace:bundleShifty', 'uglify:progressbar'])
+  grunt.registerTask('build', [
+    'shell:browserifyDevelopment',
+    'shell:browserifyMinified',
+    'uglify:progressbar'
+  ]);
 
   // Test, build, and release library to public
-  grunt.registerTask('release', function(arg) {
-    var bump = arg || 'patch';
-
+  grunt.registerTask('release', function(bump) {
     grunt.task.run([
       'jshint',
       'build',
