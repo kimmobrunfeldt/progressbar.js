@@ -16,12 +16,44 @@ See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for example
 
 *ProgressBar.js* is lightweight, MIT licensed and supports all major browsers including **IE9+**.
 
-You can install it with Bower:
+#### Installing options:
 
-    bower install progressbar.js
+* Using bower
 
-Or just by including [*dist/progressbar.js*](dist/progressbar.js) or
-[dist/progressbar.min.js](dist/progressbar.min.js) from latest tag to your project.
+        bower install progressbar.js
+
+* Using npm
+
+        npm install progressbar.js
+
+* Including [*dist/progressbar.js*](dist/progressbar.js) or [dist/progressbar.min.js](dist/progressbar.min.js) from latest tag to your project.
+
+#### Loading module
+
+Files in `dist/` folder are UMD modules built with Browserify's `--standalone` switch. Read more about [standalone Browserify builds](http://www.forbeslindesay.co.uk/post/46324645400/standalone-browserify-builds).
+
+CommonJS
+
+```javascript
+var ProgressBar = require('progressbar.js')
+var line = ProgressBar.Line('#container');
+```
+
+AMD
+
+```javascript
+define(['progressbar.js'], function(ProgressBar) {
+    var line = ProgressBar.Line('#container');
+});
+```
+
+Global variable
+
+```javascript
+// If you aren't using any module loader, progressbar.js exposes
+// global variable: window.ProgressBar
+var line = ProgressBar.Line('#container');
+```
 
 
 # How it works

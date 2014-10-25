@@ -8,11 +8,8 @@ updated.
 
 ## General project stuff
 
-This package uses npm/node tools just in the developer environment. **The actual
-delivered package is only released in Bower.** I would prefer to discard Grunt as a
-task runner but [grunt-release](https://github.com/geddski/grunt-release)
-was the best available release automation tool for a Bower package. That said, the grunt-release package
-is not very high quality but works.
+This package uses npm/node tools just in the developer environment. Grunt is used as a task runner
+but there's no reason it couldn't be replaced with e.g. Makefile
 
 *ProgressBar.js* depends on tweening library called [shifty](https://github.com/jeremyckahn/shifty).
 *Shifty* is bundled inside the scripts in [dist/](dist/) directory.
@@ -48,7 +45,11 @@ Creating a new release of the package is simple:
 
 * Edit GitHub release notes
 
-To see an example how to release minor/major, check https://github.com/geddski/grunt-release
+By default, patch release is done. You can specify the version bump as a parameter:
+
+    grunt release:major
+
+Valid version bump values: `major`, `minor`, `patch`.
 
 
 ## Decision log
@@ -61,3 +62,5 @@ animation customizations and possible even using different easings per animation
 * Expose ProgressBar so it can be used with basic module loaders or as a global.
 * Bundle shifty inside the final distributable instead of requiring users to install both libs. If someone has already included shifty, then a custom build should be made.
 * Ship distributables to Bower. Fully automate releasing.
+* Ship distributables also to NPM to ease life of Browserify users.
+* Delegate shifty dependency handling to NPM instead of keeping it in repository but still bundle it inside the final distributable.
