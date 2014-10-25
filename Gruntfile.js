@@ -43,6 +43,7 @@ module.exports = function(grunt) {
           stdout: true
         },
         command: function(bump) {
+          bump = bump || 'patch';
           return './scripts/release.js ' + bump;
         }
       }
@@ -76,9 +77,7 @@ module.exports = function(grunt) {
   ]);
 
   // Test, build, and release library to public
-  grunt.registerTask('release', function(arg) {
-    var bump = arg || 'patch';
-
+  grunt.registerTask('release', function(bump) {
     grunt.task.run([
       'jshint',
       'build',
