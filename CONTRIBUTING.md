@@ -31,6 +31,11 @@ Install tools needed for development:
 
     npm install
 
+To test locally
+
+    npm install -g mocha
+    npm install -g testem
+
 ## Release
 
 **Before releasing, make sure there are no uncommitted files,
