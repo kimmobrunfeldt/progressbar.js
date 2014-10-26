@@ -18,7 +18,8 @@
     "mustache": "^0.8.2",
     "semver": "^4.1.0",
     "shelljs": "^0.3.0",
-    "string": "^2.2.0"
+    "string": "^2.2.0",
+    "tape": "^3.0.1"
   },
   "scripts": {
     "test": "grunt test"
