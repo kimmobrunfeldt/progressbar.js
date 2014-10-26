@@ -1,6 +1,6 @@
 {
   "name": "progressbar.js",
-  "version": "0.5.2-dev",
+  "version": "0.5.3",
   "description": "Beautiful and responsive progress bars with animated SVG paths",
   "main": "dist/progressbar.js",
   "dependencies": {
