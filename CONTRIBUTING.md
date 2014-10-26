@@ -31,10 +31,43 @@ Install tools needed for development:
 
     npm install
 
-To test locally
+For testing:
 
     npm install -g mocha
     npm install -g testem
+
+## Test
+
+Tests are written with [Mocha](http://mochajs.org/) + [expect.js](https://github.com/LearnBoost/expect.js/).
+Sometimes the tests fail even though they actually work on the browser. That might be cause of setTimeouts used
+in tests.
+
+Quickly run tests:
+
+    grunt test
+
+This will use testem to run tests with Chrome. Other options specified below.
+
+#### Testem
+
+[Testem](https://github.com/airportyh/testem) is used for running tests locally. It is fast and easy to use.
+List of example commands:
+
+* `testem` Serves testing page so that you can connect any browser to it.
+* `testem ci` Runs tests an all available/detected local browsers.
+* `testem ci -R dot -l chrome` Runs tests with Chrome using dot reported.
+
+#### Karma
+
+[Karma](http://karma-runner.github.io/) is used for running tests to be executed in Sauce Labs.
+Karma was used because integrating it to Sauce Labs is easier than with Testem.
+
+You must setup `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` environment variables.
+See [karma-sauce-launcher project documentation](https://github.com/karma-runner/karma-sauce-launcher#username). Browsers used to test are specified in [karma.conf.js](karma.conf.js).
+
+You can run tests with
+
+    grunt karma
 
 ## Release
 
@@ -69,3 +102,4 @@ animation customizations and possible even using different easings per animation
 * Ship distributables to Bower. Fully automate releasing.
 * Ship distributables also to NPM to ease life of Browserify users.
 * Delegate shifty dependency handling to NPM instead of keeping it in repository but still bundle it inside the final distributable.
+* Automate tests so that testing is locally fast and CI runs tests with more browsers in Sauce Labs

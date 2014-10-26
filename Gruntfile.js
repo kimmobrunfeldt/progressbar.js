@@ -1,8 +1,13 @@
 var fs = require('fs');
 
+// Travis has env variable CI=true
+var CI = process.env.CI === 'true';
+
+
 function endsWith(str, suffix) {
   return str.indexOf(suffix, str.length - suffix.length) !== -1;
 }
+
 
 module.exports = function(grunt) {
   grunt.initConfig({
@@ -36,6 +41,7 @@ module.exports = function(grunt) {
         options: {
           stdout: true
         },
+        // The output file is minified by uglifyjs later.
         command: 'browserify progressbar.js -o dist/progressbar.min.js --standalone ProgressBar'
       },
       release: {
@@ -46,6 +52,20 @@ module.exports = function(grunt) {
           bump = bump || 'patch';
           return './scripts/release.js ' + bump;
         }
+      },
+      karma: {
+        options: {
+          stdout: true
+        },
+        // This will run tests in Sauce Lab
+        command: './node_modules/karma/bin/karma start'
+      },
+      testem: {
+        options: {
+          stdout: true
+        },
+        // This will run tests in all local browsers available/detected
+        command: 'testem ci -R dot -l chrome'
       }
     },
     // Uglify must be run after browserify
@@ -76,12 +96,17 @@ module.exports = function(grunt) {
     'uglify:progressbar'
   ]);
 
+  grunt.registerTask('test', ['shell:testem']);
+
+  grunt.registerTask('karma', ['shell:karma']);
+
   // Test, build, and release library to public
   grunt.registerTask('release', function(bump) {
     bump = bump || 'patch';
 
     grunt.task.run([
       'jshint',
+      'test',
       'build',
       'stageMinified',
       'shell:release:' + bump
