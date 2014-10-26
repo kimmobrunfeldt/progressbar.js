@@ -702,4 +702,4 @@ Tweening engine changes defined values over time and calls step function for eac
 
 # Contributing
 
-See [documentation for contributors](docs/readme.md).
+See [documentation for contributors](CONTRIBUTING.md).
