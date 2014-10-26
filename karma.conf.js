@@ -229,7 +229,8 @@ module.exports = function(config) {
         singleRun: true,
 
         sauceLabs: {
-            testName: 'ProgressBar.js'
+            testName: 'ProgressBar.js',
+            build: process.env.TRAVIS_BUILD_NUMBER || 'manual'
         },
 
         customLaunchers: customLaunchers,
@@ -239,9 +240,9 @@ module.exports = function(config) {
         reporters: ['dots', 'saucelabs'],
 
         // Timeouts
-        browserDisconnectTimeout: 5000,
-        browserDisconnectTolerance: 1,
-        browserNoActivityTimeout: 20000
-
+        browserDisconnectTimeout: 30 * 1000,
+        browserDisconnectTolerance: 3,
+        browserNoActivityTimeout: 30 * 1000,
+        captureTimeout: 120 * 1000
     });
 };
