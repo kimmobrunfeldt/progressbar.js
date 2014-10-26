@@ -1377,6 +1377,7 @@ function token () {
 }(this));
 
 },{}],2:[function(require,module,exports){
+// Browserify will transform the module compatible for browser
 var Tweenable = require('shifty');
 
 var EASING_ALIASES = {
