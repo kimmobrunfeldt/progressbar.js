@@ -30,7 +30,7 @@ module.exports = function(grunt) {
         options: {
           stdout: true
         },
-        command: 'browserify progressbar.js -o dist/progressbar.js --debug --standalone ProgressBar'
+        command: 'browserify progressbar.js -o dist/progressbar.js --standalone ProgressBar'
       },
       browserifyMinified: {
         options: {
