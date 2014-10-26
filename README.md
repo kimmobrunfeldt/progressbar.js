@@ -36,14 +36,18 @@ CommonJS
 
 ```javascript
 var ProgressBar = require('progressbar.js')
-var line = ProgressBar.Line('#container');
+var line = new ProgressBar.Line('#container');
 ```
 
 AMD
 
 ```javascript
-define(['progressbar.js'], function(ProgressBar) {
-    var line = ProgressBar.Line('#container');
+require.config({
+    paths: {"progressbar": "../bower_components/progressbar.js/dist/progressbar"}
+});
+
+define(['progressbar'], function(ProgressBar) {
+    var line = new ProgressBar.Line('#container');
 });
 ```
 
@@ -52,7 +56,7 @@ Global variable
 ```javascript
 // If you aren't using any module loader, progressbar.js exposes
 // global variable: window.ProgressBar
-var line = ProgressBar.Line('#container');
+var line = new ProgressBar.Line('#container');
 ```
 
 
