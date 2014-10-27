@@ -23,6 +23,10 @@ var config = {
     bumpType: 'patch',
     files: ['package.json', 'bower.json'],
 
+    // Banner to insert in beginning of distributables
+    bannerFiles: ['dist/progressbar.js', 'dist/progressbar.min.js'],
+    banner: '// ProgressBar.js {{ version }}\n// https://kimmobrunfeldt.github.io/progressbar.js\n\n',
+
     // If true, don't execute anything, just tell what would have been done
     dryRun: false,
 
@@ -33,7 +37,7 @@ var config = {
 }
 
 var projectRoot = path.join(__dirname, '..');
-
+process.chdir(projectRoot);
 
 function main() {
     parseArgs();
@@ -42,6 +46,11 @@ function main() {
     if (config.dryRun) status('Dry run\n');
 
     var newVersion = bumpVersion(config.files, config.bumpType);
+
+    var banner = Mustache.render(config.banner, {
+        version: newVersion
+    });
+    insertBanner(config.bannerFiles, banner);
 
     gitAdd(config.files)
         .then(function() {
@@ -174,6 +183,19 @@ function bumpVersion(files, bumpType) {
     });
 
     return newVersion;
+}
+
+function insertBanner(files, banner) {
+    status('Insert banner to', files.length, 'files');
+    if (config.dryRun) return;
+
+    _.each(files, function(fileName) {
+        var filePath = path.join(projectRoot, fileName);
+        var content = fs.readFileSync(filePath);
+        var newContent = banner + content;
+
+        fs.writeFileSync(filePath, newContent);
+    });
 }
 
 function gitAdd(files) {
