@@ -83,6 +83,7 @@ animating SVG properties with CSS transitions.
     * [animate(progress, [*options*], [*cb*])](#lineanimateprogress-options-cb)
     * [stop()](#linestop)
     * [set(progress)](#linesetprogress)
+    * [value()](#linevalue)
 
 
 * [Circle(container, [*options*])](#circlecontainer-options)
@@ -91,6 +92,7 @@ animating SVG properties with CSS transitions.
     * [animate(progress, [*options*], [*cb*])](#circleanimateprogress-options-cb)
     * [stop()](#circlestop)
     * [set(progress)](#circlesetprogress)
+    * [value()](#circlevalue)
 
 
 * [Square(container, [*options*])](#squarecontainer-options)
@@ -99,12 +101,14 @@ animating SVG properties with CSS transitions.
     * [animate(progress, [*options*], [*cb*])](#squareanimateprogress-options-cb)
     * [stop()](#squarestop)
     * [set(progress)](#squaresetprogress)
+    * [value()](#squarevalue)
 
 
 * [Path(path, [*options*])](#pathpath-options)
     * [animate(progress, [*options*], [*cb*])](#pathanimateprogress-options-cb)
     * [stop()](#pathstop)
     * [set(progress)](#pathsetprogress)
+    * [value()](#pathvalue)
 
 Functions use node-style callback convention. Callback function is always the last given parameter.
 
@@ -236,6 +240,10 @@ Stops animation to its current position.
 
 Sets progress instantly without animation. Clears all transitions
 for path.
+
+## Line.value()
+
+Returns current shown progress from 0 to 1. This value changes when animation is running.
 
 <br>
 <br>
@@ -370,6 +378,10 @@ Stops animation to its current position.
 Sets progress instantly without animation. Clears all transitions
 for path.
 
+## Circle.value()
+
+Returns current shown progress from 0 to 1. This value changes when animation is running.
+
 <br>
 <br>
 
@@ -502,6 +514,10 @@ Stops animation to its current position.
 Sets progress instantly without animation. Clears all transitions
 for path.
 
+## Square.value()
+
+Returns current shown progress from 0 to 1. This value changes when animation is running.
+
 <br>
 <br>
 
@@ -632,6 +648,10 @@ Stops animation to its current position.
 
 Set progress instantly without animation. Clears all transitions
 for path.
+
+## Path.value()
+
+Returns current shown progress from 0 to 1. This value changes when animation is running.
 
 <br>
 <br>
