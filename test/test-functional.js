@@ -27,4 +27,12 @@ describe('ProgressBar', function() {
         }, 100);
     });
 
+    it('set should change value', function() {
+        var line = new ProgressBar.Line('body');
+        var offset = utils.getComputedStyle(line.path, 'stroke-dashoffset');
+        expect(line.value()).to.be(0);
+        
+        line.set(1);
+        expect(line.value()).to.be(1);
+    });
 });
