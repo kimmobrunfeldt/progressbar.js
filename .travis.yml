@@ -7,7 +7,7 @@ before_script:
 - npm install
 - npm install -g mocha grunt-cli testem
 script:
-- if [[ $TRAVIS_PULL_REQUEST != 'false' ]]; then testem ci; fi
+- if [[ $TRAVIS_PULL_REQUEST != 'false' ]]; then testem ci -l phantomjs; fi
 - if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then grunt karma; fi
 notifications:
   email:
