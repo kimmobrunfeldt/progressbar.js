@@ -8,17 +8,25 @@
   },
   "devDependencies": {
     "bluebird": "^2.3.6",
+    "browserify": "^6.2.0",
     "commander": "^2.4.0",
+    "expect.js": "^0.3.1",
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-uglify": "^0.6.0",
+    "grunt-karma": "^0.9.0",
     "grunt-shell": "^1.1.1",
-    "grunt-text-replace": "^0.3.12",
+    "karma": "^0.12.24",
+    "karma-bro": "^0.8.0",
+    "karma-mocha": "^0.1.9",
+    "karma-sauce-launcher": "^0.2.10",
     "lodash": "^2.4.1",
+    "mocha": "^2.0.1",
     "mustache": "^0.8.2",
     "semver": "^4.1.0",
     "shelljs": "^0.3.0",
-    "string": "^2.2.0"
+    "string": "^2.2.0",
+    "testem": "^0.6.22"
   },
   "scripts": {
     "test": "grunt test"
