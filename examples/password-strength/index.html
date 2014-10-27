@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>ProgressBar.js - Password Strength Example</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href='http://fonts.googleapis.com/css?family=Roboto:300,100' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://cdn.rawgit.com/necolas/normalize.css/v2.1.3/normalize.css">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div class="row">
+            <form>
+                <input id="password" required type="password">
+                <label alt="New password" placeholder="New password"></label>
+            </form>
+
+            <div class="progress" id="strength-bar"></div>
+        </div>
+
+        <!-- These are probably out dated so you might want to use newest versions -->
+        <script src="https://cdn.rawgit.com/dropbox/zxcvbn/v1.0/zxcvbn.js"></script>
+        <script src="p.js"></script>
+
+        <script src="main.js"></script>
+    </body>
+</html>
