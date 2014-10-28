@@ -1377,7 +1377,6 @@ function token () {
 }(this));
 
 },{}],2:[function(require,module,exports){
-// Browserify will transform the module compatible for browser
 var Tweenable = require('shifty');
 
 var EASING_ALIASES = {
@@ -1422,6 +1421,10 @@ Progress.prototype.stop = function stop() {
 
 Progress.prototype.set = function set(progress) {
     this._path.set(progress);
+};
+
+Progress.prototype.value = function value() {
+    return this._path.value();
 };
 
 Progress.prototype._createSvgView = function _createSvgView(opts) {
@@ -1553,6 +1556,16 @@ var Path = function(path, opts) {
     var length = this._path.getTotalLength();
     this._path.style.strokeDasharray = length + ' ' + length;
     this._path.style.strokeDashoffset = length;
+};
+
+Path.prototype.value = function value() {
+    var computedStyle = window.getComputedStyle(this._path, null);
+    var offset = computedStyle.getPropertyValue('stroke-dashoffset');
+    // Remove 'px' suffix
+    offset = parseFloat(offset, 10);
+    var length = this._path.getTotalLength();
+
+    return 1 - offset / length;
 };
 
 Path.prototype.set = function set(progress) {
