@@ -17,6 +17,7 @@ See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for example
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/kimmobrunfeldt.svg)](https://saucelabs.com/u/kimmobrunfeldt)
 
 *ProgressBar.js* is lightweight, MIT licensed and supports all major browsers including **IE9+**.
+See complete examples in [examples] section.
 
 #### Installing options:
 
@@ -721,6 +722,11 @@ Tweening engine changes defined values over time and calls step function for eac
         attachment.path.setAttribute('stroke', state.color);
     }
     ```
+
+## Examples
+
+* [**Minimal**](http://kimmobrunfeldt.github.io/progressbar.js/examples/password-strength/) [*see code*]([*see code*](https://github.com/kimmobrunfeldt/progressbar.js/tree/gh-pages/examples/minimal)
+* [**Password strength **](http://kimmobrunfeldt.github.io/progressbar.js/examples/password-strength/) [*see code*](https://github.com/kimmobrunfeldt/progressbar.js/tree/gh-pages/examples/password-strength)
 
 # Contributing
 
