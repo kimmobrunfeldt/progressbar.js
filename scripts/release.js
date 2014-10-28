@@ -53,7 +53,7 @@ function main() {
     insertBanner(config.bannerFiles, banner);
 
     gitAdd(config.bannerFiles)
-        .then(funciton() {
+        .then(function() {
             return gitAdd(config.files);
         })
         .then(function() {
