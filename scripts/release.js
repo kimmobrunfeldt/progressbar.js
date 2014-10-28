@@ -52,7 +52,10 @@ function main() {
     });
     insertBanner(config.bannerFiles, banner);
 
-    gitAdd(config.files)
+    gitAdd(config.bannerFiles)
+        .then(funciton() {
+            return gitAdd(config.files);
+        })
         .then(function() {
             var message = Mustache.render(config.releaseMessage, {
                 version: newVersion
