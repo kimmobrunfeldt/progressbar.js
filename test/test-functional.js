@@ -9,10 +9,24 @@ var utils = require('./utils');
 var ProgressBar = require("../progressbar");
 
 describe('ProgressBar', function() {
+    var line;
+
+    beforeEach(function() {
+        line = new ProgressBar.Line('body');
+    });
+
+    afterEach(function() {
+        try {
+            line.destroy();
+        } catch (e) {
+            // Some test cases destroy the line themselves and calling again
+            // throws an error
+        }
+    });
+
     it('animate should change SVG path stroke-dashoffset property', function(done) {
         // Append progress bar to body since adding a custom HTML and div
         // with Karma was not that trivial compared to Testem
-        var line = new ProgressBar.Line('body');
         var offset = utils.getComputedStyle(line.path, 'stroke-dashoffset');
         line.animate(1, {duration: 1000});
 
@@ -28,11 +42,32 @@ describe('ProgressBar', function() {
     });
 
     it('set should change value', function() {
-        var line = new ProgressBar.Line('body');
-        var offset = utils.getComputedStyle(line.path, 'stroke-dashoffset');
         expect(line.value()).to.be(0);
-        
+
         line.set(1);
         expect(line.value()).to.be(1);
+    });
+
+    it('animate should change value', function(done) {
+        line.set(1);
+        line.animate(0, {duration: 500});
+
+        setTimeout(function checkValueHasChanged() {
+            expect(line.value()).not.to.be(1);
+        }, 100);
+
+        setTimeout(function checkValueHasChanged() {
+            expect(line.value()).to.be(0);
+            done();
+        }, 600);
+    });
+
+    it('destroy() should delete element', function() {
+        var svg = document.querySelector('svg');
+        expect(svg).not.to.be(null);
+
+        line.destroy();
+        svg = document.querySelector('svg');
+        expect(svg).to.be(null);
     });
 });
