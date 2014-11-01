@@ -65,9 +65,15 @@ Karma was used because integrating it to Sauce Labs is easier than with Testem.
 You must setup `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` environment variables.
 See [karma-sauce-launcher project documentation](https://github.com/karma-runner/karma-sauce-launcher#username). Browsers used to test are specified in [karma.conf.js](karma.conf.js).
 
-You can run tests with
+You can run tests with all browsers:
 
     grunt karma
+
+Tests are run sequentially in batches of browsers to prevent timeouts in Sauce Labs.
+You can also run single set of browsers to see test results faster:
+
+    grunt karma:sauce0
+
 
 ## Release
 
