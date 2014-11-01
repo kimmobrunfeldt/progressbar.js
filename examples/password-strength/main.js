@@ -61,7 +61,7 @@ function onLoad() {
             progress = 0.1;
         }
 
-        var startColor = strengthBar.value() === 0
+        var startColor = +strengthBar.value().toFixed(3) === 0
             ? rgbArrayToString(defaultColor)
             : rgbArrayToString(barColor(strengthBar.value()));
 
