@@ -24,14 +24,14 @@ body {
 }
 
 .progress {
-    margin: calc(0.6em + 1px) 0 0 0;
+    margin: calc(0.65em + 1px) 0 0 0;
     position: relative;
     right: 2.5em;
 }
 
 svg {
     display: block;
-    height: 1.8em;
+    height: 1.9em;
 }
 
 /* Taken from http://blog.circleci.com/adaptive-placeholders/ */
