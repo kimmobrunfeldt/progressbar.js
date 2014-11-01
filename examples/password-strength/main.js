@@ -1,5 +1,14 @@
 var weakColor = [252, 91, 63];  // Red
 var strongColor = [111, 213, 127];  // Green
+var defaultColor = [204, 204, 204];
+
+var passwordGrades = {
+    0: 'Very weak',
+    1: 'Weak',
+    2: 'Average',
+    3: 'Strong',
+    4: 'Very strong'
+};
 
 // Interpolate value between two colors.
 // Value is number from 0-1. 0 Means color A, 0.5 middle etc.
@@ -26,30 +35,47 @@ function barColor(progress) {
 function onLoad() {
     var body = document.querySelector('body');
     var strengthBar = new ProgressBar.Circle('#strength-bar', {
-        color: weakColor,
+        color: '#ddd',
         trailColor: '#f7f7f7',
         duration: 1000,
         easing: 'easeOut',
-        strokeWidth: 5,
-        step: function(state, line) {
-            line.path.setAttribute('stroke', state.color);
-        }
+        strokeWidth: 5
     });
+    strengthBar.trail.setAttribute('stroke-opacity', 0);
 
     var input = document.querySelector('#password');
+    var inputLabel = document.querySelector('#password-label');
     input.addEventListener('input', function passwordChange() {
+        if (input.value.length === 0) {
+            input.style.borderColor = '#cccccc';
+            strengthBar.trail.setAttribute('stroke-opacity', 0);
+        } else {
+            strengthBar.trail.setAttribute('stroke-opacity', 1);
+        }
+
         var result = zxcvbn(input.value);
         var progress = result.score / 4;
+        inputLabel.dataset.info = passwordGrades[result.score];
 
         if (progress === 0 && input.value && input.value.length > 0) {
             progress = 0.1;
         }
 
-        var startColor = rgbArrayToString(barColor(strengthBar.value()));
-        var endColor = rgbArrayToString(barColor(progress));
+        var startColor = strengthBar.value() === 0
+            ? rgbArrayToString(defaultColor)
+            : rgbArrayToString(barColor(strengthBar.value()));
+
+        var endColor = progress === 0
+            ? rgbArrayToString(defaultColor)
+            : rgbArrayToString(barColor(progress));
+
         strengthBar.animate(progress, {
             from: { color: startColor },
-            to: { color: endColor }
+            to: { color: endColor },
+            step: function(state, bar) {
+                input.style.color = state.color;
+                bar.path.setAttribute('stroke', state.color);
+            }
         });
     });
 }
