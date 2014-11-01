@@ -34,25 +34,31 @@ function barColor(progress) {
 
 function onLoad() {
     var body = document.querySelector('body');
-    var strengthBar = new ProgressBar.Circle('#strength-bar', {
+    var barContainer = document.querySelector('#strength-bar');
+    var strengthBar = new ProgressBar.Circle(barContainer, {
         color: '#ddd',
         trailColor: '#f7f7f7',
         duration: 1000,
         easing: 'easeOut',
         strokeWidth: 5
     });
-    strengthBar.trail.setAttribute('stroke-opacity', 0);
+    barContainer.style.visibility = 'hidden';
 
     var input = document.querySelector('#password');
     var inputLabel = document.querySelector('#password-label');
-    input.addEventListener('input', function passwordChange() {
-        if (input.value.length === 0) {
-            input.style.borderColor = '#cccccc';
-            strengthBar.trail.setAttribute('stroke-opacity', 0);
-        } else {
-            strengthBar.trail.setAttribute('stroke-opacity', 1);
-        }
 
+    input.onfocus = function(event) {
+        var result = zxcvbn(input.value);
+        inputLabel.dataset.info = passwordGrades[result.score];
+        barContainer.style.visibility = 'visible';
+    };
+
+    input.onblur = function(event) {
+        inputLabel.dataset.info = 'New password';
+        barContainer.style.visibility = 'hidden';
+    };
+
+    input.addEventListener('input', function passwordChange() {
         var result = zxcvbn(input.value);
         var progress = result.score / 4;
         inputLabel.dataset.info = passwordGrades[result.score];
