@@ -25,27 +25,43 @@ var Progress = function(container, opts) {
     var newOpts = extend({
         attachment: this
     }, opts);
-    this._path = new Path(svgView.path, newOpts);
+    this._progressPath = new Path(svgView.path, newOpts);
 
     // Expose public attributes
+    this.svg = svgView.svg;
     this.path = svgView.path;
     this.trail = svgView.trail;
 };
 
 Progress.prototype.animate = function animate(progress, opts, cb) {
-    this._path.animate(progress, opts, cb);
+    if (this._progressPath === null) throw new Error('Object is destroyed');
+    this._progressPath.animate(progress, opts, cb);
 };
 
 Progress.prototype.stop = function stop() {
-    this._path.stop();
+    if (this._progressPath === null) throw new Error('Object is destroyed');
+    this._progressPath.stop();
+};
+
+Progress.prototype.destroy = function destroy() {
+    if (this._progressPath === null) throw new Error('Object is destroyed');
+
+    this.stop();
+    this.svg.parentNode.removeChild(this.svg);
+    this.svg = null;
+    this.path = null;
+    this.trail = null;
+    this._progressPath = null;
 };
 
 Progress.prototype.set = function set(progress) {
-    this._path.set(progress);
+    if (this._progressPath === null) throw new Error('Object is destroyed');
+    this._progressPath.set(progress);
 };
 
 Progress.prototype.value = function value() {
-    return this._path.value();
+    if (this._progressPath === null) throw new Error('Object is destroyed');
+    return this._progressPath.value();
 };
 
 Progress.prototype._createSvgView = function _createSvgView(opts) {
