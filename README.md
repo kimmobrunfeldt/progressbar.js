@@ -79,36 +79,42 @@ animating SVG properties with CSS transitions.
 [**ProgressBar**](#api)
 
 * [Line(container, [*options*])](#linecontainer-options)
+    * [*svg*](#linesvg)
     * [*path*](#linepath)
     * [*trail*](#linetrail)
     * [animate(progress, [*options*], [*cb*])](#lineanimateprogress-options-cb)
-    * [stop()](#linestop)
     * [set(progress)](#linesetprogress)
+    * [stop()](#linestop)
     * [value()](#linevalue)
+    * [destroy()](#linedestroy)
 
 
 * [Circle(container, [*options*])](#circlecontainer-options)
+    * [*svg*](#circlesvg)
     * [*path*](#circlepath)
     * [*trail*](#circletrail)
     * [animate(progress, [*options*], [*cb*])](#circleanimateprogress-options-cb)
-    * [stop()](#circlestop)
     * [set(progress)](#circlesetprogress)
+    * [stop()](#circlestop)
     * [value()](#circlevalue)
+    * [destroy()](#cirlcedestroy)
 
 
 * [Square(container, [*options*])](#squarecontainer-options)
+    * [*svg*](#squaresvg)
     * [*path*](#squarepath)
     * [*trail*](#squaretrail)
     * [animate(progress, [*options*], [*cb*])](#squareanimateprogress-options-cb)
-    * [stop()](#squarestop)
     * [set(progress)](#squaresetprogress)
+    * [stop()](#squarestop)
     * [value()](#squarevalue)
+    * [destroy()](#squaredestroy)
 
 
 * [Path(path, [*options*])](#pathpath-options)
     * [animate(progress, [*options*], [*cb*])](#pathanimateprogress-options-cb)
-    * [stop()](#pathstop)
     * [set(progress)](#pathsetprogress)
+    * [stop()](#pathstop)
     * [value()](#pathvalue)
 
 Functions use node-style callback convention. Callback function is always the last given parameter.
@@ -182,6 +188,10 @@ To make line resize with its container, set for example the following CSS:
     }
     ```
 
+## Line.svg
+
+Reference to [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg) element where progress bar is drawn.
+
 ## Line.path
 
 Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which represents the actual progress bar.
@@ -233,18 +243,22 @@ progressBar.animate(0.3, {
 
 * `cb` Callback function which is called after transition ends.
 
-## Line.stop()
-
-Stops animation to its current position.
-
 ## Line.set(progress)
 
 Sets progress instantly without animation. Clears all transitions
 for path.
 
+## Line.stop()
+
+Stops animation to its current position.
+
 ## Line.value()
 
 Returns current shown progress from 0 to 1. This value changes when animation is running.
+
+## Line.destroy()
+
+Removes SVG element from container and removes all references to DOM elements. Destroying is irreversible.
 
 <br>
 <br>
@@ -319,6 +333,10 @@ To make circle resize with its container, set for example the following CSS:
     }
     ```
 
+## Circle.svg
+
+Reference to [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg) element where progress bar is drawn.
+
 ## Circle.path
 
 Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the actual progress bar.
@@ -370,18 +388,22 @@ progressBar.animate(0.3, {
 
 * `cb` Callback function which is called after transition ends.
 
-## Circle.stop()
-
-Stops animation to its current position.
-
 ## Circle.set(progress)
 
 Sets progress instantly without animation. Clears all transitions
 for path.
 
+## Circle.stop()
+
+Stops animation to its current position.
+
 ## Circle.value()
 
 Returns current shown progress from 0 to 1. This value changes when animation is running.
+
+## Circle.destroy()
+
+Removes SVG element from container and removes all references to DOM elements. Destroying is irreversible.
 
 <br>
 <br>
@@ -455,6 +477,10 @@ To make square resize with its container, set for example the following CSS:
     }
     ```
 
+## Square.svg
+
+Reference to [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg) element where progress bar is drawn.
+
 ## Square.path
 
 Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the actual progress bar.
@@ -506,18 +532,22 @@ progressBar.animate(0.3, {
 
 * `cb` Callback function which is called after transition ends.
 
-## Square.stop()
-
-Stops animation to its current position.
-
 ## Square.set(progress)
 
 Sets progress instantly without animation. Clears all transitions
 for path.
 
+## Square.stop()
+
+Stops animation to its current position.
+
 ## Square.value()
 
 Returns current shown progress from 0 to 1. This value changes when animation is running.
+
+## Square.destroy()
+
+Removes SVG element from container and removes all references to DOM elements. Destroying is irreversible.
 
 <br>
 <br>
@@ -641,14 +671,14 @@ path.animate(0.3, {
 
 * `cb` Callback function which is called after transition ends.
 
-## Path.stop()
-
-Stops animation to its current position.
-
 ## Path.set(progress)
 
 Set progress instantly without animation. Clears all transitions
 for path.
+
+## Path.stop()
+
+Stops animation to its current position.
 
 ## Path.value()
 
