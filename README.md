@@ -14,7 +14,10 @@ See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for example
 
 # Get started
 
+[![Build Status](https://travis-ci.org/kimmobrunfeldt/progressbar.js.svg?branch=master)](https://travis-ci.org/kimmobrunfeldt/progressbar.js)
+
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/kimmobrunfeldt.svg)](https://saucelabs.com/u/kimmobrunfeldt)
+
 
 *ProgressBar.js* is lightweight, MIT licensed and supports all major browsers including **IE9+**.
 See complete examples in [examples](#examples) section.
