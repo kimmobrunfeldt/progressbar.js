@@ -70,4 +70,15 @@ describe('ProgressBar', function() {
         svg = document.querySelector('svg');
         expect(svg).to.be(null);
     });
+
+    it('destroy() should make object unusable', function() {
+        line.destroy();
+
+        var methodsShouldThrow = ['destroy', 'value', 'set', 'animate', 'stop'];
+        methodsShouldThrow.forEach(function(methodName) {
+            expect(function shouldThrow() {
+                line[methodName]();
+            }).to.throwError();
+        });
+    });
 });
