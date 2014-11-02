@@ -6,6 +6,8 @@ var EASING_ALIASES = {
     easeInOut: 'easeInOutCubic'
 };
 
+var DESTROYED_ERROR = 'Object is destroyed';
+
 // Base object for different progress bar shapes
 var Progress = function(container, opts) {
     // Prevent calling constructor without parameters so inheritance
@@ -34,17 +36,17 @@ var Progress = function(container, opts) {
 };
 
 Progress.prototype.animate = function animate(progress, opts, cb) {
-    if (this._progressPath === null) throw new Error('Object is destroyed');
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
     this._progressPath.animate(progress, opts, cb);
 };
 
 Progress.prototype.stop = function stop() {
-    if (this._progressPath === null) throw new Error('Object is destroyed');
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
     this._progressPath.stop();
 };
 
 Progress.prototype.destroy = function destroy() {
-    if (this._progressPath === null) throw new Error('Object is destroyed');
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
 
     this.stop();
     this.svg.parentNode.removeChild(this.svg);
@@ -55,12 +57,12 @@ Progress.prototype.destroy = function destroy() {
 };
 
 Progress.prototype.set = function set(progress) {
-    if (this._progressPath === null) throw new Error('Object is destroyed');
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
     this._progressPath.set(progress);
 };
 
 Progress.prototype.value = function value() {
-    if (this._progressPath === null) throw new Error('Object is destroyed');
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
     return this._progressPath.value();
 };
 
