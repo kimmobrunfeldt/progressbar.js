@@ -6,7 +6,7 @@
 var expect = require('expect.js');
 
 var utils = require('./utils');
-var ProgressBar = require("../progressbar");
+var ProgressBar = require("../src/progressbar");
 
 describe('ProgressBar', function() {
     var line;

@@ -38,7 +38,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
-      files: ['progressbar.js', 'test/**/*.js'],
+      files: ['src/*.js', 'test/**/*.js'],
         options: {
           globals: {
             jQuery: true,
@@ -60,14 +60,14 @@ module.exports = function(grunt) {
         options: {
           stdout: true
         },
-        command: 'browserify progressbar.js -o dist/progressbar.js --standalone ProgressBar'
+        command: 'browserify src/progressbar.js -o dist/progressbar.js --standalone ProgressBar'
       },
       browserifyMinified: {
         options: {
           stdout: true
         },
         // The output file is minified by uglifyjs later.
-        command: 'browserify progressbar.js -o dist/progressbar.min.js --standalone ProgressBar'
+        command: 'browserify src/progressbar.js -o dist/progressbar.min.js --standalone ProgressBar'
       },
       release: {
         options: {
