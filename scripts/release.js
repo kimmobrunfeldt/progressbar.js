@@ -25,7 +25,7 @@ var config = {
 
     // Banner to insert in beginning of distributables
     bannerFiles: ['dist/progressbar.js', 'dist/progressbar.min.js'],
-    banner: '// ProgressBar.js {{ version }}\n// https://kimmobrunfeldt.github.io/progressbar.js\n\n',
+    banner: '// ProgressBar.js {{ version }}\n// https://kimmobrunfeldt.github.io/progressbar.js\n// License: MIT\n\n',
 
     // If true, don't execute anything, just tell what would have been done
     dryRun: false,
