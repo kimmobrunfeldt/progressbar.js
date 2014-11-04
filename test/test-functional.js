@@ -12,6 +12,8 @@ describe('ProgressBar', function() {
     var line;
 
     beforeEach(function() {
+        // Append progress bar to body since adding a custom HTML and div
+        // with Karma was not that trivial compared to Testem
         line = new ProgressBar.Line('body');
     });
 
@@ -25,18 +27,11 @@ describe('ProgressBar', function() {
     });
 
     it('animate should change SVG path stroke-dashoffset property', function(done) {
-        // Append progress bar to body since adding a custom HTML and div
-        // with Karma was not that trivial compared to Testem
-        var offset = utils.getComputedStyle(line.path, 'stroke-dashoffset');
+        var progressAtStart = line.value();
         line.animate(1, {duration: 1000});
 
         setTimeout(function checkOffsetHasChanged() {
-            var offsetMiddleOfAnimation = utils.getComputedStyle(
-                line.path,
-                'stroke-dashoffset'
-            );
-
-            expect(offset).not.to.be(offsetMiddleOfAnimation);
+            expect(line.value()).not.to.be(progressAtStart);
             done();
         }, 100);
     });
@@ -56,10 +51,26 @@ describe('ProgressBar', function() {
             expect(line.value()).not.to.be(1);
         }, 100);
 
-        setTimeout(function checkValueHasChanged() {
+        setTimeout(function checkAnimationHasCompleted() {
             expect(line.value()).to.be(0);
             done();
-        }, 600);
+        }, 800);
+    });
+
+    it('stop() should stop animation', function(done) {
+        var offset = utils.getComputedStyle(line.path, 'stroke-dashoffset');
+        line.animate(1, {duration: 1000});
+
+        var progressAfterStop;
+        setTimeout(function stopAnimation() {
+            line.stop();
+            progressAfterStop = line.value();
+        }, 100);
+
+        setTimeout(function checkProgressAfterStop() {
+            expect(progressAfterStop).to.be(line.value());
+            done();
+        }, 400);
     });
 
     it('destroy() should delete element', function() {
