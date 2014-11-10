@@ -1,5 +1,6 @@
-// ProgressBar.js 0.5.6
+// ProgressBar.js 0.6.0
 // https://kimmobrunfeldt.github.io/progressbar.js
+// License: MIT
 
 !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.ProgressBar=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /*! shifty - v1.2.2 - 2014-10-09 - http://jeremyckahn.github.io/shifty */
@@ -1388,6 +1389,8 @@ var EASING_ALIASES = {
     easeInOut: 'easeInOutCubic'
 };
 
+var DESTROYED_ERROR = 'Object is destroyed';
+
 // Base object for different progress bar shapes
 var Progress = function(container, opts) {
     // Prevent calling constructor without parameters so inheritance
@@ -1407,27 +1410,43 @@ var Progress = function(container, opts) {
     var newOpts = extend({
         attachment: this
     }, opts);
-    this._path = new Path(svgView.path, newOpts);
+    this._progressPath = new Path(svgView.path, newOpts);
 
     // Expose public attributes
+    this.svg = svgView.svg;
     this.path = svgView.path;
     this.trail = svgView.trail;
 };
 
 Progress.prototype.animate = function animate(progress, opts, cb) {
-    this._path.animate(progress, opts, cb);
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    this._progressPath.animate(progress, opts, cb);
 };
 
 Progress.prototype.stop = function stop() {
-    this._path.stop();
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    this._progressPath.stop();
+};
+
+Progress.prototype.destroy = function destroy() {
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+
+    this.stop();
+    this.svg.parentNode.removeChild(this.svg);
+    this.svg = null;
+    this.path = null;
+    this.trail = null;
+    this._progressPath = null;
 };
 
 Progress.prototype.set = function set(progress) {
-    this._path.set(progress);
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    this._progressPath.set(progress);
 };
 
 Progress.prototype.value = function value() {
-    return this._path.value();
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    return this._progressPath.value();
 };
 
 Progress.prototype._createSvgView = function _createSvgView(opts) {
@@ -1568,7 +1587,10 @@ Path.prototype.value = function value() {
     offset = parseFloat(offset, 10);
     var length = this._path.getTotalLength();
 
-    return 1 - offset / length;
+    var progress = 1 - offset / length;
+    // Round number to prevent returning very small number like 1e-30, which
+    // is practically 0
+    return parseFloat(progress.toFixed(10), 10);
 };
 
 Path.prototype.set = function set(progress) {
