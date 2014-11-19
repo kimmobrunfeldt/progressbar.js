@@ -82,6 +82,7 @@ Progress.prototype._createSvgView = function _createSvgView(opts) {
         color: "#555",
         strokeWidth: 1.0,
         trailColor: null,
+        trailWidth: null,
         fill: null
     }, opts);
 
@@ -89,9 +90,17 @@ Progress.prototype._createSvgView = function _createSvgView(opts) {
     this._initializeSvg(svg, opts);
 
     var trailPath = null;
-    if (opts.trailColor) {
+    if (opts.trailColor || opts.trailWidth) {
         var trailOpts = extend({}, opts);
         trailOpts.color = opts.trailColor;
+
+        if (opts.trailWidth) {
+            trailOpts.strokeWidth = opts.trailWidth;
+        }
+
+        if (opts.centerTrail) {
+            trailOpts.radiusAdjust = opts.strokeWidth / 2;
+        }
 
         // When trail path is set, fill must be set for it instead of the
         // actual path to prevent trail stroke from clipping
