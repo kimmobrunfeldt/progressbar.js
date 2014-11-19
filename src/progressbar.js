@@ -163,7 +163,7 @@ Circle.prototype._pathString = function _pathString(opts) {
     // Use two arcs to form a circle
     // See this answer http://stackoverflow.com/a/10477334/1446092
     var pathString = "M 50,50 m 0,-{r} a {r},{r} 0 1 1 0,{r*2} a {r},{r} 0 1 1 0,-{r*2}";
-    var r = 50 - opts.strokeWidth / 2;
+    var r = 50 - opts.strokeWidth / 2 - (opts.radiusAdjust || 0);
     pathString = pathString.replace(/\{r\}/g, r);
     pathString = pathString.replace(/\{r\*2\}/g, r * 2);
     return pathString;
