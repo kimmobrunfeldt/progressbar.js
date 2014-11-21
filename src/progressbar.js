@@ -233,9 +233,14 @@ Path.prototype.animate = function animate(progress, opts, cb) {
         opts = {};
     }
 
+    var newOpts = opts;
+
     // Copy default opts to new object so defaults are not modified
     var defaultOpts = extend({}, this._opts);
     opts = extend(defaultOpts, opts);
+
+    var shiftyEasing = this._easing(opts.easing);
+    var values = this._resolveFromAndTo(progress, shiftyEasing, opts);
 
     this.stop();
 
@@ -255,10 +260,10 @@ Path.prototype.animate = function animate(progress, opts, cb) {
 
     this._tweenable = new Tweenable();
     this._tweenable.tween({
-        from: extend({ offset: offset }, opts.from),
-        to: extend({ offset: newOffset }, opts.to),
+        from: extend({ offset: offset }, values.from),
+        to: extend({ offset: newOffset }, values.to),
         duration: opts.duration,
-        easing: this._easing(opts.easing),
+        easing: shiftyEasing,
         step: function(state) {
             self._path.style.strokeDashoffset = state.offset;
             opts.step(state, opts.attachment);
@@ -273,6 +278,35 @@ Path.prototype.animate = function animate(progress, opts, cb) {
             }
         }
     });
+};
+
+// Resolves from and to values for animation.
+Path.prototype._resolveFromAndTo = function _resolveFromAndTo(progress, easing, opts) {
+    if (opts.from && opts.to) {
+        return {
+            from: opts.from,
+            to: opts.to
+        };
+    }
+
+    var from = Tweenable.interpolate(
+        this._opts.from,
+        this._opts.to,
+        this.value(),
+        easing
+    );
+
+    var to = Tweenable.interpolate(
+        this._opts.from,
+        this._opts.to,
+        progress,
+        easing
+    );
+
+    return {
+        from: from,
+        to: to
+    };
 };
 
 Path.prototype._stopTween = function _stopTween() {
