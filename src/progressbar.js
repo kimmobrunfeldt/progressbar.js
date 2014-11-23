@@ -235,14 +235,14 @@ Path.prototype.animate = function animate(progress, opts, cb) {
         opts = {};
     }
 
-    var newOpts = opts;
+    var passedOpts = opts;
 
     // Copy default opts to new object so defaults are not modified
     var defaultOpts = extend({}, this._opts);
     opts = extend(defaultOpts, opts);
 
     var shiftyEasing = this._easing(opts.easing);
-    var values = this._resolveFromAndTo(progress, shiftyEasing, opts);
+    var values = this._resolveFromAndTo(progress, shiftyEasing, passedOpts);
 
     this.stop();
 
