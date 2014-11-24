@@ -756,6 +756,43 @@ Tweening engine changes defined values over time and calls step function for eac
     }
     ```
 
+**Note:** There's a big difference between passing the `from` and `to` parameters in initialization
+of progress bar compared to passing in `.animate()` call. Here's example code and illustrations to explain the difference:
+
+**Pass in initialization**
+
+```javascript
+var bar = new ProgressBar.Line('#container', {
+    from: { color: '#000 '},
+    to: { color: '#888 '},
+    step: function(state, bar) {
+        bar.setAttribute('stroke', state.color);
+    }
+});
+```
+
+![](docs/animate-init.png)
+
+
+**Pass in `.animate()` call**
+
+```javascript
+var bar = new ProgressBar.Line('#container', {
+    step: function(state, bar) {
+        bar.setAttribute('stroke', state.color);
+    }
+});
+
+var opts = {
+    from: { color: '#000 '},
+    to: { color: '#888 '}
+};
+bar.animate(0.5, opts);
+```
+
+![](docs/animate-call.png)
+
+
 ## Examples
 
 * [**Minimal**](http://kimmobrunfeldt.github.io/progressbar.js/examples/minimal/) [*see code*](https://github.com/kimmobrunfeldt/progressbar.js/tree/gh-pages/examples/minimal)

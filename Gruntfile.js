@@ -69,6 +69,12 @@ module.exports = function(grunt) {
         // The output file is minified by uglifyjs later.
         command: 'browserify src/progressbar.js -o dist/progressbar.min.js --standalone ProgressBar'
       },
+      watchifyLocalDev: {
+        options: {
+          stdout: true
+        },
+        command: 'watchify local-dev/main.js -o local-dev/bundle.js --debug'
+      },
       release: {
         options: {
           stdout: true
@@ -112,6 +118,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-karma');
+
+  grunt.registerTask('watch', function() {
+    grunt.task.run(['shell:watchifyLocalDev']);
+  });
 
   grunt.registerTask('stageMinified', function() {
     grunt.task.run(['shell:stageMinified']);

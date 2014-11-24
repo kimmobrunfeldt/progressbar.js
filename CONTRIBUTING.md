@@ -6,6 +6,15 @@ updated.
 
 **Pull requests:** You don't need to bump version numbers or modify anything related to releasing. That stuff is fully automated, just write the functionality.
 
+## Get started with development
+
+* [Install local environment](#install-environment).
+* `cd local-dev` and serve folder to browser
+* Open another terminal to project root and run `grunt watch`.
+
+Then you can edit `src/progressbar.js` and changes can be tested in browser.
+Edit `local-dev/main.js` to your testing needs.
+
 ## General project stuff
 
 This package uses npm/node tools just in the developer environment. Grunt is used as a task runner
@@ -14,7 +23,6 @@ but there's no reason it couldn't be replaced with e.g. Makefile
 *ProgressBar.js* depends on tweening library called [shifty](https://github.com/jeremyckahn/shifty).
 *Shifty* is bundled inside the scripts in [dist/](dist/) directory.
 Dependency is bundled in to ease using the library.
-
 
 #### Versioning
 
@@ -30,11 +38,14 @@ In other words, if you look into *bower.json*, you can tell if the code base is 
 Install tools needed for development:
 
     npm install
+    npm install -g watchify
+    npm install -g browserify
 
 For testing:
 
     npm install -g mocha
     npm install -g testem
+
 
 ## Test
 

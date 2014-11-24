@@ -42,3 +42,6 @@ node_modules
 
 # Secrets as environment variables
 secrets.sh
+
+# Local dev bundle
+local-dev/bundle.js
