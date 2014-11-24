@@ -710,20 +710,6 @@ See [example in demo page](https://kimmobrunfeldt.github.io/progressbar.js#examp
 Customizing animations is possible with the help of `from`, `to` and `step` parameters.
 Tweening engine changes defined values over time and calls step function for each animation's frame.
 
-**Note:** There's a big difference between passing the `from` and `to` parameters in initialization
-of progress bar compared to passing in `.animate()` call.
-
-![](docs/animate-init.png)
-
-When `from` and `to` parameters are passed in initialization. The passed values are
-interpolated to the whole scale of 0 to 1.
-
-![](docs/animate-call.png)
-
-When `from` and `to` parameters are passed in `.animate()` call. The passed values are
-interpolated to the whole scale of current value to new progress.
-
-
 * `from` Object containing values which should be tweened.
  These values represent the starting values of the animation. Default: `{}`.
 
@@ -769,6 +755,43 @@ interpolated to the whole scale of current value to new progress.
         attachment.path.setAttribute('stroke', state.color);
     }
     ```
+
+**Note:** There's a big difference between passing the `from` and `to` parameters in initialization
+of progress bar compared to passing in `.animate()` call. Here's example code and illustrations to explain the difference:
+
+**Pass in initialization**
+
+```javascript
+var bar = new ProgressBar.Line('#container', {
+    from: { color: '#000 '},
+    to: { color: '#888 '},
+    step: function(state, bar) {
+        bar.setAttribute('stroke', state.color);
+    }
+});
+```
+
+![](docs/animate-init.png)
+
+
+**Pass in `.animate()` call**
+
+```javascript
+var bar = new ProgressBar.Line('#container', {
+    step: function(state, bar) {
+        bar.setAttribute('stroke', state.color);
+    }
+});
+
+var opts = {
+    from: { color: '#000 '},
+    to: { color: '#888 '}
+};
+bar.animate(0.5, opts);
+```
+
+![](docs/animate-call.png)
+
 
 ## Examples
 
