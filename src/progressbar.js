@@ -7,11 +7,22 @@ var EASING_ALIASES = {
 };
 
 var DESTROYED_ERROR = 'Object is destroyed';
+var CONSTRUCTOR_CALL_ERROR = 'Constructor was called without new keyword';
 
 // Base object for different progress bar shapes
-var Progress = function(container, opts) {
+var Progress = function Progress(container, opts) {
+    // Throw a better error if progress bars are not initialized with `new`
+    // keyword
+    if (!(this instanceof Progress)) {
+        throw new Error(CONSTRUCTOR_CALL_ERROR);
+    }
+
     // Prevent calling constructor without parameters so inheritance
-    // works correctly
+    // works correctly. To understand, this is how Progress is inherited:
+    //
+    //   Line.prototype = new Progress();
+    //
+    // We just want to set the prototype for Line.
     if (arguments.length === 0) return;
 
     var svgView = this._createSvgView(opts);
@@ -124,7 +135,7 @@ Progress.prototype._pathString = function _pathString(opts) {
 
 // Progress bar shapes
 
-var Line = function(container, options) {
+var Line = function Line(container, options) {
     Progress.apply(this, arguments);
 };
 
@@ -143,7 +154,7 @@ Line.prototype._pathString = function _pathString(opts) {
     return pathString;
 };
 
-var Circle = function(container, options) {
+var Circle = function Circle(container, options) {
     Progress.apply(this, arguments);
 };
 
@@ -160,7 +171,7 @@ Circle.prototype._pathString = function _pathString(opts) {
     return pathString;
 };
 
-var Square = function(container, options) {
+var Square = function Square(container, options) {
     Progress.apply(this, arguments);
 };
 
@@ -178,7 +189,7 @@ Square.prototype._pathString = function _pathString(opts) {
 
 // Lower level API to animate any kind of svg path
 
-var Path = function(path, opts) {
+var Path = function Path(path, opts) {
     opts = extend({
         duration: 800,
         easing: "linear",
