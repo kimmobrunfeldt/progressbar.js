@@ -31,14 +31,17 @@ describe('ProgressBar', function() {
         line.animate(1, {duration: 1000});
 
         setTimeout(function checkOffsetHasChanged() {
-            expect(line.value()).not.to.be(progressAtStart);
+            expect(line.value()).to.be.greaterThan(progressAtStart);
+            expect(line.value()).to.be.lessThan(1);
             done();
         }, 100);
     });
 
-    it('set should change value', function() {
+    it('bar should be empty after initialization', function() {
         expect(line.value()).to.be(0);
+    });
 
+    it('set should change value', function() {
         line.set(1);
         expect(line.value()).to.be(1);
     });
@@ -91,5 +94,9 @@ describe('ProgressBar', function() {
                 line[methodName]();
             }).to.throwError();
         });
+
+        expect(line.svg).to.be(null);
+        expect(line.path).to.be(null);
+        expect(line.trail).to.be(null);
     });
 });
