@@ -78,10 +78,12 @@ Progress.prototype.value = function value() {
 };
 
 Progress.prototype._createSvgView = function _createSvgView(opts) {
+    // Default parameters for progress bar creation
     opts = extend({
         color: "#555",
         strokeWidth: 1.0,
         trailColor: null,
+        trailWidth: null,
         fill: null
     }, opts);
 
@@ -89,14 +91,10 @@ Progress.prototype._createSvgView = function _createSvgView(opts) {
     this._initializeSvg(svg, opts);
 
     var trailPath = null;
-    if (opts.trailColor) {
-        var trailOpts = extend({}, opts);
-        trailOpts.color = opts.trailColor;
-
-        // When trail path is set, fill must be set for it instead of the
-        // actual path to prevent trail stroke from clipping
-        opts.fill = null;
-        trailPath = this._createPath(trailOpts);
+    // Each option listed in the if condition are "triggers" for creating
+    // the trail path
+    if (opts.trailColor || opts.trailWidth) {
+        trailPath = this._createTrail(opts);
         svg.appendChild(trailPath);
     }
 
@@ -115,8 +113,35 @@ Progress.prototype._initializeSvg = function _initializeSvg(svg, opts) {
 };
 
 Progress.prototype._createPath = function _createPath(opts) {
+    var pathString = this._pathString(opts);
+    return this._createPathElement(pathString, opts);
+};
+
+Progress.prototype._createTrail = function _createTrail(opts) {
+    // Create path string with original passed options
+    var pathString = this._trailString(opts);
+
+    // Prevent modifying original
+    var newOpts = extend({}, opts);
+
+    // Defaults for parameters which modify trail path
+    if (!newOpts.trailColor) newOpts.trailColor = '#eee';
+    if (!newOpts.trailWidth) newOpts.trailWidth = newOpts.strokeWidth;
+
+    newOpts.color = newOpts.trailColor;
+    newOpts.strokeWidth = newOpts.trailWidth;
+
+    // When trail path is set, fill must be set for it instead of the
+    // actual path to prevent trail stroke from clipping
+    newOpts.fill = null;
+
+    return this._createPathElement(pathString, newOpts);
+};
+
+Progress.prototype._createPathElement =
+function _createPathElement(pathString, opts) {
     var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("d", this._pathString(opts));
+    path.setAttribute("d", pathString);
     path.setAttribute("stroke", opts.color);
     path.setAttribute("stroke-width", opts.strokeWidth);
 
@@ -133,9 +158,15 @@ Progress.prototype._pathString = function _pathString(opts) {
     throw new Error("Override this function for each progress bar");
 };
 
+Progress.prototype._trailString = function _trailString(opts) {
+    throw new Error("Override this function for each progress bar");
+};
+
+
 // Progress bar shapes
 
 var Line = function Line(container, options) {
+    this._pathTemplate = "M 0,{center} L 100,{center}";
     Progress.apply(this, arguments);
 };
 
@@ -148,13 +179,24 @@ Line.prototype._initializeSvg = function _initializeSvg(svg, opts) {
 };
 
 Line.prototype._pathString = function _pathString(opts) {
-    var pathString = "M 0,{c} L 100,{c}";
-    var center = opts.strokeWidth / 2;
-    pathString = pathString.replace(/\{c\}/g, center);
-    return pathString;
+    return render(this._pathTemplate, {
+        center: opts.strokeWidth / 2
+    });
 };
 
+Line.prototype._trailString = function _trailString(opts) {
+    return this._pathString(opts);
+};
+
+
 var Circle = function Circle(container, options) {
+    // Use two arcs to form a circle
+    // See this answer http://stackoverflow.com/a/10477334/1446092
+    this._pathTemplate =
+        'M 50,50 m 0,-{radius}' +
+        ' a {radius},{radius} 0 1 1 0,{2radius}' +
+        ' a {radius},{radius} 0 1 1 0,-{2radius}';
+
     Progress.apply(this, arguments);
 };
 
@@ -162,16 +204,34 @@ Circle.prototype = new Progress();
 Circle.prototype.constructor = Circle;
 
 Circle.prototype._pathString = function _pathString(opts) {
-    // Use two arcs to form a circle
-    // See this answer http://stackoverflow.com/a/10477334/1446092
-    var pathString = "M 50,50 m 0,-{r} a {r},{r} 0 1 1 0,{r*2} a {r},{r} 0 1 1 0,-{r*2}";
     var r = 50 - opts.strokeWidth / 2;
-    pathString = pathString.replace(/\{r\}/g, r);
-    pathString = pathString.replace(/\{r\*2\}/g, r * 2);
-    return pathString;
+
+    return render(this._pathTemplate, {
+        radius: r,
+        '2radius': r * 2
+    });
 };
 
+Circle.prototype._trailString = function _trailString(opts) {
+    return this._pathString(opts);
+};
+
+
 var Square = function Square(container, options) {
+    this._pathTemplate =
+        'M 0,{halfOfStrokeWidth}' +
+        ' L {width},{halfOfStrokeWidth}' +
+        ' L {width},{width}' +
+        ' L {halfOfStrokeWidth},{width}' +
+        ' L {halfOfStrokeWidth},{strokeWidth}';
+
+    this._trailTemplate =
+        'M {startMargin},{halfOfStrokeWidth}' +
+        ' L {width},{halfOfStrokeWidth}' +
+        ' L {width},{width}' +
+        ' L {halfOfStrokeWidth},{width}' +
+        ' L {halfOfStrokeWidth},{halfOfStrokeWidth}';
+
     Progress.apply(this, arguments);
 };
 
@@ -179,17 +239,31 @@ Square.prototype = new Progress();
 Square.prototype.constructor = Square;
 
 Square.prototype._pathString = function _pathString(opts) {
-    var pathString = "M 0,{s/2} L {w},{s/2} L {w},{w} L {s/2},{w} L {s/2},{s}";
     var w = 100 - opts.strokeWidth / 2;
-    pathString = pathString.replace(/\{w\}/g, w);
-    pathString = pathString.replace(/\{s\}/g, opts.strokeWidth);
-    pathString = pathString.replace(/\{s\/2\}/g, opts.strokeWidth / 2);
-    return pathString;
+
+    return render(this._pathTemplate, {
+        width: w,
+        strokeWidth: opts.strokeWidth,
+        halfOfStrokeWidth: opts.strokeWidth / 2
+    });
 };
+
+Square.prototype._trailString = function _trailString(opts) {
+    var w = 100 - opts.strokeWidth / 2;
+
+    return render(this._trailTemplate, {
+        width: w,
+        strokeWidth: opts.strokeWidth,
+        halfOfStrokeWidth: opts.strokeWidth / 2,
+        startMargin: (opts.strokeWidth / 2) - (opts.trailWidth / 2)
+    });
+};
+
 
 // Lower level API to animate any kind of svg path
 
 var Path = function Path(path, opts) {
+    // Default parameters for animation
     opts = extend({
         duration: 800,
         easing: "linear",
@@ -355,6 +429,27 @@ function extend(destination, source) {
     }
 
     return destination;
+}
+
+// Renders templates with given variables. Variables must be surrounded with
+// braces without any spaces, e.g. {variable}
+// All instances of variable placeholders will be replaced with given content
+// Example:
+// render('Hello, {message}!', {message: 'world'})
+function render(template, vars) {
+    var rendered = template;
+
+    for (var key in vars) {
+        if (vars.hasOwnProperty(key)) {
+            var val = vars[key];
+            var regExpString = '\\{' + key + '\\}';
+            var regExp = new RegExp(regExpString, "g");
+
+            rendered = rendered.replace(regExp, val);
+        }
+    }
+
+    return rendered;
 }
 
 function isString(obj) {

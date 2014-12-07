@@ -164,13 +164,19 @@ To make line resize with its container, set for example the following CSS:
         // Width of the stroke.
         // Unit is percentage of SVG canvas' size.
         // Default: 1.0
-        strokeWidth: 0.1,
+        strokeWidth: 2.1,
+
+        // If trail options are not defined, trail won't be drawn
 
         // Color for lighter trail stroke
         // underneath the actual progress path.
-        // If null, trail path is not drawn
-        // Default: null
+        // Default: '#eee'
         trailColor: "#f4f4f4",
+
+        // Width of the trail stroke. Trail is always centered relative to
+        // actual progress path.
+        // Default: same as strokeWidth
+        trailWidth: 0.8,
 
         // Duration for animation in milliseconds
         // Default: 800
@@ -305,13 +311,19 @@ To make circle resize with its container, set for example the following CSS:
         // Width of the stroke.
         // Unit is percentage of SVG canvas' size.
         // Default: 1.0
-        strokeWidth: 0.1,
+        strokeWidth: 2.1,
+
+        // If trail options are not defined, trail won't be drawn
 
         // Color for lighter trail stroke
         // underneath the actual progress path.
-        // If null, trail path is not drawn
-        // Default: null
+        // Default: '#eee'
         trailColor: "#f4f4f4",
+
+        // Width of the trail stroke. Trail is always centered relative to
+        // actual progress path.
+        // Default: same as strokeWidth
+        trailWidth: 0.8,
 
         // Fill color for the shape. If null, no fill.
         // Default: null
@@ -449,13 +461,19 @@ To make square resize with its container, set for example the following CSS:
         // Width of the stroke.
         // Unit is percentage of SVG canvas' size.
         // Default: 1.0
-        strokeWidth: 0.1,
+        strokeWidth: 2.1,
+
+        // If trail options are not defined, trail won't be drawn
 
         // Color for lighter trail stroke
         // underneath the actual progress path.
-        // If null, trail path is not drawn
-        // Default: null
+        // Default: '#eee'
         trailColor: "#f4f4f4",
+
+        // Width of the trail stroke. Trail is always centered relative to
+        // actual progress path.
+        // Default: same as strokeWidth
+        trailWidth: 0.8,
 
         // Fill color for the shape. If null, no fill.
         // Default: null
