@@ -7,9 +7,16 @@ var EASING_ALIASES = {
 };
 
 var DESTROYED_ERROR = 'Object is destroyed';
+var CONSTRUCTOR_CALL_ERROR = 'Constructor was called without new keyword';
 
 // Base object for different progress bar shapes
-var Progress = function(container, opts) {
+var Progress = function Progress(container, opts) {
+    // Throw a better error if progress bars are not initialized with `new`
+    // keyword
+    if (!(this instanceof Progress)) {
+        throw new Error(CONSTRUCTOR_CALL_ERROR);
+    }
+
     // Prevent calling constructor without parameters so inheritance
     // works correctly
     if (arguments.length === 0) return;
