@@ -2,7 +2,7 @@
   "name": "progressbar.js",
   "version": "0.6.0-dev",
   "description": "Beautiful and responsive progress bars with animated SVG paths",
-  "main": "src/progressbar.js",
+  "main": "src/main.js",
   "dependencies": {
     "shifty": "1.2.2"
   },
