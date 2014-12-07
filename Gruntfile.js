@@ -73,7 +73,7 @@ module.exports = function(grunt) {
         options: {
           stdout: true
         },
-        command: 'watchify local-dev/main.js -o local-dev/bundle.js --debug'
+        command: 'watchify local-dev/main.js -o local-dev/bundle.js --debug --verbose'
       },
       release: {
         options: {
