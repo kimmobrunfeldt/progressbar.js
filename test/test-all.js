@@ -3,8 +3,6 @@
 // CONTRIBUTING.md
 // Supporting both has lead to some compromises.
 
-var expect = require('expect.js');
-
 var utils = require('./utils');
 // https://github.com/mochajs/mocha/wiki/Shared-Behaviours
 var sharedTests = require('./shared-behaviour');

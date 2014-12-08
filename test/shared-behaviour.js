@@ -1,8 +1,14 @@
 // Tests which test shared behaviour of all progress bar shapes
 
 
-var expect = require('expect.js');
+var chai = require('chai');
+var chaiStats = require('chai-stats');
+chai.use(chaiStats);
+var expect = chai.expect;
+
 var utils = require('./utils');
+
+var PRECISION = 2;
 
 
 var sharedTests = function sharedTests() {
@@ -19,12 +25,12 @@ var sharedTests = function sharedTests() {
     });
 
     it('bar should be empty after initialization', function() {
-        expect(this.bar.value()).to.be(0);
+        expect(this.bar.value()).to.almost.equal(0, PRECISION);
     });
 
     it('set should change value', function() {
         this.bar.set(1);
-        expect(this.bar.value()).to.be(1);
+        expect(this.bar.value()).to.almost.equal(1, PRECISION);
     });
 
     it('animate should change value', function(done) {
@@ -33,11 +39,11 @@ var sharedTests = function sharedTests() {
 
         var self = this;
         setTimeout(function checkValueHasChanged() {
-            expect(self.bar.value()).not.to.be(1);
+            expect(self.bar.value()).not.to.almost.equal(1, PRECISION);
         }, 100);
 
         setTimeout(function checkAnimationHasCompleted() {
-            expect(self.bar.value()).to.be(0);
+            expect(self.bar.value()).to.almost.equal(0, PRECISION);
             done();
         }, 800);
     });
@@ -54,18 +60,18 @@ var sharedTests = function sharedTests() {
         }, 100);
 
         setTimeout(function checkProgressAfterStop() {
-            expect(progressAfterStop).to.be(self.bar.value());
+            expect(progressAfterStop).to.almost.equal(self.bar.value(), PRECISION);
             done();
         }, 400);
     });
 
     it('destroy() should delete element', function() {
         var svg = document.querySelector('svg');
-        expect(svg).not.to.be(null);
+        expect(svg).not.to.equal(null);
 
         this.bar.destroy();
         svg = document.querySelector('svg');
-        expect(svg).to.be(null);
+        expect(svg).to.equal(null);
     });
 
     it('destroy() should make object unusable', function() {
@@ -76,12 +82,12 @@ var sharedTests = function sharedTests() {
         methodsShouldThrow.forEach(function(methodName) {
             expect(function shouldThrow() {
                 self[methodName]();
-            }).to.throwError();
+            }).to.throw(Error);
         });
 
-        expect(this.bar.svg).to.be(null);
-        expect(this.bar.path).to.be(null);
-        expect(this.bar.trail).to.be(null);
+        expect(this.bar.svg).to.equal(null);
+        expect(this.bar.path).to.equal(null);
+        expect(this.bar.trail).to.equal(null);
     });
 };
 
