@@ -8,7 +8,7 @@ var expect = require('expect.js');
 var utils = require('./utils');
 // https://github.com/mochajs/mocha/wiki/Shared-Behaviours
 var sharedTests = require('./shared-behaviour');
-var ProgressBar = require("../src/progressbar");
+var ProgressBar = require("../src/main");
 
 
 var afterEachCase = function() {
