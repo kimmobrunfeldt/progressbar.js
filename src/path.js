@@ -1,7 +1,7 @@
 // Lower level API to animate any kind of svg path
 
 var Tweenable = require('shifty');
-var utils = require('./utils')
+var utils = require('./utils');
 
 var EASING_ALIASES = {
     easeIn: 'easeInCubic',
