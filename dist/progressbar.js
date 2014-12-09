@@ -1,4 +1,4 @@
-// ProgressBar.js 0.6.0
+// ProgressBar.js 0.6.1
 // https://kimmobrunfeldt.github.io/progressbar.js
 // License: MIT
 
@@ -1381,133 +1381,50 @@ function token () {
 }(this));
 
 },{}],2:[function(require,module,exports){
-var Tweenable = require('shifty');
+// Circle shaped progress bar
 
-var EASING_ALIASES = {
-    easeIn: 'easeInCubic',
-    easeOut: 'easeOutCubic',
-    easeInOut: 'easeInOutCubic'
+var Progress = require('./progress');
+var utils = require('./utils');
+
+
+var Circle = function Circle(container, options) {
+    // Use two arcs to form a circle
+    // See this answer http://stackoverflow.com/a/10477334/1446092
+    this._pathTemplate =
+        'M 50,50 m 0,-{radius}' +
+        ' a {radius},{radius} 0 1 1 0,{2radius}' +
+        ' a {radius},{radius} 0 1 1 0,-{2radius}';
+
+    Progress.apply(this, arguments);
 };
 
-var DESTROYED_ERROR = 'Object is destroyed';
+Circle.prototype = new Progress();
+Circle.prototype.constructor = Circle;
 
-// Base object for different progress bar shapes
-var Progress = function(container, opts) {
-    // Prevent calling constructor without parameters so inheritance
-    // works correctly
-    if (arguments.length === 0) return;
+Circle.prototype._pathString = function _pathString(opts) {
+    var r = 50 - opts.strokeWidth / 2;
 
-    var svgView = this._createSvgView(opts);
-
-    var element;
-    if (isString(container)) {
-        element = document.querySelector(container);
-    } else {
-        element = container;
-    }
-    element.appendChild(svgView.svg);
-
-    var newOpts = extend({
-        attachment: this
-    }, opts);
-    this._progressPath = new Path(svgView.path, newOpts);
-
-    // Expose public attributes
-    this.svg = svgView.svg;
-    this.path = svgView.path;
-    this.trail = svgView.trail;
+    return utils.render(this._pathTemplate, {
+        radius: r,
+        '2radius': r * 2
+    });
 };
 
-Progress.prototype.animate = function animate(progress, opts, cb) {
-    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
-    this._progressPath.animate(progress, opts, cb);
+Circle.prototype._trailString = function _trailString(opts) {
+    return this._pathString(opts);
 };
 
-Progress.prototype.stop = function stop() {
-    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
-    this._progressPath.stop();
-};
+module.exports = Circle;
 
-Progress.prototype.destroy = function destroy() {
-    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+},{"./progress":6,"./utils":8}],3:[function(require,module,exports){
+// Line shaped progress bar
 
-    this.stop();
-    this.svg.parentNode.removeChild(this.svg);
-    this.svg = null;
-    this.path = null;
-    this.trail = null;
-    this._progressPath = null;
-};
+var Progress = require('./progress');
+var utils = require('./utils');
 
-Progress.prototype.set = function set(progress) {
-    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
-    this._progressPath.set(progress);
-};
 
-Progress.prototype.value = function value() {
-    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
-    return this._progressPath.value();
-};
-
-Progress.prototype._createSvgView = function _createSvgView(opts) {
-    opts = extend({
-        color: "#555",
-        strokeWidth: 1.0,
-        trailColor: null,
-        fill: null
-    }, opts);
-
-    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    this._initializeSvg(svg, opts);
-
-    var trailPath = null;
-    if (opts.trailColor) {
-        var trailOpts = extend({}, opts);
-        trailOpts.color = opts.trailColor;
-
-        // When trail path is set, fill must be set for it instead of the
-        // actual path to prevent trail stroke from clipping
-        opts.fill = null;
-        trailPath = this._createPath(trailOpts);
-        svg.appendChild(trailPath);
-    }
-
-    var path = this._createPath(opts);
-    svg.appendChild(path);
-
-    return {
-        svg: svg,
-        path: path,
-        trail: trailPath
-    };
-};
-
-Progress.prototype._initializeSvg = function _initializeSvg(svg, opts) {
-    svg.setAttribute("viewBox", "0 0 100 100");
-};
-
-Progress.prototype._createPath = function _createPath(opts) {
-    var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("d", this._pathString(opts));
-    path.setAttribute("stroke", opts.color);
-    path.setAttribute("stroke-width", opts.strokeWidth);
-
-    if (opts.fill) {
-        path.setAttribute("fill", opts.fill);
-    } else {
-        path.setAttribute("fill-opacity", "0");
-    }
-
-    return path;
-};
-
-Progress.prototype._pathString = function _pathString(opts) {
-    throw new Error("Override this function for each progress bar");
-};
-
-// Progress bar shapes
-
-var Line = function(container, options) {
+var Line = function Line(container, options) {
+    this._pathTemplate = "M 0,{center} L 100,{center}";
     Progress.apply(this, arguments);
 };
 
@@ -1520,54 +1437,55 @@ Line.prototype._initializeSvg = function _initializeSvg(svg, opts) {
 };
 
 Line.prototype._pathString = function _pathString(opts) {
-    var pathString = "M 0,{c} L 100,{c}";
-    var center = opts.strokeWidth / 2;
-    pathString = pathString.replace(/\{c\}/g, center);
-    return pathString;
+    return utils.render(this._pathTemplate, {
+        center: opts.strokeWidth / 2
+    });
 };
 
-var Circle = function(container, options) {
-    Progress.apply(this, arguments);
+Line.prototype._trailString = function _trailString(opts) {
+    return this._pathString(opts);
 };
 
-Circle.prototype = new Progress();
-Circle.prototype.constructor = Circle;
+module.exports = Line;
 
-Circle.prototype._pathString = function _pathString(opts) {
-    // Use two arcs to form a circle
-    // See this answer http://stackoverflow.com/a/10477334/1446092
-    var pathString = "M 50,50 m 0,-{r} a {r},{r} 0 1 1 0,{r*2} a {r},{r} 0 1 1 0,-{r*2}";
-    var r = 50 - opts.strokeWidth / 2;
-    pathString = pathString.replace(/\{r\}/g, r);
-    pathString = pathString.replace(/\{r\*2\}/g, r * 2);
-    return pathString;
+},{"./progress":6,"./utils":8}],4:[function(require,module,exports){
+// Different shaped progress bars
+var Line = require('./line');
+var Circle = require('./circle');
+var Square = require('./square');
+
+// Lower level API to use any SVG path
+var Path = require('./path');
+
+
+module.exports = {
+    Line: Line,
+    Circle: Circle,
+    Square: Square,
+    Path: Path
 };
 
-var Square = function(container, options) {
-    Progress.apply(this, arguments);
-};
-
-Square.prototype = new Progress();
-Square.prototype.constructor = Square;
-
-Square.prototype._pathString = function _pathString(opts) {
-    var pathString = "M 0,{s/2} L {w},{s/2} L {w},{w} L {s/2},{w} L {s/2},{s}";
-    var w = 100 - opts.strokeWidth / 2;
-    pathString = pathString.replace(/\{w\}/g, w);
-    pathString = pathString.replace(/\{s\}/g, opts.strokeWidth);
-    pathString = pathString.replace(/\{s\/2\}/g, opts.strokeWidth / 2);
-    return pathString;
-};
-
+},{"./circle":2,"./line":3,"./path":5,"./square":7}],5:[function(require,module,exports){
 // Lower level API to animate any kind of svg path
 
-var Path = function(path, opts) {
-    opts = extend({
+var Tweenable = require('shifty');
+var utils = require('./utils');
+
+var EASING_ALIASES = {
+    easeIn: 'easeInCubic',
+    easeOut: 'easeOutCubic',
+    easeInOut: 'easeInOutCubic'
+};
+
+
+var Path = function Path(path, opts) {
+    // Default parameters for animation
+    opts = utils.extend({
         duration: 800,
         easing: "linear",
         from: {},
         to: {},
-        step: noop
+        step: function() {}
     }, opts);
 
     this._path = path;
@@ -1611,14 +1529,21 @@ Path.prototype.stop = function stop() {
 // Method introduced here:
 // http://jakearchibald.com/2013/animated-line-drawing-svg/
 Path.prototype.animate = function animate(progress, opts, cb) {
-    if (isFunction(opts)) {
+    opts = opts || {};
+
+    if (utils.isFunction(opts)) {
         cb = opts;
         opts = {};
     }
 
+    var passedOpts = opts;
+
     // Copy default opts to new object so defaults are not modified
-    var defaultOpts = extend({}, this._opts);
-    opts = extend(defaultOpts, opts);
+    var defaultOpts = utils.extend({}, this._opts);
+    opts = utils.extend(defaultOpts, opts);
+
+    var shiftyEasing = this._easing(opts.easing);
+    var values = this._resolveFromAndTo(progress, shiftyEasing, passedOpts);
 
     this.stop();
 
@@ -1638,10 +1563,10 @@ Path.prototype.animate = function animate(progress, opts, cb) {
 
     this._tweenable = new Tweenable();
     this._tweenable.tween({
-        from: extend({ offset: offset }, opts.from),
-        to: extend({ offset: newOffset }, opts.to),
+        from: utils.extend({ offset: offset }, values.from),
+        to: utils.extend({ offset: newOffset }, values.to),
         duration: opts.duration,
-        easing: this._easing(opts.easing),
+        easing: shiftyEasing,
         step: function(state) {
             self._path.style.strokeDashoffset = state.offset;
             opts.step(state, opts.attachment);
@@ -1651,11 +1576,40 @@ Path.prototype.animate = function animate(progress, opts, cb) {
             self._path.style.strokeDashoffset = state.offset;
             opts.step(state, opts.attachment);
 
-            if (isFunction(cb)) {
+            if (utils.isFunction(cb)) {
                 cb();
             }
         }
     });
+};
+
+// Resolves from and to values for animation.
+Path.prototype._resolveFromAndTo = function _resolveFromAndTo(progress, easing, opts) {
+    if (opts.from && opts.to) {
+        return {
+            from: opts.from,
+            to: opts.to
+        };
+    }
+
+    var from = Tweenable.interpolate(
+        this._opts.from,
+        this._opts.to,
+        this.value(),
+        easing
+    );
+
+    var to = Tweenable.interpolate(
+        this._opts.from,
+        this._opts.to,
+        progress,
+        easing
+    );
+
+    return {
+        from: from,
+        to: to
+    };
 };
 
 Path.prototype._stopTween = function _stopTween() {
@@ -1674,9 +1628,225 @@ Path.prototype._easing = function _easing(easing) {
     return easing;
 };
 
-// Utility functions
+module.exports = Path;
 
-function noop() {}
+},{"./utils":8,"shifty":1}],6:[function(require,module,exports){
+// Base object for different progress bar shapes
+
+var Path = require('./path');
+var utils = require('./utils');
+
+var DESTROYED_ERROR = 'Object is destroyed';
+var CONSTRUCTOR_CALL_ERROR = 'Constructor was called without new keyword';
+
+
+var Progress = function Progress(container, opts) {
+    // Throw a better error if progress bars are not initialized with `new`
+    // keyword
+    if (!(this instanceof Progress)) {
+        throw new Error(CONSTRUCTOR_CALL_ERROR);
+    }
+
+    // Prevent calling constructor without parameters so inheritance
+    // works correctly. To understand, this is how Progress is inherited:
+    //
+    //   Line.prototype = new Progress();
+    //
+    // We just want to set the prototype for Line.
+    if (arguments.length === 0) return;
+
+    var svgView = this._createSvgView(opts);
+
+    var element;
+    if (utils.isString(container)) {
+        element = document.querySelector(container);
+    } else {
+        element = container;
+    }
+    element.appendChild(svgView.svg);
+
+    var newOpts = utils.extend({
+        attachment: this
+    }, opts);
+    this._progressPath = new Path(svgView.path, newOpts);
+
+    // Expose public attributes
+    this.svg = svgView.svg;
+    this.path = svgView.path;
+    this.trail = svgView.trail;
+};
+
+Progress.prototype.animate = function animate(progress, opts, cb) {
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    this._progressPath.animate(progress, opts, cb);
+};
+
+Progress.prototype.stop = function stop() {
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    this._progressPath.stop();
+};
+
+Progress.prototype.destroy = function destroy() {
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+
+    this.stop();
+    this.svg.parentNode.removeChild(this.svg);
+    this.svg = null;
+    this.path = null;
+    this.trail = null;
+    this._progressPath = null;
+};
+
+Progress.prototype.set = function set(progress) {
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    this._progressPath.set(progress);
+};
+
+Progress.prototype.value = function value() {
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    return this._progressPath.value();
+};
+
+Progress.prototype._createSvgView = function _createSvgView(opts) {
+    // Default parameters for progress bar creation
+    opts = utils.extend({
+        color: "#555",
+        strokeWidth: 1.0,
+        trailColor: null,
+        trailWidth: null,
+        fill: null
+    }, opts);
+
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    this._initializeSvg(svg, opts);
+
+    var trailPath = null;
+    // Each option listed in the if condition are "triggers" for creating
+    // the trail path
+    if (opts.trailColor || opts.trailWidth) {
+        trailPath = this._createTrail(opts);
+        svg.appendChild(trailPath);
+    }
+
+    var path = this._createPath(opts);
+    svg.appendChild(path);
+
+    return {
+        svg: svg,
+        path: path,
+        trail: trailPath
+    };
+};
+
+Progress.prototype._initializeSvg = function _initializeSvg(svg, opts) {
+    svg.setAttribute("viewBox", "0 0 100 100");
+};
+
+Progress.prototype._createPath = function _createPath(opts) {
+    var pathString = this._pathString(opts);
+    return this._createPathElement(pathString, opts);
+};
+
+Progress.prototype._createTrail = function _createTrail(opts) {
+    // Create path string with original passed options
+    var pathString = this._trailString(opts);
+
+    // Prevent modifying original
+    var newOpts = utils.extend({}, opts);
+
+    // Defaults for parameters which modify trail path
+    if (!newOpts.trailColor) newOpts.trailColor = '#eee';
+    if (!newOpts.trailWidth) newOpts.trailWidth = newOpts.strokeWidth;
+
+    newOpts.color = newOpts.trailColor;
+    newOpts.strokeWidth = newOpts.trailWidth;
+
+    // When trail path is set, fill must be set for it instead of the
+    // actual path to prevent trail stroke from clipping
+    newOpts.fill = null;
+
+    return this._createPathElement(pathString, newOpts);
+};
+
+Progress.prototype._createPathElement =
+function _createPathElement(pathString, opts) {
+    var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", pathString);
+    path.setAttribute("stroke", opts.color);
+    path.setAttribute("stroke-width", opts.strokeWidth);
+
+    if (opts.fill) {
+        path.setAttribute("fill", opts.fill);
+    } else {
+        path.setAttribute("fill-opacity", "0");
+    }
+
+    return path;
+};
+
+Progress.prototype._pathString = function _pathString(opts) {
+    throw new Error("Override this function for each progress bar");
+};
+
+Progress.prototype._trailString = function _trailString(opts) {
+    throw new Error("Override this function for each progress bar");
+};
+
+module.exports = Progress;
+
+},{"./path":5,"./utils":8}],7:[function(require,module,exports){
+// Square shaped progress bar
+
+var Progress = require('./progress');
+var utils = require('./utils');
+
+
+var Square = function Square(container, options) {
+    this._pathTemplate =
+        'M 0,{halfOfStrokeWidth}' +
+        ' L {width},{halfOfStrokeWidth}' +
+        ' L {width},{width}' +
+        ' L {halfOfStrokeWidth},{width}' +
+        ' L {halfOfStrokeWidth},{strokeWidth}';
+
+    this._trailTemplate =
+        'M {startMargin},{halfOfStrokeWidth}' +
+        ' L {width},{halfOfStrokeWidth}' +
+        ' L {width},{width}' +
+        ' L {halfOfStrokeWidth},{width}' +
+        ' L {halfOfStrokeWidth},{halfOfStrokeWidth}';
+
+    Progress.apply(this, arguments);
+};
+
+Square.prototype = new Progress();
+Square.prototype.constructor = Square;
+
+Square.prototype._pathString = function _pathString(opts) {
+    var w = 100 - opts.strokeWidth / 2;
+
+    return utils.render(this._pathTemplate, {
+        width: w,
+        strokeWidth: opts.strokeWidth,
+        halfOfStrokeWidth: opts.strokeWidth / 2
+    });
+};
+
+Square.prototype._trailString = function _trailString(opts) {
+    var w = 100 - opts.strokeWidth / 2;
+
+    return utils.render(this._trailTemplate, {
+        width: w,
+        strokeWidth: opts.strokeWidth,
+        halfOfStrokeWidth: opts.strokeWidth / 2,
+        startMargin: (opts.strokeWidth / 2) - (opts.trailWidth / 2)
+    });
+};
+
+module.exports = Square;
+
+},{"./progress":6,"./utils":8}],8:[function(require,module,exports){
+// Utility functions
 
 // Copy all attributes from source object to destination object.
 // destination object is mutated.
@@ -1693,6 +1863,27 @@ function extend(destination, source) {
     return destination;
 }
 
+// Renders templates with given variables. Variables must be surrounded with
+// braces without any spaces, e.g. {variable}
+// All instances of variable placeholders will be replaced with given content
+// Example:
+// render('Hello, {message}!', {message: 'world'})
+function render(template, vars) {
+    var rendered = template;
+
+    for (var key in vars) {
+        if (vars.hasOwnProperty(key)) {
+            var val = vars[key];
+            var regExpString = '\\{' + key + '\\}';
+            var regExp = new RegExp(regExpString, "g");
+
+            rendered = rendered.replace(regExp, val);
+        }
+    }
+
+    return rendered;
+}
+
 function isString(obj) {
     return typeof obj === 'string' || obj instanceof String;
 }
@@ -1702,11 +1893,11 @@ function isFunction(obj) {
 }
 
 module.exports = {
-    Line: Line,
-    Circle: Circle,
-    Square: Square,
-    Path: Path
+    extend: extend,
+    render: render,
+    isString: isString,
+    isFunction: isFunction
 };
 
-},{"shifty":1}]},{},[2])(2)
+},{}]},{},[4])(4)
 });
