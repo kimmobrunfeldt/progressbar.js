@@ -4,7 +4,8 @@ var endColor = '#6FD57F';
 var element = document.getElementById('example-animation-container');
 var circle = new ProgressBar.Circle(element, {
     color: startColor,
-    trailColor: '#888',
+    trailColor: '#eee',
+    trailWidth: 1,
     duration: 2000,
     easing: 'bounce',
     strokeWidth: 5,

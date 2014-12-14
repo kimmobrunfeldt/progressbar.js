@@ -38,6 +38,8 @@ function initExamples() {
     var elements = document.querySelectorAll('.example');
     var elementsArray = Array.prototype.slice.call(elements, 0);
 
+    // Ugly way to check if all scripts are loaded, promises would be easier
+    var loaded = 0;
     elementsArray.forEach(function(element) {
         var codeContainer = element.querySelector('.code');
 
@@ -50,7 +52,14 @@ function initExamples() {
 
             codeContainer.innerHTML = '<pre><code data-language="javascript"></code></pre>';
             element.querySelector('code').innerHTML = escapeEntities(code);
-            Rainbow.color();
+            loaded++;
+
+            var allLoaded = loaded === elementsArray.length - 1;
+            if (allLoaded) {
+                // Rainbow can be called only once or it breaks.
+                console.log('color rainbow')
+                setTimeout(Rainbow.color(), 100);
+            }
         });
 
         var runButton = element.querySelector('.run');
