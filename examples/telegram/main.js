@@ -3,7 +3,7 @@ window.onload = function onLoad() {
         color: '#555',
         trailColor: '#eee',
         strokeWidth: 10,
-        duration: 3000,
+        duration: 2500,
         easing: 'easeInOut'
     });
 
@@ -15,13 +15,13 @@ window.onload = function onLoad() {
 
     setTimeout(function() {
         circle.animate(0.4);
-    }, 2500);
+    }, 3500);
 
     setTimeout(function() {
         circle.animate(0.8);
-    }, 4500);
+    }, 5500);
 
     setTimeout(function() {
         circle.animate(1);
-    }, 6000);
+    }, 8000);
 };
