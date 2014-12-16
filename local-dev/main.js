@@ -1,4 +1,4 @@
-var ProgressBar = require('../src/progressbar.js');
+var ProgressBar = require('../src/main.js');
 
 
 function onLoad() {
