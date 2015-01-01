@@ -6,11 +6,6 @@ var utils = require('./utils');
 
 var Line = function Line(container, options) {
     this._pathTemplate = 'M 0,{center} L 100,{center}';
-
-    if (options.text) {
-        throw new Error('Option text can\'t be set for Line.');
-    }
-
     Progress.apply(this, arguments);
 };
 
