@@ -35,7 +35,14 @@ var Progress = function Progress(container, opts) {
         throw new Error('Container does not exist: ' + container);
     }
 
-    element.appendChild(svgView.svg);
+    this._container = element;
+    this._container.appendChild(svgView.svg);
+
+    this.text = null;
+    if (opts.text) {
+        this.text = this._createTextElement(this._container, opts.text);
+        this._container.appendChild(this.text);
+    }
 
     var newOpts = utils.extend({
         attachment: this
@@ -46,6 +53,7 @@ var Progress = function Progress(container, opts) {
     this.svg = svgView.svg;
     this.path = svgView.path;
     this.trail = svgView.trail;
+    // this.text is also public attribute
 };
 
 Progress.prototype.animate = function animate(progress, opts, cb) {
@@ -67,6 +75,11 @@ Progress.prototype.destroy = function destroy() {
     this.path = null;
     this.trail = null;
     this._progressPath = null;
+
+    if (this.text !== null) {
+        this.text.parentNode.removeChild(this.text);
+        this.text = null;
+    }
 };
 
 Progress.prototype.set = function set(progress) {
@@ -77,6 +90,17 @@ Progress.prototype.set = function set(progress) {
 Progress.prototype.value = function value() {
     if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
     return this._progressPath.value();
+};
+
+Progress.prototype.setText = function setText(text) {
+    if (this.text === null) {
+        this.text = this._createTextElement(this._container, text);
+        this._container.appendChild(this.text);
+        return;
+    }
+
+    this.text.removeChild(this.text.firstChild);
+    this.text.appendChild(document.createTextNode(text));
 };
 
 Progress.prototype._createSvgView = function _createSvgView(opts) {
@@ -140,8 +164,7 @@ Progress.prototype._createTrail = function _createTrail(opts) {
     return this._createPathElement(pathString, newOpts);
 };
 
-Progress.prototype._createPathElement =
-function _createPathElement(pathString, opts) {
+Progress.prototype._createPathElement = function _createPathElement(pathString, opts) {
     var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('d', pathString);
     path.setAttribute('stroke', opts.color);
@@ -154,6 +177,22 @@ function _createPathElement(pathString, opts) {
     }
 
     return path;
+};
+
+Progress.prototype._createTextElement = function _createTextElement(container, text) {
+    var element = document.createElement('p');
+    element.appendChild(document.createTextNode(text));
+
+    // Center text
+    container.style.position = 'relative';
+    element.style.position = 'absolute';
+    element.style.top = '50%';
+    element.style.left = '50%';
+    element.style.padding = 0;
+    element.style.margin = 0;
+    utils.setStyle(element, 'transform', 'translate(-50%, -50%');
+
+    return element;
 };
 
 Progress.prototype._pathString = function _pathString(opts) {
