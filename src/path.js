@@ -14,7 +14,7 @@ var Path = function Path(path, opts) {
     // Default parameters for animation
     opts = utils.extend({
         duration: 800,
-        easing: "linear",
+        easing: 'linear',
         from: {},
         to: {},
         step: function() {}
@@ -31,8 +31,7 @@ var Path = function Path(path, opts) {
 };
 
 Path.prototype.value = function value() {
-    // Remove 'px' suffix
-    var offset = parseFloat(this._getComputedDashOffset(), 10);
+    var offset = this._getComputedDashOffset();
     var length = this._path.getTotalLength();
 
     var progress = 1 - offset / length;
@@ -44,8 +43,13 @@ Path.prototype.value = function value() {
 Path.prototype.set = function set(progress) {
     this.stop();
 
-    var length = this._path.getTotalLength();
-    this._path.style.strokeDashoffset = length - progress * length;
+    this._path.style.strokeDashoffset = this._progressToOffset(progress);
+
+    var step = this._opts.step;
+    if (utils.isFunction(step)) {
+        var values = this._calculateTo(progress, 'linear');
+        step(values, this._opts.attachment || this);
+    }
 };
 
 Path.prototype.stop = function stop() {
@@ -63,7 +67,7 @@ Path.prototype.animate = function animate(progress, opts, cb) {
         opts = {};
     }
 
-    var passedOpts = opts;
+    var passedOpts = utils.extend({}, opts);
 
     // Copy default opts to new object so defaults are not modified
     var defaultOpts = utils.extend({}, this._opts);
@@ -78,16 +82,10 @@ Path.prototype.animate = function animate(progress, opts, cb) {
     // picks up the starting position before animating
     this._path.getBoundingClientRect();
 
-    var computedStyle = window.getComputedStyle(this._path, null);
-    var offset = computedStyle.getPropertyValue('stroke-dashoffset');
-    // Remove 'px' suffix
-    offset = parseFloat(offset, 10);
-
-    var length = this._path.getTotalLength();
-    var newOffset = length - progress * length;
+    var offset = this._getComputedDashOffset();
+    var newOffset = this._progressToOffset(progress);
 
     var self = this;
-
     this._tweenable = new Tweenable();
     this._tweenable.tween({
         from: utils.extend({ offset: offset }, values.from),
@@ -112,7 +110,12 @@ Path.prototype.animate = function animate(progress, opts, cb) {
 
 Path.prototype._getComputedDashOffset = function _getComputedDashOffset() {
     var computedStyle = window.getComputedStyle(this._path, null);
-    return computedStyle.getPropertyValue('stroke-dashoffset');
+    return parseFloat(computedStyle.getPropertyValue('stroke-dashoffset'), 10);
+};
+
+Path.prototype._progressToOffset = function _progressToOffset(progress) {
+    var length = this._path.getTotalLength();
+    return length - progress * length;
 };
 
 // Resolves from and to values for animation.
@@ -124,24 +127,20 @@ Path.prototype._resolveFromAndTo = function _resolveFromAndTo(progress, easing, 
         };
     }
 
-    var from = Tweenable.interpolate(
-        this._opts.from,
-        this._opts.to,
-        this.value(),
-        easing
-    );
-
-    var to = Tweenable.interpolate(
-        this._opts.from,
-        this._opts.to,
-        progress,
-        easing
-    );
-
     return {
-        from: from,
-        to: to
+        from: this._calculateFrom(easing),
+        to: this._calculateTo(progress, easing)
     };
+};
+
+// Calculate `from` values from options passed at initialization
+Path.prototype._calculateFrom = function _calculateFrom(easing) {
+    return Tweenable.interpolate(this._opts.from, this._opts.to, this.value(), easing);
+};
+
+// Calculate `to` values from options passed at initialization
+Path.prototype._calculateTo = function _calculateTo(progress, easing) {
+    return Tweenable.interpolate(this._opts.from, this._opts.to, progress, easing);
 };
 
 Path.prototype._stopTween = function _stopTween() {
