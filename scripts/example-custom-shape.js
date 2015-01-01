@@ -11,3 +11,7 @@ scene.addEventListener('load', function() {
         path.animate(0);
     });
 });
+
+var bar = {
+    destroy: function() {}
+}

@@ -3,3 +3,5 @@ var line = new ProgressBar.Line('#example-line-container', {
 });
 
 line.animate(1);
+
+var bar = line;

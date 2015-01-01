@@ -1,6 +1,7 @@
 // Global state
 var state = {
-    exampleCodes: {}
+    exampleCodes: {},
+    bars: []
 };
 
 
@@ -47,7 +48,7 @@ function initExamples() {
         get(url, function(req) {
             var code = req.responseText;
 
-            runExample(code);
+            runExample(code, element.id);
             state.exampleCodes[element.id] = code;
 
             codeContainer.innerHTML = '<pre><code data-language="javascript"></code></pre>';
@@ -57,25 +58,27 @@ function initExamples() {
             var allLoaded = loaded === elementsArray.length - 1;
             if (allLoaded) {
                 // Rainbow can be called only once or it breaks.
-                console.log('color rainbow')
                 setTimeout(Rainbow.color(), 100);
             }
         });
 
         var runButton = element.querySelector('.run');
         runButton.onclick = function() {
+            console.log('destroy')
+            state.bars[element.id].destroy();
             element.querySelector('.example-container').innerHTML = '';
-            runExample(state.exampleCodes[element.id]);
+            runExample(state.exampleCodes[element.id], element.id);
         };
     });
 }
 
-function runExample(code) {
+function runExample(code, name) {
     // Run code in anonymous function scope
-    var scopedCode = 'var exampleCode = function() {' + code + ';}; exampleCode();';
+    var scopedCode =  code ;
 
     try {
         eval(scopedCode);
+        state.bars[name] = bar;
     } catch(err) {
         var error = err.name + ': ' + err.message;
         window.alert(error);

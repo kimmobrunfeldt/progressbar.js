@@ -14,3 +14,4 @@ setInterval(function() {
         textElement.innerHTML = second;
     });
 }, 1000);
+var bar = seconds;

@@ -20,3 +20,4 @@ circle.animate(1, {
     from: {color: startColor},
     to: {color: endColor}
 });
+var bar = circle;

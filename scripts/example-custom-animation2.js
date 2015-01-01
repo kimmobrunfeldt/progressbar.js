@@ -19,3 +19,4 @@ var circle = new ProgressBar.Circle('#example-animation2-container', {
 circle.animate(1, function() {
     circle.animate(0);
 });
+var bar = circle;
