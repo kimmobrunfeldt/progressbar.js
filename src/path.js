@@ -31,10 +31,8 @@ var Path = function Path(path, opts) {
 };
 
 Path.prototype.value = function value() {
-    var computedStyle = window.getComputedStyle(this._path, null);
-    var offset = computedStyle.getPropertyValue('stroke-dashoffset');
     // Remove 'px' suffix
-    offset = parseFloat(offset, 10);
+    var offset = parseFloat(this._getComputedDashOffset(), 10);
     var length = this._path.getTotalLength();
 
     var progress = 1 - offset / length;
@@ -52,10 +50,7 @@ Path.prototype.set = function set(progress) {
 
 Path.prototype.stop = function stop() {
     this._stopTween();
-
-    var computedStyle = window.getComputedStyle(this._path, null);
-    var offset = computedStyle.getPropertyValue('stroke-dashoffset');
-    this._path.style.strokeDashoffset = offset;
+    this._path.style.strokeDashoffset = this._getComputedDashOffset();
 };
 
 // Method introduced here:
