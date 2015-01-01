@@ -110,6 +110,11 @@ Path.prototype.animate = function animate(progress, opts, cb) {
     });
 };
 
+Path.prototype._getComputedDashOffset = function _getComputedDashOffset() {
+    var computedStyle = window.getComputedStyle(this._path, null);
+    return computedStyle.getPropertyValue('stroke-dashoffset');
+};
+
 // Resolves from and to values for animation.
 Path.prototype._resolveFromAndTo = function _resolveFromAndTo(progress, easing, opts) {
     if (opts.from && opts.to) {
