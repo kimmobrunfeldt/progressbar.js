@@ -38,7 +38,7 @@ Path.prototype.value = function value() {
     var progress = 1 - offset / length;
     // Round number to prevent returning very small number like 1e-30, which
     // is practically 0
-    return parseFloat(progress.toFixed(10), 10);
+    return parseFloat(progress.toFixed(6), 10);
 };
 
 Path.prototype.set = function set(progress) {
