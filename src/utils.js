@@ -27,7 +27,7 @@ function render(template, vars) {
         if (vars.hasOwnProperty(key)) {
             var val = vars[key];
             var regExpString = '\\{' + key + '\\}';
-            var regExp = new RegExp(regExpString, "g");
+            var regExp = new RegExp(regExpString, 'g');
 
             rendered = rendered.replace(regExp, val);
         }
@@ -41,7 +41,7 @@ function isString(obj) {
 }
 
 function isFunction(obj) {
-    return typeof obj === "function";
+    return typeof obj === 'function';
 }
 
 module.exports = {

@@ -82,18 +82,18 @@ Progress.prototype.value = function value() {
 Progress.prototype._createSvgView = function _createSvgView(opts) {
     // Default parameters for progress bar creation
     opts = utils.extend({
-        color: "#555",
+        color: '#555',
         strokeWidth: 1.0,
         trailColor: null,
         trailWidth: null,
         fill: null
     }, opts);
 
-    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     this._initializeSvg(svg, opts);
 
     var trailPath = null;
-    // Each option listed in the if condition are "triggers" for creating
+    // Each option listed in the if condition are 'triggers' for creating
     // the trail path
     if (opts.trailColor || opts.trailWidth) {
         trailPath = this._createTrail(opts);
@@ -111,7 +111,7 @@ Progress.prototype._createSvgView = function _createSvgView(opts) {
 };
 
 Progress.prototype._initializeSvg = function _initializeSvg(svg, opts) {
-    svg.setAttribute("viewBox", "0 0 100 100");
+    svg.setAttribute('viewBox', '0 0 100 100');
 };
 
 Progress.prototype._createPath = function _createPath(opts) {
@@ -142,26 +142,26 @@ Progress.prototype._createTrail = function _createTrail(opts) {
 
 Progress.prototype._createPathElement =
 function _createPathElement(pathString, opts) {
-    var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("d", pathString);
-    path.setAttribute("stroke", opts.color);
-    path.setAttribute("stroke-width", opts.strokeWidth);
+    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', pathString);
+    path.setAttribute('stroke', opts.color);
+    path.setAttribute('stroke-width', opts.strokeWidth);
 
     if (opts.fill) {
-        path.setAttribute("fill", opts.fill);
+        path.setAttribute('fill', opts.fill);
     } else {
-        path.setAttribute("fill-opacity", "0");
+        path.setAttribute('fill-opacity', '0');
     }
 
     return path;
 };
 
 Progress.prototype._pathString = function _pathString(opts) {
-    throw new Error("Override this function for each progress bar");
+    throw new Error('Override this function for each progress bar');
 };
 
 Progress.prototype._trailString = function _trailString(opts) {
-    throw new Error("Override this function for each progress bar");
+    throw new Error('Override this function for each progress bar');
 };
 
 module.exports = Progress;

@@ -5,7 +5,7 @@ var utils = require('./utils');
 
 
 var Line = function Line(container, options) {
-    this._pathTemplate = "M 0,{center} L 100,{center}";
+    this._pathTemplate = 'M 0,{center} L 100,{center}';
     Progress.apply(this, arguments);
 };
 
@@ -13,8 +13,8 @@ Line.prototype = new Progress();
 Line.prototype.constructor = Line;
 
 Line.prototype._initializeSvg = function _initializeSvg(svg, opts) {
-    svg.setAttribute("viewBox", "0 0 100 " + opts.strokeWidth);
-    svg.setAttribute("preserveAspectRatio", "none");
+    svg.setAttribute('viewBox', '0 0 100 ' + opts.strokeWidth);
+    svg.setAttribute('preserveAspectRatio', 'none');
 };
 
 Line.prototype._pathString = function _pathString(opts) {
