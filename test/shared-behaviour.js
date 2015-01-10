@@ -14,19 +14,19 @@ var TEXT_CLASS_NAME = '.progressbar-text';
 var sharedTests = function sharedTests() {
     // Test that public attributes exist
     it('.svg attribute should exist', function() {
-        expect(this.bar.svg).to.be.ok;
+        expect(this.bar.svg).to.be.ok();
     });
 
     it('.path attribute should exist', function() {
-        expect(this.bar.path).to.be.ok;
+        expect(this.bar.path).to.be.ok();
     });
 
     it('.trail attribute should exist', function() {
-        expect(this.bar.trail).to.be.ok;
+        expect(this.bar.trail).to.be.ok();
     });
 
     it('.text attribute should exist', function() {
-        expect(this.bar.text).to.be.ok;
+        expect(this.bar.text).to.be.ok();
     });
 
     it('bar should be empty after initialization', function() {
@@ -93,7 +93,7 @@ var sharedTests = function sharedTests() {
         svg = document.querySelector('svg');
         expect(svg).to.equal(null);
 
-        var textElement = document.querySelector(TEXT_CLASS_NAME);
+        textElement = document.querySelector(TEXT_CLASS_NAME);
         expect(textElement).to.equal(null);
     });
 
@@ -119,7 +119,7 @@ var sharedTests = function sharedTests() {
         expect(textElement.textContent).to.equal('Test');
         this.bar.setText('new');
 
-        var textElement = document.querySelector(TEXT_CLASS_NAME);
+        textElement = document.querySelector(TEXT_CLASS_NAME);
         expect(textElement.textContent).to.equal('new');
     });
 };
