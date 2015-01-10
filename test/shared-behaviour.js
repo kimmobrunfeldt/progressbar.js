@@ -6,7 +6,7 @@ var chaiStats = require('chai-stats');
 chai.use(chaiStats);
 var expect = chai.expect;
 
-var utils = require('./utils');
+var testUtils = require('./test-utils');
 
 var PRECISION = 2;
 
@@ -49,7 +49,7 @@ var sharedTests = function sharedTests() {
     });
 
     it('stop() should stop animation', function(done) {
-        var offset = utils.getComputedStyle(this.bar.path, 'stroke-dashoffset');
+        var offset = testUtils.getComputedStyle(this.bar.path, 'stroke-dashoffset');
         this.bar.animate(1, {duration: 1000});
 
         var self = this;
@@ -78,7 +78,7 @@ var sharedTests = function sharedTests() {
         this.bar.destroy();
 
         var self = this;
-        var methodsShouldThrow = ['destroy', 'value', 'set', 'animate', 'stop'];
+        var methodsShouldThrow = ['destroy', 'value', 'set', 'animate', 'stop', 'setText'];
         methodsShouldThrow.forEach(function(methodName) {
             expect(function shouldThrow() {
                 self[methodName]();
