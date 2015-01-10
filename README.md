@@ -1,5 +1,5 @@
 # ProgressBar.js
-**Version: 0.6.1-dev**
+**Version: 0.6.1-dev** ([*previous stable*](tree/0.6.0), [*latest dev*](tree/dev))
 
 <br>
 ![Beautiful animation](docs/animation.gif)
@@ -208,7 +208,7 @@ with CSS.
 
             // Class name for text element.
             // Default: 'progressbar-text'
-            className: '#f00',
+            className: '.progressbar__label',
 
             // If true, CSS is automatically set for container and text element.
             // If you want to modify all CSS your self, set this to false
@@ -311,6 +311,11 @@ Stops animation to its current position.
 ## Shape.value()
 
 Returns current shown progress from 0 to 1. This value changes when animation is running.
+
+## Shape.setText(text)
+
+Sets text to given a string. If you need to dynamically modify the text element,
+see [.text](#shapetext) attribute.
 
 ## Shape.destroy()
 
