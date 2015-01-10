@@ -22,6 +22,7 @@ var config = {
     backToDevMessage: 'Bump to dev version',
     bumpType: 'patch',
     files: ['package.json', 'bower.json'],
+    readmeFile: 'README.md',
 
     // Banner to insert in beginning of distributables
     bannerFiles: ['dist/progressbar.js', 'dist/progressbar.min.js'],
@@ -31,7 +32,7 @@ var config = {
     dryRun: false,
 
     // If true, don't push commits/tags or release to npm
-    noPush: false,
+    noPush: true,
     consolePrefix: '->',
     devSuffix: '-dev'
 }
@@ -52,41 +53,59 @@ function main() {
     });
     insertBanner(config.bannerFiles, banner);
 
-    gitAdd(config.bannerFiles)
-        .then(function() {
-            return gitAdd(config.files);
-        })
-        .then(function() {
-            var message = Mustache.render(config.releaseMessage, {
-                version: newVersion
-            });
+    _gitBranchName()
+    .then(function() {
+        return gitAdd([config.readmeFile]);
+    })
+    .then(function(stdout) {
+        if (stdout.trim().toLowerCase() !== 'dev') {
+            throw new Error('You should be in dev branch before running the script!');
+        }
 
-            return gitCommit(message);
-        })
-        .then(function() {
-            return gitTag(newVersion);
-        })
-        .then(gitPush)
-        .then(function() {
-            return gitPushTag(newVersion)
-        })
-        .then(npmPublish)
-        .then(function() {
-            bumpVersion(config.files, 'dev');
-            return gitAdd(config.files);
-        })
-        .then(function() {
-            return gitCommit(config.backToDevMessage);
-        })
-        .then(function() {
-            console.log('');
-            status('Release successfully done!');
-        })
-        .catch(function(err) {
-            console.error('\n!! Releasing failed')
-            console.trace(err);
-            process.exit(2);
+        return gitAdd(config.bannerFiles);
+    })
+    .then(function() {
+        return gitAdd(config.files);
+    })
+    .then(function() {
+        var message = Mustache.render(config.releaseMessage, {
+            version: newVersion
         });
+
+        return gitCommit(message);
+    })
+    .then(function() {
+        return gitTag(newVersion);
+    })
+    .then(function() {
+        gitPush('dev')
+    })
+    .then(function() {
+        return gitPushTag(newVersion);
+    })
+    .then(npmPublish)
+    .then(function() {
+        bumpVersion(config.files, 'dev');
+        return gitAdd(config.files);
+    })
+    .then(function() {
+        return gitCommit(config.backToDevMessage);
+    })
+    .then(function() {
+        gitMergeTagToMaster(newVersion);
+    })
+    .then(function() {
+        gitPush('master');
+    })
+    .then(function() {
+        console.log('');
+        status('Release successfully done!');
+    })
+    .catch(function(err) {
+        console.error('\n!! Releasing failed')
+        console.trace(err);
+        process.exit(2);
+    });
 }
 
 function parseArgs() {
@@ -124,7 +143,9 @@ function run(cmd, msg) {
     // All calls are actually synchronous but eventually some task
     // will need async stuff, so keep them promises
     return new Promise(function(resolve, reject) {
-        status(msg);
+        if (msg) {
+            status(msg);
+        }
 
         if (config.dryRun) {
             return resolve();
@@ -134,7 +155,7 @@ function run(cmd, msg) {
         var success = exec.code === 0;
 
         if (success) {
-            resolve();
+            resolve(exec.output);
         } else {
             var errMsg = 'Error executing: `' + cmd + '`\nOutput:\n' + exec.output;
             var err = new Error(errMsg);
@@ -154,11 +175,12 @@ function bumpVersion(files, bumpType) {
     if (config.dryRun) return '[not available in dry run]';
 
     var newVersion;
+    var originalVersion;
     files.forEach(function(fileName) {
         var filePath = path.join(projectRoot, fileName);
 
         var data = JSON.parse(fs.readFileSync(filePath));
-        var originalVersion = data.version;
+        originalVersion = data.version;
         var currentVersion = data.version;
         if (!semver.valid(currentVersion)) {
             var msg = 'Invalid version ' + currentVersion +
@@ -185,6 +207,8 @@ function bumpVersion(files, bumpType) {
             fileName);
     });
 
+    bumpReadmeVersion(originalVersion, newVersion);
+
     return newVersion;
 }
 
@@ -199,6 +223,29 @@ function insertBanner(files, banner) {
 
         fs.writeFileSync(filePath, newContent);
     });
+}
+
+function bumpReadmeVersion(oldVersion, newVersion) {
+    status('Replace readme version', oldVersion, '->', newVersion);
+    if (config.dryRun) return;
+
+    var filePath = path.join(projectRoot, config.readmeFile);
+    var content = fs.readFileSync(filePath, {encoding: 'utf-8'});
+
+    // Update visible version
+    var re = new RegExp('Version: ' + oldVersion, 'g');
+    var newContent = content.replace(re, 'Version: ' + newVersion);
+
+    var oldReleaseVersion = oldVersion;
+    if (S(oldReleaseVersion).endsWith(config.devSuffix)) {
+        oldReleaseVersion = S(oldReleaseVersion).chompRight(config.devSuffix).s;
+    }
+
+    // Replace link to previous stable
+    re = new RegExp('tree/[0-9]\.[0-9]\.[0-9]');
+    newContent = newContent.replace(re, 'tree/' + oldReleaseVersion);
+
+    fs.writeFileSync(filePath, newContent);
 }
 
 function gitAdd(files) {
@@ -219,11 +266,11 @@ function gitTag(name) {
     return run(cmd, msg);
 }
 
-function gitPush() {
+function gitPush(branch) {
     if (config.noPush) return;
 
-    var cmd = 'git push';
-    var msg = 'Push to remote git repository'
+    var cmd = 'git push ' + branch;
+    var msg = 'Push' + branch + ' to remote';
     return run(cmd, msg);
 }
 
@@ -242,5 +289,29 @@ function npmPublish() {
     var msg = 'Publish to npm';
     return run(cmd, msg);
 }
+
+function gitMergeTagToMaster(tag) {
+    var message = Mustache.render(config.releaseMessage, {
+        version: tag
+    });
+
+    return run('git checkout master', 'Checkout master')
+    .then(function() {
+        var msg = 'Squash merge ' + tag + ' to master';
+        return run('git merge --squash ' + tag, msg);
+    })
+    .then(function() {
+        return gitCommit(message);
+    })
+    .then(function() {
+        return run('git checkout dev', 'Checkout dev');
+    });
+}
+
+function _gitBranchName() {
+    var cmd = 'git rev-parse --abbrev-ref HEAD'
+    return run(cmd, false);
+}
+
 
 main();
