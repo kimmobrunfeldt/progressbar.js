@@ -23,11 +23,16 @@ var afterEachCase = function() {
     }
 };
 
+var barOpts = {
+    text: { value: 'Test' },
+    trailWidth: 1
+};
+
 describe('Line', function() {
     beforeEach(function() {
         // Append progress bar to body since adding a custom HTML and div
         // with Karma was not that trivial compared to Testem
-        this.bar = new ProgressBar.Line('body');
+        this.bar = new ProgressBar.Line('body', barOpts);
     });
 
     afterEach(afterEachCase);
@@ -37,7 +42,7 @@ describe('Line', function() {
 
 describe('Circle', function() {
     beforeEach(function() {
-        this.bar = new ProgressBar.Circle('body');
+        this.bar = new ProgressBar.Circle('body', barOpts);
     });
 
     afterEach(afterEachCase);
@@ -47,7 +52,7 @@ describe('Circle', function() {
 
 describe('Square', function() {
     beforeEach(function() {
-        this.bar = new ProgressBar.Square('body');
+        this.bar = new ProgressBar.Square('body', barOpts);
     });
 
     afterEach(afterEachCase);

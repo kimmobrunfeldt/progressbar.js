@@ -9,9 +9,35 @@ var expect = chai.expect;
 var testUtils = require('./test-utils');
 
 var PRECISION = 2;
-
+var TEXT_CLASS_NAME = '.progressbar-text';
 
 var sharedTests = function sharedTests() {
+    // Test that public attributes exist
+    it('.svg attribute should exist', function() {
+        expect(this.bar.svg).to.be.ok;
+    });
+
+    it('.path attribute should exist', function() {
+        expect(this.bar.path).to.be.ok;
+    });
+
+    it('.trail attribute should exist', function() {
+        expect(this.bar.trail).to.be.ok;
+    });
+
+    it('.text attribute should exist', function() {
+        expect(this.bar.text).to.be.ok;
+    });
+
+    it('bar should be empty after initialization', function() {
+        expect(this.bar.value()).to.almost.equal(0, PRECISION);
+    });
+
+    it('set should change value', function() {
+        this.bar.set(1);
+        expect(this.bar.value()).to.almost.equal(1, PRECISION);
+    });
+
     it('animate should change SVG path stroke-dashoffset property', function(done) {
         var progressAtStart = this.bar.value();
         this.bar.animate(1, {duration: 1000});
@@ -22,15 +48,6 @@ var sharedTests = function sharedTests() {
             expect(self.bar.value()).to.be.lessThan(1);
             done();
         }, 100);
-    });
-
-    it('bar should be empty after initialization', function() {
-        expect(this.bar.value()).to.almost.equal(0, PRECISION);
-    });
-
-    it('set should change value', function() {
-        this.bar.set(1);
-        expect(this.bar.value()).to.almost.equal(1, PRECISION);
     });
 
     it('animate should change value', function(done) {
@@ -65,13 +82,19 @@ var sharedTests = function sharedTests() {
         }, 400);
     });
 
-    it('destroy() should delete element', function() {
+    it('destroy() should delete DOM elements', function() {
         var svg = document.querySelector('svg');
         expect(svg).not.to.equal(null);
+
+        var textElement = document.querySelector(TEXT_CLASS_NAME);
+        expect(textElement).not.to.equal(null);
 
         this.bar.destroy();
         svg = document.querySelector('svg');
         expect(svg).to.equal(null);
+
+        var textElement = document.querySelector(TEXT_CLASS_NAME);
+        expect(textElement).to.equal(null);
     });
 
     it('destroy() should make object unusable', function() {
@@ -88,6 +111,16 @@ var sharedTests = function sharedTests() {
         expect(this.bar.svg).to.equal(null);
         expect(this.bar.path).to.equal(null);
         expect(this.bar.trail).to.equal(null);
+        expect(this.bar.text).to.equal(null);
+    });
+
+    it('setText() should change text element', function() {
+        var textElement = document.querySelector(TEXT_CLASS_NAME);
+        expect(textElement.textContent).to.equal('Test');
+        this.bar.setText('new');
+
+        var textElement = document.querySelector(TEXT_CLASS_NAME);
+        expect(textElement.textContent).to.equal('new');
     });
 };
 
