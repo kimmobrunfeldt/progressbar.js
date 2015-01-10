@@ -4,14 +4,13 @@ var Path = require('./path');
 var utils = require('./utils');
 
 var DESTROYED_ERROR = 'Object is destroyed';
-var CONSTRUCTOR_CALL_ERROR = 'Constructor was called without new keyword';
 
 
 var Progress = function Progress(container, opts) {
     // Throw a better error if progress bars are not initialized with `new`
     // keyword
     if (!(this instanceof Progress)) {
-        throw new Error(CONSTRUCTOR_CALL_ERROR);
+        throw new Error('Constructor was called without new keyword');
     }
 
     // Prevent calling constructor without parameters so inheritance
@@ -22,7 +21,22 @@ var Progress = function Progress(container, opts) {
     // We just want to set the prototype for Line.
     if (arguments.length === 0) return;
 
-    var svgView = this._createSvgView(opts);
+    // Default parameters for progress bar creation
+    this._opts = utils.extend({
+        color: '#555',
+        strokeWidth: 1.0,
+        trailColor: null,
+        trailWidth: null,
+        fill: null,
+        text: {
+            autoStyle: true,
+            color: null,
+            value: '',
+            className: 'progressbar-text'
+        }
+    }, opts, true);  // Use recursive extend
+
+    var svgView = this._createSvgView(this._opts);
 
     var element;
     if (utils.isString(container)) {
@@ -35,17 +49,25 @@ var Progress = function Progress(container, opts) {
         throw new Error('Container does not exist: ' + container);
     }
 
-    element.appendChild(svgView.svg);
+    this._container = element;
+    this._container.appendChild(svgView.svg);
+
+    this.text = null;
+    if (this._opts.text) {
+        this.text = this._createTextElement(this._opts, this._container);
+        this._container.appendChild(this.text);
+    }
 
     var newOpts = utils.extend({
         attachment: this
-    }, opts);
+    }, this._opts);
     this._progressPath = new Path(svgView.path, newOpts);
 
     // Expose public attributes
     this.svg = svgView.svg;
     this.path = svgView.path;
     this.trail = svgView.trail;
+    // this.text is also a public attribute
 };
 
 Progress.prototype.animate = function animate(progress, opts, cb) {
@@ -67,6 +89,11 @@ Progress.prototype.destroy = function destroy() {
     this.path = null;
     this.trail = null;
     this._progressPath = null;
+
+    if (this.text !== null) {
+        this.text.parentNode.removeChild(this.text);
+        this.text = null;
+    }
 };
 
 Progress.prototype.set = function set(progress) {
@@ -79,16 +106,20 @@ Progress.prototype.value = function value() {
     return this._progressPath.value();
 };
 
-Progress.prototype._createSvgView = function _createSvgView(opts) {
-    // Default parameters for progress bar creation
-    opts = utils.extend({
-        color: '#555',
-        strokeWidth: 1.0,
-        trailColor: null,
-        trailWidth: null,
-        fill: null
-    }, opts);
+Progress.prototype.setText = function setText(text) {
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
 
+    if (this.text === null) {
+        this.text = this._createTextElement(this._container, text);
+        this._container.appendChild(this.text);
+        return;
+    }
+
+    this.text.removeChild(this.text.firstChild);
+    this.text.appendChild(document.createTextNode(text));
+};
+
+Progress.prototype._createSvgView = function _createSvgView(opts) {
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     this._initializeSvg(svg, opts);
 
@@ -140,8 +171,7 @@ Progress.prototype._createTrail = function _createTrail(opts) {
     return this._createPathElement(pathString, newOpts);
 };
 
-Progress.prototype._createPathElement =
-function _createPathElement(pathString, opts) {
+Progress.prototype._createPathElement = function _createPathElement(pathString, opts) {
     var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('d', pathString);
     path.setAttribute('stroke', opts.color);
@@ -154,6 +184,31 @@ function _createPathElement(pathString, opts) {
     }
 
     return path;
+};
+
+Progress.prototype._createTextElement = function _createTextElement(opts, container) {
+    var element = document.createElement('p');
+    element.appendChild(document.createTextNode(opts.text.value));
+
+    if (opts.text.autoStyle) {
+        // Center text
+        container.style.position = 'relative';
+        element.style.position = 'absolute';
+        element.style.top = '50%';
+        element.style.left = '50%';
+        element.style.padding = 0;
+        element.style.margin = 0;
+        utils.setStyle(element, 'transform', 'translate(-50%, -50%');
+
+        if (opts.text.color) {
+            element.style.color = opts.text.color;
+        } else {
+            element.style.color = opts.color;
+        }
+    }
+    element.className = opts.text.className;
+
+    return element;
 };
 
 Progress.prototype._pathString = function _pathString(opts) {

@@ -1,4 +1,5 @@
 # ProgressBar.js
+**Version: 0.6.1-dev**
 
 <br>
 ![Beautiful animation](docs/animation.gif)
@@ -14,7 +15,7 @@ See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for example
 
 # Get started
 
-[![Build Status](https://travis-ci.org/kimmobrunfeldt/progressbar.js.svg?branch=master)](https://travis-ci.org/kimmobrunfeldt/progressbar.js) *Build status and browser tests for current master*
+[![Build Status](https://api.travis-ci.org/kimmobrunfeldt/progressbar.js.svg?branch=master)](https://travis-ci.org/kimmobrunfeldt/progressbar.js) *Build status and browser tests for current master*
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/kimmobrunfeldt.svg)](https://saucelabs.com/u/kimmobrunfeldt)
 
@@ -79,39 +80,49 @@ animating SVG properties with CSS transitions.
 
 # API
 
+**NOTE:** Line, Circle and Square links all point to the same documentation
+which is named Shape. Shape is **not** a real attribute, instead you should
+replace it with **Line**, **Circle** or **Square**.
+
 [**ProgressBar**](#api)
 
-* [Line(container, [*options*])](#linecontainer-options)
-    * [*svg*](#linesvg)
-    * [*path*](#linepath)
-    * [*trail*](#linetrail)
-    * [animate(progress, [*options*], [*cb*])](#lineanimateprogress-options-cb)
-    * [set(progress)](#linesetprogress)
-    * [stop()](#linestop)
-    * [value()](#linevalue)
-    * [destroy()](#linedestroy)
+* [Line(container, [*options*])](#shapecontainer-options)
+    * [*svg*](#shapesvg)
+    * [*path*](#shapepath)
+    * [*trail*](#shapetrail)
+    * [*text*](#shapetext)
+    * [animate(progress, [*options*], [*cb*])](#shapeanimateprogress-options-cb)
+    * [set(progress)](#shapesetprogress)
+    * [stop()](#shapestop)
+    * [value()](#shapevalue)
+    * [setText(text)](#shapesettexttext)
+    * [destroy()](#shapedestroy)
 
 
-* [Circle(container, [*options*])](#circlecontainer-options)
-    * [*svg*](#circlesvg)
-    * [*path*](#circlepath)
-    * [*trail*](#circletrail)
-    * [animate(progress, [*options*], [*cb*])](#circleanimateprogress-options-cb)
-    * [set(progress)](#circlesetprogress)
-    * [stop()](#circlestop)
-    * [value()](#circlevalue)
-    * [destroy()](#cirlcedestroy)
+* [Circle(container, [*options*])](#shapecontainer-options)
+    * [*svg*](#shapesvg)
+    * [*path*](#shapepath)
+    * [*trail*](#shapetrail)
+    * [*text*](#shapetext)
+    * [animate(progress, [*options*], [*cb*])](#shapeanimateprogress-options-cb)
+    * [set(progress)](#shapesetprogress)
+    * [stop()](#shapestop)
+    * [value()](#shapevalue)
+    * [setText(text)](#shapesettexttext)
+    * [destroy()](#shapedestroy)
 
 
-* [Square(container, [*options*])](#squarecontainer-options)
-    * [*svg*](#squaresvg)
-    * [*path*](#squarepath)
-    * [*trail*](#squaretrail)
-    * [animate(progress, [*options*], [*cb*])](#squareanimateprogress-options-cb)
-    * [set(progress)](#squaresetprogress)
-    * [stop()](#squarestop)
-    * [value()](#squarevalue)
-    * [destroy()](#squaredestroy)
+* [Square(container, [*options*])](#shapecontainer-options)
+    * [*svg*](#shapesvg)
+    * [*path*](#shapepath)
+    * [*trail*](#shapetrail)
+    * [*text*](#shapetext)
+    * [animate(progress, [*options*], [*cb*])](#shapeanimateprogress-options-cb)
+    * [set(progress)](#shapesetprogress)
+    * [stop()](#shapestop)
+    * [value()](#shapevalue)
+    * [setText(text)](#shapesettexttext)
+    * [destroy()](#shapedestroy)
 
 
 * [Path(path, [*options*])](#pathpath-options)
@@ -126,306 +137,9 @@ All built-in shapes except [Line](#linecontainer-options) are drawn on 100x100 S
 Line is drawn on 100-width canvas and height depends on the stroke width.
 
 
-## Line(container, [*options*])
+## Shape(container, [*options*])
 
-Line shaped progress bar. Appends SVG to container.
-
-**Example**
-
-```javascript
-var progressBar = new ProgressBar.Line('#container', {
-    strokeWidth: 2
-});
-```
-
-To make line resize with its container, set for example the following CSS:
-
-```css
-.container > svg {
-    display: block;
-    width: 100%;
-}
-```
-
-**Parameters**
-
-* `container` Element where SVG is added. Query string or element.
-
-    For example `"#container"` or `document.getElementById("#container")`
-
-* `options` Options for path drawing.
-
-    ```javascript
-    {
-        // Stroke color.
-        // Default: "#555"
-        color: "#3a3a3a",
-
-        // Width of the stroke.
-        // Unit is percentage of SVG canvas' size.
-        // Default: 1.0
-        strokeWidth: 2.1,
-
-        // If trail options are not defined, trail won't be drawn
-
-        // Color for lighter trail stroke
-        // underneath the actual progress path.
-        // Default: '#eee'
-        trailColor: "#f4f4f4",
-
-        // Width of the trail stroke. Trail is always centered relative to
-        // actual progress path.
-        // Default: same as strokeWidth
-        trailWidth: 0.8,
-
-        // Duration for animation in milliseconds
-        // Default: 800
-        duration: 1200,
-
-        // Easing for animation. See #easing section.
-        // Default: "linear"
-        easing: "easeIn",
-
-        // See #custom-animations section
-        // Built-in shape passes reference to itself as attachment
-        // to step function
-        from: { color: '#eee' },
-        to: { color: '#000' },
-        step: function(state, line) {
-            line.path.setAttribute('stroke', state.color);
-        }
-    }
-    ```
-
-## Line.svg
-
-Reference to [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg) element where progress bar is drawn.
-
-## Line.path
-
-Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which represents the actual progress bar.
-
-## Line.trail
-
-Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which represents the trail of the progress bar.
-Returns `null` if trail is not defined.
-
-## Line.animate(progress, [*options*], [*cb*])
-
-Animates drawing of line.
-
-**Example**
-
-```javascript
-progressBar.animate(0.3, {
-    duration: 800
-}, function() {
-    console.log('Animation has finished');
-});
-```
-
-**Parameters**
-
-* `progress` progress from 0 to 1.
-* `options` Animation options. These options override the defaults given in initialization.
-
-    ```javascript
-    {
-        // Duration for animation in milliseconds
-        // Default: 800
-        duration: 1200,
-
-        // Easing for animation. See #easing section.
-        // Default: "linear"
-        easing: "easeOut",
-
-        // See #custom-animations section
-        // Built-in shape passes reference to itself as attachment
-        // to step function
-        from: { color: '#eee' },
-        to: { color: '#000' },
-        step: function(state, line) {
-            line.path.setAttribute('stroke', state.color);
-        }
-    }
-    ```
-
-* `cb` Callback function which is called after transition ends.
-
-## Line.set(progress)
-
-Sets progress instantly without animation. Clears all transitions
-for path.
-
-## Line.stop()
-
-Stops animation to its current position.
-
-## Line.value()
-
-Returns current shown progress from 0 to 1. This value changes when animation is running.
-
-## Line.destroy()
-
-Removes SVG element from container and removes all references to DOM elements. Destroying is irreversible.
-
-<br>
-<br>
-
-
-## Circle(container, [*options*])
-
-Circle shaped progress bar. Appends SVG to container.
-
-**Example**
-
-```javascript
-var progressBar = new ProgressBar.Circle('#container', {
-    strokeWidth: 2
-});
-```
-
-To make circle resize with its container, set for example the following CSS:
-
-```css
-.container > svg {
-    display: block;
-    width: 100%;
-}
-```
-
-**Parameters**
-
-* `container` Element where SVG is added. Query string or element.
-
-    For example `"#container"` or `document.getElementById("#container")`
-
-* `options` Options for path drawing.
-
-    ```javascript
-    {
-        // Stroke color.
-        // Default: "#555"
-        color: "#3a3a3a",
-
-        // Width of the stroke.
-        // Unit is percentage of SVG canvas' size.
-        // Default: 1.0
-        strokeWidth: 2.1,
-
-        // If trail options are not defined, trail won't be drawn
-
-        // Color for lighter trail stroke
-        // underneath the actual progress path.
-        // Default: '#eee'
-        trailColor: "#f4f4f4",
-
-        // Width of the trail stroke. Trail is always centered relative to
-        // actual progress path.
-        // Default: same as strokeWidth
-        trailWidth: 0.8,
-
-        // Fill color for the shape. If null, no fill.
-        // Default: null
-        fill: "rgba(0, 0, 0, 0.5)",
-
-        // Duration for animation in milliseconds
-        // Default: 800
-        duration: 1200,
-
-        // Easing for animation. See #easing section.
-        // Default: "linear"
-        easing: "easeIn",
-
-        // See #custom-animations section
-        // Built-in shape passes reference to itself as attachment
-        // to step function
-        from: { color: '#eee' },
-        to: { color: '#000' },
-        step: function(state, circle) {
-            circle.path.setAttribute('stroke', state.color);
-        }
-    }
-    ```
-
-## Circle.svg
-
-Reference to [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg) element where progress bar is drawn.
-
-## Circle.path
-
-Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the actual progress bar.
-
-## Circle.trail
-
-Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the trail of the progress bar.
-Returns `null` if trail is not defined.
-
-## Circle.animate(progress, [*options*], [*cb*])
-
-Animates drawing of circle.
-
-**Example**
-
-```javascript
-progressBar.animate(0.3, {
-    duration: 800
-}, function() {
-    console.log('Animation has finished');
-});
-```
-
-**Parameters**
-
-* `progress` progress from 0 to 1.
-* `options` Animation options. These options override the defaults given in initialization.
-
-    ```javascript
-    {
-        // Duration for animation in milliseconds
-        // Default: 800
-        duration: 1200,
-
-        // Easing for animation. See #easing section.
-        // Default: "linear"
-        easing: "easeOut",
-
-        // See #custom-animations section
-        // Built-in shape passes reference to itself as attachment
-        // to step function
-        from: { color: '#eee' },
-        to: { color: '#000' },
-        step: function(state, circle) {
-            circle.path.setAttribute('stroke', state.color);
-        }
-    }
-    ```
-
-* `cb` Callback function which is called after transition ends.
-
-## Circle.set(progress)
-
-Sets progress instantly without animation. Clears all transitions
-for path.
-
-## Circle.stop()
-
-Stops animation to its current position.
-
-## Circle.value()
-
-Returns current shown progress from 0 to 1. This value changes when animation is running.
-
-## Circle.destroy()
-
-Removes SVG element from container and removes all references to DOM elements. Destroying is irreversible.
-
-<br>
-<br>
-
-## Square(container, [*options*])
-
-Square shaped progress bar. Appends SVG to container.
+Line, Circle or Square shaped progress bar. Appends SVG to container.
 
 **Example**
 
@@ -435,7 +149,7 @@ var progressBar = new ProgressBar.Square('#container', {
 });
 ```
 
-To make square resize with its container, set for example the following CSS:
+To make the shape resize with its container, set for example the following CSS:
 
 ```css
 .container > svg {
@@ -443,6 +157,9 @@ To make square resize with its container, set for example the following CSS:
     width: 100%;
 }
 ```
+
+With Line shape, you can control the width of the line by specifying e.g. `height: 5px`
+with CSS.
 
 **Parameters**
 
@@ -474,6 +191,30 @@ To make square resize with its container, set for example the following CSS:
         // actual progress path.
         // Default: same as strokeWidth
         trailWidth: 0.8,
+
+        // Text options. Text element is a <p> element appended to container
+        // NOTE: When text is set, 'position: relative' will be set to the
+        // container for centering. You can also prevent all style modifications
+        // with 'autoStyle: false'
+        // Default: null
+        text: {
+            // Initial value for text.
+            // Default: null
+            value: 'Text',
+
+            // Text color.
+            // Default: same as stroke color (options.color)
+            color: '#f00',
+
+            // Class name for text element.
+            // Default: 'progressbar-text'
+            className: '#f00',
+
+            // If true, CSS is automatically set for container and text element.
+            // If you want to modify all CSS your self, set this to false
+            // Default: true
+            autoStyle: true
+        },
 
         // Fill color for the shape. If null, no fill.
         // Default: null
@@ -498,22 +239,27 @@ To make square resize with its container, set for example the following CSS:
     }
     ```
 
-## Square.svg
+## Shape.svg
 
 Reference to [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg) element where progress bar is drawn.
 
-## Square.path
+## Shape.path
 
 Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the actual progress bar.
 
-## Square.trail
+## Shape.trail
 
 Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the trail of the progress bar.
 Returns `null` if trail is not defined.
 
-## Square.animate(progress, [*options*], [*cb*])
+## Shape.text
 
-Animates drawing of square.
+Reference to [p element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p) which presents the text label for progress bar.
+Returns `null` if text is not defined.
+
+## Shape.animate(progress, [*options*], [*cb*])
+
+Animates drawing of a shape.
 
 **Example**
 
@@ -551,22 +297,22 @@ progressBar.animate(0.3, {
     }
     ```
 
-* `cb` Callback function which is called after transition ends.
+* `cb` Callback function which is called after animation ends.
 
-## Square.set(progress)
+## Shape.set(progress)
 
-Sets progress instantly without animation. Clears all transitions
+Sets progress instantly without animation. Clears all animations
 for path.
 
-## Square.stop()
+## Shape.stop()
 
 Stops animation to its current position.
 
-## Square.value()
+## Shape.value()
 
 Returns current shown progress from 0 to 1. This value changes when animation is running.
 
-## Square.destroy()
+## Shape.destroy()
 
 Removes SVG element from container and removes all references to DOM elements. Destroying is irreversible.
 
