@@ -67,7 +67,7 @@ function isFunction(obj) {
 }
 
 function isArray(obj) {
-    return toString.call(obj) === '[object Array]';
+    return Object.prototype.toString.call(obj) === '[object Array]';
 }
 
 // Returns true if `obj` is object as in {a: 1, b: 2}, not if it's function or
