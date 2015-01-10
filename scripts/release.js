@@ -54,15 +54,15 @@ function main() {
     insertBanner(config.bannerFiles, banner);
 
     _gitBranchName()
-    .then(function() {
-        return gitAdd([config.readmeFile]);
-    })
     .then(function(stdout) {
         if (stdout.trim().toLowerCase() !== 'dev') {
             throw new Error('You should be in dev branch before running the script!');
         }
 
         return gitAdd(config.bannerFiles);
+    })
+    .then(function() {
+        return gitAdd([config.readmeFile]);
     })
     .then(function() {
         return gitAdd(config.files);
