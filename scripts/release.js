@@ -86,7 +86,7 @@ function main() {
     .then(npmPublish)
     .then(function() {
         bumpVersion(config.files, 'dev');
-        return gitAdd(config.files);
+        return gitAdd(config.files.concat(config.readmeFile));
     })
     .then(function() {
         return gitCommit(config.backToDevMessage);
@@ -207,7 +207,7 @@ function bumpVersion(files, bumpType) {
             fileName);
     });
 
-    bumpReadmeVersion(originalVersion, newVersion);
+    bumpReadmeVersion(originalVersion, newVersion, bumpType);
 
     return newVersion;
 }
@@ -225,7 +225,7 @@ function insertBanner(files, banner) {
     });
 }
 
-function bumpReadmeVersion(oldVersion, newVersion) {
+function bumpReadmeVersion(oldVersion, newVersion, bumpType) {
     status('Replace readme version', oldVersion, '->', newVersion);
     if (config.dryRun) return;
 
@@ -236,14 +236,16 @@ function bumpReadmeVersion(oldVersion, newVersion) {
     var re = new RegExp('Version: ' + oldVersion, 'g');
     var newContent = content.replace(re, 'Version: ' + newVersion);
 
-    var oldReleaseVersion = oldVersion;
-    if (S(oldReleaseVersion).endsWith(config.devSuffix)) {
-        oldReleaseVersion = S(oldReleaseVersion).chompRight(config.devSuffix).s;
-    }
+    if (bumpType !== 'dev') {
+        // Replace link to previous stable
+        var oldReleaseVersion = oldVersion;
+        if (S(oldReleaseVersion).endsWith(config.devSuffix)) {
+            oldReleaseVersion = S(oldReleaseVersion).chompRight(config.devSuffix).s;
+        }
 
-    // Replace link to previous stable
-    re = new RegExp('tree/[0-9]\.[0-9]\.[0-9]');
-    newContent = newContent.replace(re, 'tree/' + oldReleaseVersion);
+        re = new RegExp('tree/[0-9]\\.[0-9]\\.[0-9]');
+        newContent = newContent.replace(re, 'tree/' + oldReleaseVersion);
+    }
 
     fs.writeFileSync(filePath, newContent);
 }
