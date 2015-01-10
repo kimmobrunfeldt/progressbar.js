@@ -53,7 +53,7 @@ var Progress = function Progress(container, opts) {
     this._container.appendChild(svgView.svg);
 
     this.text = null;
-    if (this._opts.text) {
+    if (this._opts.text.value) {
         this.text = this._createTextElement(this._opts, this._container);
         this._container.appendChild(this.text);
     }
