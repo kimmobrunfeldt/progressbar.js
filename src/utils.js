@@ -4,13 +4,20 @@ var PREFIXES = 'webkit moz o ms'.split(' ');
 
 // Copy all attributes from source object to destination object.
 // destination object is mutated.
-function extend(destination, source) {
+function extend(destination, source, recursive) {
     destination = destination || {};
     source = source || {};
+    recursive = recursive || false;
 
     for (var attrName in source) {
         if (source.hasOwnProperty(attrName)) {
-            destination[attrName] = source[attrName];
+            var destVal = destination[attrName];
+            var sourceVal = source[attrName];
+            if (recursive && isObject(destVal) && isObject(sourceVal)) {
+                destination[attrName] = extend(destVal, sourceVal, recursive);
+            } else {
+                destination[attrName] = sourceVal;
+            }
         }
     }
 
@@ -42,11 +49,10 @@ function setStyle(element, style, value) {
     for (var i = 0; i < PREFIXES.length; ++i) {
         var prefix = capitalize(PREFIXES[i]);
         element.style[prefix + capitalize(style)] = value;
-
     }
 
     element.style[style] = value;
-};
+}
 
 function capitalize(text) {
     return text.charAt(0).toUpperCase() + text.slice(1);
@@ -60,11 +66,26 @@ function isFunction(obj) {
     return typeof obj === 'function';
 }
 
+function isArray(obj) {
+    return toString.call(obj) === '[object Array]';
+}
+
+// Returns true if `obj` is object as in {a: 1, b: 2}, not if it's function or
+// array
+function isObject(obj) {
+    if (isArray(obj)) return false;
+
+    var type = typeof obj;
+    return type === 'object' && !!obj;
+}
+
+
 module.exports = {
     extend: extend,
     render: render,
     setStyle: setStyle,
     capitalize: capitalize,
     isString: isString,
-    isFunction: isFunction
+    isFunction: isFunction,
+    isObject: isObject
 };
