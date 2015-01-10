@@ -16,7 +16,7 @@ See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for example
 
 # Get started
 
-[![Build Status](https://api.travis-ci.org/kimmobrunfeldt/progressbar.js.svg?branch=master)](https://travis-ci.org/kimmobrunfeldt/progressbar.js) *Build status and browser tests for current master*
+[![Build Status](https://api.travis-ci.org/kimmobrunfeldt/progressbar.js.svg?branch=master)](https://travis-ci.org/kimmobrunfeldt/progressbar.js) *Build status and browser tests for current **master** *
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/kimmobrunfeldt.svg)](https://saucelabs.com/u/kimmobrunfeldt)
 
@@ -194,6 +194,7 @@ with CSS.
         trailWidth: 0.8,
 
         // Text options. Text element is a <p> element appended to container
+        // You can add CSS rules for the text element with the className
         // NOTE: When text is set, 'position: relative' will be set to the
         // container for centering. You can also prevent all style modifications
         // with 'autoStyle: false'
@@ -209,7 +210,7 @@ with CSS.
 
             // Class name for text element.
             // Default: 'progressbar-text'
-            className: '.progressbar__label',
+            className: 'progressbar__label',
 
             // If true, CSS is automatically set for container and text element.
             // If you want to modify all CSS your self, set this to false
