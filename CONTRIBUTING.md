@@ -120,3 +120,5 @@ animation customizations and possible even using different easings per animation
 * Ship distributables also to NPM to ease life of Browserify users.
 * Delegate shifty dependency handling to NPM instead of keeping it in repository but still bundle it inside the final distributable.
 * Automate tests so that testing is locally fast and CI runs tests with more browsers in Sauce Labs
+* Because of introducing text attribute, the library must modify CSS also. Provide user an option to make CSS them selves.
+* Keep **master** branch as a release branch so that new users can see the documentation for latest release instead of development version.
