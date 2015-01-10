@@ -110,7 +110,7 @@ Progress.prototype.setText = function setText(text) {
     if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
 
     if (this.text === null) {
-        this.text = this._createTextElement(this._container, text);
+        this.text = this._createTextElement(this._opts, this._container);
         this._container.appendChild(this.text);
         return;
     }
