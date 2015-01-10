@@ -52,17 +52,17 @@ var sharedTests = function sharedTests() {
 
     it('animate should change value', function(done) {
         this.bar.set(1);
-        this.bar.animate(0, {duration: 500});
+        this.bar.animate(0, {duration: 600});
 
         var self = this;
         setTimeout(function checkValueHasChanged() {
             expect(self.bar.value()).not.to.almost.equal(1, PRECISION);
-        }, 100);
+        }, 200);
 
         setTimeout(function checkAnimationHasCompleted() {
             expect(self.bar.value()).to.almost.equal(0, PRECISION);
             done();
-        }, 800);
+        }, 1000);
     });
 
     it('stop() should stop animation', function(done) {
