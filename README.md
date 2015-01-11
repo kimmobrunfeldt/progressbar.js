@@ -1,6 +1,6 @@
 # ProgressBar.js
 
-**Version: 0.6.1-dev** ([*previous stable*](https://github.com/kimmobrunfeldt/progressbar.js/tree/0.6.0), [*latest dev*](https://github.com/kimmobrunfeldt/progressbar.js/tree/dev))
+**Version: 0.7.0** ([*previous stable*](https://github.com/kimmobrunfeldt/progressbar.js/tree/0.6.1), [*latest dev*](https://github.com/kimmobrunfeldt/progressbar.js/tree/dev))
 
 <br>
 ![Beautiful animation](docs/animation.gif)
