@@ -47,7 +47,7 @@ Path.prototype.set = function set(progress) {
 
     var step = this._opts.step;
     if (utils.isFunction(step)) {
-        var values = this._calculateTo(progress, 'linear');
+        var values = this._calculateTo(progress, this._opts.easing);
         step(values, this._opts.attachment || this);
     }
 };
