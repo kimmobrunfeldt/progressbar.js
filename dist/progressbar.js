@@ -1,4 +1,4 @@
-// ProgressBar.js 0.6.1
+// ProgressBar.js 0.7.0
 // https://kimmobrunfeldt.github.io/progressbar.js
 // License: MIT
 
@@ -1424,7 +1424,7 @@ var utils = require('./utils');
 
 
 var Line = function Line(container, options) {
-    this._pathTemplate = "M 0,{center} L 100,{center}";
+    this._pathTemplate = 'M 0,{center} L 100,{center}';
     Progress.apply(this, arguments);
 };
 
@@ -1432,8 +1432,8 @@ Line.prototype = new Progress();
 Line.prototype.constructor = Line;
 
 Line.prototype._initializeSvg = function _initializeSvg(svg, opts) {
-    svg.setAttribute("viewBox", "0 0 100 " + opts.strokeWidth);
-    svg.setAttribute("preserveAspectRatio", "none");
+    svg.setAttribute('viewBox', '0 0 100 ' + opts.strokeWidth);
+    svg.setAttribute('preserveAspectRatio', 'none');
 };
 
 Line.prototype._pathString = function _pathString(opts) {
@@ -1482,7 +1482,7 @@ var Path = function Path(path, opts) {
     // Default parameters for animation
     opts = utils.extend({
         duration: 800,
-        easing: "linear",
+        easing: 'linear',
         from: {},
         to: {},
         step: function() {}
@@ -1499,31 +1499,30 @@ var Path = function Path(path, opts) {
 };
 
 Path.prototype.value = function value() {
-    var computedStyle = window.getComputedStyle(this._path, null);
-    var offset = computedStyle.getPropertyValue('stroke-dashoffset');
-    // Remove 'px' suffix
-    offset = parseFloat(offset, 10);
+    var offset = this._getComputedDashOffset();
     var length = this._path.getTotalLength();
 
     var progress = 1 - offset / length;
     // Round number to prevent returning very small number like 1e-30, which
     // is practically 0
-    return parseFloat(progress.toFixed(10), 10);
+    return parseFloat(progress.toFixed(6), 10);
 };
 
 Path.prototype.set = function set(progress) {
     this.stop();
 
-    var length = this._path.getTotalLength();
-    this._path.style.strokeDashoffset = length - progress * length;
+    this._path.style.strokeDashoffset = this._progressToOffset(progress);
+
+    var step = this._opts.step;
+    if (utils.isFunction(step)) {
+        var values = this._calculateTo(progress, 'linear');
+        step(values, this._opts.attachment || this);
+    }
 };
 
 Path.prototype.stop = function stop() {
     this._stopTween();
-
-    var computedStyle = window.getComputedStyle(this._path, null);
-    var offset = computedStyle.getPropertyValue('stroke-dashoffset');
-    this._path.style.strokeDashoffset = offset;
+    this._path.style.strokeDashoffset = this._getComputedDashOffset();
 };
 
 // Method introduced here:
@@ -1536,7 +1535,7 @@ Path.prototype.animate = function animate(progress, opts, cb) {
         opts = {};
     }
 
-    var passedOpts = opts;
+    var passedOpts = utils.extend({}, opts);
 
     // Copy default opts to new object so defaults are not modified
     var defaultOpts = utils.extend({}, this._opts);
@@ -1551,16 +1550,10 @@ Path.prototype.animate = function animate(progress, opts, cb) {
     // picks up the starting position before animating
     this._path.getBoundingClientRect();
 
-    var computedStyle = window.getComputedStyle(this._path, null);
-    var offset = computedStyle.getPropertyValue('stroke-dashoffset');
-    // Remove 'px' suffix
-    offset = parseFloat(offset, 10);
-
-    var length = this._path.getTotalLength();
-    var newOffset = length - progress * length;
+    var offset = this._getComputedDashOffset();
+    var newOffset = this._progressToOffset(progress);
 
     var self = this;
-
     this._tweenable = new Tweenable();
     this._tweenable.tween({
         from: utils.extend({ offset: offset }, values.from),
@@ -1583,6 +1576,16 @@ Path.prototype.animate = function animate(progress, opts, cb) {
     });
 };
 
+Path.prototype._getComputedDashOffset = function _getComputedDashOffset() {
+    var computedStyle = window.getComputedStyle(this._path, null);
+    return parseFloat(computedStyle.getPropertyValue('stroke-dashoffset'), 10);
+};
+
+Path.prototype._progressToOffset = function _progressToOffset(progress) {
+    var length = this._path.getTotalLength();
+    return length - progress * length;
+};
+
 // Resolves from and to values for animation.
 Path.prototype._resolveFromAndTo = function _resolveFromAndTo(progress, easing, opts) {
     if (opts.from && opts.to) {
@@ -1592,24 +1595,20 @@ Path.prototype._resolveFromAndTo = function _resolveFromAndTo(progress, easing, 
         };
     }
 
-    var from = Tweenable.interpolate(
-        this._opts.from,
-        this._opts.to,
-        this.value(),
-        easing
-    );
-
-    var to = Tweenable.interpolate(
-        this._opts.from,
-        this._opts.to,
-        progress,
-        easing
-    );
-
     return {
-        from: from,
-        to: to
+        from: this._calculateFrom(easing),
+        to: this._calculateTo(progress, easing)
     };
+};
+
+// Calculate `from` values from options passed at initialization
+Path.prototype._calculateFrom = function _calculateFrom(easing) {
+    return Tweenable.interpolate(this._opts.from, this._opts.to, this.value(), easing);
+};
+
+// Calculate `to` values from options passed at initialization
+Path.prototype._calculateTo = function _calculateTo(progress, easing) {
+    return Tweenable.interpolate(this._opts.from, this._opts.to, progress, easing);
 };
 
 Path.prototype._stopTween = function _stopTween() {
@@ -1637,14 +1636,13 @@ var Path = require('./path');
 var utils = require('./utils');
 
 var DESTROYED_ERROR = 'Object is destroyed';
-var CONSTRUCTOR_CALL_ERROR = 'Constructor was called without new keyword';
 
 
 var Progress = function Progress(container, opts) {
     // Throw a better error if progress bars are not initialized with `new`
     // keyword
     if (!(this instanceof Progress)) {
-        throw new Error(CONSTRUCTOR_CALL_ERROR);
+        throw new Error('Constructor was called without new keyword');
     }
 
     // Prevent calling constructor without parameters so inheritance
@@ -1655,7 +1653,22 @@ var Progress = function Progress(container, opts) {
     // We just want to set the prototype for Line.
     if (arguments.length === 0) return;
 
-    var svgView = this._createSvgView(opts);
+    // Default parameters for progress bar creation
+    this._opts = utils.extend({
+        color: '#555',
+        strokeWidth: 1.0,
+        trailColor: null,
+        trailWidth: null,
+        fill: null,
+        text: {
+            autoStyle: true,
+            color: null,
+            value: '',
+            className: 'progressbar-text'
+        }
+    }, opts, true);  // Use recursive extend
+
+    var svgView = this._createSvgView(this._opts);
 
     var element;
     if (utils.isString(container)) {
@@ -1663,17 +1676,30 @@ var Progress = function Progress(container, opts) {
     } else {
         element = container;
     }
-    element.appendChild(svgView.svg);
+
+    if (!element) {
+        throw new Error('Container does not exist: ' + container);
+    }
+
+    this._container = element;
+    this._container.appendChild(svgView.svg);
+
+    this.text = null;
+    if (this._opts.text.value) {
+        this.text = this._createTextElement(this._opts, this._container);
+        this._container.appendChild(this.text);
+    }
 
     var newOpts = utils.extend({
         attachment: this
-    }, opts);
+    }, this._opts);
     this._progressPath = new Path(svgView.path, newOpts);
 
     // Expose public attributes
     this.svg = svgView.svg;
     this.path = svgView.path;
     this.trail = svgView.trail;
+    // this.text is also a public attribute
 };
 
 Progress.prototype.animate = function animate(progress, opts, cb) {
@@ -1695,6 +1721,11 @@ Progress.prototype.destroy = function destroy() {
     this.path = null;
     this.trail = null;
     this._progressPath = null;
+
+    if (this.text !== null) {
+        this.text.parentNode.removeChild(this.text);
+        this.text = null;
+    }
 };
 
 Progress.prototype.set = function set(progress) {
@@ -1707,21 +1738,25 @@ Progress.prototype.value = function value() {
     return this._progressPath.value();
 };
 
-Progress.prototype._createSvgView = function _createSvgView(opts) {
-    // Default parameters for progress bar creation
-    opts = utils.extend({
-        color: "#555",
-        strokeWidth: 1.0,
-        trailColor: null,
-        trailWidth: null,
-        fill: null
-    }, opts);
+Progress.prototype.setText = function setText(text) {
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
 
-    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    if (this.text === null) {
+        this.text = this._createTextElement(this._opts, this._container);
+        this._container.appendChild(this.text);
+        return;
+    }
+
+    this.text.removeChild(this.text.firstChild);
+    this.text.appendChild(document.createTextNode(text));
+};
+
+Progress.prototype._createSvgView = function _createSvgView(opts) {
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     this._initializeSvg(svg, opts);
 
     var trailPath = null;
-    // Each option listed in the if condition are "triggers" for creating
+    // Each option listed in the if condition are 'triggers' for creating
     // the trail path
     if (opts.trailColor || opts.trailWidth) {
         trailPath = this._createTrail(opts);
@@ -1739,7 +1774,7 @@ Progress.prototype._createSvgView = function _createSvgView(opts) {
 };
 
 Progress.prototype._initializeSvg = function _initializeSvg(svg, opts) {
-    svg.setAttribute("viewBox", "0 0 100 100");
+    svg.setAttribute('viewBox', '0 0 100 100');
 };
 
 Progress.prototype._createPath = function _createPath(opts) {
@@ -1768,28 +1803,52 @@ Progress.prototype._createTrail = function _createTrail(opts) {
     return this._createPathElement(pathString, newOpts);
 };
 
-Progress.prototype._createPathElement =
-function _createPathElement(pathString, opts) {
-    var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("d", pathString);
-    path.setAttribute("stroke", opts.color);
-    path.setAttribute("stroke-width", opts.strokeWidth);
+Progress.prototype._createPathElement = function _createPathElement(pathString, opts) {
+    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', pathString);
+    path.setAttribute('stroke', opts.color);
+    path.setAttribute('stroke-width', opts.strokeWidth);
 
     if (opts.fill) {
-        path.setAttribute("fill", opts.fill);
+        path.setAttribute('fill', opts.fill);
     } else {
-        path.setAttribute("fill-opacity", "0");
+        path.setAttribute('fill-opacity', '0');
     }
 
     return path;
 };
 
+Progress.prototype._createTextElement = function _createTextElement(opts, container) {
+    var element = document.createElement('p');
+    element.appendChild(document.createTextNode(opts.text.value));
+
+    if (opts.text.autoStyle) {
+        // Center text
+        container.style.position = 'relative';
+        element.style.position = 'absolute';
+        element.style.top = '50%';
+        element.style.left = '50%';
+        element.style.padding = 0;
+        element.style.margin = 0;
+        utils.setStyle(element, 'transform', 'translate(-50%, -50%');
+
+        if (opts.text.color) {
+            element.style.color = opts.text.color;
+        } else {
+            element.style.color = opts.color;
+        }
+    }
+    element.className = opts.text.className;
+
+    return element;
+};
+
 Progress.prototype._pathString = function _pathString(opts) {
-    throw new Error("Override this function for each progress bar");
+    throw new Error('Override this function for each progress bar');
 };
 
 Progress.prototype._trailString = function _trailString(opts) {
-    throw new Error("Override this function for each progress bar");
+    throw new Error('Override this function for each progress bar');
 };
 
 module.exports = Progress;
@@ -1848,15 +1907,24 @@ module.exports = Square;
 },{"./progress":6,"./utils":8}],8:[function(require,module,exports){
 // Utility functions
 
+var PREFIXES = 'webkit moz o ms'.split(' ');
+
 // Copy all attributes from source object to destination object.
 // destination object is mutated.
-function extend(destination, source) {
+function extend(destination, source, recursive) {
     destination = destination || {};
     source = source || {};
+    recursive = recursive || false;
 
     for (var attrName in source) {
         if (source.hasOwnProperty(attrName)) {
-            destination[attrName] = source[attrName];
+            var destVal = destination[attrName];
+            var sourceVal = source[attrName];
+            if (recursive && isObject(destVal) && isObject(sourceVal)) {
+                destination[attrName] = extend(destVal, sourceVal, recursive);
+            } else {
+                destination[attrName] = sourceVal;
+            }
         }
     }
 
@@ -1875,7 +1943,7 @@ function render(template, vars) {
         if (vars.hasOwnProperty(key)) {
             var val = vars[key];
             var regExpString = '\\{' + key + '\\}';
-            var regExp = new RegExp(regExpString, "g");
+            var regExp = new RegExp(regExpString, 'g');
 
             rendered = rendered.replace(regExp, val);
         }
@@ -1884,19 +1952,49 @@ function render(template, vars) {
     return rendered;
 }
 
+function setStyle(element, style, value) {
+    for (var i = 0; i < PREFIXES.length; ++i) {
+        var prefix = capitalize(PREFIXES[i]);
+        element.style[prefix + capitalize(style)] = value;
+    }
+
+    element.style[style] = value;
+}
+
+function capitalize(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 function isString(obj) {
     return typeof obj === 'string' || obj instanceof String;
 }
 
 function isFunction(obj) {
-    return typeof obj === "function";
+    return typeof obj === 'function';
 }
+
+function isArray(obj) {
+    return Object.prototype.toString.call(obj) === '[object Array]';
+}
+
+// Returns true if `obj` is object as in {a: 1, b: 2}, not if it's function or
+// array
+function isObject(obj) {
+    if (isArray(obj)) return false;
+
+    var type = typeof obj;
+    return type === 'object' && !!obj;
+}
+
 
 module.exports = {
     extend: extend,
     render: render,
+    setStyle: setStyle,
+    capitalize: capitalize,
     isString: isString,
-    isFunction: isFunction
+    isFunction: isFunction,
+    isObject: isObject
 };
 
 },{}]},{},[4])(4)
