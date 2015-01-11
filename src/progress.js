@@ -110,12 +110,14 @@ Progress.prototype.setText = function setText(text) {
     if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
 
     if (this.text === null) {
+        // Create new text node
         this.text = this._createTextElement(this._opts, this._container);
         this._container.appendChild(this.text);
-        return;
+    } else {
+        // Remove previous text node
+        this.text.removeChild(this.text.firstChild);
     }
 
-    this.text.removeChild(this.text.firstChild);
     this.text.appendChild(document.createTextNode(text));
 };
 
