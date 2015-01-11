@@ -27,7 +27,7 @@ var Path = function Path(path, opts) {
     // Set up the starting positions
     var length = this._path.getTotalLength();
     this._path.style.strokeDasharray = length + ' ' + length;
-    this._path.style.strokeDashoffset = length;
+    this.set(0);
 };
 
 Path.prototype.value = function value() {
