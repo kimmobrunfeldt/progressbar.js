@@ -1,8 +1,19 @@
 
 .progressbar-text {
-    font-size: 4em;
     color: $main-color-bright;
     font-weight: 100;
+}
+
+#example-circle-percent {
+    .progressbar-text {
+        font-size: 40px;
+    }
+}
+
+#example-clock {
+    .progressbar-text {
+        font-size: 60px;
+    }
 }
 
 

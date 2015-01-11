@@ -9,6 +9,6 @@ var seconds = new ProgressBar.Circle(element, {
 setInterval(function() {
     var second = new Date().getSeconds();
     seconds.animate(second / 60, function() {
-        seconds.setText(seconds;
+        seconds.setText(second);
     });
 }, 1000);

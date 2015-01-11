@@ -4153,26 +4153,27 @@ a {
   pointer-events: none;
 }
 
-/* line 1, ../sass/examples.scss */
-#example-clock-container {
-  position: relative;
-}
-/* line 4, ../sass/examples.scss */
-#example-clock-container #clock-seconds {
-  font-size: 4em;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+/* line 2, ../sass/examples.scss */
+.progressbar-text {
+  color: #fcb03c;
+  font-weight: 100;
 }
 
-/* line 17, ../sass/examples.scss */
+/* line 8, ../sass/examples.scss */
+#example-circle-percent .progressbar-text {
+  font-size: 40px;
+}
+
+/* line 14, ../sass/examples.scss */
+#example-clock .progressbar-text {
+  font-size: 60px;
+}
+
+/* line 20, ../sass/examples.scss */
 #example-line-container {
   position: relative;
 }
-/* line 20, ../sass/examples.scss */
+/* line 23, ../sass/examples.scss */
 #example-line-container svg {
   position: absolute;
   top: 50%;
