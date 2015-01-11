@@ -16,7 +16,7 @@ See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for example
 
 # Get started
 
-[![Build Status](https://api.travis-ci.org/kimmobrunfeldt/progressbar.js.svg?branch=master)](https://travis-ci.org/kimmobrunfeldt/progressbar.js) *Build status and browser tests for current **master** *
+[![Build Status](https://api.travis-ci.org/kimmobrunfeldt/progressbar.js.svg?branch=master)](https://travis-ci.org/kimmobrunfeldt/progressbar.js) *Build status and browser tests for current master*
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/kimmobrunfeldt.svg)](https://saucelabs.com/u/kimmobrunfeldt)
 
