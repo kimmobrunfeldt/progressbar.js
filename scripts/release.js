@@ -78,7 +78,7 @@ function main() {
         return gitTag(newVersion);
     })
     .then(function() {
-        gitPush('dev')
+        gitPush();
     })
     .then(function() {
         return gitPushTag(newVersion);
@@ -95,7 +95,16 @@ function main() {
         gitMergeTagToMaster(newVersion);
     })
     .then(function() {
-        gitPush('master');
+        gitCheckout('master');
+    })
+    .then(function() {
+        gitPush();
+    })
+    .then(function() {
+        gitCheckout('dev');
+    })
+    .then(function() {
+        gitPush();
     })
     .then(function() {
         console.log('');
@@ -268,11 +277,11 @@ function gitTag(name) {
     return run(cmd, msg);
 }
 
-function gitPush(branch) {
+function gitPush() {
     if (config.noPush) return;
 
-    var cmd = 'git push ' + branch;
-    var msg = 'Push' + branch + ' to remote';
+    var cmd = 'git push';
+    var msg = 'Push to remote';
     return run(cmd, msg);
 }
 
@@ -284,11 +293,9 @@ function gitPushTag(tagName) {
     return run(cmd, msg);
 }
 
-function npmPublish() {
-    if (config.noPush) return;
-
-    var cmd = 'npm publish';
-    var msg = 'Publish to npm';
+function gitCheckout(branch) {
+    var cmd = 'git checkout ' + branch;
+    var msg = 'Checkout branch ' + branch;
     return run(cmd, msg);
 }
 
@@ -297,7 +304,7 @@ function gitMergeTagToMaster(tag) {
         version: tag
     });
 
-    return run('git checkout master', 'Checkout master')
+    return gitCheckout('master')
     .then(function() {
         var msg = 'Squash merge ' + tag + ' to master';
         return run('git merge --squash ' + tag, msg);
@@ -308,6 +315,14 @@ function gitMergeTagToMaster(tag) {
     .then(function() {
         return run('git checkout dev', 'Checkout dev');
     });
+}
+
+function npmPublish() {
+    if (config.noPush) return;
+
+    var cmd = 'npm publish';
+    var msg = 'Publish to npm';
+    return run(cmd, msg);
 }
 
 function _gitBranchName() {
