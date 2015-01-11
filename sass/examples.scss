@@ -1,16 +1,8 @@
-#example-clock-container {
-    position: relative;
 
-    #clock-seconds {
-        font-size: 4em;
-        position: absolute;
-
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-    }
+.progressbar-text {
+    font-size: 4em;
+    color: $main-color-bright;
+    font-weight: 100;
 }
 
 
