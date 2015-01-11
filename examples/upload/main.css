@@ -58,7 +58,9 @@ a {
   height: 80%;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .file-picker__icon--cancel {
@@ -107,11 +109,11 @@ a {
 
 .rotating {
   -webkit-animation: rotating 3s linear infinite;
-  -moz-animation: rotating 3s linear infinite;
   -ms-animation: rotating 3s linear infinite;
-  -o-animation: rotating 3s linear infinite;
   animation: rotating 3s linear infinite;
-  transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+      -ms-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
 }
 
 @keyframes rotating {
