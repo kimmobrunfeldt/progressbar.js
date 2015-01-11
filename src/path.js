@@ -97,10 +97,6 @@ Path.prototype.animate = function animate(progress, opts, cb) {
             opts.step(state, opts.attachment);
         },
         finish: function(state) {
-            // step function is not called on the last step of animation
-            self._path.style.strokeDashoffset = state.offset;
-            opts.step(state, opts.attachment);
-
             if (utils.isFunction(cb)) {
                 cb();
             }
