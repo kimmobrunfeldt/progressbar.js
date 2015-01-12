@@ -235,6 +235,11 @@ function insertBanner(files, banner) {
 }
 
 function bumpReadmeVersion(oldVersion, newVersion, bumpType) {
+    if (bumpType === 'dev') {
+        // Don't bump readme version in to dev version
+        return;
+    }
+
     status('Replace readme version', oldVersion, '->', newVersion);
     if (config.dryRun) return;
 
@@ -245,16 +250,14 @@ function bumpReadmeVersion(oldVersion, newVersion, bumpType) {
     var re = new RegExp('Version: ' + oldVersion, 'g');
     var newContent = content.replace(re, 'Version: ' + newVersion);
 
-    if (bumpType !== 'dev') {
-        // Replace link to previous stable
-        var oldReleaseVersion = oldVersion;
-        if (S(oldReleaseVersion).endsWith(config.devSuffix)) {
-            oldReleaseVersion = S(oldReleaseVersion).chompRight(config.devSuffix).s;
-        }
-
-        re = new RegExp('tree/[0-9]\\.[0-9]\\.[0-9]');
-        newContent = newContent.replace(re, 'tree/' + oldReleaseVersion);
+    // Replace link to previous stable
+    var oldReleaseVersion = oldVersion;
+    if (S(oldReleaseVersion).endsWith(config.devSuffix)) {
+        oldReleaseVersion = S(oldReleaseVersion).chompRight(config.devSuffix).s;
     }
+
+    re = new RegExp('tree/[0-9]\\.[0-9]\\.[0-9]');
+    newContent = newContent.replace(re, 'tree/' + oldReleaseVersion);
 
     fs.writeFileSync(filePath, newContent);
 }
