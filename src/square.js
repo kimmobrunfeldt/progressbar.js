@@ -1,6 +1,6 @@
 // Square shaped progress bar
 
-var Progress = require('./progress');
+var Shape = require('./shape');
 var utils = require('./utils');
 
 
@@ -19,10 +19,10 @@ var Square = function Square(container, options) {
         ' L {halfOfStrokeWidth},{width}' +
         ' L {halfOfStrokeWidth},{halfOfStrokeWidth}';
 
-    Progress.apply(this, arguments);
+    Shape.apply(this, arguments);
 };
 
-Square.prototype = new Progress();
+Square.prototype = new Shape();
 Square.prototype.constructor = Square;
 
 Square.prototype._pathString = function _pathString(opts) {

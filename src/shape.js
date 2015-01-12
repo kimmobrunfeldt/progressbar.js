@@ -6,17 +6,17 @@ var utils = require('./utils');
 var DESTROYED_ERROR = 'Object is destroyed';
 
 
-var Progress = function Progress(container, opts) {
+var Shape = function Shape(container, opts) {
     // Throw a better error if progress bars are not initialized with `new`
     // keyword
-    if (!(this instanceof Progress)) {
+    if (!(this instanceof Shape)) {
         throw new Error('Constructor was called without new keyword');
     }
 
     // Prevent calling constructor without parameters so inheritance
-    // works correctly. To understand, this is how Progress is inherited:
+    // works correctly. To understand, this is how Shape is inherited:
     //
-    //   Line.prototype = new Progress();
+    //   Line.prototype = new Shape();
     //
     // We just want to set the prototype for Line.
     if (arguments.length === 0) return;
@@ -70,17 +70,17 @@ var Progress = function Progress(container, opts) {
     this._progressPath = new Path(svgView.path, newOpts);
 };
 
-Progress.prototype.animate = function animate(progress, opts, cb) {
+Shape.prototype.animate = function animate(progress, opts, cb) {
     if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
     this._progressPath.animate(progress, opts, cb);
 };
 
-Progress.prototype.stop = function stop() {
+Shape.prototype.stop = function stop() {
     if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
     this._progressPath.stop();
 };
 
-Progress.prototype.destroy = function destroy() {
+Shape.prototype.destroy = function destroy() {
     if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
 
     this.stop();
@@ -96,17 +96,17 @@ Progress.prototype.destroy = function destroy() {
     }
 };
 
-Progress.prototype.set = function set(progress) {
+Shape.prototype.set = function set(progress) {
     if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
     this._progressPath.set(progress);
 };
 
-Progress.prototype.value = function value() {
+Shape.prototype.value = function value() {
     if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
     return this._progressPath.value();
 };
 
-Progress.prototype.setText = function setText(text) {
+Shape.prototype.setText = function setText(text) {
     if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
 
     if (this.text === null) {
@@ -121,7 +121,7 @@ Progress.prototype.setText = function setText(text) {
     this.text.appendChild(document.createTextNode(text));
 };
 
-Progress.prototype._createSvgView = function _createSvgView(opts) {
+Shape.prototype._createSvgView = function _createSvgView(opts) {
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     this._initializeSvg(svg, opts);
 
@@ -143,16 +143,16 @@ Progress.prototype._createSvgView = function _createSvgView(opts) {
     };
 };
 
-Progress.prototype._initializeSvg = function _initializeSvg(svg, opts) {
+Shape.prototype._initializeSvg = function _initializeSvg(svg, opts) {
     svg.setAttribute('viewBox', '0 0 100 100');
 };
 
-Progress.prototype._createPath = function _createPath(opts) {
+Shape.prototype._createPath = function _createPath(opts) {
     var pathString = this._pathString(opts);
     return this._createPathElement(pathString, opts);
 };
 
-Progress.prototype._createTrail = function _createTrail(opts) {
+Shape.prototype._createTrail = function _createTrail(opts) {
     // Create path string with original passed options
     var pathString = this._trailString(opts);
 
@@ -173,7 +173,7 @@ Progress.prototype._createTrail = function _createTrail(opts) {
     return this._createPathElement(pathString, newOpts);
 };
 
-Progress.prototype._createPathElement = function _createPathElement(pathString, opts) {
+Shape.prototype._createPathElement = function _createPathElement(pathString, opts) {
     var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('d', pathString);
     path.setAttribute('stroke', opts.color);
@@ -188,7 +188,7 @@ Progress.prototype._createPathElement = function _createPathElement(pathString, 
     return path;
 };
 
-Progress.prototype._createTextElement = function _createTextElement(opts, container) {
+Shape.prototype._createTextElement = function _createTextElement(opts, container) {
     var element = document.createElement('p');
     element.appendChild(document.createTextNode(opts.text.value));
 
@@ -213,12 +213,12 @@ Progress.prototype._createTextElement = function _createTextElement(opts, contai
     return element;
 };
 
-Progress.prototype._pathString = function _pathString(opts) {
+Shape.prototype._pathString = function _pathString(opts) {
     throw new Error('Override this function for each progress bar');
 };
 
-Progress.prototype._trailString = function _trailString(opts) {
+Shape.prototype._trailString = function _trailString(opts) {
     throw new Error('Override this function for each progress bar');
 };
 
-module.exports = Progress;
+module.exports = Shape;

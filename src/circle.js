@@ -1,6 +1,6 @@
 // Circle shaped progress bar
 
-var Progress = require('./progress');
+var Shape = require('./shape');
 var utils = require('./utils');
 
 
@@ -12,10 +12,10 @@ var Circle = function Circle(container, options) {
         ' a {radius},{radius} 0 1 1 0,{2radius}' +
         ' a {radius},{radius} 0 1 1 0,-{2radius}';
 
-    Progress.apply(this, arguments);
+    Shape.apply(this, arguments);
 };
 
-Circle.prototype = new Progress();
+Circle.prototype = new Shape();
 Circle.prototype.constructor = Circle;
 
 Circle.prototype._pathString = function _pathString(opts) {

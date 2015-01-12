@@ -1,15 +1,15 @@
 // Line shaped progress bar
 
-var Progress = require('./progress');
+var Shape = require('./shape');
 var utils = require('./utils');
 
 
 var Line = function Line(container, options) {
     this._pathTemplate = 'M 0,{center} L 100,{center}';
-    Progress.apply(this, arguments);
+    Shape.apply(this, arguments);
 };
 
-Line.prototype = new Progress();
+Line.prototype = new Shape();
 Line.prototype.constructor = Line;
 
 Line.prototype._initializeSvg = function _initializeSvg(svg, opts) {
