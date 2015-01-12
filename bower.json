@@ -1,7 +1,7 @@
 {
   "name": "progressbar.js",
   "main": "dist/progressbar.js",
-  "version": "0.7.0-dev",
+  "version": "0.7.1",
   "homepage": "https://github.com/kimmobrunfeldt/progressbar.js",
   "authors": [
     "Kimmo Brunfeldt <kimmobrunfeldt@gmail.com>"
