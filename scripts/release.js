@@ -32,7 +32,7 @@ var config = {
     dryRun: false,
 
     // If true, don't push commits/tags or release to npm
-    noPush: false,
+    noPush: true,
     consolePrefix: '->',
     devSuffix: '-dev'
 }
@@ -225,22 +225,22 @@ function bumpReadmeVersion(oldVersion, newVersion, bumpType) {
         return;
     }
 
-    status('Replace readme version', oldVersion, '->', newVersion);
+    var oldReleaseVersion = oldVersion;
+    if (S(oldReleaseVersion).endsWith(config.devSuffix)) {
+        oldReleaseVersion = S(oldReleaseVersion).chompRight(config.devSuffix).s;
+    }
+
+    status('Replace readme version', oldReleaseVersion, '->', newVersion);
     if (config.dryRun) return;
 
     var filePath = path.join(projectRoot, config.readmeFile);
     var content = fs.readFileSync(filePath, {encoding: 'utf-8'});
 
     // Update visible version
-    var re = new RegExp('Version: ' + oldVersion, 'g');
+    var re = new RegExp('Version: ' + oldReleaseVersion, 'g');
     var newContent = content.replace(re, 'Version: ' + newVersion);
 
     // Replace link to previous stable
-    var oldReleaseVersion = oldVersion;
-    if (S(oldReleaseVersion).endsWith(config.devSuffix)) {
-        oldReleaseVersion = S(oldReleaseVersion).chompRight(config.devSuffix).s;
-    }
-
     re = new RegExp('tree/[0-9]\\.[0-9]\\.[0-9]');
     newContent = newContent.replace(re, 'tree/' + oldReleaseVersion);
 
