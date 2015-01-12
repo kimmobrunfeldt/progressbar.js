@@ -57,12 +57,12 @@ var sharedTests = function sharedTests() {
         var self = this;
         setTimeout(function checkValueHasChanged() {
             expect(self.bar.value()).not.to.almost.equal(1, PRECISION);
-        }, 200);
+        }, 300);
 
         setTimeout(function checkAnimationHasCompleted() {
             expect(self.bar.value()).to.almost.equal(0, PRECISION);
             done();
-        }, 1000);
+        }, 1200);
     });
 
     it('stop() should stop animation', function(done) {
