@@ -55,8 +55,8 @@ function main() {
 
     _gitBranchName()
     .then(function(stdout) {
-        if (stdout.trim().toLowerCase() !== 'dev') {
-            throw new Error('You should be in dev branch before running the script!');
+        if (stdout.trim().toLowerCase() !== 'master') {
+            throw new Error('You should be in master branch before running the script!');
         }
 
         return gitAdd(config.bannerFiles);
@@ -78,9 +78,6 @@ function main() {
         return gitTag(newVersion);
     })
     .then(function() {
-        gitPush();
-    })
-    .then(function() {
         return gitPushTag(newVersion);
     })
     .then(npmPublish)
@@ -90,18 +87,6 @@ function main() {
     })
     .then(function() {
         return gitCommit(config.backToDevMessage);
-    })
-    .then(function() {
-        gitMergeTagToMaster(newVersion);
-    })
-    .then(function() {
-        gitCheckout('master');
-    })
-    .then(function() {
-        gitPush();
-    })
-    .then(function() {
-        gitCheckout('dev');
     })
     .then(function() {
         gitPush();
@@ -300,24 +285,6 @@ function gitCheckout(branch) {
     var cmd = 'git checkout ' + branch;
     var msg = 'Checkout branch ' + branch;
     return run(cmd, msg);
-}
-
-function gitMergeTagToMaster(tag) {
-    var message = Mustache.render(config.releaseMessage, {
-        version: tag
-    });
-
-    return gitCheckout('master')
-    .then(function() {
-        var msg = 'Squash merge ' + tag + ' to master';
-        return run('git merge --squash ' + tag, msg);
-    })
-    .then(function() {
-        return gitCommit(message);
-    })
-    .then(function() {
-        return run('git checkout dev', 'Checkout dev');
-    });
 }
 
 function npmPublish() {
