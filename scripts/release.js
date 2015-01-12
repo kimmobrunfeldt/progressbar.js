@@ -55,8 +55,8 @@ function main() {
 
     _gitBranchName()
     .then(function(stdout) {
-        if (stdout.trim().toLowerCase() !== 'dev') {
-            throw new Error('You should be in dev branch before running the script!');
+        if (stdout.trim().toLowerCase() !== 'master') {
+            throw new Error('You should be in master branch before running the script!');
         }
 
         return gitAdd(config.bannerFiles);
@@ -78,9 +78,6 @@ function main() {
         return gitTag(newVersion);
     })
     .then(function() {
-        gitPush('dev')
-    })
-    .then(function() {
         return gitPushTag(newVersion);
     })
     .then(npmPublish)
@@ -92,10 +89,7 @@ function main() {
         return gitCommit(config.backToDevMessage);
     })
     .then(function() {
-        gitMergeTagToMaster(newVersion);
-    })
-    .then(function() {
-        gitPush('master');
+        gitPush();
     })
     .then(function() {
         console.log('');
@@ -226,6 +220,11 @@ function insertBanner(files, banner) {
 }
 
 function bumpReadmeVersion(oldVersion, newVersion, bumpType) {
+    if (bumpType === 'dev') {
+        // Don't bump readme version in to dev version
+        return;
+    }
+
     status('Replace readme version', oldVersion, '->', newVersion);
     if (config.dryRun) return;
 
@@ -236,16 +235,14 @@ function bumpReadmeVersion(oldVersion, newVersion, bumpType) {
     var re = new RegExp('Version: ' + oldVersion, 'g');
     var newContent = content.replace(re, 'Version: ' + newVersion);
 
-    if (bumpType !== 'dev') {
-        // Replace link to previous stable
-        var oldReleaseVersion = oldVersion;
-        if (S(oldReleaseVersion).endsWith(config.devSuffix)) {
-            oldReleaseVersion = S(oldReleaseVersion).chompRight(config.devSuffix).s;
-        }
-
-        re = new RegExp('tree/[0-9]\\.[0-9]\\.[0-9]');
-        newContent = newContent.replace(re, 'tree/' + oldReleaseVersion);
+    // Replace link to previous stable
+    var oldReleaseVersion = oldVersion;
+    if (S(oldReleaseVersion).endsWith(config.devSuffix)) {
+        oldReleaseVersion = S(oldReleaseVersion).chompRight(config.devSuffix).s;
     }
+
+    re = new RegExp('tree/[0-9]\\.[0-9]\\.[0-9]');
+    newContent = newContent.replace(re, 'tree/' + oldReleaseVersion);
 
     fs.writeFileSync(filePath, newContent);
 }
@@ -268,11 +265,11 @@ function gitTag(name) {
     return run(cmd, msg);
 }
 
-function gitPush(branch) {
+function gitPush() {
     if (config.noPush) return;
 
-    var cmd = 'git push ' + branch;
-    var msg = 'Push' + branch + ' to remote';
+    var cmd = 'git push';
+    var msg = 'Push to remote';
     return run(cmd, msg);
 }
 
@@ -284,30 +281,18 @@ function gitPushTag(tagName) {
     return run(cmd, msg);
 }
 
+function gitCheckout(branch) {
+    var cmd = 'git checkout ' + branch;
+    var msg = 'Checkout branch ' + branch;
+    return run(cmd, msg);
+}
+
 function npmPublish() {
     if (config.noPush) return;
 
     var cmd = 'npm publish';
     var msg = 'Publish to npm';
     return run(cmd, msg);
-}
-
-function gitMergeTagToMaster(tag) {
-    var message = Mustache.render(config.releaseMessage, {
-        version: tag
-    });
-
-    return run('git checkout master', 'Checkout master')
-    .then(function() {
-        var msg = 'Squash merge ' + tag + ' to master';
-        return run('git merge --squash ' + tag, msg);
-    })
-    .then(function() {
-        return gitCommit(message);
-    })
-    .then(function() {
-        return run('git checkout dev', 'Checkout dev');
-    });
 }
 
 function _gitBranchName() {

@@ -27,7 +27,7 @@ var Path = function Path(path, opts) {
     // Set up the starting positions
     var length = this._path.getTotalLength();
     this._path.style.strokeDasharray = length + ' ' + length;
-    this._path.style.strokeDashoffset = length;
+    this.set(0);
 };
 
 Path.prototype.value = function value() {
@@ -47,7 +47,7 @@ Path.prototype.set = function set(progress) {
 
     var step = this._opts.step;
     if (utils.isFunction(step)) {
-        var values = this._calculateTo(progress, 'linear');
+        var values = this._calculateTo(progress, this._opts.easing);
         step(values, this._opts.attachment || this);
     }
 };
@@ -97,10 +97,6 @@ Path.prototype.animate = function animate(progress, opts, cb) {
             opts.step(state, opts.attachment);
         },
         finish: function(state) {
-            // step function is not called on the last step of animation
-            self._path.style.strokeDashoffset = state.offset;
-            opts.step(state, opts.attachment);
-
             if (utils.isFunction(cb)) {
                 cb();
             }

@@ -58,16 +58,16 @@ var Progress = function Progress(container, opts) {
         this._container.appendChild(this.text);
     }
 
-    var newOpts = utils.extend({
-        attachment: this
-    }, this._opts);
-    this._progressPath = new Path(svgView.path, newOpts);
-
-    // Expose public attributes
+    // Expose public attributes before Path initialization
     this.svg = svgView.svg;
     this.path = svgView.path;
     this.trail = svgView.trail;
     // this.text is also a public attribute
+
+    var newOpts = utils.extend({
+        attachment: this
+    }, this._opts);
+    this._progressPath = new Path(svgView.path, newOpts);
 };
 
 Progress.prototype.animate = function animate(progress, opts, cb) {
@@ -110,12 +110,14 @@ Progress.prototype.setText = function setText(text) {
     if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
 
     if (this.text === null) {
+        // Create new text node
         this.text = this._createTextElement(this._opts, this._container);
         this._container.appendChild(this.text);
-        return;
+    } else {
+        // Remove previous text node
+        this.text.removeChild(this.text.firstChild);
     }
 
-    this.text.removeChild(this.text.firstChild);
     this.text.appendChild(document.createTextNode(text));
 };
 

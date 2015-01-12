@@ -1,4 +1,4 @@
-// ProgressBar.js 0.7.0
+// ProgressBar.js 0.7.1
 // https://kimmobrunfeldt.github.io/progressbar.js
 // License: MIT
 
@@ -1495,7 +1495,7 @@ var Path = function Path(path, opts) {
     // Set up the starting positions
     var length = this._path.getTotalLength();
     this._path.style.strokeDasharray = length + ' ' + length;
-    this._path.style.strokeDashoffset = length;
+    this.set(0);
 };
 
 Path.prototype.value = function value() {
@@ -1515,7 +1515,7 @@ Path.prototype.set = function set(progress) {
 
     var step = this._opts.step;
     if (utils.isFunction(step)) {
-        var values = this._calculateTo(progress, 'linear');
+        var values = this._calculateTo(progress, this._opts.easing);
         step(values, this._opts.attachment || this);
     }
 };
@@ -1565,10 +1565,6 @@ Path.prototype.animate = function animate(progress, opts, cb) {
             opts.step(state, opts.attachment);
         },
         finish: function(state) {
-            // step function is not called on the last step of animation
-            self._path.style.strokeDashoffset = state.offset;
-            opts.step(state, opts.attachment);
-
             if (utils.isFunction(cb)) {
                 cb();
             }
@@ -1690,16 +1686,16 @@ var Progress = function Progress(container, opts) {
         this._container.appendChild(this.text);
     }
 
-    var newOpts = utils.extend({
-        attachment: this
-    }, this._opts);
-    this._progressPath = new Path(svgView.path, newOpts);
-
-    // Expose public attributes
+    // Expose public attributes before Path initialization
     this.svg = svgView.svg;
     this.path = svgView.path;
     this.trail = svgView.trail;
     // this.text is also a public attribute
+
+    var newOpts = utils.extend({
+        attachment: this
+    }, this._opts);
+    this._progressPath = new Path(svgView.path, newOpts);
 };
 
 Progress.prototype.animate = function animate(progress, opts, cb) {
@@ -1742,12 +1738,14 @@ Progress.prototype.setText = function setText(text) {
     if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
 
     if (this.text === null) {
+        // Create new text node
         this.text = this._createTextElement(this._opts, this._container);
         this._container.appendChild(this.text);
-        return;
+    } else {
+        // Remove previous text node
+        this.text.removeChild(this.text.firstChild);
     }
 
-    this.text.removeChild(this.text.firstChild);
     this.text.appendChild(document.createTextNode(text));
 };
 

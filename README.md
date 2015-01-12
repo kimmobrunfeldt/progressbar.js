@@ -1,6 +1,6 @@
 # ProgressBar.js
 
-**Version: 0.7.0** ([*previous stable*](https://github.com/kimmobrunfeldt/progressbar.js/tree/0.6.1), [*latest dev*](https://github.com/kimmobrunfeldt/progressbar.js/tree/dev))
+**Version: 0.7.1** ([*previous stable*](https://github.com/kimmobrunfeldt/progressbar.js/tree/0.7.0), [*latest dev*](https://github.com/kimmobrunfeldt/progressbar.js/tree/dev))
 
 <br>
 ![Beautiful animation](docs/animation.gif)
@@ -16,7 +16,7 @@ See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for example
 
 # Get started
 
-[![Build Status](https://api.travis-ci.org/kimmobrunfeldt/progressbar.js.svg?branch=master)](https://travis-ci.org/kimmobrunfeldt/progressbar.js) *Build status and browser tests for current **master** *
+[![Build Status](https://api.travis-ci.org/kimmobrunfeldt/progressbar.js.svg?branch=master)](https://travis-ci.org/kimmobrunfeldt/progressbar.js) *Build status and browser tests for current master*
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/kimmobrunfeldt.svg)](https://saucelabs.com/u/kimmobrunfeldt)
 
@@ -567,9 +567,14 @@ bar.animate(0.5, opts);
 ## Examples
 
 * [**Minimal**](http://kimmobrunfeldt.github.io/progressbar.js/examples/minimal/) [*see code*](https://github.com/kimmobrunfeldt/progressbar.js/tree/gh-pages/examples/minimal)
+* [**File upload**](http://kimmobrunfeldt.github.io/progressbar.js/examples/upload/) [*see code*](https://github.com/kimmobrunfeldt/progressbar.js/tree/gh-pages/examples/upload)
 * [**Telegram**](http://kimmobrunfeldt.github.io/progressbar.js/examples/telegram/) [*see code*](https://github.com/kimmobrunfeldt/progressbar.js/tree/gh-pages/examples/telegram)
 * [**Password strength**](http://kimmobrunfeldt.github.io/progressbar.js/examples/password-strength/) [*see code*](https://github.com/kimmobrunfeldt/progressbar.js/tree/gh-pages/examples/password-strength)
 
 # Contributing
 
 See [documentation for contributors](CONTRIBUTING.md).
+
+# Thanks
+
+This project is a grateful recipient of the [Futurice Open Source sponsorship program](http://futurice.com/blog/sponsoring-free-time-open-source-activities).
