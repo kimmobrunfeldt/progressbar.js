@@ -574,3 +574,7 @@ bar.animate(0.5, opts);
 # Contributing
 
 See [documentation for contributors](CONTRIBUTING.md).
+
+# Thanks
+
+This project is a grateful recipient of the [Futurice Open Source sponsorship program](http://futurice.com/blog/sponsoring-free-time-open-source-activities).
