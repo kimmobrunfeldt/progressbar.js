@@ -19,7 +19,12 @@ Circle.prototype = new Shape();
 Circle.prototype.constructor = Circle;
 
 Circle.prototype._pathString = function _pathString(opts) {
-    var r = 50 - opts.strokeWidth / 2;
+    var widthOfWider = opts.strokeWidth;
+    if (opts.trailWidth && opts.trailWidth > opts.strokeWidth) {
+        widthOfWider = opts.trailWidth;
+    }
+
+    var r = 50 - widthOfWider / 2;
 
     return utils.render(this._pathTemplate, {
         radius: r,
