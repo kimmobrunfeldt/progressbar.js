@@ -78,7 +78,9 @@ function runExample(code) {
         eval(scopedCode);
     } catch(err) {
         var error = err.name + ': ' + err.message;
-        window.alert(error);
+        console.error(err.stack);
+        console.warn(code);
+        throw err;
     }
 }
 
