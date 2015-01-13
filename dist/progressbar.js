@@ -1,4 +1,4 @@
-// ProgressBar.js 0.7.3
+// ProgressBar.js 0.7.4
 // https://kimmobrunfeldt.github.io/progressbar.js
 // License: MIT
 
@@ -1520,7 +1520,8 @@ Path.prototype.set = function set(progress) {
 
     var step = this._opts.step;
     if (utils.isFunction(step)) {
-        var values = this._calculateTo(progress, this._opts.easing);
+        var easing = this._easing(this._opts.easing);
+        var values = this._calculateTo(progress, easing);
         step(values, this._opts.attachment || this);
     }
 };
@@ -1710,6 +1711,9 @@ Shape.prototype.animate = function animate(progress, opts, cb) {
 
 Shape.prototype.stop = function stop() {
     if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    // Don't crash if stop is called inside step function
+    if (this._progressPath === undefined) return;
+
     this._progressPath.stop();
 };
 
@@ -1736,6 +1740,8 @@ Shape.prototype.set = function set(progress) {
 
 Shape.prototype.value = function value() {
     if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    if (this._progressPath === undefined) return 0;
+
     return this._progressPath.value();
 };
 
@@ -1746,11 +1752,10 @@ Shape.prototype.setText = function setText(text) {
         // Create new text node
         this.text = this._createTextElement(this._opts, this._container);
         this._container.appendChild(this.text);
-    } else {
-        // Remove previous text node
-        this.text.removeChild(this.text.firstChild);
     }
 
+    // Remove previous text node and add new
+    this.text.removeChild(this.text.firstChild);
     this.text.appendChild(document.createTextNode(text));
 };
 
