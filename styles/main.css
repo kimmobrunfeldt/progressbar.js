@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**
  * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
  * http://cssreset.com
@@ -4045,10 +4046,41 @@ a {
 }
 
 /* line 159, ../sass/page.scss */
+.example-list {
+  margin: 30px 0 50px 0;
+}
+/* line 162, ../sass/page.scss */
+.example-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+/* line 168, ../sass/page.scss */
+.example-list li {
+  padding: 5px 0px 5px 20px;
+}
+/* line 172, ../sass/page.scss */
+.example-list li:before {
+  content: "• ";
+  font-size: 20px;
+  margin: 2px 5px 0 0;
+  color: #6e6e6e;
+}
+/* line 179, ../sass/page.scss */
+.example-list .see-code {
+  padding-left: 10px;
+  font-style: italic;
+}
+/* line 184, ../sass/page.scss */
+.example-list .see-code a {
+  color: #DD9A33;
+}
+
+/* line 190, ../sass/page.scss */
 #introduction {
   padding-top: 40px;
 }
-/* line 162, ../sass/page.scss */
+/* line 193, ../sass/page.scss */
 #introduction .slogan {
   font-style: italic;
   margin: 40px 0 30px 30px;
@@ -4057,30 +4089,30 @@ a {
   border-left: 2px solid #fcb03c;
 }
 
-/* line 171, ../sass/page.scss */
+/* line 202, ../sass/page.scss */
 #examples {
   padding-bottom: 80px;
 }
-/* line 175, ../sass/page.scss */
+/* line 206, ../sass/page.scss */
 #examples .example:not(:first-child) {
   margin: 40px auto;
 }
-/* line 179, ../sass/page.scss */
+/* line 210, ../sass/page.scss */
 #examples .example .code {
   margin: 30px 0 30px 0;
   width: 100%;
 }
-/* line 185, ../sass/page.scss */
+/* line 216, ../sass/page.scss */
 #examples .example .box-info .run {
   -webkit-transition: all .2s linear;
   transition: all .2s linear;
   color: #6e6e6e;
 }
-/* line 190, ../sass/page.scss */
+/* line 221, ../sass/page.scss */
 #examples .example .box-info .run:hover {
   color: #fcb03c;
 }
-/* line 194, ../sass/page.scss */
+/* line 225, ../sass/page.scss */
 #examples .example .box-info .run img {
   display: inline-block;
   vertical-align: middle;
@@ -4088,7 +4120,7 @@ a {
   padding-bottom: 2px;
   /* Hack */
 }
-/* line 203, ../sass/page.scss */
+/* line 234, ../sass/page.scss */
 #examples .example .result {
   background: #ffefd7;
   -webkit-border-radius: 5px;
@@ -4098,13 +4130,13 @@ a {
   border-radius: 5px;
   padding: 15px;
 }
-/* line 208, ../sass/page.scss */
+/* line 239, ../sass/page.scss */
 #examples .example .result .example-container {
   width: 200px;
   height: 200px;
 }
 
-/* line 216, ../sass/page.scss */
+/* line 247, ../sass/page.scss */
 #please {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
@@ -4124,7 +4156,7 @@ a {
   -ms-justify-content: center;
   justify-content: center;
 }
-/* line 221, ../sass/page.scss */
+/* line 252, ../sass/page.scss */
 #please .social-links {
   width: 90%;
   max-width: 300px;
@@ -4133,17 +4165,17 @@ a {
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
-/* line 229, ../sass/page.scss */
+/* line 260, ../sass/page.scss */
 #please .social-links:hover {
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
 }
-/* line 234, ../sass/page.scss */
+/* line 265, ../sass/page.scss */
 #please .social-links .github {
   color: #fff9f0;
   font-size: 1.5em;
 }
-/* line 239, ../sass/page.scss */
+/* line 270, ../sass/page.scss */
 #please .social-links .inline-icon {
   transform: translate3d(0, 0, 0);
   /* Try to enable HW accleration */
