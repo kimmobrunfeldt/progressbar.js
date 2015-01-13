@@ -47,7 +47,8 @@ Path.prototype.set = function set(progress) {
 
     var step = this._opts.step;
     if (utils.isFunction(step)) {
-        var values = this._calculateTo(progress, this._opts.easing);
+        var easing = this._easing(this._opts.easing);
+        var values = this._calculateTo(progress, easing);
         step(values, this._opts.attachment || this);
     }
 };
