@@ -118,11 +118,10 @@ Shape.prototype.setText = function setText(text) {
         // Create new text node
         this.text = this._createTextElement(this._opts, this._container);
         this._container.appendChild(this.text);
-    } else {
-        // Remove previous text node
-        this.text.removeChild(this.text.firstChild);
     }
 
+    // Remove previous text node and add new
+    this.text.removeChild(this.text.firstChild);
     this.text.appendChild(document.createTextNode(text));
 };
 
