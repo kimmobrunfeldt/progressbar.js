@@ -200,7 +200,7 @@ Shape.prototype._createTextElement = function _createTextElement(opts, container
         element.style.left = '50%';
         element.style.padding = 0;
         element.style.margin = 0;
-        utils.setStyle(element, 'transform', 'translate(-50%, -50%');
+        utils.setStyle(element, 'transform', 'translate(-50%, -50%)');
 
         if (opts.text.color) {
             element.style.color = opts.text.color;
