@@ -15,6 +15,8 @@ See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for example
 
 
 # Get started
+*Ask help in* [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kimmobrunfeldt/progressbar.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+<br>
 
 [![Build Status](https://api.travis-ci.org/kimmobrunfeldt/progressbar.js.svg?branch=master)](https://travis-ci.org/kimmobrunfeldt/progressbar.js) *Build status and browser tests for current master*
 
