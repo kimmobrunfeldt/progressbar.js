@@ -2,6 +2,11 @@
 // https://kimmobrunfeldt.github.io/progressbar.js
 // License: MIT
 
+// Round to float
+// Math.round10(55.55, -1);   // 55.6
+// Math.round10(55.549, -1);  // 55.5
+(function(){function d(c,a,b){if("undefined"===typeof b||0===+b)return Math[c](a);a=+a;b=+b;if(isNaN(a)||"number"!==typeof b||0!==b%1)return NaN;a=a.toString().split("e");a=Math[c](+(a[0]+"e"+(a[1]?+a[1]-b:-b)));a=a.toString().split("e");return+(a[0]+"e"+(a[1]?+a[1]+b:b))}Math.round10||(Math.round10=function(c,a){return d("round",c,a)});Math.floor10||(Math.floor10=function(c,a){return d("floor",c,a)});Math.ceil10||(Math.ceil10=function(c,a){return d("ceil",c,a)})})();
+
 !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.ProgressBar=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /*! shifty - v1.2.2 - 2014-10-09 - http://jeremyckahn.github.io/shifty */
 ;(function (root) {
@@ -1544,7 +1549,10 @@ Path.prototype.animate = function animate(progress, opts, cb) {
     var passedOpts = utils.extend({}, opts);
 
     // Copy default opts to new object so defaults are not modified
-    var defaultOpts = utils.extend({}, this._opts);
+    var defaultOpts = utils.extend({
+      onStep: function(args) {}
+    }, this._opts);
+
     opts = utils.extend(defaultOpts, opts);
 
     var shiftyEasing = this._easing(opts.easing);
@@ -1567,10 +1575,16 @@ Path.prototype.animate = function animate(progress, opts, cb) {
         duration: opts.duration,
         easing: shiftyEasing,
         step: function(state) {
+            opts.onStep({
+              value: (Math.round10(self.value(), -2))
+            });
             self._path.style.strokeDashoffset = state.offset;
             opts.step(state, opts.attachment);
         },
         finish: function(state) {
+            opts.onStep({
+              value: progress
+            });
             if (utils.isFunction(cb)) {
                 cb();
             }
