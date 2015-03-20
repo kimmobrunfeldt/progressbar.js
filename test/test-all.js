@@ -6,10 +6,12 @@
 var chai = require('chai');
 var chaiStats = require('chai-stats');
 chai.use(chaiStats);
+var sinon = require('sinon');
 var expect = chai.expect;
 
 // https://github.com/mochajs/mocha/wiki/Shared-Behaviours
 var sharedTests = require('./shared-behaviour');
+var pathTests = require('./path-behavior');
 var ProgressBar = require("../src/main");
 var utils = require('../src/utils');
 
@@ -51,12 +53,29 @@ describe('Circle', function() {
 
 
 describe('Square', function() {
+
     beforeEach(function() {
         this.bar = new ProgressBar.Square('body', barOpts);
     });
 
     afterEach(afterEachCase);
     sharedTests();
+});
+
+describe('Path', function () {
+
+    beforeEach(function () {
+        this.path = pathTests.createPath();
+        this.path.setAttribute('strokeOffset', this.path.getTotalLength());
+        pathTests.options.attachment = this.path;
+
+        this.bar = new ProgressBar.Path(this.path, pathTests.options);
+        this.step = sinon.spy(this.bar._opts, 'step');
+    });
+
+    afterEach(pathTests.afterEachCase);
+
+    pathTests.runTests();
 });
 
 describe('utils', function() {

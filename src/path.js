@@ -95,7 +95,7 @@ Path.prototype.animate = function animate(progress, opts, cb) {
         easing: shiftyEasing,
         step: function(state) {
             self._path.style.strokeDashoffset = state.offset;
-            opts.step(state, opts.attachment);
+            opts.step(state, opts.attachment, self);
         },
         finish: function(state) {
             if (utils.isFunction(cb)) {
