@@ -28,7 +28,8 @@
     "shelljs": "^0.3.0",
     "string": "^2.2.0",
     "testem": "^0.6.22",
-    "watchify": "^2.1.1"
+    "watchify": "^2.1.1",
+    "sinon": "~1.14.1"
   },
   "scripts": {
     "test": "grunt test"

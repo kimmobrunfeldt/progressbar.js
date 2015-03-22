@@ -233,11 +233,11 @@ with CSS.
         easing: "easeOut",
 
         // See #custom-animations section
-        // Built-in shape passes reference to itself as attachment
-        // to step function
+        // Built-in shape passes reference to itself and a custom attachment
+        // object to step function
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, square) {
+        step: function(state, square, attachment) {
             square.path.setAttribute('stroke', state.color);
         }
     }
@@ -291,11 +291,11 @@ progressBar.animate(0.3, {
         easing: "easeInOut",
 
         // See #custom-animations section
-        // Built-in shape passes reference to itself as attachment
-        // to step function
+        // Built-in shape passes reference to itself and a custom attachment
+        // object to step function
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, square) {
+        step: function(state, square, attachment) {
             square.path.setAttribute('stroke', state.color);
         }
     }
@@ -395,8 +395,8 @@ var path = new ProgressBar.Path(heartObject.contentDocument.querySelector('#hear
         // See #custom-animations section
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, attachment) {
-            // Do any modifications to attachment attributes
+        step: function(state, path, attachment) {
+            // Do any modifications to attachment and/or path attributes
         }
     }
     ```
@@ -439,8 +439,8 @@ path.animate(0.3, {
         // See #custom-animations section
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, attachment) {
-            // Do any modifications to attachment attributes
+        step: function(state, path, attachment) {
+            // Do any modifications to attachment and/or path attributes
         }
     }
     ```
@@ -515,7 +515,7 @@ Tweening engine changes defined values over time and calls step function for eac
 
     *Signature must match `from`*
 
-* `step` Function called for each animation step. Tweened values and reference to attachment are passed as parameters. Attachment can be reference to any object you need to modify within step function. Built-in shapes pass references to their selves as attachment. Default: `function() {}`.
+* `step` Function called for each animation step. Tweened values, a reference to the path or shape, and an attachment are passed as parameters. Attachment can be reference to any object you need to modify within step function. Default: `function() {}`.
 
     **This function is called multiple times per second.
     To make sure animations run smoothly, keep it minimal.**
@@ -523,9 +523,10 @@ Tweening engine changes defined values over time and calls step function for eac
     For example
 
     ```javascript
-    function(state, attachment) {
-        attachment.path.setAttribute('stroke-width', state.width);
-        attachment.path.setAttribute('stroke', state.color);
+    function(state, shape, attachment) {
+        shape.path.setAttribute('stroke-width', state.width);
+        shape.path.setAttribute('stroke', state.color);
+        attachment.text.innerHTML = shape.value()*100;
     }
     ```
 
@@ -538,8 +539,8 @@ of progress bar compared to passing in `.animate()` call. Here's example code an
 var bar = new ProgressBar.Line('#container', {
     from: { color: '#000 '},
     to: { color: '#888 '},
-    step: function(state, bar) {
-        bar.setAttribute('stroke', state.color);
+    step: function(state, bar, attachment) {
+        bar.path.setAttribute('stroke', state.color);
     }
 });
 ```
@@ -551,8 +552,8 @@ var bar = new ProgressBar.Line('#container', {
 
 ```javascript
 var bar = new ProgressBar.Line('#container', {
-    step: function(state, bar) {
-        bar.setAttribute('stroke', state.color);
+    step: function(state, bar, attachment) {
+        bar.path.setAttribute('stroke', state.color);
     }
 });
 

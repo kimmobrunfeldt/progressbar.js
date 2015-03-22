@@ -65,7 +65,8 @@ var Shape = function Shape(container, opts) {
     // this.text is also a public attribute
 
     var newOpts = utils.extend({
-        attachment: this
+        attachment: undefined,
+        shape: this
     }, this._opts);
     this._progressPath = new Path(svgView.path, newOpts);
 };

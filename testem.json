@@ -1,7 +1,7 @@
 {
   "framework": "mocha",
   "src_files": [
-    "test/*.js"
+    "test/test-*.js"
   ],
   "test_page": "test/testem.html",
   "routes": {

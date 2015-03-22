@@ -49,7 +49,7 @@ Path.prototype.set = function set(progress) {
     if (utils.isFunction(step)) {
         var easing = this._easing(this._opts.easing);
         var values = this._calculateTo(progress, easing);
-        step(values, this._opts.attachment || this);
+        step(values, this._opts.shape||this, this._opts.attachment);
     }
 };
 
@@ -95,7 +95,7 @@ Path.prototype.animate = function animate(progress, opts, cb) {
         easing: shiftyEasing,
         step: function(state) {
             self._path.style.strokeDashoffset = state.offset;
-            opts.step(state, opts.attachment);
+            opts.step(state, opts.shape||self, opts.attachment);
         },
         finish: function(state) {
             if (utils.isFunction(cb)) {
