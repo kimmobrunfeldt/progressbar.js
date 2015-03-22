@@ -21,7 +21,7 @@ var barOpts = {
 	duration: 800,
     from: {strokeOffset: 0},
     to: { strokeOffset: 0 },
-    step: function (state, attachment, self) {
+    step: function (state, self, attachment) {
     	attachment.setAttribute(ANIM_PROP.scriptName, state[ANIM_PROP.scriptName]);
     }
 };
@@ -67,7 +67,7 @@ var destroyPath = function () {
 
 	container.removeChild(svg);
 	container.innerHTML = '';
-}
+};
 
 var afterEachCase = function() {
     try {
@@ -80,21 +80,37 @@ var afterEachCase = function() {
 
 var pathTests = function pathTests () {
 
-	it('should pass a reference to ProgressBar.Path instance to step', function () {
+	it('step function should recieve a reference to ProgressBar as argument #2', function () {
 		this.bar.animate(1, {duration: 500});
 
-		// we only care about the third arg, for each call so we need to manually
+		// we only care about the second arg, for each call so we need to manually
 		// inspect them since we dont know what state would look like
 		var ok = true;
 
 		for (var i =0; i < this.step.args.length; i++) {
-			if (this.step.args[i][2] !== this.bar) {
+			if (this.step.args[i][1] !== this.bar) {
 				ok = false;
 			}
 		}
 
-		expect(ok).to.be.true;
+		expect(ok).to.be.true();
 	});
+
+    it('step function should recieve a reference to ProgressBar as argument #3', function () {
+        this.bar.animate(1, {duration: 500});
+
+        // we only care about the third arg, for each call so we need to manually
+        // inspect them since we dont know what state would look like
+        var ok = true;
+
+        for (var i =0; i < this.step.args.length; i++) {
+            if (this.step.args[i][2] !== this.attachment) {
+                ok = false;
+            }
+        }
+
+        expect(ok).to.be.true();
+    });
 
     it('set should change value', function() {
         this.bar.set(1);
@@ -144,7 +160,7 @@ var pathTests = function pathTests () {
             done();
         }, 400);
     });
-}
+};
 
 module.exports = {
 	options: barOpts,

@@ -10,8 +10,8 @@ var sinon = require('sinon');
 var expect = chai.expect;
 
 // https://github.com/mochajs/mocha/wiki/Shared-Behaviours
-var sharedTests = require('./shared-behaviour');
-var pathTests = require('./path-behavior');
+var shapeTests = require('./shape-behaviour');
+var pathTests = require('./path-behaviour');
 var ProgressBar = require("../src/main");
 var utils = require('../src/utils');
 
@@ -27,39 +27,51 @@ var afterEachCase = function() {
 
 var barOpts = {
     text: { value: 'Test' },
-    trailWidth: 1
+    trailWidth: 1,
+    attachment: {"foo": "bar"}
 };
 
 describe('Line', function() {
     beforeEach(function() {
         // Append progress bar to body since adding a custom HTML and div
         // with Karma was not that trivial compared to Testem
+        barOpts.step = function (state, bar, attachment) {};
         this.bar = new ProgressBar.Line('body', barOpts);
+        this.attachment = this.bar._opts.attachment;
+        this.step = sinon.spy(this.bar._opts, 'step');
+        
     });
 
     afterEach(afterEachCase);
-    sharedTests();
+    shapeTests();
 });
 
 
 describe('Circle', function() {
     beforeEach(function() {
+        barOpts.step = function (state, bar, attachment) {};
         this.bar = new ProgressBar.Circle('body', barOpts);
+        this.attachment = this.bar._opts.attachment;
+        this.step = sinon.spy(this.bar._opts, 'step');
+        
     });
 
     afterEach(afterEachCase);
-    sharedTests();
+    shapeTests();
 });
 
 
 describe('Square', function() {
 
     beforeEach(function() {
+        barOpts.step = function (state, bar, attachment) {};
         this.bar = new ProgressBar.Square('body', barOpts);
+        this.attachment = this.bar._opts.attachment;
+        this.step = sinon.spy(this.bar._opts, 'step'); 
     });
 
     afterEach(afterEachCase);
-    sharedTests();
+    shapeTests();
 });
 
 describe('Path', function () {
@@ -70,6 +82,7 @@ describe('Path', function () {
         pathTests.options.attachment = this.path;
 
         this.bar = new ProgressBar.Path(this.path, pathTests.options);
+        this.attachment = this.bar._opts.attachment;
         this.step = sinon.spy(this.bar._opts, 'step');
     });
 

@@ -65,6 +65,32 @@ var sharedTests = function sharedTests() {
         }, 1200);
     });
 
+    it('step function should recieve a reference to ProgressBar as argument #2', function () {
+        this.bar.animate(1, {duration: 600});
+        var allCallsHaveBar = true;
+
+        for (var i =0; i < this.step.args.length; i++) {
+            if (this.step.args[i][1] !== this.bar) {
+                allCallsHaveBar = false;
+            }
+        }
+
+        expect(allCallsHaveBar).to.be.true();
+    });
+
+    it('step function should recieve a reference to attachment as argument #3', function () {
+        this.bar.animate(1, {duration: 600});
+        var allCallsHaveAttachment = true;
+
+        for (var i =0; i < this.step.args.length; i++) {
+            if (this.step.args[i][2] !== this.attachment) {
+                allCallsHaveAttachment = false;
+            }
+        }
+
+        expect(allCallsHaveAttachment).to.be.true();
+    });
+
     it('stop() should stop animation', function(done) {
         var offset = testUtils.getComputedStyle(this.bar.path, 'stroke-dashoffset');
         this.bar.animate(1, {duration: 1000});
