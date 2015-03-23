@@ -27,11 +27,10 @@ var barOpts = {
 };
 
 var createPath = function () {
-    var container = document.getElementById('container'),
+    var container = document.querySelector('#container'),
         svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
         path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
-    container.setAttribute('style', 'width: 200px;');
 
     svg.setAttribute('version', '1.1');
     svg.setAttribute('id', 'progress-bar');
@@ -57,12 +56,12 @@ var createPath = function () {
 
     container.appendChild(svg);
 
-    return document.getElementById('progress-path');
+    return path;
 };
 
 var destroyPath = function () {
-    var container = document.getElementById('container'),
-        svg = document.getElementById('progress-bar');
+    var container = document.querySelector('#container'),
+        svg = document.querySelector('#progress-bar');
     container.removeAttribute('style');
 
     container.removeChild(svg);
