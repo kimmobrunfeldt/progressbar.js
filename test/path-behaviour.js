@@ -8,10 +8,6 @@ var sinon = require('sinon');
 
 var PRECISION = 2;
 
-
-
-var svgStr = '<svg version="1.1" id="progress-bar" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 197 165.39555" enable-background="0 0 197 165.39555" xml:space="preserve"><path id="progress-path" fill="none" stroke="none" stroke-width="15" stroke-miterlimit="10" d="m 31.7,160.3 c -15,-16.2 -24.2,-38 -24.2,-61.8 0,-50.3 40.7,-91 91,-91 50.3,0 91,40.7 91,91 0,23.9 -9.2,45.6 -24.2,61.8"/></svg>';
-
 var ANIM_PROP = {
     'styleName': 'stroke-offset',
     'scriptName': 'strokeOffset'
@@ -27,11 +23,10 @@ var barOpts = {
 };
 
 var createPath = function () {
-    var container = document.getElementById('container'),
+    var container = document.querySelector('body'),
         svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
         path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
-    container.setAttribute('style', 'width: 200px;');
 
     svg.setAttribute('version', '1.1');
     svg.setAttribute('id', 'progress-bar');
@@ -57,25 +52,10 @@ var createPath = function () {
 
     container.appendChild(svg);
 
-    return document.getElementById('progress-path');
-};
-
-var destroyPath = function () {
-    var container = document.getElementById('container'),
-        svg = document.getElementById('progress-bar');
-    container.removeAttribute('style');
-
-    container.removeChild(svg);
-    container.innerHTML = '';
-};
-
-var afterEachCase = function() {
-    try {
-        destroyPath();
-    } catch (e) {
-        // Some test cases destroy the bar themselves and calling again
-        // throws an error
-    }
+    return {
+        "path": path,
+        "svg": svg
+    };
 };
 
 var pathTests = function pathTests () {
@@ -165,7 +145,5 @@ var pathTests = function pathTests () {
 module.exports = {
     options: barOpts,
     runTests: pathTests,
-    afterEachCase: afterEachCase,
-    createPath: createPath,
-    destroyPath: destroyPath
+    createPath: createPath
 };

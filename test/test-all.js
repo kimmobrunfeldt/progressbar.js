@@ -39,7 +39,7 @@ describe('Line', function() {
         this.bar = new ProgressBar.Line('body', barOpts);
         this.attachment = this.bar._opts.attachment;
         this.step = sinon.spy(this.bar._opts, 'step');
-        
+
     });
 
     afterEach(afterEachCase);
@@ -53,7 +53,7 @@ describe('Circle', function() {
         this.bar = new ProgressBar.Circle('body', barOpts);
         this.attachment = this.bar._opts.attachment;
         this.step = sinon.spy(this.bar._opts, 'step');
-        
+
     });
 
     afterEach(afterEachCase);
@@ -67,7 +67,7 @@ describe('Square', function() {
         barOpts.step = function (state, bar, attachment) {};
         this.bar = new ProgressBar.Square('body', barOpts);
         this.attachment = this.bar._opts.attachment;
-        this.step = sinon.spy(this.bar._opts, 'step'); 
+        this.step = sinon.spy(this.bar._opts, 'step');
     });
 
     afterEach(afterEachCase);
@@ -77,7 +77,9 @@ describe('Square', function() {
 describe('Path', function () {
 
     beforeEach(function () {
-        this.path = pathTests.createPath();
+        var svgView = pathTests.createPath();
+        this.svg = svgView.svg;
+        this.path = svgView.path;
         this.path.setAttribute('strokeOffset', this.path.getTotalLength());
         pathTests.options.attachment = this.path;
 
@@ -86,7 +88,14 @@ describe('Path', function () {
         this.step = sinon.spy(this.bar._opts, 'step');
     });
 
-    afterEach(pathTests.afterEachCase);
+    afterEach(function () {
+        var container = this.svg.parentNode;
+        container.removeChild(this.svg);
+        this.svg = null;
+        pathTests.options.attachment = null;
+        this.path = null;
+        this.bar = null;
+    });
 
     pathTests.runTests();
 });
