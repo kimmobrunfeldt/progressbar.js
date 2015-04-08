@@ -1,8 +1,8 @@
-// ProgressBar.js 0.7.4
+// ProgressBar.js 0.8.0
 // https://kimmobrunfeldt.github.io/progressbar.js
 // License: MIT
 
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.ProgressBar=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.ProgressBar = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /*! shifty - v1.2.2 - 2014-10-09 - http://jeremyckahn.github.io/shifty */
 ;(function (root) {
 
@@ -1493,19 +1493,27 @@ var Path = function Path(path, opts) {
         step: function() {}
     }, opts);
 
-    this._path = path;
+    var element;
+    if (utils.isString(path)) {
+        element = document.querySelector(path);
+    } else {
+        element = path;
+    }
+
+    // Reveal .path as public attribute
+    this.path = element;
     this._opts = opts;
     this._tweenable = null;
 
     // Set up the starting positions
-    var length = this._path.getTotalLength();
-    this._path.style.strokeDasharray = length + ' ' + length;
+    var length = this.path.getTotalLength();
+    this.path.style.strokeDasharray = length + ' ' + length;
     this.set(0);
 };
 
 Path.prototype.value = function value() {
     var offset = this._getComputedDashOffset();
-    var length = this._path.getTotalLength();
+    var length = this.path.getTotalLength();
 
     var progress = 1 - offset / length;
     // Round number to prevent returning very small number like 1e-30, which
@@ -1516,19 +1524,19 @@ Path.prototype.value = function value() {
 Path.prototype.set = function set(progress) {
     this.stop();
 
-    this._path.style.strokeDashoffset = this._progressToOffset(progress);
+    this.path.style.strokeDashoffset = this._progressToOffset(progress);
 
     var step = this._opts.step;
     if (utils.isFunction(step)) {
         var easing = this._easing(this._opts.easing);
         var values = this._calculateTo(progress, easing);
-        step(values, this._opts.attachment || this);
+        step(values, this._opts.shape||this, this._opts.attachment);
     }
 };
 
 Path.prototype.stop = function stop() {
     this._stopTween();
-    this._path.style.strokeDashoffset = this._getComputedDashOffset();
+    this.path.style.strokeDashoffset = this._getComputedDashOffset();
 };
 
 // Method introduced here:
@@ -1554,7 +1562,7 @@ Path.prototype.animate = function animate(progress, opts, cb) {
 
     // Trigger a layout so styles are calculated & the browser
     // picks up the starting position before animating
-    this._path.getBoundingClientRect();
+    this.path.getBoundingClientRect();
 
     var offset = this._getComputedDashOffset();
     var newOffset = this._progressToOffset(progress);
@@ -1567,8 +1575,8 @@ Path.prototype.animate = function animate(progress, opts, cb) {
         duration: opts.duration,
         easing: shiftyEasing,
         step: function(state) {
-            self._path.style.strokeDashoffset = state.offset;
-            opts.step(state, opts.attachment);
+            self.path.style.strokeDashoffset = state.offset;
+            opts.step(state, opts.shape||self, opts.attachment);
         },
         finish: function(state) {
             if (utils.isFunction(cb)) {
@@ -1579,12 +1587,12 @@ Path.prototype.animate = function animate(progress, opts, cb) {
 };
 
 Path.prototype._getComputedDashOffset = function _getComputedDashOffset() {
-    var computedStyle = window.getComputedStyle(this._path, null);
+    var computedStyle = window.getComputedStyle(this.path, null);
     return parseFloat(computedStyle.getPropertyValue('stroke-dashoffset'), 10);
 };
 
 Path.prototype._progressToOffset = function _progressToOffset(progress) {
-    var length = this._path.getTotalLength();
+    var length = this.path.getTotalLength();
     return length - progress * length;
 };
 
@@ -1699,7 +1707,8 @@ var Shape = function Shape(container, opts) {
     // this.text is also a public attribute
 
     var newOpts = utils.extend({
-        attachment: this
+        attachment: undefined,
+        shape: this
     }, this._opts);
     this._progressPath = new Path(svgView.path, newOpts);
 };
