@@ -1,6 +1,6 @@
 // Utility functions
 
-var PREFIXES = 'webkit moz o ms'.split(' ');
+var PREFIXES = 'Webkit Moz O ms'.split(' ');
 
 // Copy all attributes from source object to destination object.
 // destination object is mutated.
@@ -47,7 +47,7 @@ function render(template, vars) {
 
 function setStyle(element, style, value) {
     for (var i = 0; i < PREFIXES.length; ++i) {
-        var prefix = capitalize(PREFIXES[i]);
+        var prefix = PREFIXES[i];
         element.style[prefix + capitalize(style)] = value;
     }
 
