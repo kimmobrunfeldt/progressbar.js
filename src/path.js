@@ -20,6 +20,12 @@ var Path = function Path(path, opts) {
         step: function() {}
     }, opts);
 
+    var element;
+    if (utils.isString(path)) {
+        element = document.querySelector(path);
+    } else {
+        element = path;
+    }
 
     // Reveal .path as public attribute
     this.path = element;
