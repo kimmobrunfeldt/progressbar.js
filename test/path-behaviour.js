@@ -27,7 +27,6 @@ var createPath = function () {
         svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
         path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
-
     svg.setAttribute('version', '1.1');
     svg.setAttribute('id', 'progress-bar');
     svg.setAttribute('x', '0px');
@@ -139,6 +138,10 @@ var pathTests = function pathTests () {
             expect(progressAfterStop).to.almost.equal(self.bar.value(), PRECISION);
             done();
         }, 400);
+    });
+
+    it('.path attribute should exist', function() {
+        expect(this.bar.path).to.be.ok();
     });
 };
 
