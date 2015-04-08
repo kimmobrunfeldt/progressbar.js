@@ -20,19 +20,21 @@ var Path = function Path(path, opts) {
         step: function() {}
     }, opts);
 
-    this._path = path;
+
+    // Reveal .path as public attribute
+    this.path = element;
     this._opts = opts;
     this._tweenable = null;
 
     // Set up the starting positions
-    var length = this._path.getTotalLength();
-    this._path.style.strokeDasharray = length + ' ' + length;
+    var length = this.path.getTotalLength();
+    this.path.style.strokeDasharray = length + ' ' + length;
     this.set(0);
 };
 
 Path.prototype.value = function value() {
     var offset = this._getComputedDashOffset();
-    var length = this._path.getTotalLength();
+    var length = this.path.getTotalLength();
 
     var progress = 1 - offset / length;
     // Round number to prevent returning very small number like 1e-30, which
@@ -43,7 +45,7 @@ Path.prototype.value = function value() {
 Path.prototype.set = function set(progress) {
     this.stop();
 
-    this._path.style.strokeDashoffset = this._progressToOffset(progress);
+    this.path.style.strokeDashoffset = this._progressToOffset(progress);
 
     var step = this._opts.step;
     if (utils.isFunction(step)) {
@@ -55,7 +57,7 @@ Path.prototype.set = function set(progress) {
 
 Path.prototype.stop = function stop() {
     this._stopTween();
-    this._path.style.strokeDashoffset = this._getComputedDashOffset();
+    this.path.style.strokeDashoffset = this._getComputedDashOffset();
 };
 
 // Method introduced here:
@@ -81,7 +83,7 @@ Path.prototype.animate = function animate(progress, opts, cb) {
 
     // Trigger a layout so styles are calculated & the browser
     // picks up the starting position before animating
-    this._path.getBoundingClientRect();
+    this.path.getBoundingClientRect();
 
     var offset = this._getComputedDashOffset();
     var newOffset = this._progressToOffset(progress);
@@ -94,7 +96,7 @@ Path.prototype.animate = function animate(progress, opts, cb) {
         duration: opts.duration,
         easing: shiftyEasing,
         step: function(state) {
-            self._path.style.strokeDashoffset = state.offset;
+            self.path.style.strokeDashoffset = state.offset;
             opts.step(state, opts.shape||self, opts.attachment);
         },
         finish: function(state) {
@@ -106,12 +108,12 @@ Path.prototype.animate = function animate(progress, opts, cb) {
 };
 
 Path.prototype._getComputedDashOffset = function _getComputedDashOffset() {
-    var computedStyle = window.getComputedStyle(this._path, null);
+    var computedStyle = window.getComputedStyle(this.path, null);
     return parseFloat(computedStyle.getPropertyValue('stroke-dashoffset'), 10);
 };
 
 Path.prototype._progressToOffset = function _progressToOffset(progress) {
-    var length = this._path.getTotalLength();
+    var length = this.path.getTotalLength();
     return length - progress * length;
 };
 

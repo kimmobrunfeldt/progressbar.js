@@ -129,6 +129,7 @@ replace it with **Line**, **Circle** or **Square**.
 
 
 * [Path(path, [*options*])](#pathpath-options)
+    * [*path*](#pathpath)
     * [animate(progress, [*options*], [*cb*])](#pathanimateprogress-options-cb)
     * [set(progress)](#pathsetprogress)
     * [stop()](#pathstop)
@@ -400,6 +401,10 @@ var path = new ProgressBar.Path(heartObject.contentDocument.querySelector('#hear
         }
     }
     ```
+
+## Path.path
+
+Reference to [SVG path](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path) which presents the actual progress bar.
 
 ## Path.animate(progress, [*options*], [*cb*])
 
