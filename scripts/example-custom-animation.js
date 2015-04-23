@@ -16,7 +16,7 @@ var circle = new ProgressBar.Circle(element, {
     }
 });
 
-circle.animate(1, {
+circle.animate(1.0, {
     from: {color: startColor},
     to: {color: endColor}
 });

@@ -3,4 +3,4 @@ var line = new ProgressBar.Line('#example-line-container', {
 
 });
 
-line.animate(1);
+line.animate(1.0);  // Number from 0.0 to 1.0

@@ -4,6 +4,6 @@ var circle = new ProgressBar.Circle('#example-circle-container', {
     fill: '#aaa'
 });
 
-circle.animate(1, function() {
+circle.animate(0.7, function() {
     circle.animate(0);
 })

@@ -7,7 +7,7 @@ scene.addEventListener('load', function() {
         duration: 1000
     });
 
-    path.animate(1, function() {
+    path.animate(1.0, function() {
         path.animate(0);
     });
 });
