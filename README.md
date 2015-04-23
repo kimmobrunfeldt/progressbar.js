@@ -11,7 +11,7 @@ Beautiful and responsive progress bars with animated SVG paths.
 [Customize](#custom-animations) the animations as you wish.
 
 See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for examples or
-[**try it in JSFiddle**](http://jsfiddle.net/kimmobrunfeldt/8xa87k31/).
+[**try it in JSFiddle**](http://jsfiddle.net/kimmobrunfeldt/8xa87k31/392/).
 
 
 # Get started
