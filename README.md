@@ -156,7 +156,7 @@ var progressBar = new ProgressBar.Square('#container', {
 To make the shape resize with its container, set for example the following CSS:
 
 ```css
-.container > svg {
+#container > svg {
     display: block;
     width: 100%;
 }
