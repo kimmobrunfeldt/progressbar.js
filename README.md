@@ -149,7 +149,7 @@ Shape      | Canvas size
 -----------|------------------------
 Circle     | `100x100`
 SemiCircle | `100x50`
-Line       | `100x{optsstrokeWidth}`
+Line       | `100x{opts.strokeWidth}`
 
 All shapes are fitted exactly to their canvases.
 
