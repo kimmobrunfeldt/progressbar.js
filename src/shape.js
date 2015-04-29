@@ -30,6 +30,8 @@ var Shape = function Shape(container, opts) {
         fill: null,
         text: {
             autoStyle: true,
+            removeMarginPadding: true,
+            alignToBottom: false,
             color: null,
             value: '',
             className: 'progressbar-text'
@@ -202,21 +204,14 @@ Shape.prototype._createTextElement = function _createTextElement(opts, container
         container.style.position = 'relative';
         element.style.position = 'absolute';
         element.style.left = '50%';
-        element.style.padding = 0;
-        element.style.margin = 0;
+        element.style.top = '50%';
 
-        // We have to require semicircle.js inside the function because
-        // otherwise we would have unsolvable cyclic dependency:
-        // semicircle.js needs to call new Shape() when it's required.
-        // shape.js      needs to require('./semicircle') when it's required.
-        var SemiCircle = require('./semicircle');
-        if (this instanceof SemiCircle) {
-            element.style.bottom = '0';
-            utils.setStyle(element, 'transform', 'translate(-50%, 50%)');
-        } else {
-            element.style.top = '50%';
-            utils.setStyle(element, 'transform', 'translate(-50%, -50%)');
+        if (opts.text.removeMarginPadding) {
+            element.style.padding = 0;
+            element.style.margin = 0;
         }
+
+        utils.setStyle(element, 'transform', 'translate(-50%, -50%)');
 
         if (opts.text.color) {
             element.style.color = opts.text.color;
@@ -226,7 +221,14 @@ Shape.prototype._createTextElement = function _createTextElement(opts, container
     }
     element.className = opts.text.className;
 
+    this._initializeTextElement(opts, container, element);
     return element;
+};
+
+// Give custom shapes possibility to modify text element
+Shape.prototype._initializeTextElement = function _initializeTextElement(opts, container, element) {
+    // By default, no-op
+    // Custom shapes should respect API options, such as autoStyle
 };
 
 Shape.prototype._pathString = function _pathString(opts) {

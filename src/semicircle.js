@@ -22,6 +22,21 @@ SemiCircle.prototype._initializeSvg = function _initializeSvg(svg, opts) {
     svg.setAttribute('viewBox', '0 0 100 50');
 };
 
+SemiCircle.prototype._initializeTextElement = function _initializeTextElement(opts, container, element) {
+    if (opts.text.autoStyle) {
+        // Reset top style
+        element.style.top = 'auto';
+
+        element.style.bottom = '0';
+        if (opts.text.alignToBottom) {
+            utils.setStyle(element, 'transform', 'translate(-50%, 0)');
+        } else {
+            utils.setStyle(element, 'transform', 'translate(-50%, 50%)');
+        }
+    }
+};
+
+
 // Share functionality with Circle, just have different path
 SemiCircle.prototype._pathString = Circle.prototype._pathString;
 SemiCircle.prototype._trailString = Circle.prototype._trailString;
