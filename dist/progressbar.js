@@ -1417,7 +1417,7 @@ Circle.prototype._trailString = function _trailString(opts) {
 
 module.exports = Circle;
 
-},{"./shape":6,"./utils":8}],3:[function(require,module,exports){
+},{"./shape":7,"./utils":8}],3:[function(require,module,exports){
 // Line shaped progress bar
 
 var Shape = require('./shape');
@@ -1449,24 +1449,26 @@ Line.prototype._trailString = function _trailString(opts) {
 
 module.exports = Line;
 
-},{"./shape":6,"./utils":8}],4:[function(require,module,exports){
-// Different shaped progress bars
-var Line = require('./line');
-var Circle = require('./circle');
-var Square = require('./square');
-
-// Lower level API to use any SVG path
-var Path = require('./path');
-
-
+},{"./shape":7,"./utils":8}],4:[function(require,module,exports){
 module.exports = {
-    Line: Line,
-    Circle: Circle,
-    Square: Square,
-    Path: Path
+    // Higher level API, different shaped progress bars
+    Line: require('./line'),
+    Circle: require('./circle'),
+    SemiCircle: require('./semicircle'),
+
+    // Lower level API to use any SVG path
+    Path: require('./path'),
+
+    // Base-class for creating new custom shapes
+    // to be in line with the API of built-in shapes
+    // Undocumented.
+    Shape: require('./shape'),
+
+    // Internal utils, undocumented.
+    utils: require('./utils')
 };
 
-},{"./circle":2,"./line":3,"./path":5,"./square":7}],5:[function(require,module,exports){
+},{"./circle":2,"./line":3,"./path":5,"./semicircle":6,"./shape":7,"./utils":8}],5:[function(require,module,exports){
 // Lower level API to animate any kind of svg path
 
 var Tweenable = require('shifty');
@@ -1636,6 +1638,37 @@ Path.prototype._easing = function _easing(easing) {
 module.exports = Path;
 
 },{"./utils":8,"shifty":1}],6:[function(require,module,exports){
+// Semi-SemiCircle shaped progress bar
+
+var Shape = require('./shape');
+var Circle = require('./circle');
+var utils = require('./utils');
+
+
+var SemiCircle = function SemiCircle(container, options) {
+    // Use one arc to form a SemiCircle
+    // See this answer http://stackoverflow.com/a/10477334/1446092
+    this._pathTemplate =
+        'M 50,50 m -{radius},0' +
+        ' a {radius},{radius} 0 1 1 {2radius},0';
+
+    Shape.apply(this, arguments);
+};
+
+SemiCircle.prototype = new Shape();
+SemiCircle.prototype.constructor = SemiCircle;
+
+SemiCircle.prototype._initializeSvg = function _initializeSvg(svg, opts) {
+    svg.setAttribute('viewBox', '0 0 100 50');
+};
+
+// Share functionality with Circle, just have different path
+SemiCircle.prototype._pathString = Circle.prototype._pathString;
+SemiCircle.prototype._trailString = Circle.prototype._trailString;
+
+module.exports = SemiCircle;
+
+},{"./circle":2,"./shape":7,"./utils":8}],7:[function(require,module,exports){
 // Base object for different progress bar shapes
 
 var Path = require('./path');
@@ -1839,11 +1872,22 @@ Shape.prototype._createTextElement = function _createTextElement(opts, container
         // Center text
         container.style.position = 'relative';
         element.style.position = 'absolute';
-        element.style.top = '50%';
         element.style.left = '50%';
         element.style.padding = 0;
         element.style.margin = 0;
-        utils.setStyle(element, 'transform', 'translate(-50%, -50%)');
+
+        // We have to require semicircle.js inside the function because
+        // otherwise we would have unsolvable cyclic dependency:
+        // semicircle.js needs to call new Shape() when it's required.
+        // shape.js      needs to require('./semicircle') when it's required.
+        var SemiCircle = require('./semicircle');
+        if (this instanceof SemiCircle) {
+            element.style.bottom = '0';
+            utils.setStyle(element, 'transform', 'translate(-50%, 50%)');
+        } else {
+            element.style.top = '50%';
+            utils.setStyle(element, 'transform', 'translate(-50%, -50%)');
+        }
 
         if (opts.text.color) {
             element.style.color = opts.text.color;
@@ -1866,58 +1910,7 @@ Shape.prototype._trailString = function _trailString(opts) {
 
 module.exports = Shape;
 
-},{"./path":5,"./utils":8}],7:[function(require,module,exports){
-// Square shaped progress bar
-
-var Shape = require('./shape');
-var utils = require('./utils');
-
-
-var Square = function Square(container, options) {
-    this._pathTemplate =
-        'M 0,{halfOfStrokeWidth}' +
-        ' L {width},{halfOfStrokeWidth}' +
-        ' L {width},{width}' +
-        ' L {halfOfStrokeWidth},{width}' +
-        ' L {halfOfStrokeWidth},{strokeWidth}';
-
-    this._trailTemplate =
-        'M {startMargin},{halfOfStrokeWidth}' +
-        ' L {width},{halfOfStrokeWidth}' +
-        ' L {width},{width}' +
-        ' L {halfOfStrokeWidth},{width}' +
-        ' L {halfOfStrokeWidth},{halfOfStrokeWidth}';
-
-    Shape.apply(this, arguments);
-};
-
-Square.prototype = new Shape();
-Square.prototype.constructor = Square;
-
-Square.prototype._pathString = function _pathString(opts) {
-    var w = 100 - opts.strokeWidth / 2;
-
-    return utils.render(this._pathTemplate, {
-        width: w,
-        strokeWidth: opts.strokeWidth,
-        halfOfStrokeWidth: opts.strokeWidth / 2
-    });
-};
-
-Square.prototype._trailString = function _trailString(opts) {
-    var w = 100 - opts.strokeWidth / 2;
-
-    return utils.render(this._trailTemplate, {
-        width: w,
-        strokeWidth: opts.strokeWidth,
-        halfOfStrokeWidth: opts.strokeWidth / 2,
-        startMargin: (opts.strokeWidth / 2) - (opts.trailWidth / 2)
-    });
-};
-
-module.exports = Square;
-
-},{"./shape":6,"./utils":8}],8:[function(require,module,exports){
+},{"./path":5,"./semicircle":6,"./utils":8}],8:[function(require,module,exports){
 // Utility functions
 
 var PREFIXES = 'Webkit Moz O ms'.split(' ');
