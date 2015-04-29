@@ -72,20 +72,6 @@ describe('SemiCircle', function() {
     shapeTests();
 });
 
-
-describe('Square', function() {
-
-    beforeEach(function() {
-        barOpts.step = function (state, bar, attachment) {};
-        this.bar = new ProgressBar.Square('body', barOpts);
-        this.attachment = this.bar._opts.attachment;
-        this.step = sinon.spy(this.bar._opts, 'step');
-    });
-
-    afterEach(afterEachCase);
-    shapeTests();
-});
-
 describe('Path', function () {
 
     beforeEach(function () {
