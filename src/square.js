@@ -1,4 +1,6 @@
 // Square shaped progress bar
+// Note: Square is not core part of API anymore. It's left here
+//       for reference.
 
 var Shape = require('./shape');
 var utils = require('./utils');

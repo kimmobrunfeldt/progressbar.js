@@ -83,9 +83,9 @@ animating SVG properties with CSS transitions.
 
 # API
 
-**NOTE:** Line, Circle and Square links all point to the same documentation
+**NOTE:** Line, Circle and SemiCircle links all point to the same documentation
 which is named Shape. Shape is **not** a real attribute, instead you should
-replace it with **Line**, **Circle** or **Square**.
+replace it with **Line**, **Circle** or **SemiCircle**.
 
 [**ProgressBar**](#api)
 
@@ -115,7 +115,7 @@ replace it with **Line**, **Circle** or **Square**.
     * [destroy()](#shapedestroy)
 
 
-* [Square(container, [*options*])](#shapecontainer-options)
+* [SemiCircle(container, [*options*])](#shapecontainer-options)
     * [*svg*](#shapesvg)
     * [*path*](#shapepath)
     * [*trail*](#shapetrail)
@@ -137,18 +137,25 @@ replace it with **Line**, **Circle** or **Square**.
 
 Functions use node-style callback convention. Callback function is always the last given parameter.
 
-All built-in shapes except [Line](#linecontainer-options) are drawn on 100x100 SVG canvas and the shape is fitted exactly to the canvas.
-Line is drawn on 100-width canvas and height depends on the stroke width.
+Shapes have different SVG canvas sizes:
+
+Shape      | Canvas size
+------------------------
+Circle     | `100x100`
+SemiCircle | `100x50`
+Line       | `100x{optsstrokeWidth}`
+
+All shapes are fitted exactly to their canvases.
 
 
 ## Shape(container, [*options*])
 
-Line, Circle or Square shaped progress bar. Appends SVG to container.
+Line, Circle or SemiCircle shaped progress bar. Appends SVG to container.
 
 **Example**
 
 ```javascript
-var progressBar = new ProgressBar.Square('#container', {
+var progressBar = new ProgressBar.Circle('#container', {
     strokeWidth: 2
 });
 ```
@@ -242,8 +249,8 @@ with CSS.
         // object to step function
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, square, attachment) {
-            square.path.setAttribute('stroke', state.color);
+        step: function(state, circle, attachment) {
+            circle.path.setAttribute('stroke', state.color);
         }
     }
     ```
@@ -300,8 +307,8 @@ progressBar.animate(0.3, {
         // object to step function
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, square, attachment) {
-            square.path.setAttribute('stroke', state.color);
+        step: function(state, circle, attachment) {
+            circle.path.setAttribute('stroke', state.color);
         }
     }
     ```

@@ -1,7 +1,7 @@
 // Different shaped progress bars
 var Line = require('./line');
 var Circle = require('./circle');
-var Square = require('./square');
+var SemiCircle = require('./semicircle');
 
 // Lower level API to use any SVG path
 var Path = require('./path');
@@ -10,6 +10,6 @@ var Path = require('./path');
 module.exports = {
     Line: Line,
     Circle: Circle,
-    Square: Square,
+    SemiCircle: SemiCircle,
     Path: Path
 };
