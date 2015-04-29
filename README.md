@@ -146,7 +146,7 @@ Functions use node-style callback convention. Callback function is always the la
 Shapes have different SVG canvas sizes:
 
 Shape      | Canvas size
-------------------------
+-----------|------------------------
 Circle     | `100x100`
 SemiCircle | `100x50`
 Line       | `100x{optsstrokeWidth}`
