@@ -1,7 +1,3 @@
-// ProgressBar.js 0.8.1
-// https://kimmobrunfeldt.github.io/progressbar.js
-// License: MIT
-
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.ProgressBar = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /*! shifty - v1.2.2 - 2014-10-09 - http://jeremyckahn.github.io/shifty */
 ;(function (root) {
@@ -1421,7 +1417,7 @@ Circle.prototype._trailString = function _trailString(opts) {
 
 module.exports = Circle;
 
-},{"./shape":6,"./utils":8}],3:[function(require,module,exports){
+},{"./shape":7,"./utils":8}],3:[function(require,module,exports){
 // Line shaped progress bar
 
 var Shape = require('./shape');
@@ -1453,24 +1449,26 @@ Line.prototype._trailString = function _trailString(opts) {
 
 module.exports = Line;
 
-},{"./shape":6,"./utils":8}],4:[function(require,module,exports){
-// Different shaped progress bars
-var Line = require('./line');
-var Circle = require('./circle');
-var Square = require('./square');
-
-// Lower level API to use any SVG path
-var Path = require('./path');
-
-
+},{"./shape":7,"./utils":8}],4:[function(require,module,exports){
 module.exports = {
-    Line: Line,
-    Circle: Circle,
-    Square: Square,
-    Path: Path
+    // Higher level API, different shaped progress bars
+    Line: require('./line'),
+    Circle: require('./circle'),
+    SemiCircle: require('./semicircle'),
+
+    // Lower level API to use any SVG path
+    Path: require('./path'),
+
+    // Base-class for creating new custom shapes
+    // to be in line with the API of built-in shapes
+    // Undocumented.
+    Shape: require('./shape'),
+
+    // Internal utils, undocumented.
+    utils: require('./utils')
 };
 
-},{"./circle":2,"./line":3,"./path":5,"./square":7}],5:[function(require,module,exports){
+},{"./circle":2,"./line":3,"./path":5,"./semicircle":6,"./shape":7,"./utils":8}],5:[function(require,module,exports){
 // Lower level API to animate any kind of svg path
 
 var Tweenable = require('shifty');
@@ -1640,6 +1638,52 @@ Path.prototype._easing = function _easing(easing) {
 module.exports = Path;
 
 },{"./utils":8,"shifty":1}],6:[function(require,module,exports){
+// Semi-SemiCircle shaped progress bar
+
+var Shape = require('./shape');
+var Circle = require('./circle');
+var utils = require('./utils');
+
+
+var SemiCircle = function SemiCircle(container, options) {
+    // Use one arc to form a SemiCircle
+    // See this answer http://stackoverflow.com/a/10477334/1446092
+    this._pathTemplate =
+        'M 50,50 m -{radius},0' +
+        ' a {radius},{radius} 0 1 1 {2radius},0';
+
+    Shape.apply(this, arguments);
+};
+
+SemiCircle.prototype = new Shape();
+SemiCircle.prototype.constructor = SemiCircle;
+
+SemiCircle.prototype._initializeSvg = function _initializeSvg(svg, opts) {
+    svg.setAttribute('viewBox', '0 0 100 50');
+};
+
+SemiCircle.prototype._initializeTextElement = function _initializeTextElement(opts, container, element) {
+    if (opts.text.autoStyle) {
+        // Reset top style
+        element.style.top = 'auto';
+
+        element.style.bottom = '0';
+        if (opts.text.alignToBottom) {
+            utils.setStyle(element, 'transform', 'translate(-50%, 0)');
+        } else {
+            utils.setStyle(element, 'transform', 'translate(-50%, 50%)');
+        }
+    }
+};
+
+
+// Share functionality with Circle, just have different path
+SemiCircle.prototype._pathString = Circle.prototype._pathString;
+SemiCircle.prototype._trailString = Circle.prototype._trailString;
+
+module.exports = SemiCircle;
+
+},{"./circle":2,"./shape":7,"./utils":8}],7:[function(require,module,exports){
 // Base object for different progress bar shapes
 
 var Path = require('./path');
@@ -1672,6 +1716,8 @@ var Shape = function Shape(container, opts) {
         fill: null,
         text: {
             autoStyle: true,
+            removeMarginPadding: true,
+            alignToBottom: false,
             color: null,
             value: '',
             className: 'progressbar-text'
@@ -1843,10 +1889,14 @@ Shape.prototype._createTextElement = function _createTextElement(opts, container
         // Center text
         container.style.position = 'relative';
         element.style.position = 'absolute';
-        element.style.top = '50%';
         element.style.left = '50%';
-        element.style.padding = 0;
-        element.style.margin = 0;
+        element.style.top = '50%';
+
+        if (opts.text.removeMarginPadding) {
+            element.style.padding = 0;
+            element.style.margin = 0;
+        }
+
         utils.setStyle(element, 'transform', 'translate(-50%, -50%)');
 
         if (opts.text.color) {
@@ -1857,7 +1907,14 @@ Shape.prototype._createTextElement = function _createTextElement(opts, container
     }
     element.className = opts.text.className;
 
+    this._initializeTextElement(opts, container, element);
     return element;
+};
+
+// Give custom shapes possibility to modify text element
+Shape.prototype._initializeTextElement = function _initializeTextElement(opts, container, element) {
+    // By default, no-op
+    // Custom shapes should respect API options, such as autoStyle
 };
 
 Shape.prototype._pathString = function _pathString(opts) {
@@ -1870,58 +1927,7 @@ Shape.prototype._trailString = function _trailString(opts) {
 
 module.exports = Shape;
 
-},{"./path":5,"./utils":8}],7:[function(require,module,exports){
-// Square shaped progress bar
-
-var Shape = require('./shape');
-var utils = require('./utils');
-
-
-var Square = function Square(container, options) {
-    this._pathTemplate =
-        'M 0,{halfOfStrokeWidth}' +
-        ' L {width},{halfOfStrokeWidth}' +
-        ' L {width},{width}' +
-        ' L {halfOfStrokeWidth},{width}' +
-        ' L {halfOfStrokeWidth},{strokeWidth}';
-
-    this._trailTemplate =
-        'M {startMargin},{halfOfStrokeWidth}' +
-        ' L {width},{halfOfStrokeWidth}' +
-        ' L {width},{width}' +
-        ' L {halfOfStrokeWidth},{width}' +
-        ' L {halfOfStrokeWidth},{halfOfStrokeWidth}';
-
-    Shape.apply(this, arguments);
-};
-
-Square.prototype = new Shape();
-Square.prototype.constructor = Square;
-
-Square.prototype._pathString = function _pathString(opts) {
-    var w = 100 - opts.strokeWidth / 2;
-
-    return utils.render(this._pathTemplate, {
-        width: w,
-        strokeWidth: opts.strokeWidth,
-        halfOfStrokeWidth: opts.strokeWidth / 2
-    });
-};
-
-Square.prototype._trailString = function _trailString(opts) {
-    var w = 100 - opts.strokeWidth / 2;
-
-    return utils.render(this._trailTemplate, {
-        width: w,
-        strokeWidth: opts.strokeWidth,
-        halfOfStrokeWidth: opts.strokeWidth / 2,
-        startMargin: (opts.strokeWidth / 2) - (opts.trailWidth / 2)
-    });
-};
-
-module.exports = Square;
-
-},{"./shape":6,"./utils":8}],8:[function(require,module,exports){
+},{"./path":5,"./utils":8}],8:[function(require,module,exports){
 // Utility functions
 
 var PREFIXES = 'Webkit Moz O ms'.split(' ');
