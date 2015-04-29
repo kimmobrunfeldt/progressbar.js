@@ -7,16 +7,18 @@
 
 <br>
 Beautiful and responsive progress bars with animated SVG paths.
-[Use built-in shapes](#api) or [create your own paths](#pathpath-options).
+Use built-in shapes or [create your own paths](#pathpath-options).
 [Customize](#custom-animations) the animations as you wish.
 
-See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for examples or
-[**try it in JSFiddle**](http://jsfiddle.net/kimmobrunfeldt/8xa87k31/392/).
 
+**Shortcuts**
+
+* [How to install](#installing-options)
+* [Demo & Examples](https://kimmobrunfeldt.github.io/progressbar.js)
+* [**Try** in JSFiddle](http://jsfiddle.net/kimmobrunfeldt/8xa87k31/392/)
+* [API documentation](#api)
 
 # Get started
-*Ask help in* [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kimmobrunfeldt/progressbar.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-<br>
 
 [![Build Status](https://api.travis-ci.org/kimmobrunfeldt/progressbar.js.svg?branch=master)](https://travis-ci.org/kimmobrunfeldt/progressbar.js) *Build status and browser tests for current master*
 
@@ -83,9 +85,13 @@ animating SVG properties with CSS transitions.
 
 # API
 
-**NOTE:** Line, Circle and Square links all point to the same documentation
-which is named Shape. Shape is **not** a real attribute, instead you should
-replace it with **Line**, **Circle** or **Square**.
+**NOTE:** Line, Circle and SemiCircle all point to the same
+documentation which is named Shape. You almost certainly should
+replace it(Shape) with Line, Circle or SemiCircle.
+
+**Example:** if documentation states `Shape.animate()`, replace it with
+`Circle.animate()`, simple. Shape is the base object for all
+progress bars and currently undocumented internal module.
 
 [**ProgressBar**](#api)
 
@@ -115,7 +121,7 @@ replace it with **Line**, **Circle** or **Square**.
     * [destroy()](#shapedestroy)
 
 
-* [Square(container, [*options*])](#shapecontainer-options)
+* [SemiCircle(container, [*options*])](#shapecontainer-options)
     * [*svg*](#shapesvg)
     * [*path*](#shapepath)
     * [*trail*](#shapetrail)
@@ -137,18 +143,25 @@ replace it with **Line**, **Circle** or **Square**.
 
 Functions use node-style callback convention. Callback function is always the last given parameter.
 
-All built-in shapes except [Line](#linecontainer-options) are drawn on 100x100 SVG canvas and the shape is fitted exactly to the canvas.
-Line is drawn on 100-width canvas and height depends on the stroke width.
+Shapes have different SVG canvas sizes:
+
+Shape      | Canvas size
+------------------------
+Circle     | `100x100`
+SemiCircle | `100x50`
+Line       | `100x{optsstrokeWidth}`
+
+All shapes are fitted exactly to their canvases.
 
 
 ## Shape(container, [*options*])
 
-Line, Circle or Square shaped progress bar. Appends SVG to container.
+Line, Circle or SemiCircle shaped progress bar. Appends SVG to container.
 
 **Example**
 
 ```javascript
-var progressBar = new ProgressBar.Square('#container', {
+var progressBar = new ProgressBar.Circle('#container', {
     strokeWidth: 2
 });
 ```
@@ -242,8 +255,8 @@ with CSS.
         // object to step function
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, square, attachment) {
-            square.path.setAttribute('stroke', state.color);
+        step: function(state, circle, attachment) {
+            circle.path.setAttribute('stroke', state.color);
         }
     }
     ```
@@ -300,8 +313,8 @@ progressBar.animate(0.3, {
         // object to step function
         from: { color: '#eee' },
         to: { color: '#000' },
-        step: function(state, square, attachment) {
-            square.path.setAttribute('stroke', state.color);
+        step: function(state, circle, attachment) {
+            circle.path.setAttribute('stroke', state.color);
         }
     }
     ```

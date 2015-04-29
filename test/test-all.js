@@ -60,12 +60,10 @@ describe('Circle', function() {
     shapeTests();
 });
 
-
-describe('Square', function() {
-
+describe('SemiCircle', function() {
     beforeEach(function() {
         barOpts.step = function (state, bar, attachment) {};
-        this.bar = new ProgressBar.Square('body', barOpts);
+        this.bar = new ProgressBar.SemiCircle('body', barOpts);
         this.attachment = this.bar._opts.attachment;
         this.step = sinon.spy(this.bar._opts, 'step');
     });

@@ -201,11 +201,22 @@ Shape.prototype._createTextElement = function _createTextElement(opts, container
         // Center text
         container.style.position = 'relative';
         element.style.position = 'absolute';
-        element.style.top = '50%';
         element.style.left = '50%';
         element.style.padding = 0;
         element.style.margin = 0;
-        utils.setStyle(element, 'transform', 'translate(-50%, -50%)');
+
+        // We have to require semicircle.js inside the function because
+        // otherwise we would have unsolvable cyclic dependency:
+        // semicircle.js needs to call new Shape() when it's required.
+        // shape.js      needs to require('./semicircle') when it's required.
+        var SemiCircle = require('./semicircle');
+        if (this instanceof SemiCircle) {
+            element.style.bottom = '0';
+            utils.setStyle(element, 'transform', 'translate(-50%, 50%)');
+        } else {
+            element.style.top = '50%';
+            utils.setStyle(element, 'transform', 'translate(-50%, -50%)');
+        }
 
         if (opts.text.color) {
             element.style.color = opts.text.color;
