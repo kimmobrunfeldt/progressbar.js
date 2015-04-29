@@ -156,11 +156,15 @@ var progressBar = new ProgressBar.Square('#container', {
 To make the shape resize with its container, set for example the following CSS:
 
 ```css
-.container > svg {
+#container > svg {
     display: block;
     width: 100%;
 }
 ```
+
+> Note: this is just an example, you probably shouldn't use IDs in CSS selectors.
+> - https://github.com/CSSLint/csslint/wiki/Disallow-IDs-in-selectors
+> - http://oli.jp/2011/ids/
 
 With Line shape, you can control the width of the line by specifying e.g. `height: 5px`
 with CSS.
