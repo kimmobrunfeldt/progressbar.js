@@ -7,16 +7,18 @@
 
 <br>
 Beautiful and responsive progress bars with animated SVG paths.
-[Use built-in shapes](#api) or [create your own paths](#pathpath-options).
+Use built-in shapes or [create your own paths](#pathpath-options).
 [Customize](#custom-animations) the animations as you wish.
 
-See [**demo page**](https://kimmobrunfeldt.github.io/progressbar.js) for examples or
-[**try it in JSFiddle**](http://jsfiddle.net/kimmobrunfeldt/8xa87k31/392/).
 
+**Shortcuts**
+
+* [How to install](#installing-options)
+* [Demo & Examples](https://kimmobrunfeldt.github.io/progressbar.js)
+* [**Try** in JSFiddle](http://jsfiddle.net/kimmobrunfeldt/8xa87k31/392/)
+* [API documentation](#api)
 
 # Get started
-*Ask help in* [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kimmobrunfeldt/progressbar.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-<br>
 
 [![Build Status](https://api.travis-ci.org/kimmobrunfeldt/progressbar.js.svg?branch=master)](https://travis-ci.org/kimmobrunfeldt/progressbar.js) *Build status and browser tests for current master*
 
@@ -83,9 +85,13 @@ animating SVG properties with CSS transitions.
 
 # API
 
-**NOTE:** Line, Circle and SemiCircle links all point to the same documentation
-which is named Shape. Shape is **not** a real attribute, instead you should
-replace it with **Line**, **Circle** or **SemiCircle**.
+**NOTE:** Line, Circle and SemiCircle all point to the same
+documentation which is named Shape. You almost certainly should
+replace it(Shape) with Line, Circle or SemiCircle.
+
+**Example:** if documentation states `Shape.animate()`, replace it with
+`Circle.animate()`, simple. Shape is the base object for all
+progress bars and currently undocumented internal module.
 
 [**ProgressBar**](#api)
 
