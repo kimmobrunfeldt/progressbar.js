@@ -128,6 +128,19 @@ Shape.prototype.setText = function setText(text) {
     this.text.appendChild(document.createTextNode(text));
 };
 
+Shape.prototype.setHtml = function setHtml(html) {
+    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+
+    if (this.text === null) {
+        // Create new text node
+        this.text = this._createTextElement(this._opts, this._container);
+        this._container.appendChild(this.text);
+    }
+
+    // Set new HTML content
+    this.text.innerHTML = html;
+};
+
 Shape.prototype._createSvgView = function _createSvgView(opts) {
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     this._initializeSvg(svg, opts);
