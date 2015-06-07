@@ -533,7 +533,7 @@ Tweening engine changes defined values over time and calls step function for eac
     ```
 
     Thanks to shifty, you can tween values in formats like `translateX(45px)`, `rgb(0,255,0)` and `#fff`.
-    See all supported string formats from [shifty's documentation](http://jeremyckahn.github.io/shifty/dist/doc/src/shifty.token.js.html#token)
+    See all supported string formats from [shifty's documentation](http://jeremyckahn.github.io/shifty/dist/doc/modules/Tweenable.token.html)
 
     Easing defined as option for animation applies to all of the specified values.
 
