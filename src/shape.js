@@ -30,7 +30,6 @@ var Shape = function Shape(container, opts) {
         fill: null,
         text: {
             autoStyle: true,
-            removeMarginPadding: true,
             alignToBottom: false,
             color: null,
             value: '',
@@ -205,11 +204,8 @@ Shape.prototype._createTextElement = function _createTextElement(opts, container
         element.style.position = 'absolute';
         element.style.left = '50%';
         element.style.top = '50%';
-
-        if (opts.text.removeMarginPadding) {
-            element.style.padding = 0;
-            element.style.margin = 0;
-        }
+        element.style.padding = 0;
+        element.style.margin = 0;
 
         utils.setStyle(element, 'transform', 'translate(-50%, -50%)');
 

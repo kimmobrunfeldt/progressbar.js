@@ -237,13 +237,6 @@ with CSS.
             // Default: true
             autoStyle: true,
 
-            // Only effective when autoStyle is enabled.
-            // If true, padding and margin are removed automatically
-            // from text element. Set this to false, if you want to
-            // set margin or padding for text element
-            // Default: true
-            removeMarginPadding: true,
-
             // Only effective if the shape is SemiCircle.
             // If true, baseline for text is aligned with bottom of
             // the SVG canvas. If false, bottom line of SVG canvas
