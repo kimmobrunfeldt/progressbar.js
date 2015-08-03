@@ -52,7 +52,7 @@ function createPath() {
         path: path,
         svg: svg
     };
-};
+}
 
 function pathTests() {
 
@@ -139,7 +139,7 @@ function pathTests() {
     it('.path attribute should exist', function() {
         expect(this.bar.path).to.be.ok();
     });
-};
+}
 
 module.exports = {
     options: barOpts,

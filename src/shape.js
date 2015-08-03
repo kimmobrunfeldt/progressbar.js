@@ -93,8 +93,8 @@ var Shape = function Shape(container, opts) {
 
 Shape.prototype.animate = function animate(progress, opts, cb) {
     if (this._progressPath === null) {
-        throw new Error(DESTROYED_ERROR)
-    };
+        throw new Error(DESTROYED_ERROR);
+    }
 
     this._progressPath.animate(progress, opts, cb);
 };
