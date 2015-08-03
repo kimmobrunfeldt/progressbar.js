@@ -1,7 +1,7 @@
 {
   "name": "progressbar.js",
   "version": "0.8.1-dev",
-  "description": "Beautiful and responsive progress bars with animated SVG paths",
+  "description": "Responsive and slick progress bars with animated SVG paths",
   "main": "src/main.js",
   "dependencies": {
     "shifty": "1.2.2"
@@ -12,11 +12,14 @@
     "chai": "^1.10.0",
     "chai-stats": "kimmobrunfeldt/chai-stats",
     "commander": "^2.4.0",
+    "concurrently": "^0.1.1",
+    "eslint": "^1.0.0",
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-uglify": "^0.6.0",
     "grunt-karma": "^0.9.0",
     "grunt-shell": "^1.1.1",
+    "jscs": "^2.0.0",
     "karma": "^0.12.24",
     "karma-bro": "^0.8.0",
     "karma-mocha": "^0.1.9",
@@ -24,15 +27,21 @@
     "lodash": "^2.4.1",
     "mocha": "^2.0.1",
     "mustache": "^0.8.2",
+    "node-static": "^0.7.7",
     "semver": "^4.1.0",
     "shelljs": "^0.3.0",
+    "sinon": "~1.14.1",
     "string": "^2.2.0",
     "testem": "^0.6.22",
-    "watchify": "^2.1.1",
-    "sinon": "~1.14.1"
+    "watchify": "^2.1.1"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "dev": "concurrent 'npm run serve' 'grunt watch' 'open http://localhost:8080'",
+    "serve": "static ./local-dev -c 0",
+    "lint": "./tools/lint.sh",
+    "jscs": "jscs ./src ./test",
+    "eslint": "eslint --ext .js ./src ./test"
   },
   "repository": {
     "type": "git",
@@ -43,7 +52,7 @@
   "bugs": {
     "url": "https://github.com/kimmobrunfeldt/progressbar.js/issues"
   },
-  "homepage": "https://github.com/kimmobrunfeldt/progressbar.js",
+  "homepage": "https://kimmobrunfeldt.github.io/progressbar.js/",
   "keywords": [
     "progress",
     "bar",
@@ -55,6 +64,8 @@
     "radial",
     "line",
     "loading",
-    "loader"
+    "loader",
+    "semi-circle",
+    "indicator"
   ]
 }

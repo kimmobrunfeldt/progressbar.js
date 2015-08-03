@@ -3,7 +3,6 @@
 var Shape = require('./shape');
 var utils = require('./utils');
 
-
 var Line = function Line(container, options) {
     this._pathTemplate = 'M 0,{center} L 100,{center}';
     Shape.apply(this, arguments);

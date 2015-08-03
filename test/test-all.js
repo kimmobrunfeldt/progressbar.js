@@ -12,9 +12,8 @@ var expect = chai.expect;
 // https://github.com/mochajs/mocha/wiki/Shared-Behaviours
 var shapeTests = require('./shape-behaviour');
 var pathTests = require('./path-behaviour');
-var ProgressBar = require("../src/main");
+var ProgressBar = require('../src/main');
 var utils = require('../src/utils');
-
 
 var afterEachCase = function() {
     try {
@@ -28,14 +27,14 @@ var afterEachCase = function() {
 var barOpts = {
     text: { value: 'Test' },
     trailWidth: 1,
-    attachment: {"foo": "bar"}
+    attachment: {foo: 'bar'}
 };
 
 describe('Line', function() {
     beforeEach(function() {
         // Append progress bar to body since adding a custom HTML and div
         // with Karma was not that trivial compared to Testem
-        barOpts.step = function (state, bar, attachment) {};
+        barOpts.step = function(state, bar, attachment) {};
         this.bar = new ProgressBar.Line('body', barOpts);
         this.attachment = this.bar._opts.attachment;
         this.step = sinon.spy(this.bar._opts, 'step');
@@ -46,10 +45,9 @@ describe('Line', function() {
     shapeTests();
 });
 
-
 describe('Circle', function() {
     beforeEach(function() {
-        barOpts.step = function (state, bar, attachment) {};
+        barOpts.step = function(state, bar, attachment) {};
         this.bar = new ProgressBar.Circle('body', barOpts);
         this.attachment = this.bar._opts.attachment;
         this.step = sinon.spy(this.bar._opts, 'step');
@@ -62,7 +60,7 @@ describe('Circle', function() {
 
 describe('SemiCircle', function() {
     beforeEach(function() {
-        barOpts.step = function (state, bar, attachment) {};
+        barOpts.step = function(state, bar, attachment) {};
         this.bar = new ProgressBar.SemiCircle('body', barOpts);
         this.attachment = this.bar._opts.attachment;
         this.step = sinon.spy(this.bar._opts, 'step');
@@ -72,9 +70,9 @@ describe('SemiCircle', function() {
     shapeTests();
 });
 
-describe('Path', function () {
+describe('Path', function() {
 
-    beforeEach(function () {
+    beforeEach(function() {
         var svgView = pathTests.createPath();
         this.svg = svgView.svg;
         this.path = svgView.path;
@@ -86,7 +84,7 @@ describe('Path', function () {
         this.step = sinon.spy(this.bar._opts, 'step');
     });
 
-    afterEach(function () {
+    afterEach(function() {
         var container = this.svg.parentNode;
         container.removeChild(this.svg);
         this.svg = null;
@@ -114,7 +112,6 @@ describe('utils', function() {
             e: 1
         };
         utils.extend(first, second);
-
 
         // These should normally override a's attributes
         expect(first.a.content).to.equal(undefined);

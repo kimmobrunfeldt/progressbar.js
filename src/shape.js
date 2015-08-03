@@ -5,7 +5,6 @@ var utils = require('./utils');
 
 var DESTROYED_ERROR = 'Object is destroyed';
 
-
 var Shape = function Shape(container, opts) {
     // Throw a better error if progress bars are not initialized with `new`
     // keyword
@@ -19,7 +18,9 @@ var Shape = function Shape(container, opts) {
     //   Line.prototype = new Shape();
     //
     // We just want to set the prototype for Line.
-    if (arguments.length === 0) return;
+    if (arguments.length === 0) {
+        return;
+    }
 
     // Default parameters for progress bar creation
     this._opts = utils.extend({
@@ -73,20 +74,30 @@ var Shape = function Shape(container, opts) {
 };
 
 Shape.prototype.animate = function animate(progress, opts, cb) {
-    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    if (this._progressPath === null) {
+        throw new Error(DESTROYED_ERROR)
+    };
+
     this._progressPath.animate(progress, opts, cb);
 };
 
 Shape.prototype.stop = function stop() {
-    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    if (this._progressPath === null) {
+        throw new Error(DESTROYED_ERROR);
+    }
+
     // Don't crash if stop is called inside step function
-    if (this._progressPath === undefined) return;
+    if (this._progressPath === undefined) {
+        return;
+    }
 
     this._progressPath.stop();
 };
 
 Shape.prototype.destroy = function destroy() {
-    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    if (this._progressPath === null) {
+        throw new Error(DESTROYED_ERROR);
+    }
 
     this.stop();
     this.svg.parentNode.removeChild(this.svg);
@@ -102,19 +113,29 @@ Shape.prototype.destroy = function destroy() {
 };
 
 Shape.prototype.set = function set(progress) {
-    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    if (this._progressPath === null) {
+        throw new Error(DESTROYED_ERROR);
+    }
+
     this._progressPath.set(progress);
 };
 
 Shape.prototype.value = function value() {
-    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
-    if (this._progressPath === undefined) return 0;
+    if (this._progressPath === null) {
+        throw new Error(DESTROYED_ERROR);
+    }
+
+    if (this._progressPath === undefined) {
+        return 0;
+    }
 
     return this._progressPath.value();
 };
 
 Shape.prototype.setText = function setText(text) {
-    if (this._progressPath === null) throw new Error(DESTROYED_ERROR);
+    if (this._progressPath === null) {
+        throw new Error(DESTROYED_ERROR);
+    }
 
     if (this.text === null) {
         // Create new text node
@@ -166,8 +187,12 @@ Shape.prototype._createTrail = function _createTrail(opts) {
     var newOpts = utils.extend({}, opts);
 
     // Defaults for parameters which modify trail path
-    if (!newOpts.trailColor) newOpts.trailColor = '#eee';
-    if (!newOpts.trailWidth) newOpts.trailWidth = newOpts.strokeWidth;
+    if (!newOpts.trailColor) {
+        newOpts.trailColor = '#eee';
+    }
+    if (!newOpts.trailWidth) {
+        newOpts.trailWidth = newOpts.strokeWidth;
+    }
 
     newOpts.color = newOpts.trailColor;
     newOpts.strokeWidth = newOpts.trailWidth;

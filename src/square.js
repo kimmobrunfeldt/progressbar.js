@@ -6,7 +6,6 @@
 var Shape = require('./shape');
 var utils = require('./utils');
 
-
 var Square = function Square(container, options) {
     this._pathTemplate =
         'M 0,{halfOfStrokeWidth}' +
@@ -45,7 +44,7 @@ Square.prototype._trailString = function _trailString(opts) {
         width: w,
         strokeWidth: opts.strokeWidth,
         halfOfStrokeWidth: opts.strokeWidth / 2,
-        startMargin: (opts.strokeWidth / 2) - (opts.trailWidth / 2)
+        startMargin: opts.strokeWidth / 2 - opts.trailWidth / 2
     });
 };
 

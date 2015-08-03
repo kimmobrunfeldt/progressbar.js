@@ -4,7 +4,6 @@ var Shape = require('./shape');
 var Circle = require('./circle');
 var utils = require('./utils');
 
-
 var SemiCircle = function SemiCircle(container, options) {
     // Use one arc to form a SemiCircle
     // See this answer http://stackoverflow.com/a/10477334/1446092
@@ -22,8 +21,12 @@ SemiCircle.prototype._initializeSvg = function _initializeSvg(svg, opts) {
     svg.setAttribute('viewBox', '0 0 100 50');
 };
 
-SemiCircle.prototype._initializeTextElement = function _initializeTextElement(opts, container, element) {
-    if (opts.text.autoStyle) {
+SemiCircle.prototype._initializeTextElement = function _initializeTextElement(
+    opts,
+    container,
+    element
+) {
+    if (opts.text.style) {
         // Reset top style
         element.style.top = 'auto';
 
@@ -35,7 +38,6 @@ SemiCircle.prototype._initializeTextElement = function _initializeTextElement(op
         }
     }
 };
-
 
 // Share functionality with Circle, just have different path
 SemiCircle.prototype._pathString = Circle.prototype._pathString;

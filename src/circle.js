@@ -3,7 +3,6 @@
 var Shape = require('./shape');
 var utils = require('./utils');
 
-
 var Circle = function Circle(container, options) {
     // Use two arcs to form a circle
     // See this answer http://stackoverflow.com/a/10477334/1446092

@@ -9,7 +9,6 @@ var EASING_ALIASES = {
     easeInOut: 'easeInOutCubic'
 };
 
-
 var Path = function Path(path, opts) {
     // Default parameters for animation
     opts = utils.extend({
@@ -57,7 +56,8 @@ Path.prototype.set = function set(progress) {
     if (utils.isFunction(step)) {
         var easing = this._easing(this._opts.easing);
         var values = this._calculateTo(progress, easing);
-        step(values, this._opts.shape||this, this._opts.attachment);
+        var reference = this._opts.shape || this;
+        step(values, reference, this._opts.attachment);
     }
 };
 
@@ -103,7 +103,8 @@ Path.prototype.animate = function animate(progress, opts, cb) {
         easing: shiftyEasing,
         step: function(state) {
             self.path.style.strokeDashoffset = state.offset;
-            opts.step(state, opts.shape||self, opts.attachment);
+            var reference = opts.shape || self;
+            opts.step(state, reference, opts.attachment);
         },
         finish: function(state) {
             if (utils.isFunction(cb)) {

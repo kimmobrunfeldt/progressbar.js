@@ -3,11 +3,7 @@ var chaiStats = require('chai-stats');
 chai.use(chaiStats);
 var expect = chai.expect;
 
-var testUtils = require('./test-utils');
-var sinon = require('sinon');
-
 var PRECISION = 2;
-
 var ANIM_PROP = {
     'styleName': 'stroke-offset',
     'scriptName': 'strokeOffset'
@@ -17,12 +13,12 @@ var barOpts = {
     duration: 800,
     from: {strokeOffset: 0},
     to: { strokeOffset: 0 },
-    step: function (state, self, attachment) {
+    step: function(state, self, attachment) {
         attachment.setAttribute(ANIM_PROP.scriptName, state[ANIM_PROP.scriptName]);
     }
 };
 
-var createPath = function () {
+function createPath() {
     var container = document.querySelector('body'),
         svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
         path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -35,12 +31,13 @@ var createPath = function () {
     svg.setAttribute('enable-background', '0 0 197 165.39555');
 
     var attrs = {
-        "id": "progress-path",
-        "fill": "none",
-        "stroke": "#ccc",
-        "stroke-width":"15",
-        "stroke-miterlimit": "10",
-        "d": "m 31.7,160.3 c -15,-16.2 -24.2,-38 -24.2,-61.8 0,-50.3 40.7,-91 91,-91 50.3,0 91,40.7 91,91 0,23.9 -9.2,45.6 -24.2,61.8"
+        'id': 'progress-path',
+        'fill': 'none',
+        'stroke': '#ccc',
+        'stroke-width':'15',
+        'stroke-miterlimit': '10',
+        'd': 'm 31.7,160.3 c -15,-16.2 -24.2,-38 -24.2,-61.8 0,-50.3' +
+             ' 40.7,-91 91,-91 50.3,0 91,40.7 91,91 0,23.9 -9.2,45.6 -24.2,61.8'
     };
 
     for (var i in attrs) {
@@ -52,21 +49,21 @@ var createPath = function () {
     container.appendChild(svg);
 
     return {
-        "path": path,
-        "svg": svg
+        path: path,
+        svg: svg
     };
 };
 
-var pathTests = function pathTests () {
+function pathTests() {
 
-    it('step function should recieve a reference to ProgressBar as argument #2', function () {
+    it('step function should recieve a reference to ProgressBar as argument #2', function() {
         this.bar.animate(1, {duration: 500});
 
         // we only care about the second arg, for each call so we need to manually
         // inspect them since we dont know what state would look like
         var ok = true;
 
-        for (var i =0; i < this.step.args.length; i++) {
+        for (var i = 0; i < this.step.args.length; i++) {
             if (this.step.args[i][1] !== this.bar) {
                 ok = false;
             }
@@ -75,14 +72,14 @@ var pathTests = function pathTests () {
         expect(ok).to.be.true();
     });
 
-    it('step function should recieve a reference to ProgressBar as argument #3', function () {
+    it('step function should recieve a reference to ProgressBar as argument #3', function() {
         this.bar.animate(1, {duration: 500});
 
         // we only care about the third arg, for each call so we need to manually
         // inspect them since we dont know what state would look like
         var ok = true;
 
-        for (var i =0; i < this.step.args.length; i++) {
+        for (var i = 0; i < this.step.args.length; i++) {
             if (this.step.args[i][2] !== this.attachment) {
                 ok = false;
             }
@@ -124,7 +121,6 @@ var pathTests = function pathTests () {
     });
 
     it('stop() should stop animation', function(done) {
-        var offset = testUtils.getComputedStyle(this.path, ANIM_PROP.scriptName);
         this.bar.animate(1, {duration: 1000});
 
         var self = this;

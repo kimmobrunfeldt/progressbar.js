@@ -73,7 +73,9 @@ function isArray(obj) {
 // Returns true if `obj` is object as in {a: 1, b: 2}, not if it's function or
 // array
 function isObject(obj) {
-    if (isArray(obj)) return false;
+    if (isArray(obj)) {
+        return false;
+    }
 
     var type = typeof obj;
     return type === 'object' && !!obj;

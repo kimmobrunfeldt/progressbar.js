@@ -15,6 +15,8 @@ updated.
 Then you can edit `src/progressbar.js` and changes can be tested in browser.
 Edit `local-dev/main.js` to your testing needs.
 
+Shorter way to do local development is running: ```npm run dev```.
+
 ## General project stuff
 
 This package uses npm/node tools just in the developer environment. Grunt is used as a task runner
@@ -122,3 +124,4 @@ animation customizations and possible even using different easings per animation
 * Automate tests so that testing is locally fast and CI runs tests with more browsers in Sauce Labs
 * Because of introducing text attribute, the library must modify CSS also. Provide user an option to make CSS them selves.
 * Keep **master** branch as a release branch so that new users can see the documentation for latest release instead of development version.
+* Add some tasks to package.json aside with grunt tasks. I would want to move from Grunt to npm scripts totally but Sauce Labs tests are run with grunt.
