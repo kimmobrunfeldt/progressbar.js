@@ -21,7 +21,7 @@ var config = {
     releaseMessage: 'Release {{ version }}',
     backToDevMessage: 'Bump to dev version',
     bumpType: 'patch',
-    files: ['package.json', 'bower.json'],
+    files: ['package.json'],
     readmeFile: 'README.md',
 
     // Banner to insert in beginning of distributables
