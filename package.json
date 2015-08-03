@@ -36,7 +36,7 @@
     "watchify": "^2.1.1"
   },
   "scripts": {
-    "test": "grunt test",
+    "test": "./tools/test.sh",
     "dev": "concurrent 'npm run serve' 'grunt watch' 'open http://localhost:8080'",
     "serve": "static ./local-dev -c 0",
     "lint": "./tools/lint.sh",
