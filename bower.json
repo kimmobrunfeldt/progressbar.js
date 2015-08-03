@@ -5,7 +5,7 @@
   "authors": [
     "Kimmo Brunfeldt <kimmobrunfeldt@gmail.com>"
   ],
-  "description": "Beautiful and responsive progress bars with animated SVG paths",
+  "description": "Responsive and slick progress bars with animated SVG paths",
   "moduleType": [
     "amd",
     "globals"

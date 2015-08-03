@@ -3,10 +3,10 @@
 **Version: 0.8.1** ([*previous stable*](https://github.com/kimmobrunfeldt/progressbar.js/tree/0.8.0))
 
 <br>
-![Beautiful animation](docs/animation.gif)
+![Demo animation](docs/animation.gif)
 
 <br>
-Beautiful and responsive progress bars with animated SVG paths.
+Responsive and slick progress bars with animated SVG paths.
 Use built-in shapes or [create your own paths](#pathpath-options).
 [Customize](#custom-animations) the animations as you wish.
 
