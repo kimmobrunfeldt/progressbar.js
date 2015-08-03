@@ -95,12 +95,14 @@ tests pass and jshint gives no errors.**
 
 Creating a new release of the package is simple:
 
-* Commit all changes
-* Run `grunt release`, which will create new tag and publish code to GitHub
+1. Commit and push all changes
+2. Run local tests and linters with `npm test`
+3. Make sure Sauce Labs tests pass
+4. Run `grunt release`, which will create new tag and publish code to GitHub
 
     Bower detects your new version of git tag.
 
-* Edit GitHub release notes
+5. Edit GitHub release notes
 
 By default, patch release is done. You can specify the version bump as a parameter:
 
