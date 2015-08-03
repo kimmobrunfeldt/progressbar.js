@@ -45,6 +45,10 @@ var Shape = function Shape(container, opts) {
             alignToBottom: true,
             value: '',
             className: 'progressbar-text'
+        },
+        svgStyle: {
+            display: 'block',
+            width: '100%'
         }
     }, opts, true);  // Use recursive extend
 
@@ -63,6 +67,10 @@ var Shape = function Shape(container, opts) {
 
     this._container = element;
     this._container.appendChild(svgView.svg);
+
+    if (this._opts.svgStyle) {
+        utils.setStyles(svgView.svg, this._opts.svgStyle);
+    }
 
     this.text = null;
     if (this._opts.text.value) {
@@ -237,21 +245,7 @@ Shape.prototype._createTextElement = function _createTextElement(opts, container
     if (textStyle) {
         container.style.position = 'relative';
 
-        utils.forEachObject(textStyle, function(styleValue, styleName) {
-            // Allow users to disable some individual styles by setting them
-            // to null or undefined
-            if (styleValue === null || styleValue === undefined) {
-                return;
-            }
-
-            // If style's value is {prefix: true, value: '50%'},
-            // Set also browser prefixed styles
-            if (utils.isObject(styleValue) && styleValue.prefix === true) {
-                utils.setStyle(element, styleName, styleValue.value);
-            } else {
-                element.style[styleName] = styleValue;
-            }
-        });
+        utils.setStyles(element, textStyle);
 
         // Default text color to progress bar's color
         if (!textStyle.color) {

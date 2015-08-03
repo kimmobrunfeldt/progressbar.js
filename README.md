@@ -18,12 +18,14 @@ Use built-in shapes or [create your own paths](#pathpath-options).
 * [**Try** in JSFiddle](http://jsfiddle.net/kimmobrunfeldt/8xa87k31/392/)
 * [API documentation](#api)
 
-# Get started
+**Build status**
 
 [![Build Status](https://api.travis-ci.org/kimmobrunfeldt/progressbar.js.svg?branch=master)](https://travis-ci.org/kimmobrunfeldt/progressbar.js) *Build status and browser tests for current master*
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/kimmobrunfeldt.svg)](https://saucelabs.com/u/kimmobrunfeldt)
 
+
+# Get started
 
 *ProgressBar.js* is lightweight, MIT licensed and supports all major browsers including **IE9+**.
 See complete examples in [examples](#examples) section.
@@ -41,8 +43,6 @@ See complete examples in [examples](#examples) section.
 * Including [*dist/progressbar.js*](dist/progressbar.js) or [dist/progressbar.min.js](dist/progressbar.min.js) from latest tag to your project.
 
 #### Loading module
-
-Files in `dist/` folder are UMD modules built with Browserify's `--standalone` switch. Read more about [standalone Browserify builds](http://www.forbeslindesay.co.uk/post/46324645400/standalone-browserify-builds).
 
 CommonJS
 
@@ -70,6 +70,8 @@ Global variable
 // global variable: window.ProgressBar
 var line = new ProgressBar.Line('#container');
 ```
+
+Files in `dist/` folder are UMD modules built with Browserify's `--standalone` switch. Read more about [standalone Browserify builds](http://www.forbeslindesay.co.uk/post/46324645400/standalone-browserify-builds).
 
 
 # How it works
@@ -153,6 +155,16 @@ Line       | `100x{opts.strokeWidth}`
 
 All shapes are fitted exactly to their canvases.
 
+**Important:** make sure that your container has same aspect ratio
+as the SVG canvas. For example: if you are using SemiCircle,
+set e.g.
+
+```css
+#container {
+    width: 300px;
+    height: 150px;
+}
+```
 
 ## Shape(container, [*options*])
 
@@ -165,19 +177,6 @@ var progressBar = new ProgressBar.Circle('#container', {
     strokeWidth: 2
 });
 ```
-
-To make the shape resize with its container, set for example the following CSS:
-
-```css
-#container > svg {
-    display: block;
-    width: 100%;
-}
-```
-
-> Note: this is just an example, you probably shouldn't use IDs in CSS selectors.
-> - https://github.com/CSSLint/csslint/wiki/Disallow-IDs-in-selectors
-> - http://oli.jp/2011/ids/
 
 With Line shape, you can control the width of the line by specifying e.g. `height: 5px`
 with CSS.
@@ -212,6 +211,17 @@ with CSS.
         // actual progress path.
         // Default: same as strokeWidth
         trailWidth: 0.8,
+
+        // Inline CSS styles for the created SVG element
+        // Set null to disable all default styles.
+        // You can disable individual defaults by setting them to `null`.
+        svgStyle: {
+            display: 'block',
+
+            // Important: make sure that your container has same
+            // aspect ratio as the SVG canvas. See SVG canvas sizes above.
+            width: '100%'
+        },
 
         // Text options. Text element is a <p> element appended to container
         // You can add CSS rules for the text element with the className

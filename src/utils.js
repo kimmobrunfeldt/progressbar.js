@@ -54,6 +54,24 @@ function setStyle(element, style, value) {
     element.style[style] = value;
 }
 
+function setStyles(element, styles) {
+    forEachObject(styles, function(styleValue, styleName) {
+        // Allow disabling some individual styles by setting them
+        // to null or undefined
+        if (styleValue === null || styleValue === undefined) {
+            return;
+        }
+
+        // If style's value is {prefix: true, value: '50%'},
+        // Set also browser prefixed styles
+        if (isObject(styleValue) && styleValue.prefix === true) {
+            setStyle(element, styleName, styleValue.value);
+        } else {
+            element.style[styleName] = styleValue;
+        }
+    });
+}
+
 function capitalize(text) {
     return text.charAt(0).toUpperCase() + text.slice(1);
 }
@@ -94,6 +112,7 @@ module.exports = {
     extend: extend,
     render: render,
     setStyle: setStyle,
+    setStyles: setStyles,
     capitalize: capitalize,
     isString: isString,
     isFunction: isFunction,
