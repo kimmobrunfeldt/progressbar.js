@@ -63,6 +63,7 @@ var Shape = function Shape(container, opts) {
 
     this._container = element;
     this._container.appendChild(svgView.svg);
+    this._warnContainerAspectRatio(this._container);
 
     this.text = null;
     if (this._opts.text.value) {
@@ -277,6 +278,31 @@ Shape.prototype._pathString = function _pathString(opts) {
 
 Shape.prototype._trailString = function _trailString(opts) {
     throw new Error('Override this function for each progress bar');
+};
+
+Shape.prototype._warnContainerAspectRatio = function _warnContainerAspectRatio(container) {
+    if (!this.containerAspectRatio) {
+        return;
+    }
+
+    var computedStyle = window.getComputedStyle(container, null);
+    var width = parseFloat(computedStyle.getPropertyValue('width'), 10);
+    var height = parseFloat(computedStyle.getPropertyValue('height'), 10);
+    if (!utils.floatEquals(this.containerAspectRatio, width / height)) {
+        console.warn(
+            'Incorrect aspect ratio of container detected:',
+            computedStyle.getPropertyValue('width') + '(width)',
+            '/',
+            computedStyle.getPropertyValue('height') + '(height)',
+            '=',
+            width / height
+        );
+
+        console.warn(
+            'Aspect ratio of should be',
+            this.containerAspectRatio
+        );
+    }
 };
 
 module.exports = Shape;

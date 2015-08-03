@@ -11,6 +11,8 @@ var SemiCircle = function SemiCircle(container, options) {
         'M 50,50 m -{radius},0' +
         ' a {radius},{radius} 0 1 1 {2radius},0';
 
+    this.containerAspectRatio = 2;
+
     Shape.apply(this, arguments);
 };
 
@@ -29,8 +31,8 @@ SemiCircle.prototype._initializeTextElement = function _initializeTextElement(
     if (opts.text.style) {
         // Reset top style
         element.style.top = 'auto';
-
         element.style.bottom = '0';
+
         if (opts.text.alignToBottom) {
             utils.setStyle(element, 'transform', 'translate(-50%, 0)');
         } else {
