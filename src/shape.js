@@ -30,9 +30,19 @@ var Shape = function Shape(container, opts) {
         trailWidth: null,
         fill: null,
         text: {
-            autoStyle: true,
-            alignToBottom: false,
-            color: null,
+            style: {
+                color: null,
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                padding: 0,
+                margin: 0,
+                transform: {
+                    prefix: true,
+                    value: 'translate(-50%, -50%)'
+                }
+            },
+            alignToBottom: true,
             value: '',
             className: 'progressbar-text'
         }
@@ -223,23 +233,32 @@ Shape.prototype._createTextElement = function _createTextElement(opts, container
     var element = document.createElement('p');
     element.appendChild(document.createTextNode(opts.text.value));
 
-    if (opts.text.autoStyle) {
-        // Center text
+    var textStyle = opts.text.style;
+    if (textStyle) {
         container.style.position = 'relative';
-        element.style.position = 'absolute';
-        element.style.left = '50%';
-        element.style.top = '50%';
-        element.style.padding = 0;
-        element.style.margin = 0;
 
-        utils.setStyle(element, 'transform', 'translate(-50%, -50%)');
+        utils.forEachObject(textStyle, function(styleValue, styleName) {
+            // Allow users to disable some individual styles by setting them
+            // to null or undefined
+            if (styleValue === null || styleValue === undefined) {
+                return;
+            }
 
-        if (opts.text.color) {
-            element.style.color = opts.text.color;
-        } else {
+            // If style's value is {prefix: true, value: '50%'},
+            // Set also browser prefixed styles
+            if (utils.isObject(styleValue) && styleValue.prefix === true) {
+                utils.setStyle(element, styleName, styleValue.value);
+            } else {
+                element.style[styleName] = styleValue;
+            }
+        });
+
+        // Default text color to progress bar's color
+        if (!textStyle.color) {
             element.style.color = opts.color;
         }
     }
+
     element.className = opts.text.className;
 
     this._initializeTextElement(opts, container, element);
@@ -249,7 +268,7 @@ Shape.prototype._createTextElement = function _createTextElement(opts, container
 // Give custom shapes possibility to modify text element
 Shape.prototype._initializeTextElement = function _initializeTextElement(opts, container, element) {
     // By default, no-op
-    // Custom shapes should respect API options, such as autoStyle
+    // Custom shapes should respect API options, such as text.style
 };
 
 Shape.prototype._pathString = function _pathString(opts) {

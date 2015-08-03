@@ -81,6 +81,14 @@ function isObject(obj) {
     return type === 'object' && !!obj;
 }
 
+function forEachObject(object, callback) {
+    for (var key in object) {
+        if (object.hasOwnProperty(key)) {
+            var val = object[key];
+            callback(val, key);
+        }
+    }
+}
 
 module.exports = {
     extend: extend,
@@ -89,5 +97,6 @@ module.exports = {
     capitalize: capitalize,
     isString: isString,
     isFunction: isFunction,
-    isObject: isObject
+    isObject: isObject,
+    forEachObject: forEachObject
 };

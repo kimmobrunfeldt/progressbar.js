@@ -216,33 +216,47 @@ with CSS.
         // Text options. Text element is a <p> element appended to container
         // You can add CSS rules for the text element with the className
         // NOTE: When text is set, 'position: relative' will be set to the
-        // container for centering. You can also prevent all style modifications
-        // with 'autoStyle: false'
+        // container for centering. You can also prevent all default inline
+        // styles with 'text.style: null'
         // Default: null
         text: {
             // Initial value for text.
             // Default: null
             value: 'Text',
 
-            // Text color.
-            // Default: same as stroke color (options.color)
-            color: '#f00',
-
             // Class name for text element.
             // Default: 'progressbar-text'
             className: 'progressbar__label',
 
-            // If true, CSS is automatically set for container and text element.
-            // If you want to modify all CSS your self, set this to false
-            // Default: true
-            autoStyle: true,
+            // Inline CSS styles for the text element.
+            // If you want to modify all CSS your self, set null to disable
+            // all default styles.
+            // You can disable individual defaults by setting them to `null`.
+            // If the style option contains values, container is automatically
+            // set to position: relative.
+            // Default: object speficied below
+            style: {
+                // Text color.
+                // Default: same as stroke color (options.color)
+                color: '#f00',
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                padding: 0,
+                margin: 0,
+                // You can specify styles which will be browser prefixed
+                transform: {
+                    prefix: true,
+                    value: 'translate(-50%, -50%)'
+                }
+            },
 
             // Only effective if the shape is SemiCircle.
             // If true, baseline for text is aligned with bottom of
             // the SVG canvas. If false, bottom line of SVG canvas
             // is in the center of text.
-            // Default: false
-            alignToBottom: false
+            // Default: true
+            alignToBottom: true
         },
 
         // Fill color for the shape. If null, no fill.
