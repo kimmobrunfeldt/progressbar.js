@@ -17,6 +17,7 @@ Use built-in shapes or [create your own paths](#pathpath-options).
 * [Demo & Examples](https://kimmobrunfeldt.github.io/progressbar.js)
 * [**Try** in JSFiddle](http://jsfiddle.net/kimmobrunfeldt/8xa87k31/392/)
 * [API documentation](#api)
+* [Migration between versions](#version-migrations)
 
 **Build status**
 
@@ -619,6 +620,16 @@ bar.animate(0.5, opts);
 
 ![](docs/animate-call.png)
 
+## Version migrations
+
+To upgrade from version x to y:
+
+* Go to [releases page](https://github.com/kimmobrunfeldt/progressbar.js/releases)
+* Find the version x you are using
+* Browse through release notes from x to y. API breaking releases are marked with `[Breaking]`.
+* Fix your current code to use new API
+
+*If you find this very tedious, please open a new issue.*
 
 ## Examples
 
