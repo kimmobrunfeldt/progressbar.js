@@ -626,7 +626,7 @@ To upgrade from version x to y:
 
 * Go to [releases page](https://github.com/kimmobrunfeldt/progressbar.js/releases)
 * Find the version x you are using
-* Browse through release notes from x to y. API breaking releases are marked with `[Breaking]`.
+* Browse through release notes from x to y. API breaking releases are marked with `#breaking`.
 * Fix your current code to use new API
 
 *If you find this very tedious, please open a new issue.*
