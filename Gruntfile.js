@@ -81,7 +81,7 @@ module.exports = function(grunt) {
         },
         command: function(bump) {
           bump = bump || 'patch';
-          return './scripts/release.js ' + bump;
+          return './tools/release.js ' + bump;
         }
       },
       karma: {
