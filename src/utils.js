@@ -1,6 +1,7 @@
 // Utility functions
 
 var PREFIXES = 'Webkit Moz O ms'.split(' ');
+var FLOAT_COMPARISON_EPSILON = 0.001;
 
 // Copy all attributes from source object to destination object.
 // destination object is mutated.
@@ -108,6 +109,10 @@ function forEachObject(object, callback) {
     }
 }
 
+function floatEquals(a, b) {
+    return Math.abs(a - b) < FLOAT_COMPARISON_EPSILON;
+}
+
 module.exports = {
     extend: extend,
     render: render,
@@ -117,5 +122,6 @@ module.exports = {
     isString: isString,
     isFunction: isFunction,
     isObject: isObject,
-    forEachObject: forEachObject
+    forEachObject: forEachObject,
+    floatEquals: floatEquals
 };

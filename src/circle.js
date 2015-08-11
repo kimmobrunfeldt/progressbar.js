@@ -11,6 +11,8 @@ var Circle = function Circle(container, options) {
         ' a {radius},{radius} 0 1 1 0,{2radius}' +
         ' a {radius},{radius} 0 1 1 0,-{2radius}';
 
+    this.containerAspectRatio = 1;
+
     Shape.apply(this, arguments);
 };
 
