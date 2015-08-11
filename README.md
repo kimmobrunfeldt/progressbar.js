@@ -56,7 +56,7 @@ AMD
 
 ```javascript
 require.config({
-    paths: {"progressbar": "../bower_components/progressbar.js/dist/progressbar"}
+    paths: {'progressbar': '../bower_components/progressbar.js/dist/progressbar'}
 });
 
 define(['progressbar'], function(ProgressBar) {
@@ -186,15 +186,15 @@ with CSS.
 
 * `container` Element where SVG is added. Query string or element.
 
-    For example `"#container"` or `document.getElementById("#container")`
+    For example `'#container'` or `document.getElementById('#container')`
 
 * `options` Options for path drawing.
 
     ```javascript
     {
         // Stroke color.
-        // Default: "#555"
-        color: "#3a3a3a",
+        // Default: '#555'
+        color: '#3a3a3a',
 
         // Width of the stroke.
         // Unit is percentage of SVG canvas' size.
@@ -206,7 +206,7 @@ with CSS.
         // Color for lighter trail stroke
         // underneath the actual progress path.
         // Default: '#eee'
-        trailColor: "#f4f4f4",
+        trailColor: '#f4f4f4',
 
         // Width of the trail stroke. Trail is always centered relative to
         // actual progress path.
@@ -272,15 +272,15 @@ with CSS.
 
         // Fill color for the shape. If null, no fill.
         // Default: null
-        fill: "rgba(0, 0, 0, 0.5)",
+        fill: 'rgba(0, 0, 0, 0.5)',
 
         // Duration for animation in milliseconds
         // Default: 800
         duration: 1200,
 
         // Easing for animation. See #easing section.
-        // Default: "linear"
-        easing: "easeOut",
+        // Default: 'linear'
+        easing: 'easeOut',
 
         // See #custom-animations section
         // Built-in shape passes reference to itself and a custom attachment
@@ -337,8 +337,8 @@ progressBar.animate(0.3, {
         duration: 1200,
 
         // Easing for animation. See #easing section.
-        // Default: "linear"
-        easing: "easeInOut",
+        // Default: 'linear'
+        easing: 'easeInOut',
 
         // See #custom-animations section
         // Built-in shape passes reference to itself and a custom attachment
@@ -397,7 +397,7 @@ Assuming there was SVG object with heart shaped path in HTML
 Initialization would be this easy
 
 ```javascript
-var svgPath = document.getElementById("heart-path");
+var svgPath = document.getElementById('heart-path');
 var path = new ProgressBar.Path(svgPath, {
     duration: 300
 });
@@ -415,7 +415,7 @@ we could do
 
 ```javascript
 var heart = document.getElementById('heart');
-heart.addEventListener('load', function () {
+heart.addEventListener('load', function() {
 var path = new ProgressBar.Path(heartObject.contentDocument.querySelector('#heart-path'), {
     duration: 300
 });
@@ -433,8 +433,8 @@ var path = new ProgressBar.Path(heartObject.contentDocument.querySelector('#hear
         duration: 1200,
 
         // Easing for animation. See #easing section.
-        // Default: "linear"
-        easing: "easeIn",
+        // Default: 'linear'
+        easing: 'easeIn',
 
         // Attachment which can be any object
         // you need to modify within the step function.
@@ -481,8 +481,8 @@ path.animate(0.3, {
         duration: 1200,
 
         // Easing for animation. See #easing section.
-        // Default: "linear"
-        easing: "easeOut",
+        // Default: 'linear'
+        easing: 'easeOut',
 
         // Attachment which can be any object
         // you need to modify within the step function.
@@ -525,10 +525,10 @@ Easing functions [provided with *shifty* are supported](https://github.com/jerem
 
 A few basic easing options:
 
-* `"linear"`
-* `"easeIn"`
-* `"easeOut"`
-* `"easeInOut"`
+* `'linear'`
+* `'easeIn'`
+* `'easeOut'`
+* `'easeInOut'`
 
 # Custom animations
 
@@ -546,7 +546,7 @@ Tweening engine changes defined values over time and calls step function for eac
     {
         // Start from thin gray line
         width: 0.1,
-        color: "#eee"
+        color: '#eee'
     }
     ```
 
@@ -563,7 +563,7 @@ Tweening engine changes defined values over time and calls step function for eac
     {
         // Finish to thick black line
         width: 1,
-        color: "#000"
+        color: '#000'
     }
     ```
 
@@ -580,7 +580,7 @@ Tweening engine changes defined values over time and calls step function for eac
     function(state, shape, attachment) {
         shape.path.setAttribute('stroke-width', state.width);
         shape.path.setAttribute('stroke', state.color);
-        attachment.text.innerHTML = shape.value()*100;
+        attachment.text.innerHTML = shape.value() * 100;
     }
     ```
 
@@ -613,7 +613,7 @@ var bar = new ProgressBar.Line('#container', {
 
 var opts = {
     from: { color: '#000 '},
-    to: { color: '#888 '}
+    to: { color: '#888'}
 };
 bar.animate(0.5, opts);
 ```
