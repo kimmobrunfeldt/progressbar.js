@@ -10,6 +10,7 @@ Responsive and slick progress bars with animated SVG paths.
 Use built-in shapes or [create your own paths](#pathpath-options).
 [Customize](#custom-animations) the animations as you wish.
 
+**NEW!** [react-progressbar.js](https://github.com/kimmobrunfeldt/react-progressbar.js) provides progress bars for React.
 
 **Shortcuts**
 
