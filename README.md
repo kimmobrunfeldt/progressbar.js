@@ -5,18 +5,18 @@
 
 <br>
 Responsive and slick progress bars with animated SVG paths.
-Use built-in shapes or [create your own paths](http://progressbarjs.readthedocs.org/api/path).
-[Customize](http://progressbarjs.readthedocs.org/api/parameters#custom-animations) the animations as you wish.
+Use built-in shapes or [create your own paths](http://progressbarjs.readthedocs.org/en/latest/api/path).
+[Customize](http://progressbarjs.readthedocs.org/en/latest/api/parameters#custom-animations) the animations as you wish.
 
 Documentation is [hosted at readthedocs.org](http://progressbarjs.readthedocs.org/en/latest/).
 
 **Shortcuts**
 
-* [How to install](http://progressbarjs.readthedocs.org/#install)
+* [Get started](http://progressbarjs.readthedocs.org/en/latest/)
 * [Demo & Examples](https://kimmobrunfeldt.github.io/progressbar.js)
 * [**Try** in JSFiddle](http://jsfiddle.net/kimmobrunfeldt/8xa87k31/392/)
-* [API documentation](http://progressbarjs.readthedocs.org/api/shape)
-* [Migration between versions](http://progressbarjs.readthedocs.org/#migrations)
+* [API documentation](http://progressbarjs.readthedocs.org/en/latest/api/shape)
+* [Migration between versions](http://progressbarjs.readthedocs.org/en/latest/#migrations)
 * [react-progressbar.js](https://github.com/kimmobrunfeldt/react-progressbar.js) progress bars in React.
 
 **Build status**
@@ -28,7 +28,7 @@ Documentation is [hosted at readthedocs.org](http://progressbarjs.readthedocs.or
 
 # Contributing
 
-See [documentation for contributors](http://progressbarjs.readthedocs.org/contributing.md).
+See [documentation for contributors](http://progressbarjs.readthedocs.org/en/latest/contributing.md).
 
 
 # Thanks
