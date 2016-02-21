@@ -13,6 +13,9 @@ to build documentation site. [ReadTheDocs](https://readthedocs.org/projects/prog
 provides hosting for the documentation site and builds the documentation on each
 commit.
 
+To locally develop documentation, you need to install mkdocs and requirements specified
+in pip-requirements.txt. After that you can run `mkdocs serve`.
+
 ## Get started with development
 
 * [Install local environment](#install-environment).
