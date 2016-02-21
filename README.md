@@ -26,7 +26,7 @@ Use built-in shapes or [create your own paths](http://progressbarjs.readthedocs.
 
 # Contributing
 
-See [documentation for contributors](CONTRIBUTING.md).
+See [documentation for contributors](http://progressbarjs.readthedocs.org/contributing.md).
 
 
 # Thanks

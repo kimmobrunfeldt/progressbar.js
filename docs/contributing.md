@@ -6,6 +6,13 @@ updated.
 
 **Pull requests:** You don't need to bump version numbers or modify anything related to releasing. That stuff is fully automated, just write the functionality.
 
+## Get started with documentation
+
+Documentation is written in markdown and [mkdocs](https://github.com/mkdocs/mkdocs) is used
+to build documentation site. [ReadTheDocs](https://readthedocs.org/projects/progressbarjs/)
+provides hosting for the documentation site and builds the documentation on each
+commit.
+
 ## Get started with development
 
 * [Install local environment](#install-environment).
