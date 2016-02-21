@@ -1,5 +1,6 @@
 // Browsers on Sauce Labs
 // Check out https://saucelabs.com/platforms for all browser/platform combos
+// and https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
 module.exports = {
 
     // Chrome
@@ -29,16 +30,16 @@ module.exports = {
     },
 
     // Safari
-    sauce_osx_safari7: {
+    sauce_osx_safari9: {
         base: 'SauceLabs',
         browserName: 'safari',
-        platform: 'OS X 10.9',
-        version: '7'
+        platform: 'OS X 10.11',
+        version: '9'
     },
     sauce_osx_safari8: {
         base: 'SauceLabs',
         browserName: 'safari',
-        platform: 'OS X 10.11',
+        platform: 'OS X 10.10',
         version: '8'
     },
 
