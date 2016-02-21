@@ -28,7 +28,7 @@ Documentation is [hosted at readthedocs.org](http://progressbarjs.readthedocs.or
 
 # Contributing
 
-See [documentation for contributors](http://progressbarjs.readthedocs.org/en/latest/contributing.md).
+See [documentation for contributors](http://progressbarjs.readthedocs.org/en/latest/contributing/).
 
 
 # Thanks
