@@ -8,6 +8,8 @@ Responsive and slick progress bars with animated SVG paths.
 Use built-in shapes or [create your own paths](http://progressbarjs.readthedocs.org/api/path).
 [Customize](http://progressbarjs.readthedocs.org/api/parameters#custom-animations) the animations as you wish.
 
+Documentation is [hosted at readthedocs.org](http://progressbarjs.readthedocs.org/en/latest/).
+
 **Shortcuts**
 
 * [How to install](http://progressbarjs.readthedocs.org/#install)
