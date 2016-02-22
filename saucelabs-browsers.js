@@ -4,12 +4,6 @@
 module.exports = {
 
     // Chrome
-    sauce_linux_chrome_beta: {
-        base: 'SauceLabs',
-        browserName: 'chrome',
-        platform: 'linux',
-        version: 'beta'
-    },
     sauce_linux_chrome_47: {
         base: 'SauceLabs',
         browserName: 'chrome',
