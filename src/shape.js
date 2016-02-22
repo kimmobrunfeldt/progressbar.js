@@ -73,23 +73,21 @@ var Shape = function Shape(container, opts) {
         utils.setStyles(svgView.svg, this._opts.svgStyle);
     }
 
-    this.text = null;
-    if (this._opts.text.value) {
-        this.text = this._createTextElement(this._opts, this._container);
-        this._container.appendChild(this.text);
-    }
-
     // Expose public attributes before Path initialization
     this.svg = svgView.svg;
     this.path = svgView.path;
     this.trail = svgView.trail;
-    // this.text is also a public attribute
+    this.text = null;
 
     var newOpts = utils.extend({
         attachment: undefined,
         shape: this
     }, this._opts);
     this._progressPath = new Path(svgView.path, newOpts);
+
+    if (utils.isObject(this._opts.text) && this._opts.text.value) {
+        this.setText(this._opts.text.value);
+    }
 };
 
 Shape.prototype.animate = function animate(progress, opts, cb) {
@@ -151,20 +149,24 @@ Shape.prototype.value = function value() {
     return this._progressPath.value();
 };
 
-Shape.prototype.setText = function setText(text) {
+Shape.prototype.setText = function setText(newText) {
     if (this._progressPath === null) {
         throw new Error(DESTROYED_ERROR);
     }
 
     if (this.text === null) {
         // Create new text node
-        this.text = this._createTextElement(this._opts, this._container);
+        this.text = this._createTextContainer(this._opts, this._container);
         this._container.appendChild(this.text);
     }
 
     // Remove previous text node and add new
-    this.text.removeChild(this.text.firstChild);
-    this.text.appendChild(document.createTextNode(text));
+    utils.removeChildren(this.text);
+    if (utils.isString(newText)) {
+        this.text.innerHTML = newText;
+    } else {
+        this.text.appendChild(newText);
+    }
 };
 
 Shape.prototype._createSvgView = function _createSvgView(opts) {
@@ -238,30 +240,27 @@ Shape.prototype._createPathElement = function _createPathElement(pathString, opt
     return path;
 };
 
-Shape.prototype._createTextElement = function _createTextElement(opts, container) {
-    var element = document.createElement('p');
-    element.appendChild(document.createTextNode(opts.text.value));
+Shape.prototype._createTextContainer = function _createTextContainer(opts, container) {
+    var textContainer = document.createElement('div');
+    textContainer.className = opts.text.className;
 
     var textStyle = opts.text.style;
     if (textStyle) {
         container.style.position = 'relative';
 
-        utils.setStyles(element, textStyle);
-
+        utils.setStyles(textContainer, textStyle);
         // Default text color to progress bar's color
         if (!textStyle.color) {
-            element.style.color = opts.color;
+            textContainer.style.color = opts.color;
         }
     }
 
-    element.className = opts.text.className;
-
-    this._initializeTextElement(opts, container, element);
-    return element;
+    this._initializeTextContainer(opts, container, textContainer);
+    return textContainer;
 };
 
 // Give custom shapes possibility to modify text element
-Shape.prototype._initializeTextElement = function _initializeTextElement(opts, container, element) {
+Shape.prototype._initializeTextContainer = function(opts, container, element) {
     // By default, no-op
     // Custom shapes should respect API options, such as text.style
 };

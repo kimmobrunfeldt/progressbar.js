@@ -23,20 +23,20 @@ SemiCircle.prototype._initializeSvg = function _initializeSvg(svg, opts) {
     svg.setAttribute('viewBox', '0 0 100 50');
 };
 
-SemiCircle.prototype._initializeTextElement = function _initializeTextElement(
+SemiCircle.prototype._initializeTextContainer = function _initializeTextContainer(
     opts,
     container,
-    element
+    textContainer
 ) {
     if (opts.text.style) {
         // Reset top style
-        element.style.top = 'auto';
-        element.style.bottom = '0';
+        textContainer.style.top = 'auto';
+        textContainer.style.bottom = '0';
 
         if (opts.text.alignToBottom) {
-            utils.setStyle(element, 'transform', 'translate(-50%, 0)');
+            utils.setStyle(textContainer, 'transform', 'translate(-50%, 0)');
         } else {
-            utils.setStyle(element, 'transform', 'translate(-50%, 50%)');
+            utils.setStyle(textContainer, 'transform', 'translate(-50%, 50%)');
         }
     }
 };

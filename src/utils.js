@@ -47,12 +47,14 @@ function render(template, vars) {
 }
 
 function setStyle(element, style, value) {
+    var elStyle = element.style;  // cache for performance
+
     for (var i = 0; i < PREFIXES.length; ++i) {
         var prefix = PREFIXES[i];
-        element.style[prefix + capitalize(style)] = value;
+        elStyle[prefix + capitalize(style)] = value;
     }
 
-    element.style[style] = value;
+    elStyle[style] = value;
 }
 
 function setStyles(element, styles) {
@@ -113,6 +115,13 @@ function floatEquals(a, b) {
     return Math.abs(a - b) < FLOAT_COMPARISON_EPSILON;
 }
 
+// https://coderwall.com/p/nygghw/don-t-use-innerhtml-to-empty-dom-elements
+function removeChildren(el) {
+    while (el.firstChild) {
+        el.removeChild(el.firstChild);
+    }
+}
+
 module.exports = {
     extend: extend,
     render: render,
@@ -123,5 +132,6 @@ module.exports = {
     isFunction: isFunction,
     isObject: isObject,
     forEachObject: forEachObject,
-    floatEquals: floatEquals
+    floatEquals: floatEquals,
+    removeChildren: removeChildren
 };
