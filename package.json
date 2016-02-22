@@ -15,6 +15,7 @@
     "concurrently": "^0.1.1",
     "eslint": "^1.0.0",
     "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-uglify": "^0.6.0",
     "grunt-karma": "^0.9.0",
