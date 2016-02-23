@@ -160,12 +160,12 @@ Shape.prototype.setText = function setText(newText) {
         this._container.appendChild(this.text);
     }
 
-    // Remove previous text node and add new
-    utils.removeChildren(this.text);
-    if (utils.isString(newText)) {
-        this.text.innerHTML = newText;
-    } else {
+    // Remove previous text and add new
+    if (utils.isObject(newText)) {
+        utils.removeChildren(this.text);
         this.text.appendChild(newText);
+    } else {
+        this.text.innerHTML = newText;
     }
 };
 
