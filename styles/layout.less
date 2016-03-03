@@ -1,0 +1,33 @@
+@side-panel-width: 250px;
+
+.side-panel {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: @side-panel-width;
+  height: 100%;
+  overflow-y: auto;
+}
+
+body > .content {
+  position: absolute;
+  left: @side-panel-width;
+  bottom: 0;
+  top: 0;
+  padding: 50px 60px 50px 60px;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+div.github-link {
+  position: absolute;
+  top: 25px;
+  right: 20px;
+}

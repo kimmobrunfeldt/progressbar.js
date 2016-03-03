@@ -4,23 +4,65 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>ProgressBar.js - Progress bars with JavaScript</title>
-    <meta name="description" content="Beautiful and responsive progress bars with animated SVG paths. This library provides a few built&#8209;in shapes such as Line, Circle and Square but you can also create your own progress bars with Illustrator or any vector graphic editor.">
+    <meta name="author" content="Kimmo Brunfeldt">
+    <meta name="description" content="Responsive and slick progress bars with animated SVG paths. This library provides a few built&#8209;in shapes such as Line, Circle and Square but you can also create your own progress bars with Illustrator or any vector graphic editor.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:300,100' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="styles/main.css">
-
     <link rel="shortcut icon" type="image/png" href="images/svg-progressbar-icon-32.png"/>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600,800,900" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" type="text/css">
 
-    <!-- Color scheme used -->
-    <!-- https://kuler.adobe.com/Copy-of-Close-to-the-Garden-but-more-Teal-color-theme-4324985/ -->
+    <link rel="stylesheet" href="bundle.css">
   </head>
   <body>
+    <nav class="side-panel">
+      <div class="side-panel-header">
+        <header>
+          Progress<br />bar
+        </header>
 
-    <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.9.0/dist/progressbar.js"></script>
-    <script src="scripts/main.js"></script>
+        <p class="sub-header">Demos</p>
+      </div>
 
+      <ul>
+        <li class="sub-header">
+          <a href="#line">Line</a>
+        </li>
+        <li class="sub-header">
+          <a href="#circle">Circle</a>
+        </li>
+        <li class="sub-header">
+          <a href="#semicircle">SemiCircle</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="github-link">
+      <a href="https://github.com/kimmobrunfeldt/progressbar.js" data-title="kimmobrunfeldt/progressbar.js" class="iconlink">
+        <i class="fa fa-github"></i>
+      </a>
+    </div>
+
+    <div class="content">
+      <div id="example">
+
+      </div>
+
+      <div class="row">
+          <h4 id="line">Line examples</h4>
+          <p>
+            With ProgressBar.js, it's easy to create arbitrary shaped progress bars.
+            It provides a few built‑in shapes like Line, Circle and SemiCircle but
+            you can also create your own progress bars with any vector graphic editor.
+          </p>
+          <p>
+            ProgressBar.js is lightweight, MIT licensed and supports all major browsers including IE9+.
+          </p>
+      </div>
+    </div>
+
+    <script src="bundle.js"></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -30,7 +72,6 @@
       ga('create', 'UA-55650262-1', 'auto');
       ga('send', 'pageview');
     </script>
-
     <script>
       (function(w,d) {
           w.hj = w.hj || function() { (w.hj.q=w.hj.q||[]).push(arguments); };

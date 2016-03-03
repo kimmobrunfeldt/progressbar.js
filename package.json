@@ -1,0 +1,38 @@
+{
+  "name": "progressbar.js-demopage",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "serve": "http-server -c0 .",
+    "start": "concurrently -p command 'npm run serve' 'npm run watch-js' 'npm run watch-styles'",
+    "watch-js": "watchify ./scripts/index.js -t babelify -d -o ./bundle.js -v",
+    "watch-styles": "npm run build-styles-dev && chokidar '**/*.less' './styles/**/*.css' -c 'npm run build-styles-dev'",
+    "build": "npm run build-js && npm run build-styles",
+    "build-js": "NODE_ENV=production browserify ./scripts/index.js -t babelify -o ./bundle.js && npm run minify-js",
+    "build-styles": "npm run build-styles-dev && npm run postcss && npm run minify-css",
+    "build-styles-dev": "npm run build-less && npm run postcss && echo 'Styles built!'",
+    "build-less": "lessc --glob ./styles/index.less ./bundle.css",
+    "postcss": "postcss --use autoprefixer ./bundle.css -o ./bundle.css",
+    "minify-js": "uglifyjs ./bundle.js -o ./bundle.js",
+    "minify-css": "cleancss --skip-aggressive-merging --skip-restructuring ./bundle.css -o ./bundle.css",
+    "lint": "npm run jscs && npm run eslint",
+    "jscs": "jscs ./scripts",
+    "eslint": "eslint --ext .js ./scripts"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.3",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "chokidar-cli": "^1.2.0",
+    "envify": "^3.4.0",
+    "less": "^2.6.0",
+    "less-plugin-glob": "^1.1.1",
+    "postcss-cli": "^2.5.1",
+    "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "progressbar.js": "^0.9.0"
+  }
+}
