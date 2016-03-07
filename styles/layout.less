@@ -1,21 +1,21 @@
-@side-panel-width: 250px;
+@side-menu-width: 250px;
 
-.side-panel {
-  position: absolute;
+.side-menu {
+  position: fixed;
   left: 0;
   bottom: 0;
   top: 0;
-  width: @side-panel-width;
+  width: @side-menu-width;
   height: 100%;
   overflow-y: auto;
 }
 
 body > .content {
   position: absolute;
-  left: @side-panel-width;
+  left: @side-menu-width;
   bottom: 0;
   top: 0;
-  padding: 50px 60px 50px 60px;
+  padding: 60px 60px 50px 60px;
 }
 
 html {
@@ -28,6 +28,7 @@ html {
 
 div.github-link {
   position: absolute;
+  z-index: 9999;
   top: 25px;
   right: 20px;
 }

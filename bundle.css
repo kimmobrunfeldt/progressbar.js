@@ -846,7 +846,7 @@ ul > li {
 }
 body {
   font-family: "Source Sans Pro", Helvetica, sans-serif;
-  color: #646464;
+  color: #555;
 }
 header,
 h1,
@@ -866,7 +866,7 @@ h3,
 h4,
 h5,
 h6,
-.sub-header {
+.uppercase {
   font-family: "Raleway", Helvetica, sans-serif;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -877,8 +877,8 @@ h6,
 p {
   max-width: 600px;
 }
-.side-panel {
-  position: absolute;
+.side-menu {
+  position: fixed;
   left: 0;
   bottom: 0;
   top: 0;
@@ -891,7 +891,7 @@ body > .content {
   left: 250px;
   bottom: 0;
   top: 0;
-  padding: 50px 60px 50px 60px;
+  padding: 60px 60px 50px 60px;
 }
 html {
   box-sizing: border-box;
@@ -903,6 +903,7 @@ html {
 }
 div.github-link {
   position: absolute;
+  z-index: 9999;
   top: 25px;
   right: 20px;
 }
@@ -910,7 +911,7 @@ a {
   cursor: pointer;
   border-bottom: dotted 1px rgba(160, 160, 160, 0.65);
   text-decoration: none;
-  color: #646464;
+  color: #555;
   -webkit-transition: color 0.2s ease, border-bottom-color 0.2s ease;
   transition: color 0.2s ease, border-bottom-color 0.2s ease;
 }
@@ -931,7 +932,7 @@ a:hover {
   padding: 10px;
 }
 .iconlink:hover {
-  color: #4078C0;
+  color: #0FA0CE;
 }
 .iconlink {
   white-space: nowrap;
@@ -971,18 +972,46 @@ a:hover {
 .iconlink i.fa {
   font-size: 2.827rem;
 }
-.side-panel {
+.intro-demo {
+  height: 150px;
+  width: 300px;
+  margin: 30px 0 30px 0;
+}
+.intro-demo > svg {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.intro-demo > p {
+  font-size: 3.5rem;
+  font-family: "Raleway", Helvetica, sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.side-menu {
   border-right: 1px solid rgba(160, 160, 160, 0.298039);
   padding: 30px;
   background: #f4f4f4;
 }
-.side-panel .side-panel-header {
+.side-menu .side-menu-header {
   margin-bottom: 60px;
 }
-.side-panel .side-panel-header header {
+.side-menu .side-menu-header h1 {
   font-size: 1.999rem;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
-.side-panel .side-panel-header p {
-  font-size: 1rem;
+.side-menu .side-menu-header h2 {
+  font-size: 1.05rem;
+  font-weight: normal;
+}
+.side-menu h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 28px;
+  margin-bottom: 13px;
+}
+.side-menu ul > li {
+  font-size: 1.2rem;
+  letter-spacing: 0.15em;
 }

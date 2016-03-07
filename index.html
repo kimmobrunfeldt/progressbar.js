@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ProgressBar.js - Progress bars with JavaScript</title>
+    <title>ProgressBar.js - Progress bars for the web</title>
     <meta name="author" content="Kimmo Brunfeldt">
-    <meta name="description" content="Responsive and slick progress bars with animated SVG paths. This library provides a few built&#8209;in shapes such as Line, Circle and Square but you can also create your own progress bars with Illustrator or any vector graphic editor.">
+    <meta name="description" content="With ProgressBar.js, it's easy to create responsive and stylish progress bars which work in all browsers. Animations perform well even on mobile devices. It provides a few built‑in shapes like Line, Circle and SemiCircle but you can also create arbitrary shaped progress bars with any vector graphic editor.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="shortcut icon" type="image/png" href="images/svg-progressbar-icon-32.png"/>
@@ -16,24 +16,41 @@
     <link rel="stylesheet" href="bundle.css">
   </head>
   <body>
-    <nav class="side-panel">
-      <div class="side-panel-header">
-        <header>
+    <nav id="side-menu" class="side-menu">
+      <div class="side-menu-header">
+        <h1>
           Progress<br />bar
-        </header>
+        </h1>
 
-        <p class="sub-header">Demos</p>
+        <h2 class="sub-header">Demos &amp; Examples</h2>
       </div>
 
+      <h3>Shapes</h3>
       <ul>
-        <li class="sub-header">
+        <li class="uppercase">
           <a href="#line">Line</a>
         </li>
-        <li class="sub-header">
+        <li class="uppercase">
           <a href="#circle">Circle</a>
         </li>
-        <li class="sub-header">
+        <li class="uppercase">
           <a href="#semicircle">SemiCircle</a>
+        </li>
+        <li class="uppercase">
+          <a href="#customshape">Custom</a>
+        </li>
+      </ul>
+
+      <h3>Links</h3>
+      <ul>
+        <li class="uppercase">
+          <a href="http://progressbarjs.readthedocs.org/en/latest/">Documentation</a>
+        </li>
+        <li class="uppercase">
+          <a href="http://progressbarjs.readthedocs.org/en/latest/api/shape/">API</a>
+        </li>
+        <li class="uppercase">
+          <a href="https://github.com/kimmobrunfeldt/progressbar.js">GitHub</a>
         </li>
       </ul>
     </nav>
@@ -45,20 +62,64 @@
     </div>
 
     <div class="content">
-      <div id="example">
+      <div class="row">
+        <h4 id="intro">Progress bar.js</h4>
 
+        <div class="intro-demo-container">
+          <div class="intro-demo" id="intro-demo"></div>
+        </div>
+
+        <p>
+          With ProgressBar.js, it's easy to create responsive and stylish progress
+          bars for the web. Animations perform well even on mobile
+          devices.
+          It provides a few built‑in shapes like <a href="#line">Line</a>, <a href="#circle">Circle</a>
+          and <a href="#semicircle">SemiCircle</a> but
+          you can also create arbitrary shaped progress bars with any vector graphic editor.
+        </p>
+        <p>
+          ProgressBar.js is lightweight, MIT licensed and supports all major browsers including IE9+.
+        </p>
       </div>
 
       <div class="row">
-          <h4 id="line">Line examples</h4>
-          <p>
-            With ProgressBar.js, it's easy to create arbitrary shaped progress bars.
-            It provides a few built‑in shapes like Line, Circle and SemiCircle but
-            you can also create your own progress bars with any vector graphic editor.
-          </p>
-          <p>
-            ProgressBar.js is lightweight, MIT licensed and supports all major browsers including IE9+.
-          </p>
+        <h4 id="line">Line</h4>
+        <p>
+          Line examples here
+        </p>
+        <p>
+          More Line examples here
+        </p>
+      </div>
+
+      <div class="row">
+        <h4 id="circle">Circle</h4>
+        <p>
+          Circle examples here
+        </p>
+        <p>
+          More Circle examples here
+        </p>
+      </div>
+
+      <div class="row">
+        <h4 id="semicircle">SemiCircle</h4>
+        <p>
+          SemiCircle examples here
+        </p>
+        <p>
+          More SemiCircle examples here
+        </p>
+      </div>
+
+      <div class="row">
+        <h4 id="customshape">Custom</h4>
+        <p>
+          Custom examples here
+        </p>
+        <p>
+          More Custom examples here
+        </p>
       </div>
     </div>
 

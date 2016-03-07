@@ -1,16 +1,10 @@
-var ProgressBar = require('progressbar.js');
+const _debounce = require('lodash.debounce');
+const redSemiCircleText = require('./examples/red-semi-circle-text');
 
 function onLoad() {
-  var semiCircle = new ProgressBar.SemiCircle('#example', {
-    strokeWidth: 5,
-    easing: 'easeInOut',
-    duration: 800,
-    color: '#FF4365',
-    step: (state, bar) => {
-      bar.setText(bar.value());
-    }
-  });
-  semiCircle.animate(1);
+
+  var demoBar = redSemiCircleText('#intro-demo');
+  setTimeout(() => demoBar.animate(1), 800);
 }
 
 window.onload = onLoad;
