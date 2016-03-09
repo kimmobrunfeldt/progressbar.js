@@ -14,15 +14,29 @@ function onLoad() {
   });
 
   setTimeout(() => {
-    _.forEach(introBars, bar => bar.animate(1));
-    var triangle = introBars[2];
+    playIntroDemo(introBars);
 
-    setTimeout(() => {
-      triangle.path.style['stroke-linecap'] = 'round';
-    }, 100);
+    setInterval(() => {
+      _.forEach(introBars, bar => bar.set(0));
+      playIntroDemo(introBars);
+    }, 4000);
+
   }, 1500);
 
   var loadingBar = createLoadingBar();
+  playFakeLoadingDemo(loadingBar)
+}
+
+function playIntroDemo(introBars) {
+  _.forEach(introBars, bar => bar.animate(1));
+  var triangle = introBars[2];
+
+  setTimeout(() => {
+    triangle.path.style['stroke-linecap'] = 'round';
+  }, 100);
+}
+
+function playFakeLoadingDemo(loadingBar) {
   setTimeout(() => loadingBar.animate(0.1), 20);
   setTimeout(() => {
     loadingBar.animate(1.0, {
