@@ -907,6 +907,13 @@ div.github-link {
   top: 25px;
   right: 20px;
 }
+div.top-loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+}
 a {
   cursor: pointer;
   border-bottom: dotted 1px rgba(160, 160, 160, 0.65);
@@ -918,6 +925,10 @@ a {
 a:hover {
   text-decoration: none;
   border-bottom-color: transparent;
+  color: #ED6A5A;
+}
+.content a {
+  color: #ED6A5A;
 }
 .iconlink {
   border-bottom: none;
@@ -973,16 +984,39 @@ a:hover {
   font-size: 2.827rem;
 }
 .intro-demo {
-  height: 150px;
-  width: 300px;
-  margin: 30px 0 30px 0;
+  width: 100%;
+  max-width: 410px;
+  margin: 40px 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
-.intro-demo > svg {
+.intro-demo > div {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.intro-demo > div:first-child > svg,
+.intro-demo > div:last-child > svg {
+  margin-top: 2%;
+  margin-left: 2%;
+  width: 96%;
+  height: 96%;
+}
+.intro-demo > div:nth-child(2) {
+  margin-left: 30px;
+}
+.intro-demo > div:last-child {
+  margin-left: 25px;
+}
+.intro-demo > div > svg {
   display: block;
   height: 100%;
   width: 100%;
 }
-.intro-demo > p {
+.intro-demo > div > p {
   font-size: 3.5rem;
   font-family: "Raleway", Helvetica, sans-serif;
   letter-spacing: 0.05em;
@@ -1000,6 +1034,7 @@ a:hover {
 .side-menu .side-menu-header h1 {
   font-size: 1.999rem;
   margin-bottom: 20px;
+  color: #ED6A5A;
 }
 .side-menu .side-menu-header h2 {
   font-size: 1.05rem;
@@ -1010,6 +1045,7 @@ a:hover {
   font-weight: 700;
   margin-top: 28px;
   margin-bottom: 13px;
+  color: #ED6A5A;
 }
 .side-menu ul > li {
   font-size: 1.2rem;
