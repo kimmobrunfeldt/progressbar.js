@@ -56,7 +56,7 @@ var Shape = function Shape(container, opts) {
     // If user specifies e.g. svgStyle or text style, the whole object
     // should replace the defaults to make working with styles easier
     if (utils.isObject(opts) && opts.svgStyle !== undefined) {
-        this._opts.svgStyle = opts.svgStyle
+        this._opts.svgStyle = opts.svgStyle;
     }
     if (utils.isObject(opts) && utils.isObject(opts.text) && opts.text.style !== undefined) {
         this._opts.text.style = opts.text.style;
