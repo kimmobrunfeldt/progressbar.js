@@ -6,8 +6,14 @@ const ProgressBar = require('progressbar.js');
 const introSquare = require('./examples/intro-square');
 const introCircle = require('./examples/intro-circle');
 const introTriangle = require('./examples/intro-triangle');
+const initializeExamples = require('./init-examples');
 
 function onLoad() {
+  initializeIntro();
+  initializeExamples();
+}
+
+function initializeIntro() {
   const createBars = [introSquare, introCircle, introTriangle];
   const introBars = _.map(createBars, (createBar, i) => {
     return createBar('#intro-demo' + (i + 1));
@@ -19,7 +25,7 @@ function onLoad() {
     setInterval(() => {
       _.forEach(introBars, bar => bar.set(0));
       playIntroDemo(introBars);
-    }, 4000);
+    }, 5000);
 
   }, 1500);
 

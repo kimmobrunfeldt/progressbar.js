@@ -56,7 +56,7 @@
     </nav>
 
     <div class="top-loading-bar" id="loading-bar"></div>
-    
+
     <div class="github-link">
       <a href="https://github.com/kimmobrunfeldt/progressbar.js" data-title="kimmobrunfeldt/progressbar.js" class="iconlink">
         <i class="fa fa-github"></i>
@@ -79,34 +79,74 @@
           devices.
           It provides a few built‑in shapes like <a href="#line">Line</a>, <a href="#circle">Circle</a>
           and <a href="#semicircle">SemiCircle</a> but
-          you can also create arbitrary shaped progress bars with any vector graphic editor.
+          you can also create <a href="#customshape">custom</a> shaped progress bars with any vector graphic editor.
         </p>
         <p>
           ProgressBar.js is lightweight, MIT licensed and supports all major browsers including IE9+.
         </p>
       </div>
 
-      <div class="row">
+      <section class="row line-examples">
         <h4 id="line">Line</h4>
-        <p>
-          Line examples here
-        </p>
-        <p>
-          More Line examples here
-        </p>
-      </div>
 
-      <div class="row">
+        <div class="example-grid">
+          <div class="example">
+            <div class="example-bar">
+              <div id="example-line-1"></div>
+            </div>
+
+            <h5>Basic line</h5>
+          </div>
+
+          <div class="example">
+            <div class="example-bar">
+              <div id="example-line-2"></div>
+            </div>
+
+            <h5>Percent</h5>
+          </div>
+
+          <div class="example">
+            <div class="example-bar">
+              <div id="example-line-3"></div>
+            </div>
+
+            <h5>Color animation</h5>
+          </div>
+        </div>
+      </section>
+
+      <section class="row circle-examples">
         <h4 id="circle">Circle</h4>
-        <p>
-          Circle examples here
-        </p>
-        <p>
-          More Circle examples here
-        </p>
-      </div>
 
-      <div class="row">
+        <div class="example-grid">
+          <div class="example">
+            <div class="example-bar">
+              <div id="example-circle-1"></div>
+            </div>
+
+            <h5>Basic circle</h5>
+          </div>
+
+          <div class="example">
+            <div class="example-bar">
+              <div id="example-circle-2"></div>
+            </div>
+
+            <h5>Bounce easing</h5>
+          </div>
+
+          <div class="example">
+            <div class="example-bar">
+              <div id="example-circle-3"></div>
+            </div>
+
+            <h5>Animate multiple properties</h5>
+          </div>
+        </div>
+      </section>
+
+      <section class="row semicircle-examples">
         <h4 id="semicircle">SemiCircle</h4>
         <p>
           SemiCircle examples here
@@ -114,9 +154,9 @@
         <p>
           More SemiCircle examples here
         </p>
-      </div>
+      </section>
 
-      <div class="row">
+      <section class="row customshape-examples">
         <h4 id="customshape">Custom</h4>
         <p>
           Custom examples here
@@ -124,7 +164,7 @@
         <p>
           More Custom examples here
         </p>
-      </div>
+      </section>
     </div>
 
     <script src="bundle.js"></script>

@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "lodash.debounce": "^4.0.3",
+    "lodash.flatten": "^4.1.0",
     "lodash.foreach": "^4.1.0",
     "lodash.map": "^4.2.1",
     "lodash.range": "^3.1.3",

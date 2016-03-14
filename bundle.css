@@ -908,11 +908,15 @@ div.github-link {
   right: 20px;
 }
 div.top-loading-bar {
+  z-index: 9999999;
   position: fixed;
   top: 0;
   left: 0;
   height: 2px;
   width: 100%;
+}
+section.row {
+  margin-top: 40px;
 }
 a {
   cursor: pointer;
@@ -983,6 +987,56 @@ a:hover {
 .iconlink i.fa {
   font-size: 2.827rem;
 }
+.example-grid {
+  max-width: 1200px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+.example-grid .example:not(:last-child) {
+  margin-right: 60px;
+}
+.example {
+  width: 300px;
+  margin: 30px 0;
+  background: #fafafa;
+  border: 1px solid rgba(160, 160, 160, 0.298039);
+}
+.example .example-bar {
+  position: relative;
+  background: white;
+  padding: 90px 60px 80px 60px;
+}
+.example .example-bar > div:first-child {
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  position: absolute;
+}
+.example h5 {
+  margin: 0;
+  font-weight: 400;
+  color: #777;
+  padding: 15px 20px;
+  text-align: right;
+  font-size: 1rem;
+}
+.line-examples .example-bar > div:first-child {
+  top: 52%;
+  width: 60%;
+  height: 8px;
+}
+.circle-examples .example-bar > div:first-child {
+  width: 120px;
+  height: 120px;
+}
 .intro-demo {
   width: 100%;
   max-width: 410px;
@@ -1039,13 +1093,14 @@ a:hover {
 .side-menu .side-menu-header h2 {
   font-size: 1.05rem;
   font-weight: normal;
+  color: #999;
 }
 .side-menu h3 {
   font-size: 1.05rem;
   font-weight: 700;
   margin-top: 28px;
   margin-bottom: 13px;
-  color: #ED6A5A;
+  color: #4A4949;
 }
 .side-menu ul > li {
   font-size: 1.2rem;

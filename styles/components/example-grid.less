@@ -1,0 +1,12 @@
+.example-grid {
+  max-width: 1200px;
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+
+  .example {
+    &:not(:last-child) {
+      margin-right: 60px;
+    }
+  }
+}
