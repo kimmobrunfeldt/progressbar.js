@@ -40,6 +40,8 @@ with CSS.
         // Width of the stroke.
         // Unit is percentage of SVG canvas' size.
         // Default: 1.0
+        // NOTE: In Line shape, you should control
+        // the stroke width by setting container's height.
         strokeWidth: 2.1,
 
         // If trail options are not defined, trail won't be drawn
