@@ -152,7 +152,6 @@ Path.prototype._calculateTo = function _calculateTo(progress, easing) {
 Path.prototype._stopTween = function _stopTween() {
     if (this._tweenable !== null) {
         this._tweenable.stop();
-        this._tweenable.dispose();
         this._tweenable = null;
     }
 };
