@@ -56,7 +56,9 @@ with CSS.
 
         // Inline CSS styles for the created SVG element
         // Set null to disable all default styles.
-        // You can disable individual defaults by setting them to `null`.
+        // You can disable individual defaults by setting them to `null`
+        // If you specify anything in this object, none of the default styles
+        // apply
         svgStyle: {
             display: 'block',
 
@@ -83,9 +85,11 @@ with CSS.
             // Inline CSS styles for the text element.
             // If you want to modify all CSS your self, set null to disable
             // all default styles.
-            // You can disable individual defaults by setting them to `null`.
             // If the style option contains values, container is automatically
-            // set to position: relative.
+            // set to position: relative. You can disable behavior this with
+            // autoStyleContainer: false
+            // If you specify anything in this object, none of the default styles
+            // apply
             // Default: object speficied below
             style: {
                 // Text color.
@@ -102,6 +106,11 @@ with CSS.
                     value: 'translate(-50%, -50%)'
                 }
             },
+
+            // Only effective if the text.style is not null
+            // By default position: relative is applied to container if text
+            // is set. Setting this to false disables that feature.
+            autoStyleContainer: true,
 
             // Only effective if the shape is SemiCircle.
             // If true, baseline for text is aligned with bottom of

@@ -42,6 +42,7 @@ var Shape = function Shape(container, opts) {
                     value: 'translate(-50%, -50%)'
                 }
             },
+            autoStyleContainer: true,
             alignToBottom: true,
             value: '',
             className: 'progressbar-text'
@@ -51,6 +52,15 @@ var Shape = function Shape(container, opts) {
             width: '100%'
         }
     }, opts, true);  // Use recursive extend
+
+    // If user specifies e.g. svgStyle or text style, the whole object
+    // should replace the defaults to make working with styles easier
+    if (utils.isObject(opts) && opts.svgStyle !== undefined) {
+        this._opts.svgStyle = opts.svgStyle
+    }
+    if (utils.isObject(opts) && utils.isObject(opts.text) && opts.text.style !== undefined) {
+        this._opts.text.style = opts.text.style;
+    }
 
     var svgView = this._createSvgView(this._opts);
 
@@ -246,7 +256,9 @@ Shape.prototype._createTextContainer = function _createTextContainer(opts, conta
 
     var textStyle = opts.text.style;
     if (textStyle) {
-        container.style.position = 'relative';
+        if (opts.text.autoStyleContainer) {
+            container.style.position = 'relative';
+        }
 
         utils.setStyles(textContainer, textStyle);
         // Default text color to progress bar's color
@@ -283,7 +295,9 @@ Shape.prototype._warnContainerAspectRatio = function _warnContainerAspectRatio(c
     var height = parseFloat(computedStyle.getPropertyValue('height'), 10);
     if (!utils.floatEquals(this.containerAspectRatio, width / height)) {
         console.warn(
-            'Incorrect aspect ratio of container detected:',
+            'Incorrect aspect ratio of container',
+            this._container,
+            'detected:',
             computedStyle.getPropertyValue('width') + '(width)',
             '/',
             computedStyle.getPropertyValue('height') + '(height)',

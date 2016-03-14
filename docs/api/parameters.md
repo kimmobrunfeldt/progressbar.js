@@ -10,6 +10,8 @@ A few basic easing options:
 * `'easeOut'`
 * `'easeInOut'`
 
+You can also provide an custom easing function.
+
 # {custom-animations} Custom animations
 
 See [example in demo page](https://kimmobrunfeldt.github.io/progressbar.js#example-custom-animation).
