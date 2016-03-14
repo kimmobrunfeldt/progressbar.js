@@ -24,7 +24,7 @@ function initialize() {
     });
   }));
 
-  _.forEach(bars, bar => playLoop(bar));
+  return () => _.forEach(bars, bar => playLoop(bar));
 }
 
 module.exports = initialize;

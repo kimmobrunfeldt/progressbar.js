@@ -86,32 +86,51 @@
         </p>
       </div>
 
+      <!-- This HTML is verbose and could be better generated from a template
+      However I want to keep the tooling simple in this example page,
+      and rendering these containers from JS would make the initial render slower
+      -->
       <section class="row line-examples">
         <h4 id="line">Line</h4>
 
         <div class="example-grid">
           <div class="example">
-            <div class="example-bar">
+            <div class="example-content">
               <div id="example-line-1"></div>
             </div>
 
-            <h5>Basic line</h5>
+            <div class="example-footer">
+              <a href="https://jsfiddle.net/kimmobrunfeldt/rfny4ftb/" data-title="Edit example" class="iconlink">
+                <img src="images/pencil.svg" alt="See code" />
+              </a>
+              <h5>Basic line</h5>
+            </div>
           </div>
 
           <div class="example">
-            <div class="example-bar">
+            <div class="example-content">
               <div id="example-line-2"></div>
             </div>
 
-            <h5>Percent</h5>
+            <div class="example-footer">
+              <a href="https://jsfiddle.net/kimmobrunfeldt/k5v2d0rr/" data-title="Edit example" class="iconlink">
+                <img src="images/pencil.svg" alt="See code" />
+              </a>
+              <h5>Percent</h5>
+            </div>
           </div>
 
           <div class="example">
-            <div class="example-bar">
+            <div class="example-content">
               <div id="example-line-3"></div>
             </div>
 
-            <h5>Color animation</h5>
+            <div class="example-footer">
+              <a href="https://jsfiddle.net/kimmobrunfeldt/swc64gg3/" data-title="Edit example" class="iconlink">
+                <img src="images/pencil.svg" alt="See code" />
+              </a>
+              <h5>Color animation</h5>
+            </div>
           </div>
         </div>
       </section>
@@ -121,49 +140,134 @@
 
         <div class="example-grid">
           <div class="example">
-            <div class="example-bar">
+            <div class="example-content">
               <div id="example-circle-1"></div>
             </div>
 
-            <h5>Basic circle</h5>
+            <div class="example-footer">
+              <a href="https://jsfiddle.net/kimmobrunfeldt/mxjj6jom/" data-title="Edit example" class="iconlink">
+                <img src="images/pencil.svg" alt="See code" />
+              </a>
+              <h5>Basic circle</h5>
+            </div>
           </div>
 
           <div class="example">
-            <div class="example-bar">
+            <div class="example-content">
               <div id="example-circle-2"></div>
             </div>
 
-            <h5>Bounce easing</h5>
+            <div class="example-footer">
+              <a href="https://jsfiddle.net/kimmobrunfeldt/3pxvkq2d/" data-title="Edit example" class="iconlink">
+                <img src="images/pencil.svg" alt="See code" />
+              </a>
+              <h5>Bounce easing</h5>
+            </div>
           </div>
 
           <div class="example">
-            <div class="example-bar">
+            <div class="example-content">
               <div id="example-circle-3"></div>
             </div>
 
-            <h5>Animate multiple properties</h5>
+            <div class="example-footer">
+              <a href="https://jsfiddle.net/kimmobrunfeldt/72tkyn40/" data-title="Edit example" class="iconlink">
+                <img src="images/pencil.svg" alt="See code" />
+              </a>
+              <h5>Multiple properties</h5>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="row semicircle-examples">
         <h4 id="semicircle">SemiCircle</h4>
-        <p>
-          SemiCircle examples here
-        </p>
-        <p>
-          More SemiCircle examples here
-        </p>
+
+        <div class="example-grid">
+          <div class="example">
+            <div class="example-content">
+              <div id="example-semicircle-1"></div>
+            </div>
+
+            <div class="example-footer">
+              <a href="#" data-title="Edit example" class="iconlink">
+                <img src="images/pencil.svg" alt="See code" />
+              </a>
+              <h5>Basic circle</h5>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-content">
+              <div id="example-semicircle-2"></div>
+            </div>
+
+            <div class="example-footer">
+              <a href="#" data-title="Edit example" class="iconlink">
+                <img src="images/pencil.svg" alt="See code" />
+              </a>
+              <h5>Bounce easing</h5>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-content">
+              <div id="example-semicircle-3"></div>
+            </div>
+
+            <div class="example-footer">
+              <a href="#" data-title="Edit example" class="iconlink">
+                <img src="images/pencil.svg" alt="See code" />
+              </a>
+              <h5>Multiple properties</h5>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="row customshape-examples">
         <h4 id="customshape">Custom</h4>
-        <p>
-          Custom examples here
-        </p>
-        <p>
-          More Custom examples here
-        </p>
+
+        <div class="example-grid">
+          <div class="example">
+            <div class="example-content">
+              <div id="example-customshape-1"></div>
+            </div>
+
+            <div class="example-footer">
+              <a href="#" data-title="Edit example" class="iconlink">
+                <img src="images/pencil.svg" alt="See code" />
+              </a>
+              <h5>Basic circle</h5>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-content">
+              <div id="example-customshape-2"></div>
+            </div>
+
+            <div class="example-footer">
+              <a href="#" data-title="Edit example" class="iconlink">
+                <img src="images/pencil.svg" alt="See code" />
+              </a>
+              <h5>Bounce easing</h5>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-content">
+              <div id="example-customshape-3"></div>
+            </div>
+
+            <div class="example-footer">
+              <a href="#" data-title="Edit example" class="iconlink">
+                <img src="images/pencil.svg" alt="See code" />
+              </a>
+              <h5>Multiple properties</h5>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
 

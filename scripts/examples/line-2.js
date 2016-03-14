@@ -1,3 +1,7 @@
+// WARNING: When editing this file, remember to update the JSFiddle:
+// https://jsfiddle.net/kimmobrunfeldt/k5v2d0rr/
+// MAKE SURE TO SET THE NEW VERSION: "SET AS BASE"
+
 var ProgressBar = require('progressbar.js');
 
 function create(container) {

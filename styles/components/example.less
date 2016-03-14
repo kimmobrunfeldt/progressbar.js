@@ -4,13 +4,13 @@
   background: @grey-xxxx-light;
   border: 1px solid @grey-border;
 
-  .example-bar {
+  .example-content {
     position: relative;
     background: white;
     padding: 90px 60px 80px 60px;
   }
 
-  .example-bar > div:first-child {
+  .example-content > div:first-child {
     left: 50%;
     top: 50%;
     width: 30px;
@@ -18,23 +18,46 @@
     position: absolute;
   }
 
+  .example-footer {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > a {
+      margin-left: 0;
+      padding: 0;
+      height: 28px;
+      border-bottom: none;
+
+      > img {
+        margin: 4px;
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    h5 {
+
+    }
+  }
+
   h5 {
     margin: 0;
     font-weight: 400;
     color: @grey-light;
-    padding: 15px 20px;
     text-align: right;
     font-size: 1rem;
   }
 }
 
-.line-examples .example-bar > div:first-child {
+.line-examples .example-content > div:first-child {
   top: 52%;
   width: 60%;
   height: 8px;
 }
 
-.circle-examples .example-bar > div:first-child {
+.circle-examples .example-content > div:first-child {
   width: 120px;
   height: 120px;
 }

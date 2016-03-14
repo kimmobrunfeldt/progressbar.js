@@ -10,13 +10,13 @@ a {
   &:hover {
     text-decoration: none;
     border-bottom-color: transparent;
-    color: #ED6A5A;
+    color: @red;
   }
 }
 
 .content {
   a {
-    color: #ED6A5A;
+    color: @red;
   }
 }
 
@@ -33,7 +33,7 @@ a {
 }
 
 .iconlink:hover {
-  color: #0FA0CE;
+  color: @red;
 }
 
 .iconlink {
@@ -62,6 +62,11 @@ a {
   opacity: 0;
   transition: opacity 150ms linear, transform 150ms linear;
   transform: translate3d(0, -8px, 0);
+}
+
+.iconlink.iconlink-light[data-title]:before {
+  background: @grey-xxx-light;
+  color: @black-x-light;
 }
 
 .iconlink[data-title]:hover:before {

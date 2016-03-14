@@ -1,3 +1,5 @@
+@font-source-sans: "Source Sans Pro", Helvetica, sans-serif;
+@font-raleway: "Raleway", Helvetica, sans-serif;
 @font-base-color: #555;
 @font-size-xxx-large: 3.998rem;
 @font-size-xx-large: 2.827rem;
@@ -9,7 +11,7 @@
 @font-size-xx-small: 0.345rem;
 
 body {
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  font-family: @font-source-sans;
   color: @font-base-color;
 }
 
@@ -20,9 +22,13 @@ header, h1, h2, h3, h4, h5, h6 {
 }
 
 header, h1, h2, h3, h4, h5, h6, .uppercase {
-  font-family: "Raleway", Helvetica, sans-serif;
+  font-family: @font-raleway;
   letter-spacing: 0.25em;
   text-transform: uppercase;
+}
+
+.raleway {
+  font-family: @font-raleway;
 }
 
 .sub-header {

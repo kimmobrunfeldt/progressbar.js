@@ -9,8 +9,17 @@ const introTriangle = require('./examples/intro-triangle');
 const initializeExamples = require('./init-examples');
 
 function onLoad() {
-  initializeIntro();
-  initializeExamples();
+  // Create a fake loading bar, just for a demo. :)
+  var loadingBar = createLoadingBar();
+  playFakeLoadingDemo(loadingBar)
+
+  const playIntro = initializeIntro();
+  const playExamples = initializeExamples();
+
+  setTimeout(() => {
+    playIntro();
+    playExamples();
+  }, 1500);
 }
 
 function initializeIntro() {
@@ -19,18 +28,12 @@ function initializeIntro() {
     return createBar('#intro-demo' + (i + 1));
   });
 
-  setTimeout(() => {
+  setInterval(() => {
+    _.forEach(introBars, bar => bar.set(0));
     playIntroDemo(introBars);
+  }, 5000);
 
-    setInterval(() => {
-      _.forEach(introBars, bar => bar.set(0));
-      playIntroDemo(introBars);
-    }, 5000);
-
-  }, 1500);
-
-  var loadingBar = createLoadingBar();
-  playFakeLoadingDemo(loadingBar)
+  return () => playIntroDemo(introBars);
 }
 
 function playIntroDemo(introBars) {
