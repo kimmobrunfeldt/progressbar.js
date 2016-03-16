@@ -102,6 +102,14 @@ function isObject(obj) {
     return type === 'object' && !!obj;
 }
 
+//Returns true if there's a percent sign in the passed value
+function isPercent(num) {
+  if (num.toString().indexOf('%') !== -1) {
+    return true;
+  }
+  return false;
+}
+
 function forEachObject(object, callback) {
     for (var key in object) {
         if (object.hasOwnProperty(key)) {
@@ -122,6 +130,7 @@ function removeChildren(el) {
     }
 }
 
+
 module.exports = {
     extend: extend,
     render: render,
@@ -131,6 +140,7 @@ module.exports = {
     isString: isString,
     isFunction: isFunction,
     isObject: isObject,
+    isPercent: isPercent,
     forEachObject: forEachObject,
     floatEquals: floatEquals,
     removeChildren: removeChildren

@@ -62,8 +62,6 @@ var Shape = function Shape(container, opts) {
         this._opts.text.style = opts.text.style;
     }
 
-    var svgView = this._createSvgView(this._opts);
-
     var element;
     if (utils.isString(container)) {
         element = document.querySelector(container);
@@ -76,6 +74,14 @@ var Shape = function Shape(container, opts) {
     }
 
     this._container = element;
+
+
+    if (utils.isPercent(this._opts.strokeWidth)) {
+      var ratio = parseFloat(this._opts.strokeWidth.substring(0, this._opts.strokeWidth.length - 1) * .01);
+      this._opts.strokeWidth = parseInt(this._container.offsetWidth * ratio);
+    }
+
+    var svgView = this._createSvgView(this._opts);
     this._container.appendChild(svgView.svg);
     this._warnContainerAspectRatio(this._container);
 
