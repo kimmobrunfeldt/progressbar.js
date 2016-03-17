@@ -10,7 +10,8 @@ function onLoad() {
         to: {
             color: '#0f0'
         },
-        strokeWidth:'5%',
+        strokeWidth:'7%',
+        trailWidth:'7%',
         step: function(state, bar) {
             bar.path.setAttribute('stroke', state.color);
         },

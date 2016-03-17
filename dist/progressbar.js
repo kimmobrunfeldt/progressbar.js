@@ -1,8 +1,4 @@
-// ProgressBar.js 1.0.0
-// https://kimmobrunfeldt.github.io/progressbar.js
-// License: MIT
-
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.ProgressBar=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.ProgressBar = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /* shifty - v1.5.2 - 2016-02-10 - http://jeremyckahn.github.io/shifty */
 ;(function () {
   var root = this || Function('return this')();
@@ -2031,8 +2027,6 @@ var Shape = function Shape(container, opts) {
         this._opts.text.style = opts.text.style;
     }
 
-    var svgView = this._createSvgView(this._opts);
-
     var element;
     if (utils.isString(container)) {
         element = document.querySelector(container);
@@ -2045,6 +2039,19 @@ var Shape = function Shape(container, opts) {
     }
 
     this._container = element;
+
+
+    if (utils.isPercent(this._opts.strokeWidth)) {
+      ratio = parseFloat(this._opts.strokeWidth.substring(0, this._opts.strokeWidth.length - 1) * 0.01);
+      this._opts.strokeWidth = parseInt(this._container.offsetWidth * ratio);
+    }
+
+    if (utils.isPercent(this._opts.trailWidth)) {
+      ratio = parseFloat(this._opts.trailWidth.substring(0, this._opts.trailWidth.length - 1) * 0.01);
+      this._opts.trailWidth = parseInt(this._container.offsetWidth * ratio);
+    }
+
+    var svgView = this._createSvgView(this._opts);
     this._container.appendChild(svgView.svg);
     this._warnContainerAspectRatio(this._container);
 
@@ -2388,6 +2395,14 @@ function isObject(obj) {
     return type === 'object' && !!obj;
 }
 
+//Returns true if there's a percent sign in the passed value
+function isPercent(num) {
+  if (num.toString().indexOf('%') !== -1) {
+    return true;
+  }
+  return false;
+}
+
 function forEachObject(object, callback) {
     for (var key in object) {
         if (object.hasOwnProperty(key)) {
@@ -2408,6 +2423,7 @@ function removeChildren(el) {
     }
 }
 
+
 module.exports = {
     extend: extend,
     render: render,
@@ -2417,6 +2433,7 @@ module.exports = {
     isString: isString,
     isFunction: isFunction,
     isObject: isObject,
+    isPercent: isPercent,
     forEachObject: forEachObject,
     floatEquals: floatEquals,
     removeChildren: removeChildren

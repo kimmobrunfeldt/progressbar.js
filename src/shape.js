@@ -77,8 +77,13 @@ var Shape = function Shape(container, opts) {
 
 
     if (utils.isPercent(this._opts.strokeWidth)) {
-      var ratio = parseFloat(this._opts.strokeWidth.substring(0, this._opts.strokeWidth.length - 1) * .01);
+      ratio = parseFloat(this._opts.strokeWidth.substring(0, this._opts.strokeWidth.length - 1) * 0.01);
       this._opts.strokeWidth = parseInt(this._container.offsetWidth * ratio);
+    }
+
+    if (utils.isPercent(this._opts.trailWidth)) {
+      ratio = parseFloat(this._opts.trailWidth.substring(0, this._opts.trailWidth.length - 1) * 0.01);
+      this._opts.trailWidth = parseInt(this._container.offsetWidth * ratio);
     }
 
     var svgView = this._createSvgView(this._opts);
