@@ -2,14 +2,17 @@ const _ = {
   map: require('lodash.map'),
   forEach: require('lodash.foreach')
 };
+const Visibility = require('visibilityjs');
 const ProgressBar = require('progressbar.js');
 window.ProgressBar = ProgressBar;
+const util = require('./util');
 const introSquare = require('./examples/intro-square');
 const introCircle = require('./examples/intro-circle');
 const introTriangle = require('./examples/intro-triangle');
 const initializeExamples = require('./init-examples');
 
-function onLoad() {
+Visibility.onVisible(main);
+function main() {
   // Create a fake loading bar, just for a demo. :)
   var loadingBar = createLoadingBar();
   playFakeLoadingDemo(loadingBar)
@@ -20,7 +23,7 @@ function onLoad() {
   setTimeout(() => {
     playIntro();
     playExamples();
-  }, 1500);
+  }, 2000);
 }
 
 function initializeIntro() {
@@ -47,14 +50,24 @@ function playIntroDemo(introBars) {
 }
 
 function playFakeLoadingDemo(loadingBar) {
-  setTimeout(() => loadingBar.animate(0.1), 20);
+  var textElement = document.querySelector('.top-loading-bar-tip');
+  util.addClass(textElement, 'visible');
+
+  setTimeout(() => loadingBar.animate(0.1), 500);
   setTimeout(() => {
     loadingBar.animate(1.0, {
       duration: 500,
       easing: 'easeIn'
     })
-  }, 500);
-  setTimeout(() => loadingBar.set(0), 1200);
+  }, 1000);
+
+  setTimeout(() => {
+    loadingBar.set(0);
+    setTimeout(() => {
+      util.removeClass(textElement, 'visible');
+      setTimeout(() => util.addClass(textElement, 'hidden'), 800);
+    }, 200);
+  }, 1700);
 }
 
 function createLoadingBar() {
@@ -67,5 +80,3 @@ function createLoadingBar() {
     }
   });
 }
-
-window.onload = onLoad;

@@ -844,6 +844,38 @@ there.
 ul > li {
   list-style: none;
 }
+.hidden {
+  visibility: hidden;
+  display: none;
+}
+@-webkit-keyframes floating {
+  from {
+    -webkit-transform: translate(0, 0px);
+            transform: translate(0, 0px);
+  }
+  50% {
+    -webkit-transform: translate(0, -15px);
+            transform: translate(0, -15px);
+  }
+  to {
+    -webkit-transform: translate(0, 0px);
+            transform: translate(0, 0px);
+  }
+}
+@keyframes floating {
+  from {
+    -webkit-transform: translate(0, 0px);
+            transform: translate(0, 0px);
+  }
+  50% {
+    -webkit-transform: translate(0, -15px);
+            transform: translate(0, -15px);
+  }
+  to {
+    -webkit-transform: translate(0, 0px);
+            transform: translate(0, 0px);
+  }
+}
 body {
   font-family: "Source Sans Pro", Helvetica, sans-serif;
   color: #555;
@@ -1150,4 +1182,21 @@ a:hover {
 .side-menu ul > li {
   font-size: 1.2rem;
   letter-spacing: 0.15em;
+}
+.top-loading-bar-tip {
+  -webkit-animation: ease floating 2.5s infinite;
+          animation: ease floating 2.5s infinite;
+  position: fixed;
+  z-index: 999999;
+  top: 40px;
+  left: 800px;
+  opacity: 0;
+  -webkit-transition: opacity 0.8s ease;
+  transition: opacity 0.8s ease;
+}
+.top-loading-bar-tip > img {
+  width: 300px;
+}
+.top-loading-bar-tip.visible {
+  opacity: 1;
 }

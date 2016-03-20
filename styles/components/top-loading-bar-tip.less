@@ -1,0 +1,17 @@
+.top-loading-bar-tip {
+  animation: ease floating 2.5s infinite;
+  position: fixed;
+  z-index: 999999;
+  top: 40px;
+  left: 800px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+
+  > img {
+    width: 300px;
+  }
+
+  &.visible {
+    opacity: 1;
+  }
+}
