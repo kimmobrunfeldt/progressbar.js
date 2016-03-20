@@ -5,9 +5,7 @@ pages:
   - Home: index.md
   - API References:
     - General information: api/general.md
-    - ProgressBar.Line: api/shape.md
-    - ProgressBar.Circle: api/shape.md
-    - ProgressBar.SemiCircle: api/shape.md
+    - ProgressBar.Line, Circle, SemiCircle: api/shape.md
     - ProgressBar.Path: api/path.md
     - Parameters in detail: api/parameters.md
   - Developers:
