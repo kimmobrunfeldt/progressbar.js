@@ -1,7 +1,7 @@
 !!! note
 
     Line, Circle and SemiCircle all point to the same
-    documentation which is named Shape. You almost should
+    documentation which is named Shape. You should
     replace it(Shape) with Line, Circle or SemiCircle.
 
     **Example:** if documentation states `Shape.animate()`, replace it with
