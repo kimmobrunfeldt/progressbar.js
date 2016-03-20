@@ -14,13 +14,21 @@ const examples = {
     require('./examples/circle-1'),
     require('./examples/circle-2'),
     require('./examples/circle-3')
+  ],
+  semiCircle: [
+    require('./examples/semi-circle-1'),
+    require('./examples/semi-circle-2')
+  ],
+  custom: [
+    require('./examples/custom-1')
   ]
 };
+
 
 function initialize() {
   const bars = _.flatten(_.map(examples, (createBars, key) => {
     return _.map(createBars, (createBar, i) => {
-      return createBar('#example-' + key + '-' + (i + 1));
+      return createBar('#example-' + key.toLowerCase() + '-' + (i + 1));
     });
   }));
 

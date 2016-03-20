@@ -3,6 +3,7 @@ const _ = {
   forEach: require('lodash.foreach')
 };
 const ProgressBar = require('progressbar.js');
+window.ProgressBar = ProgressBar;
 const introSquare = require('./examples/intro-square');
 const introCircle = require('./examples/intro-circle');
 const introTriangle = require('./examples/intro-triangle');

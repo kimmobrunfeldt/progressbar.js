@@ -7,10 +7,10 @@
   .example-content {
     position: relative;
     background: white;
-    padding: 90px 60px 80px 60px;
+    height: 200px;
   }
 
-  .example-content > div:first-child {
+  .example-content > *:first-child {
     left: 50%;
     top: 50%;
     width: 30px;
@@ -19,7 +19,7 @@
   }
 
   .example-footer {
-    padding: 15px 20px;
+    padding: 10px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -31,14 +31,10 @@
       border-bottom: none;
 
       > img {
-        margin: 4px;
-        width: 20px;
-        height: 20px;
+        margin: 6px;
+        width: 16px;
+        height: 16px;
       }
-    }
-
-    h5 {
-
     }
   }
 
@@ -60,4 +56,15 @@
 .circle-examples .example-content > div:first-child {
   width: 120px;
   height: 120px;
+}
+
+.semi-circle-examples .example-content > div:first-child {
+  width: 160px;
+  height: 80px;
+}
+
+.customshape-examples .example-content > *:first-child {
+  height: 95%;
+  width: 160px;
+  display: block;
 }
