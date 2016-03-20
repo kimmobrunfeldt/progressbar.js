@@ -44,7 +44,7 @@ var Shape = function Shape(container, opts) {
             },
             autoStyleContainer: true,
             alignToBottom: true,
-            value: '',
+            value: null,
             className: 'progressbar-text'
         },
         svgStyle: {
@@ -95,7 +95,7 @@ var Shape = function Shape(container, opts) {
     }, this._opts);
     this._progressPath = new Path(svgView.path, newOpts);
 
-    if (utils.isObject(this._opts.text) && this._opts.text.value) {
+    if (utils.isObject(this._opts.text) && this._opts.text.value !== null) {
         this.setText(this._opts.text.value);
     }
 };
