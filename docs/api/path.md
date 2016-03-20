@@ -3,6 +3,11 @@
 Custom shaped progress bar. You can create arbitrary shaped progress bars by
 passing a SVG path created with e.g. Adobe Illustrator. It's on caller's responsibility to append SVG to DOM.
 
+!!! note
+
+    Remember to add e.g. `stroke="1"` and `fill-opacity="0"` attributes for the SVG path.
+    They will reveal the true shape of the path.
+
 **Example**
 
 Assuming there was SVG object with heart shaped path in HTML
@@ -25,7 +30,10 @@ var path = new ProgressBar.Path(svgPath, {
 
 **Working with embedded SVG**
 
-If the SVG was not inline in the HTML but instead in, say, an `<object>` tag, we'd have to take extra steps to wait until it has loaded and then access it differently since it's in a separate DOM tree. Given e.g.:
+If the SVG was not inline in the HTML but instead in, say,
+an `<object>` tag, we'd have to take extra steps to wait until it has loaded
+and then access it differently since it's in a separate DOM tree.
+Given e.g.:
 
 ```html
 <object id="heart" type="image/svg+xml" data="heart.svg">No SVG support :(</object>
@@ -43,7 +51,7 @@ var path = new ProgressBar.Path(heartObject.contentDocument.querySelector('#hear
 
 **Parameters**
 
-* `path` [SVG Path](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths) object. For example `$('svg > path:first-child')[0]`.
+* `path` [SVG Path](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths) object or plain selector string. For example `$('svg > path:first-child')[0]`.
 * `options` Animation options.
 
     ```javascript
