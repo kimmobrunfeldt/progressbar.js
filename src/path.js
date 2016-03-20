@@ -10,6 +10,11 @@ var EASING_ALIASES = {
 };
 
 var Path = function Path(path, opts) {
+    // Throw a better error if not initialized with `new` keyword
+    if (!(this instanceof Path)) {
+        throw new Error('Constructor was called without new keyword');
+    }
+
     // Default parameters for animation
     opts = utils.extend({
         duration: 800,
