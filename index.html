@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="bundle.css">
   </head>
   <body>
-    <nav id="side-menu" class="side-menu">
+    <nav id="side-menu" class="side-menu slideout-menu">
       <div class="side-menu-header">
         <h1>
           Progress<br />bar
@@ -55,7 +55,7 @@
       </ul>
     </nav>
 
-    <div class="content">
+    <div id="content" class="content slideout-panel">
       <div class="row">
         <h4 id="intro">Progress bar.js</h4>
 
@@ -226,11 +226,17 @@
 
         </div>
       </section>
+
+      <button class="side-menu-toggle hamburger hamburger--arrow" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
     </div>
 
     <div class="top-loading-bar" id="loading-bar"></div>
 
-    <div class="top-loading-bar-tip">
+    <div class="top-loading-bar-tip hidden">
       <img src="images/arrow.svg" />
     </div>
 

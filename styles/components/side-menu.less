@@ -1,5 +1,4 @@
 .side-menu {
-  border-right: 1px solid @grey-border;
   padding: 30px;
   background: @grey-xxx-light;
 
@@ -30,5 +29,17 @@
   ul > li {
     font-size: 1.2rem;
     letter-spacing: 0.15em;
+  }
+}
+
+.side-menu-toggle {
+  z-index: 9999999;
+  position: absolute;
+  top: 5px;
+  left: 0;
+  transition: left 0.3s ease;
+
+  &.is-active {
+    left: -60px;
   }
 }

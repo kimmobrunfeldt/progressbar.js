@@ -10,7 +10,7 @@ function playLoop(bar) {
   setInterval(() => {
     bar.set(0)
     animateBar();
-  }, 4500);
+  }, 4000);
 
   animateBar();
 }

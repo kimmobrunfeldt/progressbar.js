@@ -4,9 +4,11 @@
   display: flex;
   flex-flow: row wrap;
 
-  .example {
-    &:not(:last-child) {
-      margin-right: 60px;
+  @media screen and (min-width: @breakpoint-medium) {
+    .example {
+      &:not(:last-child) {
+        margin-right: 60px;
+      }
     }
   }
 }

@@ -1,8 +1,10 @@
 const _ = {
   map: require('lodash.map'),
-  forEach: require('lodash.foreach')
+  forEach: require('lodash.foreach'),
+  throttle: require('lodash.throttle')
 };
 const Visibility = require('visibilityjs');
+const Slideout = require('slideout');
 const ProgressBar = require('progressbar.js');
 window.ProgressBar = ProgressBar;
 const util = require('./util');
@@ -11,6 +13,7 @@ const introCircle = require('./examples/intro-circle');
 const introTriangle = require('./examples/intro-triangle');
 const initializeExamples = require('./init-examples');
 
+initSlideout();
 Visibility.onVisible(main);
 function main() {
   // Create a fake loading bar, just for a demo. :)
@@ -24,6 +27,28 @@ function main() {
     playIntro();
     playExamples();
   }, 2000);
+}
+
+function initSlideout() {
+  var slideout = new Slideout({
+    menu: document.getElementById('side-menu'),
+    panel: document.getElementById('content'),
+    padding: 0,
+    tolerance: 50
+  });
+  window.slideout = slideout;
+
+  const hamburgerButton = document.querySelector('.side-menu-toggle');
+  const throttledToggle = _.throttle(slideout.toggle.bind(slideout), 600);
+  hamburgerButton.addEventListener('click', throttledToggle);
+
+  slideout.on('beforeopen', () => {
+    util.addClass(hamburgerButton, 'is-active')
+  });
+
+  slideout.on('beforeclose', () => {
+    util.removeClass(hamburgerButton, 'is-active')
+  });
 }
 
 function initializeIntro() {
@@ -50,8 +75,12 @@ function playIntroDemo(introBars) {
 }
 
 function playFakeLoadingDemo(loadingBar) {
-  var textElement = document.querySelector('.top-loading-bar-tip');
-  util.addClass(textElement, 'visible');
+  const textShown = checkOrSetFlag();
+  if (!textShown) {
+    var textElement = document.querySelector('.top-loading-bar-tip');
+    util.removeClass(textElement, 'hidden');
+    util.addClass(textElement, 'visible');
+  }
 
   setTimeout(() => loadingBar.animate(0.1), 500);
   setTimeout(() => {
@@ -63,11 +92,24 @@ function playFakeLoadingDemo(loadingBar) {
 
   setTimeout(() => {
     loadingBar.set(0);
-    setTimeout(() => {
-      util.removeClass(textElement, 'visible');
-      setTimeout(() => util.addClass(textElement, 'hidden'), 800);
-    }, 200);
+
+    if (!textShown) {
+      setTimeout(() => {
+        util.removeClass(textElement, 'visible');
+        setTimeout(() => util.addClass(textElement, 'hidden'), 800);
+      }, 200);
+    }
   }, 1700);
+}
+
+function checkOrSetFlag() {
+  const textShown = localStorage.getItem('progressbar_text_shown');
+  if (textShown !== 'true') {
+    localStorage.setItem('progressbar_text_shown', 'true');
+    return false;
+  }
+
+  return true;
 }
 
 function createLoadingBar() {
