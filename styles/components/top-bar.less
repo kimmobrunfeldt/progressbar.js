@@ -1,0 +1,22 @@
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  opacity: 0.97;
+  background: white;
+  border-bottom: 1px solid @grey-border;
+
+  .side-menu-toggle {
+    padding-left: 12px;
+    transition: left 0.3s ease;
+
+    &.is-active {
+      left: -60px;
+    }
+  }
+
+  .github-link {
+    padding-right: 5px;
+  }
+}

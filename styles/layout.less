@@ -1,28 +1,62 @@
-body > .content {
-  padding: 60px 40px 50px 40px;
+html, body, .content-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
-  @media screen and (min-width: @breakpoint-x-narrow) {
-    padding: 80px 60px 50px 60px;
+.content-wrapper {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  box-shadow: 11px 0px 15px 5px;
+
+  .top-bar {
+    flex: 0 0 auto;
+    height: 44px;
+    z-index: 10;
+  }
+
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    position: relative;
+
+    > .github-link {
+      .hidden();
+    }
+  }
+
+  @media screen and (min-width: @side-menu-collapse-breakpoint) {
+    box-shadow: none;
+
+    .top-bar {
+      .hidden();
+    }
+
+    .content > .github-link {
+      display: block;
+      visibility: visible;
+      position: absolute;
+      z-index: 999999;
+      top: 20px;
+      right: 20px;
+
+      > a {
+        color: #505d6b;
+
+        &:hover {
+          color: @red;
+        }
+      }
+    }
   }
 }
 
-html {
-  box-sizing: border-box;
-}
+.content {
+  padding: 40px 40px 50px 40px;
 
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-div.github-link {
-  position: absolute;
-  z-index: 9999;
-  top: 8px;
-  right: 15px;
-
-  @media screen and (min-width: @breakpoint-narrow) {
-    top: 25px;
-    right: 20px;
+  @media screen and (min-width: @breakpoint-x-narrow) {
+    padding: 80px 60px 50px 60px;
   }
 }
 

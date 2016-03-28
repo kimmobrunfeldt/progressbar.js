@@ -26,7 +26,7 @@
       </div>
 
       <h3>Shapes</h3>
-      <ul>
+      <ul id="shape-links">
         <li class="uppercase">
           <a href="#line">Line</a>
         </li>
@@ -55,195 +55,205 @@
       </ul>
     </nav>
 
-    <div id="content" class="content slideout-panel">
-      <div class="row">
-        <h4 id="intro">Progress bar.js</h4>
+    <div id="content-wrapper" class="content-wrapper slideout-panel">
+      <div id="top-bar" class="top-bar">
+        <button class="side-menu-toggle hamburger hamburger--spin" type="button">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
 
-        <div class="row intro-demo">
-          <div id="intro-demo1"></div>
-          <div id="intro-demo2"></div>
-          <div id="intro-demo3"></div>
+        <div class="github-link">
+          <a href="https://github.com/kimmobrunfeldt/progressbar.js" data-title="kimmobrunfeldt/progressbar.js" class="iconlink">
+            <i class="fa fa-github"></i>
+          </a>
         </div>
-
-        <p>
-          With ProgressBar.js, it's easy to create responsive and stylish progress
-          bars for the web. Animations perform well even on mobile
-          devices.
-          It provides a few built‑in shapes like <a href="#line">Line</a>, <a href="#circle">Circle</a>
-          and <a href="#semicircle">SemiCircle</a> but
-          you can also create <a href="#customshape">custom</a> shaped progress bars with any vector graphic editor.
-        </p>
-        <p>
-          ProgressBar.js is lightweight, MIT licensed and supports all major browsers including IE9+.
-        </p>
       </div>
 
-      <!-- Verbose and could be better generated from a template.
-      However I want to keep the tooling simple in this example page,
-      and rendering these containers from JS would make the initial render slower
-      -->
-      <section class="row line-examples">
-        <h4 id="line">Line</h4>
+      <div class="content">
+        <div class="row">
+          <h4 id="intro">Progress bar.js</h4>
 
-        <div class="example-grid">
-          <div class="example">
-            <div class="example-content">
-              <div id="example-line-1"></div>
-            </div>
-
-            <div class="example-footer">
-              <a href="https://jsfiddle.net/kimmobrunfeldt/rfny4ftb/" data-title="Edit example" class="iconlink">
-                <img src="images/pencil.svg" alt="See code" />
-              </a>
-              <h5>Basic line</h5>
-            </div>
+          <div class="row intro-demo">
+            <div id="intro-demo1"></div>
+            <div id="intro-demo2"></div>
+            <div id="intro-demo3"></div>
           </div>
 
-          <div class="example">
-            <div class="example-content">
-              <div id="example-line-2"></div>
-            </div>
-
-            <div class="example-footer">
-              <a href="https://jsfiddle.net/kimmobrunfeldt/k5v2d0rr/" data-title="Edit example" class="iconlink">
-                <img src="images/pencil.svg" alt="See code" />
-              </a>
-              <h5>Percent</h5>
-            </div>
-          </div>
-
-          <div class="example">
-            <div class="example-content">
-              <div id="example-line-3"></div>
-            </div>
-
-            <div class="example-footer">
-              <a href="https://jsfiddle.net/kimmobrunfeldt/swc64gg3/" data-title="Edit example" class="iconlink">
-                <img src="images/pencil.svg" alt="See code" />
-              </a>
-              <h5>Color animation</h5>
-            </div>
-          </div>
+          <p>
+            With ProgressBar.js, it's easy to create responsive and stylish progress
+            bars for the web. Animations perform well even on mobile
+            devices.
+            It provides a few built‑in shapes like <a href="#line">Line</a>, <a href="#circle">Circle</a>
+            and <a href="#semicircle">SemiCircle</a> but
+            you can also create <a href="#customshape">custom</a> shaped progress bars with any vector graphic editor.
+          </p>
+          <p>
+            ProgressBar.js is lightweight, MIT licensed and supports all major browsers including IE9+.
+          </p>
         </div>
-      </section>
 
-      <section class="row circle-examples">
-        <h4 id="circle">Circle</h4>
+        <!-- Verbose and could be better generated from a template.
+        I wanted to keep the tooling simple in this example page,
+        and rendering these containers from JS would make the initial render slower
+        -->
+        <section class="row line-examples">
+          <h4 id="line">Line</h4>
 
-        <div class="example-grid">
-          <div class="example">
-            <div class="example-content">
-              <div id="example-circle-1"></div>
+          <div class="example-grid">
+            <div class="example">
+              <div class="example-content">
+                <div id="example-line-1"></div>
+              </div>
+
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/rfny4ftb/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
+                </a>
+                <h5>Basic line</h5>
+              </div>
             </div>
 
-            <div class="example-footer">
-              <a href="https://jsfiddle.net/kimmobrunfeldt/mxjj6jom/" data-title="Edit example" class="iconlink">
-                <img src="images/pencil.svg" alt="See code" />
-              </a>
-              <h5>Basic circle</h5>
+            <div class="example">
+              <div class="example-content">
+                <div id="example-line-2"></div>
+              </div>
+
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/k5v2d0rr/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
+                </a>
+                <h5>Percent</h5>
+              </div>
+            </div>
+
+            <div class="example">
+              <div class="example-content">
+                <div id="example-line-3"></div>
+              </div>
+
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/swc64gg3/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
+                </a>
+                <h5>Color animation</h5>
+              </div>
             </div>
           </div>
+        </section>
 
-          <div class="example">
-            <div class="example-content">
-              <div id="example-circle-2"></div>
+        <section class="row circle-examples">
+          <h4 id="circle">Circle</h4>
+
+          <div class="example-grid">
+            <div class="example">
+              <div class="example-content">
+                <div id="example-circle-1"></div>
+              </div>
+
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/mxjj6jom/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
+                </a>
+                <h5>Basic circle</h5>
+              </div>
             </div>
 
-            <div class="example-footer">
-              <a href="https://jsfiddle.net/kimmobrunfeldt/3pxvkq2d/" data-title="Edit example" class="iconlink">
-                <img src="images/pencil.svg" alt="See code" />
-              </a>
-              <h5>Bounce easing</h5>
+            <div class="example">
+              <div class="example-content">
+                <div id="example-circle-2"></div>
+              </div>
+
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/3pxvkq2d/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
+                </a>
+                <h5>Bounce easing</h5>
+              </div>
+            </div>
+
+            <div class="example">
+              <div class="example-content">
+                <div id="example-circle-3"></div>
+              </div>
+
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/72tkyn40/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
+                </a>
+                <h5>Multiple properties</h5>
+              </div>
             </div>
           </div>
+        </section>
 
-          <div class="example">
-            <div class="example-content">
-              <div id="example-circle-3"></div>
+        <section class="row semi-circle-examples">
+          <h4 id="semicircle">SemiCircle</h4>
+
+          <div class="example-grid">
+            <div class="example">
+              <div class="example-content">
+                <div id="example-semicircle-1"></div>
+              </div>
+
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/bs8ane6m/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
+                </a>
+                <h5>Basic semicircle</h5>
+              </div>
             </div>
 
-            <div class="example-footer">
-              <a href="https://jsfiddle.net/kimmobrunfeldt/72tkyn40/" data-title="Edit example" class="iconlink">
-                <img src="images/pencil.svg" alt="See code" />
-              </a>
-              <h5>Multiple properties</h5>
+            <div class="example">
+              <div class="example-content">
+                <div id="example-semicircle-2"></div>
+              </div>
+
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/sqwdkrg0/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
+                </a>
+                <h5>Semicircle with text</h5>
+              </div>
             </div>
           </div>
+        </section>
+
+        <section class="row customshape-examples">
+          <h4 id="customshape">Custom</h4>
+
+          <div class="example-grid">
+            <div class="example">
+              <div class="example-content">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 100 100">
+                    <path fill-opacity="0" stroke-width="1" stroke="#f4f4f4" d="M81.495,13.923c-11.368-5.261-26.234-0.311-31.489,11.032C44.74,13.612,29.879,8.657,18.511,13.923  C6.402,19.539,0.613,33.883,10.175,50.804c6.792,12.04,18.826,21.111,39.831,37.379c20.993-16.268,33.033-25.344,39.819-37.379  C99.387,33.883,93.598,19.539,81.495,13.923z"/>
+                    <path id="example-custom-1" fill-opacity="0" stroke-width="3" stroke="#ED6A5A" d="M81.495,13.923c-11.368-5.261-26.234-0.311-31.489,11.032C44.74,13.612,29.879,8.657,18.511,13.923  C6.402,19.539,0.613,33.883,10.175,50.804c6.792,12.04,18.826,21.111,39.831,37.379c20.993-16.268,33.033-25.344,39.819-37.379  C99.387,33.883,93.598,19.539,81.495,13.923z"/>
+                </svg>
+              </div>
+
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/dnLLgm5o/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
+                </a>
+                <h5>Heart</h5>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <div class="github-link">
+          <a href="https://github.com/kimmobrunfeldt/progressbar.js" data-title="kimmobrunfeldt/progressbar.js" class="iconlink">
+            <i class="fa fa-github"></i>
+          </a>
         </div>
-      </section>
-
-      <section class="row semi-circle-examples">
-        <h4 id="semicircle">SemiCircle</h4>
-
-        <div class="example-grid">
-          <div class="example">
-            <div class="example-content">
-              <div id="example-semicircle-1"></div>
-            </div>
-
-            <div class="example-footer">
-              <a href="https://jsfiddle.net/kimmobrunfeldt/bs8ane6m/" data-title="Edit example" class="iconlink">
-                <img src="images/pencil.svg" alt="See code" />
-              </a>
-              <h5>Basic semicircle</h5>
-            </div>
-          </div>
-
-          <div class="example">
-            <div class="example-content">
-              <div id="example-semicircle-2"></div>
-            </div>
-
-            <div class="example-footer">
-              <a href="https://jsfiddle.net/kimmobrunfeldt/sqwdkrg0/" data-title="Edit example" class="iconlink">
-                <img src="images/pencil.svg" alt="See code" />
-              </a>
-              <h5>Semicircle with text</h5>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="row customshape-examples">
-        <h4 id="customshape">Custom</h4>
-
-        <div class="example-grid">
-          <div class="example">
-            <div class="example-content">
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 100 100">
-                  <path fill-opacity="0" stroke-width="1" stroke="#f4f4f4" d="M81.495,13.923c-11.368-5.261-26.234-0.311-31.489,11.032C44.74,13.612,29.879,8.657,18.511,13.923  C6.402,19.539,0.613,33.883,10.175,50.804c6.792,12.04,18.826,21.111,39.831,37.379c20.993-16.268,33.033-25.344,39.819-37.379  C99.387,33.883,93.598,19.539,81.495,13.923z"/>
-                  <path id="example-custom-1" fill-opacity="0" stroke-width="3" stroke="#ED6A5A" d="M81.495,13.923c-11.368-5.261-26.234-0.311-31.489,11.032C44.74,13.612,29.879,8.657,18.511,13.923  C6.402,19.539,0.613,33.883,10.175,50.804c6.792,12.04,18.826,21.111,39.831,37.379c20.993-16.268,33.033-25.344,39.819-37.379  C99.387,33.883,93.598,19.539,81.495,13.923z"/>
-              </svg>
-            </div>
-
-            <div class="example-footer">
-              <a href="https://jsfiddle.net/kimmobrunfeldt/dnLLgm5o/" data-title="Edit example" class="iconlink">
-                <img src="images/pencil.svg" alt="See code" />
-              </a>
-              <h5>Heart</h5>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <button class="side-menu-toggle hamburger hamburger--arrow" type="button">
-        <span class="hamburger-box">
-          <span class="hamburger-inner"></span>
-        </span>
-      </button>
+      </div>
     </div>
 
     <div class="top-loading-bar" id="loading-bar"></div>
 
     <div class="top-loading-bar-tip hidden">
       <img src="images/arrow.svg" />
-    </div>
-
-    <div class="github-link">
-      <a href="https://github.com/kimmobrunfeldt/progressbar.js" data-title="kimmobrunfeldt/progressbar.js" class="iconlink">
-        <i class="fa fa-github"></i>
-      </a>
     </div>
 
     <script src="bundle.js"></script>

@@ -841,10 +841,13 @@ there.
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {}
 
-html,
-body {
-  width: 100%;
-  height: 100%;
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 ul > li {
   list-style: none;
@@ -917,32 +920,75 @@ h6,
 p {
   max-width: 600px;
 }
-body > .content {
-  padding: 60px 40px 50px 40px;
+html,
+body,
+.content-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
-@media screen and (min-width: 500px) {
-  body > .content {
-    padding: 80px 60px 50px 60px;
-  }
+.content-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  box-shadow: 11px 0px 15px 5px;
 }
-html {
-  box-sizing: border-box;
+.content-wrapper .top-bar {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  height: 44px;
+  z-index: 10;
 }
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
+.content-wrapper .content {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  overflow-y: auto;
+  position: relative;
 }
-div.github-link {
-  position: absolute;
-  z-index: 9999;
-  top: 8px;
-  right: 15px;
+.content-wrapper .content > .github-link {
+  visibility: hidden;
+  display: none;
 }
 @media screen and (min-width: 700px) {
-  div.github-link {
-    top: 25px;
+  .content-wrapper {
+    box-shadow: none;
+  }
+  .content-wrapper .top-bar {
+    visibility: hidden;
+    display: none;
+  }
+  .content-wrapper .content > .github-link {
+    display: block;
+    visibility: visible;
+    position: absolute;
+    z-index: 999999;
+    top: 20px;
     right: 20px;
+  }
+  .content-wrapper .content > .github-link > a {
+    color: #505d6b;
+  }
+  .content-wrapper .content > .github-link > a:hover {
+    color: #ED6A5A;
+  }
+}
+.content {
+  padding: 40px 40px 50px 40px;
+}
+@media screen and (min-width: 500px) {
+  .content {
+    padding: 80px 60px 50px 60px;
   }
 }
 div.top-loading-bar {
@@ -981,7 +1027,6 @@ a:hover {
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  height: 32px;
   line-height: 1em;
   color: #505d6b;
   -webkit-transition: all 150ms linear;
@@ -1000,7 +1045,7 @@ a:hover {
   content: attr(data-title);
   display: inline-block;
   position: absolute;
-  bottom: -40px;
+  bottom: -34px;
   right: 10px;
   font-size: 13px;
   padding: 5px 10px;
@@ -1019,6 +1064,10 @@ a:hover {
   transition: opacity 150ms linear, transform 150ms linear, -webkit-transform 150ms linear;
   -webkit-transform: translate3d(0, -8px, 0);
           transform: translate3d(0, -8px, 0);
+}
+.iconlink.iconlink-right[data-title]:before {
+  left: 10px;
+  right: auto;
 }
 .iconlink.iconlink-light[data-title]:before {
   background: #f4f4f4;
@@ -1057,7 +1106,8 @@ body {
   will-change: transform;
 }
 .slideout-open,
-.slideout-open body {
+.slideout-open body,
+.slideout-open .slideout-panel {
   overflow: hidden;
 }
 .slideout-open .slideout-menu {
@@ -1066,6 +1116,7 @@ body {
 @media screen and (min-width: 700px) {
   .slideout-panel {
     margin-left: 256px;
+    padding-right: 256px;
   }
   .slideout-menu {
     display: block;
@@ -1082,7 +1133,7 @@ body {
  * @link https://github.com/jonsuh/hamburgers
  */
 .hamburger {
-  padding: 15px 15px;
+  height: 20px;
   display: inline-block;
   cursor: pointer;
   transition-property: opacity, -webkit-filter;
@@ -1286,6 +1337,96 @@ body {
   -webkit-transform: translate3d(-8px, 0, 0) rotate(45deg) scale(0.7, 1);
   transform: translate3d(-8px, 0, 0) rotate(45deg) scale(0.7, 1);
 }
+/*
+ * Vortex
+ */
+.hamburger--vortex .hamburger-inner {
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+          transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+.hamburger--vortex .hamburger-inner::before,
+.hamburger--vortex .hamburger-inner::after {
+  -webkit-transition-duration: 0s;
+          transition-duration: 0s;
+  -webkit-transition-delay: 0.1s;
+          transition-delay: 0.1s;
+  -webkit-transition-timing-function: linear;
+          transition-timing-function: linear;
+}
+.hamburger--vortex .hamburger-inner::before {
+  -webkit-transition-property: top, opacity;
+  transition-property: top, opacity;
+}
+.hamburger--vortex .hamburger-inner::after {
+  transition-property: bottom, -webkit-transform;
+  -webkit-transition-property: bottom, -webkit-transform;
+  transition-property: bottom, transform;
+  transition-property: bottom, transform, -webkit-transform;
+}
+.hamburger--vortex.is-active .hamburger-inner {
+  -webkit-transform: rotate(765deg);
+  transform: rotate(765deg);
+  -webkit-transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+          transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+.hamburger--vortex.is-active .hamburger-inner::before,
+.hamburger--vortex.is-active .hamburger-inner::after {
+  -webkit-transition-delay: 0s;
+          transition-delay: 0s;
+}
+.hamburger--vortex.is-active .hamburger-inner::before {
+  top: 0;
+  opacity: 0;
+}
+.hamburger--vortex.is-active .hamburger-inner::after {
+  bottom: 0;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+/*
+ * Spin
+ */
+.hamburger--spin .hamburger-inner {
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+          transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+.hamburger--spin .hamburger-inner::before {
+  -webkit-transition: top 0.1s 0.34s ease-in, opacity 0.1s ease-in;
+  transition: top 0.1s 0.34s ease-in, opacity 0.1s ease-in;
+}
+.hamburger--spin .hamburger-inner::after {
+  transition: bottom 0.1s 0.34s ease-in, -webkit-transform 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  -webkit-transition: bottom 0.1s 0.34s ease-in, -webkit-transform 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  transition: bottom 0.1s 0.34s ease-in, transform 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  transition: bottom 0.1s 0.34s ease-in, transform 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), -webkit-transform 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+.hamburger--spin.is-active .hamburger-inner {
+  -webkit-transform: rotate(225deg);
+  transform: rotate(225deg);
+  -webkit-transition-delay: 0.14s;
+          transition-delay: 0.14s;
+  -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+          transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.hamburger--spin.is-active .hamburger-inner::before {
+  top: 0;
+  opacity: 0;
+  -webkit-transition: top 0.1s ease-out, opacity 0.1s 0.14s ease-out;
+  transition: top 0.1s ease-out, opacity 0.1s 0.14s ease-out;
+}
+.hamburger--spin.is-active .hamburger-inner::after {
+  bottom: 0;
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  transition: bottom 0.1s ease-out, -webkit-transform 0.3s 0.14s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -webkit-transition: bottom 0.1s ease-out, -webkit-transform 0.3s 0.14s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: bottom 0.1s ease-out, transform 0.3s 0.14s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: bottom 0.1s ease-out, transform 0.3s 0.14s cubic-bezier(0.215, 0.61, 0.355, 1), -webkit-transform 0.3s 0.14s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
 .example-grid {
   max-width: 1200px;
   position: relative;
@@ -1450,16 +1591,33 @@ body {
   font-size: 1.2rem;
   letter-spacing: 0.15em;
 }
-.side-menu-toggle {
-  z-index: 9999999;
-  position: absolute;
-  top: 5px;
-  left: 0;
+.top-bar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  opacity: 0.97;
+  background: white;
+  border-bottom: 1px solid rgba(160, 160, 160, 0.298039);
+}
+.top-bar .side-menu-toggle {
+  padding-left: 12px;
   -webkit-transition: left 0.3s ease;
   transition: left 0.3s ease;
 }
-.side-menu-toggle.is-active {
+.top-bar .side-menu-toggle.is-active {
   left: -60px;
+}
+.top-bar .github-link {
+  padding-right: 5px;
 }
 .top-loading-bar-tip {
   -webkit-animation: ease floating 2.5s infinite;

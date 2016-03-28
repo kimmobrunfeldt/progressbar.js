@@ -10,7 +10,7 @@ body {
   bottom: 0;
   right: 0;
   z-index: 0;
-  width: 256px;
+  width: @slideout-menu-width;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   display: none;
@@ -25,7 +25,8 @@ body {
 }
 
 .slideout-open,
-.slideout-open body {
+.slideout-open body,
+.slideout-open .slideout-panel {
   overflow: hidden;
 }
 
@@ -35,7 +36,8 @@ body {
 
 @media screen and (min-width: @breakpoint-narrow) {
   .slideout-panel {
-    margin-left: 256px;
+    margin-left: @slideout-menu-width;
+    padding-right: @slideout-menu-width;
   }
 
   .slideout-menu {

@@ -5,15 +5,19 @@ const _ = {
 };
 const Visibility = require('visibilityjs');
 const Slideout = require('slideout');
+var attachFastClick = require('fastclick');
 const ProgressBar = require('progressbar.js');
 window.ProgressBar = ProgressBar;
+console.log('> `ProgressBar` is available in console.')
+console.log(ProgressBar);
+
 const util = require('./util');
 const introSquare = require('./examples/intro-square');
 const introCircle = require('./examples/intro-circle');
 const introTriangle = require('./examples/intro-triangle');
 const initializeExamples = require('./init-examples');
 
-initSlideout();
+attachFastClick(document.body);
 Visibility.onVisible(main);
 function main() {
   // Create a fake loading bar, just for a demo. :)
@@ -27,21 +31,23 @@ function main() {
     playIntro();
     playExamples();
   }, 2000);
+
+  initSlideout();
 }
 
 function initSlideout() {
   var slideout = new Slideout({
     menu: document.getElementById('side-menu'),
-    panel: document.getElementById('content'),
+    panel: document.getElementById('content-wrapper'),
     padding: 0,
     tolerance: 50
   });
-  window.slideout = slideout;
 
   const hamburgerButton = document.querySelector('.side-menu-toggle');
   const throttledToggle = _.throttle(slideout.toggle.bind(slideout), 600);
   hamburgerButton.addEventListener('click', throttledToggle);
 
+  const topBar = document.querySelector('#top-bar');
   slideout.on('beforeopen', () => {
     util.addClass(hamburgerButton, 'is-active')
   });
@@ -49,6 +55,12 @@ function initSlideout() {
   slideout.on('beforeclose', () => {
     util.removeClass(hamburgerButton, 'is-active')
   });
+  
+  var children = document.querySelector('#shape-links').children;
+  for (var i = 0; i < children.length; ++i) {
+    var liEl = children[i];
+    liEl.addEventListener('click', () => slideout.close());
+  }
 }
 
 function initializeIntro() {

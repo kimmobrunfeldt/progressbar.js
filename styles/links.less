@@ -25,7 +25,6 @@ a {
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  height: 32px;
   line-height: 1em;
   color: #505d6b;
   transition: all 150ms linear;
@@ -47,7 +46,7 @@ a {
   content: attr(data-title);
   display: inline-block;
   position: absolute;
-  bottom: -16px - @iconlink-pad;
+  bottom: -10px - @iconlink-pad;
   right: 10px;
   font-size: 13px;
   padding: 5px 10px;
@@ -62,6 +61,11 @@ a {
   opacity: 0;
   transition: opacity 150ms linear, transform 150ms linear;
   transform: translate3d(0, -8px, 0);
+}
+
+.iconlink.iconlink-right[data-title]:before {
+  left: 10px;
+  right: auto;
 }
 
 .iconlink.iconlink-light[data-title]:before {

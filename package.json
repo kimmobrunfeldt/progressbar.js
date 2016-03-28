@@ -36,6 +36,7 @@
     "watchify": "^3.7.0"
   },
   "dependencies": {
+    "fastclick": "^1.0.6",
     "lodash.debounce": "^4.0.3",
     "lodash.flatten": "^4.1.0",
     "lodash.foreach": "^4.1.0",
