@@ -140,7 +140,12 @@ function playFakeLoadingDemo(loadingBar) {
 function checkOrSetFlag() {
   const textShown = localStorage.getItem('progressbar_text_shown');
   if (textShown !== 'true') {
-    localStorage.setItem('progressbar_text_shown', 'true');
+    try {
+      localStorage.setItem('progressbar_text_shown', 'true');
+    } catch (e) {
+      // Ignore error, this happens in safari private mode
+    }
+
     return false;
   }
 
