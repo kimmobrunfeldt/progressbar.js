@@ -27,16 +27,19 @@
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "chokidar-cli": "^1.2.0",
+    "clean-css": "^3.4.11",
     "concurrently": "^2.0.0",
     "envify": "^3.4.0",
     "http-server": "^0.9.0",
     "less": "^2.6.0",
     "less-plugin-glob": "^1.1.1",
     "postcss-cli": "^2.5.1",
+    "uglifyjs": "^2.4.10",
     "watchify": "^3.7.0"
   },
   "dependencies": {
     "fastclick": "^1.0.6",
+    "in-viewport": "^3.4.1",
     "lodash.debounce": "^4.0.3",
     "lodash.flatten": "^4.1.0",
     "lodash.foreach": "^4.1.0",
@@ -45,7 +48,7 @@
     "lodash.throttle": "^4.0.1",
     "progressbar.js": "^0.9.0",
     "punycode": "^1.4.0",
-    "slideout": "^0.1.12",
+    "slideout": "https://github.com/kimmobrunfeldt/slideout.git#da0589fbe4fa9fdc0edf3d2a27260a6faf1bd398",
     "visibilityjs": "^1.2.3"
   }
 }

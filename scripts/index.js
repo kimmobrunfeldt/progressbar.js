@@ -3,6 +3,7 @@ const _ = {
   forEach: require('lodash.foreach'),
   throttle: require('lodash.throttle')
 };
+var inViewport = require('in-viewport');
 const Visibility = require('visibilityjs');
 const Slideout = require('slideout');
 var attachFastClick = require('fastclick');
@@ -25,22 +26,40 @@ function main() {
   playFakeLoadingDemo(loadingBar)
 
   const playIntro = initializeIntro();
-  const playExamples = initializeExamples();
+  const examples = initializeExamples();
 
   setTimeout(() => {
     playIntro();
-    playExamples();
+
+    setInterval(() => {
+      _.forEach(examples.playLoops, (playLoop, id) => {
+        let parent = document.querySelector(id).parentElement;
+        if (parent instanceof SVGElement) {
+          parent = parent.parentElement;
+        }
+
+        var isInViewport = inViewport(parent);
+
+        if (isInViewport) {
+          playLoop.resume();
+        } else {
+          playLoop.pause();
+        }
+      });
+    }, 400);
   }, 2000);
 
-  initSlideout();
+  const slideout = initSlideout();
+  slideout.on('translatestart', () => examples.pause());
+  slideout.on('translateend', () => examples.resume());
 }
 
 function initSlideout() {
   var slideout = new Slideout({
     menu: document.getElementById('side-menu'),
     panel: document.getElementById('content-wrapper'),
-    padding: 0,
-    tolerance: 50
+    padding: 256,
+    tolerance: 100
   });
 
   const hamburgerButton = document.querySelector('.side-menu-toggle');
@@ -55,12 +74,14 @@ function initSlideout() {
   slideout.on('beforeclose', () => {
     util.removeClass(hamburgerButton, 'is-active')
   });
-  
+
   var children = document.querySelector('#shape-links').children;
   for (var i = 0; i < children.length; ++i) {
     var liEl = children[i];
     liEl.addEventListener('click', () => slideout.close());
   }
+
+  return slideout;
 }
 
 function initializeIntro() {
@@ -69,12 +90,14 @@ function initializeIntro() {
     return createBar('#intro-demo' + (i + 1));
   });
 
-  setInterval(() => {
-    _.forEach(introBars, bar => bar.set(0));
-    playIntroDemo(introBars);
-  }, 5000);
+  return () => {
+    setInterval(() => {
+      _.forEach(introBars, bar => bar.set(0));
+      playIntroDemo(introBars);
+    }, 5000);
 
-  return () => playIntroDemo(introBars);
+    playIntroDemo(introBars)
+  };
 }
 
 function playIntroDemo(introBars) {

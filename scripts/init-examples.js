@@ -15,6 +15,7 @@ const examples = {
     require('./examples/circle-2'),
     require('./examples/circle-3')
   ],
+
   semiCircle: [
     require('./examples/semi-circle-1'),
     require('./examples/semi-circle-2')
@@ -26,13 +27,29 @@ const examples = {
 
 
 function initialize() {
-  const bars = _.flatten(_.map(examples, (createBars, key) => {
-    return _.map(createBars, (createBar, i) => {
-      return createBar('#example-' + key.toLowerCase() + '-' + (i + 1));
-    });
-  }));
+  let bars = {};
 
-  return () => _.forEach(bars, bar => playLoop(bar));
+  _.forEach(examples, (createBars, key) => {
+    return _.forEach(createBars, (createBar, i) => {
+      const id = '#example-' + key.toLowerCase() + '-' + (i + 1);
+      bars[id] = createBar(id);
+    });
+  });
+
+  let playLoops = {};
+  _.forEach(bars, (bar, id) => {
+    playLoops[id] = playLoop(bar, false);
+  });
+
+  return {
+    playLoops: playLoops,
+    resume: function resume() {
+      _.forEach(playLoops, loop => loop.resume());
+    },
+    pause: function pause() {
+      _.forEach(playLoops, loop => loop.pause());
+    }
+  }
 }
 
 module.exports = initialize;

@@ -1,4 +1,7 @@
-function playLoop(bar) {
+function playLoop(bar, start = true) {
+  let interval;
+  let playing = false;
+
   function animateBar() {
     bar.animate(1, () => {
       setTimeout(() => {
@@ -7,12 +10,34 @@ function playLoop(bar) {
     });
   }
 
-  setInterval(() => {
-    bar.set(0)
-    animateBar();
-  }, 4000);
+  function resume() {
+    if (playing) {
+      return;
+    }
+    playing = true;
+    interval = setInterval(() => {
+      bar.set(0)
+      animateBar();
+    }, 4000);
 
-  animateBar();
+    animateBar();
+  }
+
+  if (start) {
+    resume();
+  }
+
+  return {
+    pause: () => {
+      if (interval) {
+        bar.stop();
+        clearInterval(interval);
+      }
+
+      playing = false;
+    },
+    resume: resume
+  };
 }
 
 function removeClass(element, className) {
