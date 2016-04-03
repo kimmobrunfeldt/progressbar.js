@@ -49,6 +49,7 @@
     "progressbar.js": "^0.9.0",
     "punycode": "^1.4.0",
     "slideout": "https://github.com/kimmobrunfeldt/slideout.git#da0589fbe4fa9fdc0edf3d2a27260a6faf1bd398",
-    "visibilityjs": "^1.2.3"
+    "visibilityjs": "^1.2.3",
+    "withinviewport": "^1.0.0"
   }
 }

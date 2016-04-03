@@ -1,12 +1,14 @@
+require('./libs/modernizr.min.js');
+
 const _ = {
   map: require('lodash.map'),
   forEach: require('lodash.foreach'),
   throttle: require('lodash.throttle')
 };
-var inViewport = require('in-viewport');
+const withinViewport = require('withinviewport');
 const Visibility = require('visibilityjs');
 const Slideout = require('slideout');
-var attachFastClick = require('fastclick');
+const attachFastClick = require('fastclick');
 const ProgressBar = require('progressbar.js');
 window.ProgressBar = ProgressBar;
 console.log('> `ProgressBar` is available in console.')
@@ -20,7 +22,10 @@ const initializeExamples = require('./init-examples');
 
 attachFastClick(document.body);
 Visibility.onVisible(main);
+
 function main() {
+  initUnsupportedPopup();
+
   // Create a fake loading bar, just for a demo. :)
   var loadingBar = createLoadingBar();
   playFakeLoadingDemo(loadingBar)
@@ -32,13 +37,13 @@ function main() {
     playIntro();
 
     setInterval(() => {
-      _.forEach(examples.playLoops, (playLoop, id) => {
-        let parent = document.querySelector(id).parentElement;
+      _.forEach(examples.playLoops, (playLoop, idSelector) => {
+        let parent = document.querySelector(idSelector).parentNode;
         if (parent instanceof SVGElement) {
-          parent = parent.parentElement;
+          parent = parent.parentNode;
         }
 
-        var isInViewport = inViewport(parent);
+        var isInViewport = withinViewport(parent);
 
         if (isInViewport) {
           playLoop.resume();
@@ -138,14 +143,9 @@ function playFakeLoadingDemo(loadingBar) {
 }
 
 function checkOrSetFlag() {
-  const textShown = localStorage.getItem('progressbar_text_shown');
+  const textShown = util.getStorageSafe('progressbar_text_shown');
   if (textShown !== 'true') {
-    try {
-      localStorage.setItem('progressbar_text_shown', 'true');
-    } catch (e) {
-      // Ignore error, this happens in safari private mode
-    }
-
+    util.setStorageSafe('progressbar_text_shown', 'true');
     return false;
   }
 
@@ -161,4 +161,31 @@ function createLoadingBar() {
       display: 'block'
     }
   });
+}
+
+function initUnsupportedPopup() {
+  if (!shouldShowUnsupported()) {
+    dismissUnsupported();
+  }
+
+  const dismissButton = document.querySelector('#dismiss-not-supported');
+  if (dismissButton) {
+    dismissButton.addEventListener('click', () => {
+      dismissUnsupported();
+    });
+  }
+}
+
+function shouldShowUnsupported() {
+  return util.getStorageSafe('progressbar_dismiss_unsupported') !== 'true';
+}
+
+function dismissUnsupported() {
+  const dismissForver = document.querySelector('#dismiss-not-supported-forever');
+  if (dismissForver.checked) {
+    util.setStorageSafe('progressbar_dismiss_unsupported', 'true');
+  }
+
+  const popup = document.querySelector('.not-supported-browser');
+  popup.parentElement.removeChild(popup);
 }

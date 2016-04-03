@@ -70,9 +70,34 @@ function hasClass(element, className) {
   return false;
 }
 
+function getStorageSafe(key) {
+  let result;
+  try {
+    result = localStorage.getItem(key);
+  } catch (e) {
+    // Ignore
+  }
+
+  return result;
+}
+
+function setStorageSafe(key, val) {
+  let success = false;
+  try {
+    localStorage.setItem(key, val);
+    success = true;
+  } catch (e) {
+    // Ignore error, this happens in safari private mode
+  }
+
+  return success;
+}
+
 module.exports = {
   playLoop,
   removeClass,
   addClass,
-  hasClass
+  hasClass,
+  setStorageSafe,
+  getStorageSafe
 };
