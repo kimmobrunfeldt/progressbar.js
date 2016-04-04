@@ -14,6 +14,7 @@ window.ProgressBar = ProgressBar;
 console.log('> `ProgressBar` is available in console.')
 console.log(ProgressBar);
 
+const smoothScroll = require('./smooth-scroll');
 const util = require('./util');
 const introSquare = require('./examples/intro-square');
 const introCircle = require('./examples/intro-circle');
@@ -57,6 +58,30 @@ function main() {
   const slideout = initSlideout();
   slideout.on('translatestart', () => examples.pause());
   slideout.on('translateend', () => examples.resume());
+
+  initSmoothScroll();
+}
+
+function initSmoothScroll() {
+  const contentContainer = document.querySelector('.content');
+
+  const links = document.querySelectorAll('[data-scroll]');
+  for (let i = 0; i < links.length; ++i) {
+    let link = links[i];
+    const selector = link.hash;
+    link.addEventListener('click', event => {
+      // Don't run if right-click or command/control + click
+      if (event.button !== 0 || event.metaKey || event.ctrlKey) {
+        return;
+      }
+
+      event.preventDefault();
+      //window.location.hash = link.hash;
+      smoothScroll(contentContainer, {
+        to: selector
+      });
+    }, false);
+  }
 }
 
 function initSlideout() {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ProgressBar.js - Progress bars for the web</title>
+    <title>ProgressBar.js - Progress bars with JavaScript</title>
     <meta name="author" content="Kimmo Brunfeldt">
     <meta name="description" content="With ProgressBar.js, it's easy to create responsive and stylish progress bars for the web. Animations perform well even on mobile devices. It provides a few built‑in shapes like Line, Circle and SemiCircle but you can also create arbitrary shaped progress bars with any vector graphic editor.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,8 +18,10 @@
   <body>
     <nav id="side-menu" class="side-menu slideout-menu">
       <div class="side-menu-header">
-        <h1>
-          Progress<br />bar
+        <h1 class="main-header">
+          <a data-scroll href="#intro">
+            Progress<br />bar
+          </a>
         </h1>
 
         <h2 class="sub-header">Demos &amp; Examples</h2>
@@ -28,16 +30,16 @@
       <h3>Shapes</h3>
       <ul id="shape-links">
         <li class="uppercase">
-          <a href="#line">Line</a>
+          <a data-scroll href="#line">Line</a>
         </li>
         <li class="uppercase">
-          <a href="#circle">Circle</a>
+          <a data-scroll href="#circle">Circle</a>
         </li>
         <li class="uppercase">
-          <a href="#semicircle">SemiCircle</a>
+          <a data-scroll href="#semicircle">SemiCircle</a>
         </li>
         <li class="uppercase">
-          <a href="#customshape">Custom</a>
+          <a data-scroll href="#customshape">Custom</a>
         </li>
       </ul>
 
@@ -93,12 +95,21 @@
           </p>
         </div>
 
+        <h4 class="examples-header">Examples</h4>
+        <div class="examples-intro">
+          <p>
+            A few examples of using ProgressBar.js which can be quickly tested
+            in JSFiddle.
+            You can submit your example suggestions to <a href="https://github.com/kimmobrunfeldt/progressbar.js/issues/114">this issue</a>.
+          </p>
+        </div>
+
         <!-- Verbose and could be better generated from a template.
         I wanted to keep the tooling simple in this example page,
         and rendering these containers from JS would make the initial render slower
         -->
         <section class="row line-examples">
-          <h4 id="line">Line</h4>
+          <h5 id="line">Line</h4>
 
           <div class="example-grid">
             <div class="example">
@@ -143,7 +154,7 @@
         </section>
 
         <section class="row circle-examples">
-          <h4 id="circle">Circle</h4>
+          <h5 id="circle">Circle</h4>
 
           <div class="example-grid">
             <div class="example">
@@ -188,7 +199,7 @@
         </section>
 
         <section class="row semi-circle-examples">
-          <h4 id="semicircle">SemiCircle</h4>
+          <h5 id="semicircle">SemiCircle</h4>
 
           <div class="example-grid">
             <div class="example">
@@ -220,7 +231,7 @@
         </section>
 
         <section class="row customshape-examples">
-          <h4 id="customshape">Custom</h4>
+          <h5 id="customshape">Custom</h4>
 
           <div class="example-grid">
             <div class="example">
@@ -278,7 +289,9 @@
       <button id="dismiss-not-supported">Ok</button>
     </div>
 
+    <script src="https://rawgit.com/cferdinandi/smooth-scroll/master/dist/js/smooth-scroll.js"></script>
     <script src="bundle.js"></script>
+
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
