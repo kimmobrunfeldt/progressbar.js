@@ -1,0 +1,18 @@
+.example-grid {
+  h5 {
+    margin-bottom: 0;
+  }
+
+  max-width: 1200px;
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+
+  @media screen and (min-width: @breakpoint-medium) {
+    .example {
+      &:not(:last-child) {
+        margin-right: 60px;
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+.example {
+  width: 100%;
+  margin: 30px 0;
+  background: @grey-xxxx-light;
+  border: 1px solid @grey-border;
+
+  @media screen and (min-width: @breakpoint-x-narrow) {
+    width: 80%;
+  }
+
+  @media screen and (min-width: @breakpoint-narrow) {
+    width: 300px;
+  }
+
+  .example-content {
+    position: relative;
+    background: white;
+    height: 200px;
+  }
+
+  .example-content > *:first-child {
+    left: 50%;
+    top: 50%;
+    width: 30px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+
+  .example-footer {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > a {
+      margin-left: 0;
+      padding: 0;
+      height: 28px;
+      border-bottom: none;
+
+      > img {
+        margin: 6px;
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  h5 {
+    margin: 0;
+    font-weight: 400;
+    color: @grey-light;
+    text-align: right;
+    font-size: 1rem;
+  }
+}
+
+.line-examples .example-content > div:first-child {
+  top: 52%;
+  width: 60%;
+  height: 8px;
+}
+
+.circle-examples .example-content > div:first-child {
+  width: 120px;
+  height: 120px;
+}
+
+.semi-circle-examples .example-content > div:first-child {
+  width: 160px;
+  height: 80px;
+}
+
+.customshape-examples .example-content > *:first-child {
+  height: 95%;
+  width: 160px;
+  display: block;
+}

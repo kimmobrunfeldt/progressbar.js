@@ -1,0 +1,84 @@
+@iconlink-pad: 24px;
+
+a {
+  cursor: pointer;
+  border-bottom: dotted 1px rgba(160, 160, 160, 0.65);
+  text-decoration: none;
+  color: @font-base-color;
+  transition: color 0.2s ease, border-bottom-color 0.2s ease;
+
+  &:hover {
+    text-decoration: none;
+    border-bottom-color: transparent;
+    color: @red;
+  }
+}
+
+.content {
+  a {
+    color: @red;
+  }
+}
+
+.iconlink {
+  border-bottom: none;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1em;
+  color: #505d6b;
+  transition: all 150ms linear;
+  padding: 10px;
+}
+
+.iconlink:hover {
+  color: @red;
+}
+
+.iconlink {
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+// Tooltip
+.iconlink[data-title]:before {
+  font-weight: 300;
+  content: attr(data-title);
+  display: inline-block;
+  position: absolute;
+  bottom: -10px - @iconlink-pad;
+  right: 10px;
+  font-size: 13px;
+  padding: 5px 10px;
+  background: #404040;
+  color: white;
+  border: solid 1px #555;
+  border-radius: 2px;
+  text-decoration: none;
+  width: auto;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms linear, transform 150ms linear;
+  transform: translate3d(0, -8px, 0);
+}
+
+.iconlink.iconlink-right[data-title]:before {
+  left: 10px;
+  right: auto;
+}
+
+.iconlink.iconlink-light[data-title]:before {
+  background: @grey-xxx-light;
+  color: @black-x-light;
+}
+
+.iconlink[data-title]:hover:before {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+}
+
+.iconlink i.fa {
+  font-size: @font-size-xx-large;
+}

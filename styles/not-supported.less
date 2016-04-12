@@ -1,0 +1,30 @@
+.not-supported-browser {
+  .hidden();
+}
+
+.no-flexbox.no-flexboxtweener {
+  .not-supported-browser {
+    position: fixed;
+    z-index: 9999999999;
+    top: 2%;
+    left: 2%;
+    right: 2%;
+    bottom: 2%;
+    width: 96%;
+    heigh: 96%;
+    background: white;
+    border: 3px solid @grey-border;
+    padding: 40px;
+    overflow: auto;
+
+    .visible();
+
+    header {
+      margin-bottom: 20px;
+    }
+
+    button {
+      margin-bottom: 30px;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+.intro-demo {
+  width: 100%;
+  max-width: 410px;
+  margin: 40px 0;
+  display: flex;
+
+  > div {
+    flex: 1;
+
+    &:first-child, &:last-child {
+      > svg {
+        margin-top: 2%;
+        margin-left: 2%;
+        width: 96%;
+        height: 96%;
+      }
+    }
+
+    &:nth-child(2) {
+      margin-left: 30px;
+    }
+
+    &:last-child {
+      margin-left: 25px;
+    }
+
+    > svg {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+
+    > p {
+      font-size: 3.5rem;
+      font-family: "Raleway", Helvetica, sans-serif;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+  }
+}

@@ -1,321 +1,332 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>ProgressBar.js - Progress bars with JavaScript</title>
-        <meta name="description" content="Beautiful and responsive progress bars with animated SVG paths. This library provides a few built&#8209;in shapes such as Line, Circle and Square but you can also create your own progress bars with Illustrator or any vector graphic editor.">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ProgressBar.js - Progress bars with JavaScript</title>
+    <meta name="author" content="Kimmo Brunfeldt">
+    <meta name="description" content="With ProgressBar.js, it's easy to create responsive and stylish progress bars for the web. Animations perform well even on mobile devices. It provides a few built‑in shapes like Line, Circle and SemiCircle but you can also create arbitrary shaped progress bars with any vector graphic editor.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href='http://fonts.googleapis.com/css?family=Roboto:300,100' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="styles/main.css">
+    <link rel="shortcut icon" type="image/png" href="images/progressbar-icon-32.png"/>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600,800,900" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" type="text/css">
 
-        <link rel="shortcut icon" type="image/png" href="images/svg-progressbar-icon-32.png"/>
+    <link rel="stylesheet" href="bundle.css">
+  </head>
+  <body>
+    <nav id="side-menu" class="side-menu slideout-menu">
+      <div class="side-menu-header">
+        <h1 class="main-header">
+          <a data-scroll href="#intro">
+            Progress<br />bar
+          </a>
+        </h1>
 
-        <!-- Color scheme used -->
-        <!-- https://kuler.adobe.com/Copy-of-Close-to-the-Garden-but-more-Teal-color-theme-4324985/ -->
-    </head>
-    <body>
+        <h2 class="sub-header">Demos &amp; Examples</h2>
+      </div>
 
-        <nav class="fixed">
-            <div class="midnightHeader default">
-                <a href="https://github.com/kimmobrunfeldt/progressbar.js" class="github">
-                    <i class="fa fa-github"></i>
+      <h3>Shapes</h3>
+      <ul id="shape-links">
+        <li class="uppercase">
+          <a data-scroll href="#line">Line</a>
+        </li>
+        <li class="uppercase">
+          <a data-scroll href="#circle">Circle</a>
+        </li>
+        <li class="uppercase">
+          <a data-scroll href="#semicircle">SemiCircle</a>
+        </li>
+        <li class="uppercase">
+          <a data-scroll href="#customshape">Custom</a>
+        </li>
+      </ul>
+
+      <h3>Links</h3>
+      <ul>
+        <li class="uppercase">
+          <a href="http://progressbarjs.readthedocs.org/en/latest/">Documentation</a>
+        </li>
+        <li class="uppercase">
+          <a href="http://progressbarjs.readthedocs.org/en/latest/api/shape/">API</a>
+        </li>
+        <li class="uppercase">
+          <a href="https://github.com/kimmobrunfeldt/progressbar.js">GitHub</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div id="content-wrapper" class="content-wrapper slideout-panel">
+      <div id="top-bar" class="top-bar">
+        <button class="side-menu-toggle hamburger hamburger--spin" type="button">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+
+        <div class="github-link">
+          <a href="https://github.com/kimmobrunfeldt/progressbar.js" data-title="kimmobrunfeldt/progressbar.js" class="iconlink">
+            <i class="fa fa-github"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="row">
+          <h4 id="intro">Progress bar.js</h4>
+
+          <div class="row intro-demo">
+            <div id="intro-demo1"></div>
+            <div id="intro-demo2"></div>
+            <div id="intro-demo3"></div>
+          </div>
+
+          <p>
+            With ProgressBar.js, it's easy to create responsive and stylish progress
+            bars for the web. Animations perform well even on mobile
+            devices.
+            It provides a few built‑in shapes like <a data-scroll href="#line">Line</a>, <a data-scroll href="#circle">Circle</a>
+            and <a data-scroll href="#semicircle">SemiCircle</a> but
+            you can also create <a data-scroll href="#customshape">custom</a> shaped progress bars with any vector graphic editor.
+          </p>
+          <p>
+            ProgressBar.js is lightweight, MIT licensed and supports all major browsers including IE9+.
+          </p>
+        </div>
+
+
+        <div class="row usage-container">
+          <h5 id="usage">Usage</h5>
+          <p>
+            A simple code example of creating a <a data-scroll href="#line">Line</a>
+            shaped progress bar and animating it
+            from 0% to 100%. See the <a href="http://progressbarjs.readthedocs.org/en/latest/#install">install documentation</a>
+            for different installation options.
+          </p>
+
+          <pre><code class="language-javascript">var ProgressBar = require('progressbar.js');
+
+// Assuming we have an empty &lt;div id="container"&gt;&lt;/div&gt; in
+// HTML
+var bar = new ProgressBar.Line('#container', {easing: 'easeInOut'});
+bar.animate(1);  // Value from 0.0 to 1.0</code></pre>
+        </div>
+
+        <h4 class="examples-header">Examples</h4>
+        <div class="examples-intro">
+          <p>
+            A few examples of using ProgressBar.js which can be quickly tested
+            in JSFiddle.
+            You can submit your own example suggestions to <a href="https://github.com/kimmobrunfeldt/progressbar.js/issues/114">this issue</a>.
+          </p>
+        </div>
+
+        <!-- Verbose and could be better generated from a template.
+        I wanted to keep the tooling simple in this example page,
+        and rendering these containers from JS would make the initial render slower
+        -->
+        <section class="row example-row line-examples">
+          <h5 id="line">Line</h4>
+
+          <div class="example-grid">
+            <div class="example">
+              <div class="example-content">
+                <div id="example-line-1"></div>
+              </div>
+
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/rfny4ftb/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
                 </a>
+                <h5>Basic line</h5>
+              </div>
             </div>
 
-            <div class="midnightHeader dark">
-                <a href="https://github.com/kimmobrunfeldt/progressbar.js" class="github">
-                    <i class="fa fa-github"></i>
+            <div class="example">
+              <div class="example-content">
+                <div id="example-line-2"></div>
+              </div>
+
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/k5v2d0rr/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
                 </a>
-            </div>
-        </nav>
-
-        <section id="landing" class="no-user-select full-window">
-
-            <div class="background">
-                <div class="landing-progress" id="landing-progress"></div>
+                <h5>Percent</h5>
+              </div>
             </div>
 
-            <div class="content">
-                <header>ProgressBar.js</header>
-                <h3>Beautiful progress bars</h3>
-            </div>
+            <div class="example">
+              <div class="example-content">
+                <div id="example-line-3"></div>
+              </div>
 
-            <div class="go-down-link">
-                <a data-scroll href="//kimmobrunfeldt.github.io/progressbar.js/#introduction">
-                    <img src="images/arrow-down.svg" alt="ProgressBar.js">
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/swc64gg3/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
                 </a>
+                <h5>Color animation</h5>
+              </div>
             </div>
-
+          </div>
         </section>
 
-        <section id="introduction" class="light-section" data-midnight="dark">
-            <div class="content">
-                <a data-scroll href="//kimmobrunfeldt.github.io/progressbar.js/#introduction">
-                    <h1>ProgressBar.js</h1>
+        <section class="row example-row circle-examples">
+          <h5 id="circle">Circle</h4>
+
+          <div class="example-grid">
+            <div class="example">
+              <div class="example-content">
+                <div id="example-circle-1"></div>
+              </div>
+
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/mxjj6jom/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
                 </a>
-                <p class="slogan">Beautiful and responsive progress bars with animated SVG paths.</p>
-
-                <p>
-                    <span class="heavy">With ProgressBar.js</span>, it's easy to create arbitrary shaped progress bars.
-                    This JavaScript library provides a few built&#8209;in shapes like
-                    <a href="http://progressbarjs.readthedocs.org/en/latest/api/shape/">Line, Circle and SemiCircle</a>
-                    but you can also create your own progress bars with Illustrator or any vector graphic editor.
-                </p>
-
-                <p>ProgressBar.js is lightweight, MIT licensed and supports all major browsers including IE9+.</p>
-
-                <p>Install it with Bower:</p>
-
-                <pre><code data-language="javascript">bower install progressbar.js</code></pre>
-
-                <p>Or NPM:</p>
-                <pre><code data-language="javascript">npm install progressbar.js</code></pre>
-
-                <p>Or just by including <a href="https://github.com/kimmobrunfeldt/progressbar.js/blob/master/dist/progressbar.js">progressbar.js</a> or
-                <a href="https://github.com/kimmobrunfeldt/progressbar.js/blob/master/dist/progressbar.min.js">progressbar.min.js</a>
-                from latest tag to your project.</p>
-
-                <p>For detailed usage, see <a href="http://progressbarjs.readthedocs.org/en/latest/api/general/">API documentation in ReadTheDocs</a>.</p>
-
-            </div>
-        </section>
-
-        <section id="examples" class="light-section" data-midnight="dark">
-            <div class="content">
-
-                <a data-scroll href="//kimmobrunfeldt.github.io/progressbar.js/#full-page-examples">
-                    <h2>Full page examples</h2>
-                </a>
-
-                <ul class="example-list" id="full-page-examples">
-                    <li>
-                        <a href="http://kimmobrunfeldt.github.io/progressbar.js/examples/minimal/">Minimal</a>
-                        <span class="see-code">
-                         <a href="https://github.com/kimmobrunfeldt/progressbar.js/tree/gh-pages/examples/minimal">(see code)</a>
-                        </span>
-                    </li>
-                    <li>
-                        <a href="http://kimmobrunfeldt.github.io/progressbar.js/examples/upload/">File upload</a>
-                        <span class="see-code">
-                        <a href="https://github.com/kimmobrunfeldt/progressbar.js/tree/gh-pages/examples/upload">(see code)</a>
-                        </span>
-                    </li>
-                    <li>
-                        <a href="http://kimmobrunfeldt.github.io/progressbar.js/examples/telegram/">Telegram-style loader</a>
-                        <span class="see-code">
-                        <a href="https://github.com/kimmobrunfeldt/progressbar.js/tree/gh-pages/examples/telegram">(see code)</a>
-                        </span>
-                    </li>
-                    <li>
-                        <a href="http://kimmobrunfeldt.github.io/progressbar.js/examples/password-strength/">Password strength</a>
-                        <span class="see-code">
-                        <a href="https://github.com/kimmobrunfeldt/progressbar.js/tree/gh-pages/examples/password-strength">(see code)</a>
-                        </span>
-                    </li>
-
-                </ul>
-
-                <a data-scroll href="//kimmobrunfeldt.github.io/progressbar.js/#examples">
-                    <h1>Examples</h1>
-                </a>
-
-                <div id="example-line" class="example">
-                    <a data-scroll href="//kimmobrunfeldt.github.io/progressbar.js/#example-line">
-                        <h2>Line</h2>
-                    </a>
-                    <p>Simple example of animating a built&#8209;in Line progress bar to 100%. Line width can be set by specifying container's height with CSS.</p>
-
-                    <div class="code"></div>
-
-                    <div class="box-info">
-                        <!-- Play by Alex Fuller from The Noun Project -->
-                        <a class="no-user-select run">
-                            <img src="images/play.svg" alt="Run"> Run
-                        </a>
-                    </div>
-                    <div class="result">
-                        <div class="example-container" id="example-line-container"></div>
-                    </div>
-                </div>
-
-                <div id="example-circle" class="example">
-                    <a data-scroll href="//kimmobrunfeldt.github.io/progressbar.js/#example-circle">
-                        <h2>Circle</h2>
-                    </a>
-                    <p>Simple example of animating a built&#8209;in circular progress bar to 70% and back to 0%.</p>
-
-                    <div class="code"></div>
-
-                    <div class="box-info">
-                        <!-- Play by Alex Fuller from The Noun Project -->
-                        <a class="no-user-select run">
-                            <img src="images/play.svg" alt="Run"> Run
-                        </a>
-                    </div>
-                    <div class="result">
-                        <div class="example-container" id="example-circle-container"></div>
-                    </div>
-                </div>
-
-                <div id="example-circle-percent" class="example">
-                    <a data-scroll href="//kimmobrunfeldt.github.io/progressbar.js/#example-circle-percent">
-                        <h2>Circle with percent text</h2>
-                    </a>
-                    <p>Example of setting text for progress bar. We nicely animate percent of the progress.</p>
-
-                    <div class="code"></div>
-
-                    <div class="box-info">
-                        <!-- Play by Alex Fuller from The Noun Project -->
-                        <a class="no-user-select run">
-                            <img src="images/play.svg" alt="Run"> Run
-                        </a>
-                    </div>
-                    <div class="result">
-                        <div class="example-container" id="example-percent-container"></div>
-                    </div>
-                </div>
-
-                <div id="example-custom-animation" class="example">
-                    <a data-scroll href="//kimmobrunfeldt.github.io/progressbar.js/#example-custom-animation">
-                        <h2>Custom animation</h2>
-                    </a>
-                    <p>Example of customizing the animation. We'll change the color of progress bar smoothly with animation.
-                    You could also animate any property like stroke width, fill opacity, fill color etc.
-                    See detailed explanation in <a href="http://progressbarjs.readthedocs.org/en/latest/api/parameters/#custom-animations">API documentation</a>.</p>
-
-                    <div class="code"></div>
-
-                    <div class="box-info">
-
-                        <a class="no-user-select run">
-                            <img src="images/play.svg" alt="Run"> Run
-                        </a>
-                    </div>
-                    <div class="result">
-                        <div class="example-container" id="example-animation-container"></div>
-                    </div>
-                </div>
-
-                <div id="example-custom-animation2" class="example">
-                    <a data-scroll href="//kimmobrunfeldt.github.io/progressbar.js/#example-custom-animation">
-                        <h2>Complex custom animation</h2>
-                    </a>
-                    <p>A bit more complex example of customizing the animation.
-                        We'll change the width and the color of a progress bar.
-                    </p>
-
-                    <div class="code"></div>
-
-                    <div class="box-info">
-
-                        <a class="no-user-select run">
-                            <img src="images/play.svg" alt="Run"> Run
-                        </a>
-                    </div>
-                    <div class="result">
-                        <div class="example-container" id="example-animation2-container"></div>
-                    </div>
-                </div>
-
-
-                <div id="example-clock" class="example">
-                    <a data-scroll href="//kimmobrunfeldt.github.io/progressbar.js/#example-clock">
-                        <h2>Clock</h2>
-                    </a>
-                    <p>Example of useless clock. Text is automatically positioned to the center.
-                    You can disable automatic text styling with <b>autoStyle</b> option.
-
-                    <div class="code"></div>
-
-                    <div class="box-info">
-                        <!-- Play by Alex Fuller from The Noun Project -->
-                        <a class="no-user-select run">
-                            <img src="images/play.svg" alt="Run"> Run
-                        </a>
-                    </div>
-                    <div class="result">
-                        <div class="example-container" id="example-clock-container"></div>
-                    </div>
-                </div>
-
-                <div id="example-custom-shape" class="example">
-                    <a data-scroll href="//kimmobrunfeldt.github.io/progressbar.js/#example-custom-shape">
-                        <h2>Custom shaped path</h2>
-                    </a>
-                    <p>Example of animating path inside a complex SVG scene.
-                    If you need to do more complicated animations, use SVG animation library like <a href="http://snapsvg.io/">Snap.svg</a>.</p>
-
-                    <div class="code"></div>
-
-                    <div class="box-info">
-
-                        <a class="no-user-select run">
-                            <img src="images/play.svg" alt="Run"> Run
-                        </a>
-                    </div>
-                    <div class="result">
-                        <div class="example-container" id="example-custom-container"></div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section id="please" class="full-window">
-
-            <div class="social-links">
-                <a href="https://github.com/kimmobrunfeldt/progressbar.js" class="github">
-                    <object class="inline-icon" id="star" type="image/svg+xml" data="images/star.svg"></object>
-                    on GitHub
-                </a>
+                <h5>Basic circle</h5>
+              </div>
             </div>
 
+            <div class="example">
+              <div class="example-content">
+                <div id="example-circle-2"></div>
+              </div>
+
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/3pxvkq2d/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
+                </a>
+                <h5>Bounce easing</h5>
+              </div>
+            </div>
+
+            <div class="example">
+              <div class="example-content">
+                <div id="example-circle-3"></div>
+              </div>
+
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/72tkyn40/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
+                </a>
+                <h5>Multiple properties</h5>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <script src="scripts/lib/fit.js"></script>
-        <script src="scripts/lib/bind-polyfill.js"></script>
-        <script src="scripts/lib/smooth-scroll.js"></script>
-        <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
-        <script src="https://cdn.rawgit.com/kimmobrunfeldt/midnight.js/gh-pages/midnight.jquery.src.js"></script>
-        <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.9.0/dist/progressbar.js"></script>
+        <section class="row example-row semi-circle-examples">
+          <h5 id="semicircle">SemiCircle</h4>
 
-        <script src="scripts/lib/rainbow.js"></script>
-        <script src="scripts/lib/rainbow-lang-generic.js"></script>
-        <script src="scripts/lib/rainbow-lang-js.js"></script>
+          <div class="example-grid">
+            <div class="example">
+              <div class="example-content">
+                <div id="example-semicircle-1"></div>
+              </div>
 
-        <script src="scripts/main.js"></script>
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/bs8ane6m/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
+                </a>
+                <h5>Basic semicircle</h5>
+              </div>
+            </div>
 
-        <script>
-          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            <div class="example">
+              <div class="example-content">
+                <div id="example-semicircle-2"></div>
+              </div>
 
-          ga('create', 'UA-55650262-1', 'auto');
-          ga('send', 'pageview');
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/sqwdkrg0/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
+                </a>
+                <h5>Semicircle with text</h5>
+              </div>
+            </div>
+          </div>
+        </section>
 
-        </script>
+        <section class="row example-row customshape-examples">
+          <h5 id="customshape">Custom</h4>
 
-        <!-- Crazyegg -->
-        <script type="text/javascript">
-        setTimeout(function(){var a=document.createElement("script");
-        var b=document.getElementsByTagName("script")[0];
-        a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0026/6682.js?"+Math.floor(new Date().getTime()/3600000);
-        a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-        </script>
+          <div class="example-grid">
+            <div class="example">
+              <div class="example-content">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 100 100">
+                    <path fill-opacity="0" stroke-width="1" stroke="#f4f4f4" d="M81.495,13.923c-11.368-5.261-26.234-0.311-31.489,11.032C44.74,13.612,29.879,8.657,18.511,13.923  C6.402,19.539,0.613,33.883,10.175,50.804c6.792,12.04,18.826,21.111,39.831,37.379c20.993-16.268,33.033-25.344,39.819-37.379  C99.387,33.883,93.598,19.539,81.495,13.923z"/>
+                    <path id="example-custom-1" fill-opacity="0" stroke-width="3" stroke="#ED6A5A" d="M81.495,13.923c-11.368-5.261-26.234-0.311-31.489,11.032C44.74,13.612,29.879,8.657,18.511,13.923  C6.402,19.539,0.613,33.883,10.175,50.804c6.792,12.04,18.826,21.111,39.831,37.379c20.993-16.268,33.033-25.344,39.819-37.379  C99.387,33.883,93.598,19.539,81.495,13.923z"/>
+                </svg>
+              </div>
 
-        <script>
-            (function(w,d) {
-                w.hj = w.hj || function() { (w.hj.q=w.hj.q||[]).push(arguments); };
-                w._hjSettings = { hjid: 2345 };
-                var s = d.createElement('script');
-                s.src = '//insights.hotjar.com/static/client/insights.js';
-                d.getElementsByTagName('head')[0].appendChild(s);
-            }(window,document));
-        </script>
-    </body>
+              <div class="example-footer">
+                <a href="https://jsfiddle.net/kimmobrunfeldt/dnLLgm5o/" data-title="Edit example" class="iconlink iconlink-right">
+                  <img src="images/pencil.svg" alt="See code" />
+                </a>
+                <h5>Heart</h5>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <div class="github-link">
+          <a href="https://github.com/kimmobrunfeldt/progressbar.js" data-title="kimmobrunfeldt/progressbar.js" class="iconlink">
+            <i class="fa fa-github"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="top-loading-bar" id="loading-bar"></div>
+
+    <div class="top-loading-bar-tip hidden">
+      <img src="images/arrow.svg" />
+    </div>
+
+    <div class="not-supported-browser">
+      <header>Unsupported browser</header>
+      <p>
+        Unfortunately this demo page doesn't work well with your browser.
+        For best viewing experience, you should use IE10+, Chrome, Firefox or
+        Opera browser.
+      </p>
+
+      <p>
+        ProgressBar.js supports all major browsers including IE9+ but ironically,
+        this demo page doesn't. If you still want to view the broken page layout,
+        press Ok.
+      </p>
+
+      <label>
+        <input id="dismiss-not-supported-forever" type="checkbox">
+        <span class="label-body">Don't show this again</span>
+      </label>
+
+      <button id="dismiss-not-supported">Ok</button>
+    </div>
+
+    <script src="scripts/libs/highlight.pack.js"></script>
+    <script src="bundle.js"></script>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-55650262-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script>
+      (function(w,d) {
+          w.hj = w.hj || function() { (w.hj.q=w.hj.q||[]).push(arguments); };
+          w._hjSettings = { hjid: 2345 };
+          var s = d.createElement('script');
+          s.src = '//insights.hotjar.com/static/client/insights.js';
+          d.getElementsByTagName('head')[0].appendChild(s);
+      }(window,document));
+    </script>
+  </body>
 </html>
