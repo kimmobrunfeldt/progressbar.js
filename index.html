@@ -8,7 +8,7 @@
     <meta name="description" content="With ProgressBar.js, it's easy to create responsive and stylish progress bars for the web. Animations perform well even on mobile devices. It provides a few built‑in shapes like Line, Circle and SemiCircle but you can also create arbitrary shaped progress bars with any vector graphic editor.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" type="image/png" href="images/svg-progressbar-icon-32.png"/>
+    <link rel="shortcut icon" type="image/png" href="images/progressbar-icon-32.png"/>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600,800,900" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" type="text/css">
@@ -86,13 +86,31 @@
             With ProgressBar.js, it's easy to create responsive and stylish progress
             bars for the web. Animations perform well even on mobile
             devices.
-            It provides a few built‑in shapes like <a href="#line">Line</a>, <a href="#circle">Circle</a>
-            and <a href="#semicircle">SemiCircle</a> but
-            you can also create <a href="#customshape">custom</a> shaped progress bars with any vector graphic editor.
+            It provides a few built‑in shapes like <a data-scroll href="#line">Line</a>, <a data-scroll href="#circle">Circle</a>
+            and <a data-scroll href="#semicircle">SemiCircle</a> but
+            you can also create <a data-scroll href="#customshape">custom</a> shaped progress bars with any vector graphic editor.
           </p>
           <p>
             ProgressBar.js is lightweight, MIT licensed and supports all major browsers including IE9+.
           </p>
+        </div>
+
+
+        <div class="row usage-container">
+          <h5 id="usage">Usage</h5>
+          <p>
+            A simple code example of creating a <a data-scroll href="#line">Line</a>
+            shaped progress bar and animating it
+            from 0% to 100%. See the <a href="http://progressbarjs.readthedocs.org/en/latest/#install">install documentation</a>
+            for different installation options.
+          </p>
+
+          <pre><code class="language-javascript">var ProgressBar = require('progressbar.js');
+
+// Assuming we have an empty &lt;div id="container"&gt;&lt;/div&gt; in
+// HTML
+var bar = ProgressBar.Line('#container', {easing: 'easeInOut'});
+bar.animate(1);  // Value from 0.0 to 1.0</code></pre>
         </div>
 
         <h4 class="examples-header">Examples</h4>
@@ -100,7 +118,7 @@
           <p>
             A few examples of using ProgressBar.js which can be quickly tested
             in JSFiddle.
-            You can submit your example suggestions to <a href="https://github.com/kimmobrunfeldt/progressbar.js/issues/114">this issue</a>.
+            You can submit your own example suggestions to <a href="https://github.com/kimmobrunfeldt/progressbar.js/issues/114">this issue</a>.
           </p>
         </div>
 
@@ -108,7 +126,7 @@
         I wanted to keep the tooling simple in this example page,
         and rendering these containers from JS would make the initial render slower
         -->
-        <section class="row line-examples">
+        <section class="row example-row line-examples">
           <h5 id="line">Line</h4>
 
           <div class="example-grid">
@@ -153,7 +171,7 @@
           </div>
         </section>
 
-        <section class="row circle-examples">
+        <section class="row example-row circle-examples">
           <h5 id="circle">Circle</h4>
 
           <div class="example-grid">
@@ -198,7 +216,7 @@
           </div>
         </section>
 
-        <section class="row semi-circle-examples">
+        <section class="row example-row semi-circle-examples">
           <h5 id="semicircle">SemiCircle</h4>
 
           <div class="example-grid">
@@ -230,7 +248,7 @@
           </div>
         </section>
 
-        <section class="row customshape-examples">
+        <section class="row example-row customshape-examples">
           <h5 id="customshape">Custom</h4>
 
           <div class="example-grid">
@@ -289,7 +307,7 @@
       <button id="dismiss-not-supported">Ok</button>
     </div>
 
-    <script src="https://rawgit.com/cferdinandi/smooth-scroll/master/dist/js/smooth-scroll.js"></script>
+    <script src="scripts/libs/highlight.pack.js"></script>
     <script src="bundle.js"></script>
 
     <script>

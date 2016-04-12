@@ -1,7 +1,4 @@
-const _ = {
-  map: require('lodash.map'),
-  range: require('lodash.range')
-};
+const _ = require('lodash');
 const punycode = require('punycode')
 
 // See http://apps.timwhitlock.info/emoji/tables/unicode

@@ -1,10 +1,6 @@
 require('./libs/modernizr.min.js');
 
-const _ = {
-  map: require('lodash.map'),
-  forEach: require('lodash.foreach'),
-  throttle: require('lodash.throttle')
-};
+const _ = require('lodash');
 const withinViewport = require('withinviewport');
 const Visibility = require('visibilityjs');
 const Slideout = require('slideout');
@@ -21,6 +17,7 @@ const introCircle = require('./examples/intro-circle');
 const introTriangle = require('./examples/intro-triangle');
 const initializeExamples = require('./init-examples');
 
+hljs.initHighlightingOnLoad();
 attachFastClick(document.body);
 Visibility.onVisible(main);
 

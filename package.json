@@ -21,6 +21,18 @@
     "jscs": "jscs ./scripts",
     "eslint": "eslint --ext .js ./scripts"
   },
+  "dependencies": {
+    "fastclick": "^1.0.6",
+    "in-viewport": "^3.4.1",
+    "lodash": "^4.10.0",
+    "progressbar.js": "^0.9.0",
+    "punycode": "^1.4.0",
+    "shifty": "^1.5.2",
+    "slideout": "https://github.com/kimmobrunfeldt/slideout.git#da0589fbe4fa9fdc0edf3d2a27260a6faf1bd398",
+    "smooth-scroll": "cferdinandi/smooth-scroll",
+    "visibilityjs": "^1.2.3",
+    "withinviewport": "^1.0.0"
+  },
   "devDependencies": {
     "autoprefixer": "^6.3.3",
     "babel-preset-es2015": "^6.6.0",
@@ -36,25 +48,5 @@
     "postcss-cli": "^2.5.1",
     "uglifyjs": "^2.4.10",
     "watchify": "^3.7.0"
-  },
-  "dependencies": {
-    "fastclick": "^1.0.6",
-    "in-viewport": "^3.4.1",
-    "lodash.debounce": "^4.0.3",
-    "lodash.flatten": "^4.1.0",
-    "lodash.foreach": "^4.1.0",
-    "lodash.isfunction": "^3.0.8",
-    "lodash.isstring": "^4.0.1",
-    "lodash.map": "^4.2.1",
-    "lodash.merge": "^4.3.4",
-    "lodash.range": "^3.1.3",
-    "lodash.throttle": "^4.0.1",
-    "progressbar.js": "^0.9.0",
-    "punycode": "^1.4.0",
-    "shifty": "^1.5.2",
-    "slideout": "https://github.com/kimmobrunfeldt/slideout.git#da0589fbe4fa9fdc0edf3d2a27260a6faf1bd398",
-    "smooth-scroll": "cferdinandi/smooth-scroll",
-    "visibilityjs": "^1.2.3",
-    "withinviewport": "^1.0.0"
   }
 }

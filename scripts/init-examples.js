@@ -1,8 +1,4 @@
-const _ = {
-  map: require('lodash.map'),
-  forEach: require('lodash.foreach'),
-  flatten: require('lodash.flatten')
-};
+const _ = require('lodash');
 const {playLoop} = require('./util');
 const examples = {
   line: [

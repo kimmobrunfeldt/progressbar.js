@@ -1,8 +1,4 @@
-const _ = {
-  isString: require('lodash.isstring'),
-  isFunction: require('lodash.isfunction'),
-  merge: require('lodash.merge')
-};
+const _ = require('lodash');
 const Tweenable = require('shifty');
 
 function smoothScroll(element, opts, cb) {
