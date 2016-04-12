@@ -6,7 +6,7 @@ var ProgressBar = require('progressbar.js');
 
 function create(container) {
   var bar = new ProgressBar.SemiCircle(container, {
-    strokeWidth: 8,
+    strokeWidth: 6,
     color: '#FFEA82',
     trailColor: '#eee',
     trailWidth: 1,
