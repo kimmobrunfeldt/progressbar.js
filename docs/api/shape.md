@@ -42,6 +42,8 @@ with CSS.
         // Default: 1.0
         // NOTE: In Line shape, you should control
         // the stroke width by setting container's height.
+        // WARNING: IE doesn't support values over 6, see this bug:
+        //          https://github.com/kimmobrunfeldt/progressbar.js/issues/79
         strokeWidth: 2.1,
 
         // If trail options are not defined, trail won't be drawn
