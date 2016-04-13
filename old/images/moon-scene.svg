@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="200" y1="323.2005" x2="200" y2="-8.7638">
+	<stop  offset="1.427154e-03" style="stop-color:#85D8CE"/>
+	<stop  offset="0.3398" style="stop-color:#509FAA"/>
+	<stop  offset="0.6343" style="stop-color:#29748F"/>
+	<stop  offset="0.8637" style="stop-color:#115A7E"/>
+	<stop  offset="1" style="stop-color:#085078"/>
+</linearGradient>
+<rect fill="url(#SVGID_1_)" width="400" height="400"/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="288.8885" y1="72.8631" x2="384.2635" y2="72.8631">
+	<stop  offset="1.427154e-03" style="stop-color:#D9E286"/>
+	<stop  offset="9.859025e-02" style="stop-color:#DCE481"/>
+	<stop  offset="0.6634" style="stop-color:#EEED67"/>
+	<stop  offset="1" style="stop-color:#F4F05D"/>
+</linearGradient>
+<circle fill="url(#SVGID_2_)" cx="336.6" cy="72.9" r="47.7"/>
+<radialGradient id="SVGID_3_" cx="248.8153" cy="277.5572" r="215.4663" gradientTransform="matrix(-0.392 0.92 -0.6172 -0.263 517.674 121.6589)" gradientUnits="userSpaceOnUse">
+	<stop  offset="0" style="stop-color:#AAC49F"/>
+	<stop  offset="0.114" style="stop-color:#9BB092"/>
+	<stop  offset="0.3445" style="stop-color:#828D7D"/>
+	<stop  offset="0.5625" style="stop-color:#6F746D"/>
+	<stop  offset="0.7608" style="stop-color:#646563"/>
+	<stop  offset="0.9217" style="stop-color:#606060"/>
+</radialGradient>
+<rect y="299.2" fill="url(#SVGID_3_)" width="400" height="100.8"/>
+<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M0,154.7"/>
+<circle fill="#EFEFEF" cx="37.5" cy="75" r="2.9"/>
+<circle fill="#EFEFEF" cx="77.5" cy="63" r="3"/>
+<circle fill="#EFEFEF" cx="101.5" cy="75" r="2.9"/>
+<circle fill="#EFEFEF" cx="133.5" cy="87" r="3.2"/>
+<circle fill="#EFEFEF" cx="141.5" cy="111" r="3.8"/>
+<circle fill="#EFEFEF" cx="193.5" cy="75" r="4.2"/>
+<circle fill="#EFEFEF" cx="189.5" cy="107" r="3.6"/>
+<path id="asterism-path" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-miterlimit="10" d="M37.5,75 77.5,63 101.5,75 133.5,87 193.5,75 189.5,107
+	141.5,111 133.5,87 "/>
+</svg>

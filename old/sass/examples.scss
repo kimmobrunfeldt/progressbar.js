@@ -1,0 +1,34 @@
+
+.progressbar-text {
+    color: $main-color-bright;
+    font-weight: 100;
+}
+
+#example-circle-percent {
+    .progressbar-text {
+        font-size: 40px;
+    }
+}
+
+#example-clock {
+    .progressbar-text {
+        font-size: 60px;
+    }
+}
+
+
+#example-line-container {
+    position: relative;
+
+    svg {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+
+        width: 130%;
+
+        height: 2px;
+    }
+}
