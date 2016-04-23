@@ -50,7 +50,8 @@ var Shape = function Shape(container, opts) {
         svgStyle: {
             display: 'block',
             width: '100%'
-        }
+        },
+        warnings: false
     }, opts, true);  // Use recursive extend
 
     // If user specifies e.g. svgStyle or text style, the whole object
@@ -77,7 +78,9 @@ var Shape = function Shape(container, opts) {
 
     this._container = element;
     this._container.appendChild(svgView.svg);
-    this._warnContainerAspectRatio(this._container);
+    if (this._opts.warnings) {
+        this._warnContainerAspectRatio(this._container);
+    }
 
     if (this._opts.svgStyle) {
         utils.setStyles(svgView.svg, this._opts.svgStyle);
@@ -296,7 +299,7 @@ Shape.prototype._warnContainerAspectRatio = function _warnContainerAspectRatio(c
     if (!utils.floatEquals(this.containerAspectRatio, width / height)) {
         console.warn(
             'Incorrect aspect ratio of container',
-            this._container,
+            '#' + container.id,
             'detected:',
             computedStyle.getPropertyValue('width') + '(width)',
             '/',

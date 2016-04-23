@@ -143,7 +143,12 @@ with CSS.
         to: { color: '#000' },
         step: function(state, circle, attachment) {
             circle.path.setAttribute('stroke', state.color);
-        }
+        },
+
+        // If true, some useful console.warn calls will be done if it seems
+        // that progressbar is used incorrectly
+        // Default: false
+        warnings: false
     }
     ```
 
