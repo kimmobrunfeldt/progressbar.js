@@ -1,6 +1,6 @@
 {
   "name": "progressbar.js",
-  "version": "1.0.0-dev",
+  "version": "1.0.1",
   "description": "Responsive and slick progress bars with animated SVG paths",
   "main": "src/main.js",
   "dependencies": {
@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "bluebird": "^2.3.6",
-    "browserify": "^6.2.0",
+    "browserify": "^13.0.0",
     "chai": "^1.10.0",
     "chai-stats": "kimmobrunfeldt/chai-stats",
     "commander": "^2.4.0",
@@ -33,7 +33,7 @@
     "shelljs": "^0.3.0",
     "sinon": "~1.14.1",
     "string": "^2.2.0",
-    "testem": "^0.6.22",
+    "testem": "^1.6.0",
     "watchify": "^2.1.1"
   },
   "scripts": {

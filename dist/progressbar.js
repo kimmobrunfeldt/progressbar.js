@@ -1,8 +1,8 @@
-// ProgressBar.js 1.0.0
+// ProgressBar.js 1.0.1
 // https://kimmobrunfeldt.github.io/progressbar.js
 // License: MIT
 
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.ProgressBar=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.ProgressBar = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /* shifty - v1.5.2 - 2016-02-10 - http://jeremyckahn.github.io/shifty */
 ;(function () {
   var root = this || Function('return this')();
@@ -1760,6 +1760,11 @@ var EASING_ALIASES = {
 };
 
 var Path = function Path(path, opts) {
+    // Throw a better error if not initialized with `new` keyword
+    if (!(this instanceof Path)) {
+        throw new Error('Constructor was called without new keyword');
+    }
+
     // Default parameters for animation
     opts = utils.extend({
         duration: 800,
@@ -2013,13 +2018,14 @@ var Shape = function Shape(container, opts) {
             },
             autoStyleContainer: true,
             alignToBottom: true,
-            value: '',
+            value: null,
             className: 'progressbar-text'
         },
         svgStyle: {
             display: 'block',
             width: '100%'
-        }
+        },
+        warnings: false
     }, opts, true);  // Use recursive extend
 
     // If user specifies e.g. svgStyle or text style, the whole object
@@ -2046,7 +2052,9 @@ var Shape = function Shape(container, opts) {
 
     this._container = element;
     this._container.appendChild(svgView.svg);
-    this._warnContainerAspectRatio(this._container);
+    if (this._opts.warnings) {
+        this._warnContainerAspectRatio(this._container);
+    }
 
     if (this._opts.svgStyle) {
         utils.setStyles(svgView.svg, this._opts.svgStyle);
@@ -2064,7 +2072,7 @@ var Shape = function Shape(container, opts) {
     }, this._opts);
     this._progressPath = new Path(svgView.path, newOpts);
 
-    if (utils.isObject(this._opts.text) && this._opts.text.value) {
+    if (utils.isObject(this._opts.text) && this._opts.text.value !== null) {
         this.setText(this._opts.text.value);
     }
 };
@@ -2265,7 +2273,7 @@ Shape.prototype._warnContainerAspectRatio = function _warnContainerAspectRatio(c
     if (!utils.floatEquals(this.containerAspectRatio, width / height)) {
         console.warn(
             'Incorrect aspect ratio of container',
-            this._container,
+            '#' + container.id,
             'detected:',
             computedStyle.getPropertyValue('width') + '(width)',
             '/',
