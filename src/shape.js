@@ -28,6 +28,8 @@ var Shape = function Shape(container, opts) {
         strokeWidth: 1.0,
         trailColor: null,
         trailWidth: null,
+        outlineColor: null,
+        outlineWidth: 0,
         fill: null,
         text: {
             style: {
@@ -197,6 +199,13 @@ Shape.prototype._createSvgView = function _createSvgView(opts) {
     var path = this._createPath(opts);
     svg.appendChild(path);
 
+    var outlinePath = null;
+    if (opts.outlineColor || opts.outlineWidth > 0){
+        outlinePath = this._createOutline(opts);
+        svg.appendChild(outlinePath);
+
+    }
+
     return {
         svg: svg,
         path: path,
@@ -233,6 +242,31 @@ Shape.prototype._createTrail = function _createTrail(opts) {
 
     // When trail path is set, fill must be set for it instead of the
     // actual path to prevent trail stroke from clipping
+    newOpts.fill = null;
+
+    return this._createPathElement(pathString, newOpts);
+};
+
+Shape.prototype._createOutline = function _createOutline(opts) {
+    // Create path string with original passed options
+    var pathString = this._outlineString(opts);
+
+    // Prevent modifying original
+    var newOpts = utils.extend({}, opts);
+
+    // Defaults for parameters which modify outline path
+    if (!newOpts.outlineColor) {
+        newOpts.outlineColor = '#eee';
+    }
+    if (!newOpts.outlineWidth) {
+        newOpts.outlineWidth = 0;
+    }
+
+    newOpts.color = newOpts.outlineColor;
+    newOpts.strokeWidth = newOpts.outlineWidth;
+
+    // When outline path is set, fill must be set for it instead of the
+    // actual path to prevent outline stroke from clipping
     newOpts.fill = null;
 
     return this._createPathElement(pathString, newOpts);
@@ -285,6 +319,10 @@ Shape.prototype._pathString = function _pathString(opts) {
 };
 
 Shape.prototype._trailString = function _trailString(opts) {
+    throw new Error('Override this function for each progress bar');
+};
+
+Shape.prototype._outlineString = function _outlineString(opts) {
     throw new Error('Override this function for each progress bar');
 };
 

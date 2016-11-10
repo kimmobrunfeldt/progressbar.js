@@ -58,6 +58,15 @@ with CSS.
         // Default: same as strokeWidth
         trailWidth: 0.8,
 
+        // Color for outline stroke
+        // over the actual progress path.
+        // Default: '#eee'
+        outlineColor: '#f4f4f4',
+
+        // Width of the outline stroke. 
+        // Default: 0 , so doesn't show, unless this value is more than 0
+        outlineWidth: 0.8,
+
         // Inline CSS styles for the created SVG element
         // Set null to disable all default styles.
         // You can disable individual defaults by setting them to `null`
