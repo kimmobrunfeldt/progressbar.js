@@ -3,6 +3,7 @@ module.exports = {
     Line: require('./line'),
     Circle: require('./circle'),
     SemiCircle: require('./semicircle'),
+    Square: require('./square'),
 
     // Lower level API to use any SVG path
     Path: require('./path'),
