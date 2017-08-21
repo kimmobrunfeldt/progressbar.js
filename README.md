@@ -1,9 +1,11 @@
 # ProgressBar.js
 
 <br>
+
 ![Demo animation](docs/img/animation.gif)
 
 <br>
+
 Responsive and slick progress bars with animated SVG paths.
 Use built-in shapes or [create your own paths](http://progressbarjs.readthedocs.org/en/latest/api/path).
 [Customize](http://progressbarjs.readthedocs.org/en/latest/api/parameters#custom-animations) the animations as you wish.
