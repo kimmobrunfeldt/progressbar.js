@@ -46,7 +46,7 @@
     "less": "^2.6.0",
     "less-plugin-glob": "^1.1.1",
     "postcss-cli": "^2.5.1",
-    "uglifyjs": "^2.4.10",
+    "uglify-js": "^3.0.28",
     "watchify": "^3.7.0"
   }
 }
