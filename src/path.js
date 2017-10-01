@@ -112,11 +112,10 @@ Path.prototype.animate = function animate(progress, opts, cb) {
             self.path.style.strokeDashoffset = state.offset;
             var reference = opts.shape || self;
             opts.step(state, reference, opts.attachment);
-        },
-        finish: function(state) {
-            if (utils.isFunction(cb)) {
-                cb();
-            }
+        }
+    }).then(function(state) {
+        if (utils.isFunction(cb)) {
+            cb();
         }
     });
 };
