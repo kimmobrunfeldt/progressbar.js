@@ -2,7 +2,6 @@
     "disallowImplicitTypeConversion": ["string"],
     "disallowMixedSpacesAndTabs": true,
     "disallowMultipleLineBreaks": true,
-    "disallowMultipleVarDecl": true,
     "disallowNewlineBeforeBlockStatements": true,
     "disallowMultipleLineStrings": true,
     "disallowMultipleVarDecl": null,
