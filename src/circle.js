@@ -45,13 +45,13 @@ Circle.prototype._trailString = function _trailString(opts) {
     return this._pathString(opts);
 };
 
-Circle.prototype._outlineString = function _outlineString(opts){
+Circle.prototype._outlineString = function _outlineString(opts) {
     /*
       The outline is drawn inside the circle so that the path doesn't clip
     */
 
     // prevent the outline extending outside the circle
-    if(opts.outlineWidth && opts.outlineWidth > opts.strokeWidth){
+    if(opts.outlineWidth && opts.outlineWidth > opts.strokeWidth) {
       opts.outlineWidth = opts.strokeWidth / 2;
     }
 
