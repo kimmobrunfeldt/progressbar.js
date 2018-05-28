@@ -4,19 +4,7 @@
 module.exports = {
 
     // Chrome
-    sauce_linux_chrome_60: {
-        base: 'SauceLabs',
-        browserName: 'chrome',
-        platform: 'linux',
-        version: '60'
-    },
-    sauce_windows_chrome_60: {
-        base: 'SauceLabs',
-        browserName: 'chrome',
-        platform: 'Windows 8.1',
-        version: '60'
-    },
-    sauce_osx_chrome_60: {
+    sauce_chrome: {
         base: 'SauceLabs',
         browserName: 'chrome',
         platform: 'OS X 10.9',
@@ -24,47 +12,19 @@ module.exports = {
     },
 
     // Safari
-    sauce_osx_safari10: {
+    sauce_safari: {
         base: 'SauceLabs',
         browserName: 'safari',
         platform: 'OS X 10.12',
-        version: '10'
+        version: '11'
     },
 
     // Firefox
-    sauce_osx_firefox_beta: {
+    sauce_firefox: {
         base: 'SauceLabs',
         browserName: 'firefox',
-        platform: 'OS X 10.11',
-        version: 'beta'
-    },
-    sauce_osx_firefox_55: {
-        base: 'SauceLabs',
-        browserName: 'firefox',
-        platform: 'OS X 10.9',
+        platform: 'Windows 10',
         version: '55'
-    },
-
-    sauce_linux_firefox_55: {
-        base: 'SauceLabs',
-        browserName: 'firefox',
-        platform: 'linux',
-        version: '55'
-    },
-
-    sauce_windows_firefox_55: {
-        base: 'SauceLabs',
-        browserName: 'firefox',
-        platform: 'Windows 8.1',
-        version: '55'
-    },
-
-    // Opera
-    sauce_windows_opera_12: {
-        base: 'SauceLabs',
-        browserName: 'opera',
-        platform: 'Windows 7',
-        version: '12.12'
     },
 
     // Internet explorer
