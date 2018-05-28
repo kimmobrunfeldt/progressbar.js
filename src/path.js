@@ -1,7 +1,9 @@
 // Lower level API to animate any kind of svg path
 
-var Tweenable = require('shifty');
+var shifty = require('shifty');
 var utils = require('./utils');
+
+var Tweenable = shifty.Tweenable;
 
 var EASING_ALIASES = {
     easeIn: 'easeInCubic',
@@ -110,11 +112,10 @@ Path.prototype.animate = function animate(progress, opts, cb) {
             self.path.style.strokeDashoffset = state.offset;
             var reference = opts.shape || self;
             opts.step(state, reference, opts.attachment);
-        },
-        finish: function(state) {
-            if (utils.isFunction(cb)) {
-                cb();
-            }
+        }
+    }).then(function(state) {
+        if (utils.isFunction(cb)) {
+            cb();
         }
     });
 };
@@ -146,12 +147,12 @@ Path.prototype._resolveFromAndTo = function _resolveFromAndTo(progress, easing, 
 
 // Calculate `from` values from options passed at initialization
 Path.prototype._calculateFrom = function _calculateFrom(easing) {
-    return Tweenable.interpolate(this._opts.from, this._opts.to, this.value(), easing);
+    return shifty.interpolate(this._opts.from, this._opts.to, this.value(), easing);
 };
 
 // Calculate `to` values from options passed at initialization
 Path.prototype._calculateTo = function _calculateTo(progress, easing) {
-    return Tweenable.interpolate(this._opts.from, this._opts.to, progress, easing);
+    return shifty.interpolate(this._opts.from, this._opts.to, progress, easing);
 };
 
 Path.prototype._stopTween = function _stopTween() {
