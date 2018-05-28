@@ -27,7 +27,7 @@
     "karma-sauce-launcher": "^0.2.10",
     "lodash": "^2.4.1",
     "mocha": "^2.0.1",
-    "mustache": "^0.8.2",
+    "mustache": "^2.3.0",
     "node-static": "^0.7.7",
     "semver": "^4.1.0",
     "shelljs": "^0.3.0",
