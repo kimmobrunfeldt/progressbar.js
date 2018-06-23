@@ -124,6 +124,25 @@ Shape.prototype.stop = function stop() {
     this._progressPath.stop();
 };
 
+Shape.prototype.pause = function pause() { 
+    if (this._progressPath === null) {
+        throw new Error(DESTROYED_ERROR);
+    }
+
+    if (this._progressPath === undefined) {
+        return;
+    }
+    this._progressPath._tweenable.pause();
+};
+
+Shape.prototype.resume = function resume() { 
+    if (this._progressPath === null) {
+      throw new Error(DESTROYED_ERROR);
+    }
+
+    this._progressPath._tweenable.resume();
+};
+
 Shape.prototype.destroy = function destroy() {
     if (this._progressPath === null) {
         throw new Error(DESTROYED_ERROR);
