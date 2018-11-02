@@ -7,7 +7,7 @@
     "shifty": "^2.1.2"
   },
   "devDependencies": {
-    "bluebird": "^2.3.6",
+    "bluebird": "^3.5.2",
     "browserify": "^13.0.0",
     "chai": "^4.2.0",
     "chai-stats": "kimmobrunfeldt/chai-stats",
