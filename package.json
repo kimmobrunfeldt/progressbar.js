@@ -9,7 +9,7 @@
   "devDependencies": {
     "bluebird": "^2.3.6",
     "browserify": "^13.0.0",
-    "chai": "^1.10.0",
+    "chai": "^4.2.0",
     "chai-stats": "kimmobrunfeldt/chai-stats",
     "commander": "^2.4.0",
     "concurrently": "^2.0.0",
