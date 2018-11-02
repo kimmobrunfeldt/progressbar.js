@@ -33,7 +33,7 @@
     "shelljs": "^0.3.0",
     "sinon": "~1.14.1",
     "string": "^2.2.0",
-    "testem": "^1.6.0",
+    "testem": "^2.13.0",
     "watchify": "^3.9.0"
   },
   "scripts": {
