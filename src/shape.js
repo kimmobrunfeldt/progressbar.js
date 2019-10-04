@@ -132,12 +132,27 @@ Shape.prototype.pause = function pause() {
     if (this._progressPath === undefined) {
         return;
     }
+
+    if (!this._progressPath._tweenable) {
+        // It seems that we can't pause this
+        return;
+    }
+
     this._progressPath._tweenable.pause();
 };
 
 Shape.prototype.resume = function resume() { 
     if (this._progressPath === null) {
-      throw new Error(DESTROYED_ERROR);
+        throw new Error(DESTROYED_ERROR);
+    }
+
+    if (this._progressPath === undefined) {
+        return;
+    }
+
+    if (!this._progressPath._tweenable) {
+        // It seems that we can't resume this
+        return;
     }
 
     this._progressPath._tweenable.resume();

@@ -104,6 +104,32 @@ var sharedTests = function sharedTests() {
         }, 400);
     });
 
+    // We have to test these two functions together
+    it('pause() & resume() should pause & resume animation', function(done) {
+        this.bar.animate(1, {duration: 1000});
+
+        var self = this;
+        var progressAfterPause;
+
+        setTimeout(function pauseAnimation() {
+            self.bar.pause();
+            progressAfterPause = self.bar.value();
+        }, 100);
+
+        setTimeout(function checkProgressAfterPause() {
+            expect(progressAfterPause).to.almost.equal(self.bar.value(), PRECISION);
+        }, 400);
+
+        setTimeout(function resumeAnimation() {
+            self.bar.resume();
+            setTimeout(function checkProgressAfterResume() {
+                // Make sure it did resume
+                expect(self.bar.value() > progressAfterPause + PRECISION).to.be.true;
+                done();
+            }, 200);
+        }, 600);
+    });
+
     it('destroy() should delete DOM elements', function() {
         var svg = document.querySelector('svg');
         expect(svg).not.to.equal(null);
