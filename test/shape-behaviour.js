@@ -123,8 +123,8 @@ var sharedTests = function sharedTests() {
         setTimeout(function resumeAnimation() {
             self.bar.resume();
             setTimeout(function checkProgressAfterResume() {
-                // Make sure it did resume
-                expect(self.bar.value() > progressAfterPause + PRECISION).to.be.true;
+                // Make sure it did resume quickly (<60ms)
+                expect(self.bar.value() > progressAfterPause + 0.14).to.be.true;
                 done();
             }, 200);
         }, 600);

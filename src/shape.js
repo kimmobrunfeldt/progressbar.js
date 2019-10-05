@@ -124,7 +124,7 @@ Shape.prototype.stop = function stop() {
     this._progressPath.stop();
 };
 
-Shape.prototype.pause = function pause() { 
+Shape.prototype.pause = function pause() {
     if (this._progressPath === null) {
         throw new Error(DESTROYED_ERROR);
     }
@@ -141,7 +141,7 @@ Shape.prototype.pause = function pause() {
     this._progressPath._tweenable.pause();
 };
 
-Shape.prototype.resume = function resume() { 
+Shape.prototype.resume = function resume() {
     if (this._progressPath === null) {
         throw new Error(DESTROYED_ERROR);
     }
