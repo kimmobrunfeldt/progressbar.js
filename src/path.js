@@ -19,6 +19,7 @@ var Path = function Path(path, opts) {
 
     // Default parameters for animation
     opts = utils.extend({
+        delay: 0,
         duration: 800,
         easing: 'linear',
         from: {},
@@ -107,6 +108,7 @@ Path.prototype.animate = function animate(progress, opts, cb) {
         from: utils.extend({ offset: offset }, values.from),
         to: utils.extend({ offset: newOffset }, values.to),
         duration: opts.duration,
+        delay: opts.delay,
         easing: shiftyEasing,
         step: function(state) {
             self.path.style.strokeDashoffset = state.offset;
