@@ -37,15 +37,6 @@ _.each(browserGroups, function(group, index) {
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    jshint: {
-      files: ['src/*.js', 'test/**/*.js'],
-        options: {
-          globals: {
-            jQuery: true,
-            module: true
-          }
-        }
-    },
     shell: {
       stageMinified: {
         options: {
@@ -170,7 +161,6 @@ module.exports = function(grunt) {
     bump = bump || 'patch';
 
     grunt.task.run([
-      'jshint',
       'test',
       'build',
       'stageMinified',
