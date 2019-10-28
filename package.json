@@ -13,7 +13,7 @@
     "chai-stats": "kimmobrunfeldt/chai-stats",
     "commander": "^2.4.0",
     "concurrently": "^2.0.0",
-    "eslint": "^1.0.0",
+    "eslint": "^4.18.2",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-jshint": "^0.10.0",
