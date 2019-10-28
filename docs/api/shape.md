@@ -132,6 +132,10 @@ with CSS.
         // Default: 800
         duration: 1200,
 
+        // Delay for animation in milliseconds
+        // Default: 0
+        delay: 100,
+
         // Easing for animation. See #easing section.
         // Default: 'linear'
         easing: 'easeOut',
@@ -194,6 +198,10 @@ progressBar.animate(0.3, {
         // Duration for animation in milliseconds
         // Default: 800
         duration: 1200,
+
+        // Delay for animation in milliseconds
+        // Default: 0
+        delay: 100,
 
         // Easing for animation. See #easing section.
         // Default: 'linear'
