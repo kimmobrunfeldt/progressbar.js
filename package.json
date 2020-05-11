@@ -4,7 +4,7 @@
   "description": "Responsive and slick progress bars with animated SVG paths",
   "main": "src/main.js",
   "dependencies": {
-    "shifty": "^2.1.2"
+    "shifty": "^2.8.3"
   },
   "devDependencies": {
     "bluebird": "^2.3.6",
@@ -39,6 +39,7 @@
   },
   "scripts": {
     "test": "./tools/test.sh",
+    "start": "npm run dev",
     "dev": "concurrently 'npm run serve' 'grunt watch' 'open http://localhost:8080'",
     "serve": "static ./local-dev -c 0",
     "lint": "./tools/lint.sh",
