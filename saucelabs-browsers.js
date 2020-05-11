@@ -7,16 +7,16 @@ module.exports = {
     sauce_chrome: {
         base: 'SauceLabs',
         browserName: 'chrome',
-        platform: 'OS X 10.9',
-        version: '60'
+        platform: 'macOS 10.15',
+        version: 'latest'
     },
 
     // Safari
     sauce_safari: {
         base: 'SauceLabs',
         browserName: 'safari',
-        platform: 'OS X 10.12',
-        version: '11'
+        platform: 'macOS 10.15',
+        version: 'latest'
     },
 
     // Firefox
@@ -24,7 +24,7 @@ module.exports = {
         base: 'SauceLabs',
         browserName: 'firefox',
         platform: 'Windows 10',
-        version: '55'
+        version: 'latest'
     },
 
     // Internet explorer
@@ -46,6 +46,6 @@ module.exports = {
         base: 'SauceLabs',
         browserName: 'MicrosoftEdge',
         platform: 'Windows 10',
-        version: '20.10240'
+        version: 'latest'
     },
 };
