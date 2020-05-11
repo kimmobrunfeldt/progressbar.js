@@ -2,8 +2,8 @@ var customLaunchers = require('./saucelabs-browsers');
 
 module.exports = function(config) {
     config.set({
-        frameworks: ['mocha', 'browserify'],
-
+        frameworks: ['polyfill', 'mocha', 'browserify'],
+        polyfill: ['es6'],
         files: [
           'test/*.js'
         ],

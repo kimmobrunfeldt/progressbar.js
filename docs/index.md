@@ -8,7 +8,7 @@ See complete examples in [full examples](#full-examples) section.
 You can include ES6 polyfills by adding to your index.html:
 
 ```
-<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js"></script>
+<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 ```
 
 See https://github.com/jeremyckahn/shifty#ie-compatibility and https://polyfill.io/v3/url-builder/.
