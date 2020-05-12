@@ -1,6 +1,6 @@
 // Lower level API to animate any kind of svg path
 
-var shifty = require('shifty').shifty;
+var shifty = require('shifty');
 var utils = require('./utils');
 
 var Tweenable = shifty.Tweenable;
