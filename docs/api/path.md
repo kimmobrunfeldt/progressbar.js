@@ -137,6 +137,14 @@ path.animate(0.3, {
 
 * `cb` Callback function which is called after transition ends.
 
+## .pause()
+
+Suspends animation at its current position.
+
+## .resume()
+
+Resumes animation from a previously paused position.
+
 ## .set(progress)
 
 Set progress instantly without animation. Clears all transitions
