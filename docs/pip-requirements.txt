@@ -1,6 +1,6 @@
 backports-abc==0.4
 backports.ssl-match-hostname==3.5.0.1
-certifi==2015.11.20.1
+certifi==2022.12.7
 click==6.2
 Jinja2==2.8
 livereload==2.4.1
