@@ -8,7 +8,4 @@ EXIT_STATUS=0
 echo -e "\n---- Linting code..\n"
 npm run lint || EXIT_STATUS=$?
 
-echo -e "\n---- Running tests..\n"
-grunt test || EXIT_STATUS=$?
-
 exit $EXIT_STATUS

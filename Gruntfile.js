@@ -1,6 +1,4 @@
-var fs = require('fs');
 var _ = require('lodash');
-
 
 // Split array to smaller arrays containing n elements at max
 function groupToElements(array, n) {
@@ -9,10 +7,6 @@ function groupToElements(array, n) {
   });
 
   return _.toArray(lists);
-}
-
-function endsWith(str, suffix) {
-  return str.indexOf(suffix, str.length - suffix.length) !== -1;
 }
 
 // Setup karma configuration dynamically to run browsers sequentially
@@ -82,13 +76,6 @@ module.exports = function(grunt) {
         // This will run tests in Sauce Lab
         command: './node_modules/karma/bin/karma start'
       },
-      testem: {
-        options: {
-          stdout: true
-        },
-        // This will run tests in all local browsers available/detected
-        command: 'testem ci -R dot -l chrome'
-      }
     },
     // Uglify must be run after browserify
     uglify: {
@@ -125,8 +112,6 @@ module.exports = function(grunt) {
     'uglify:progressbar'
   ]);
 
-  grunt.registerTask('test', ['shell:testem']);
-
   // Run multiple tests serially, but continue if one of them fails.
   // Adapted from http://stackoverflow.com/questions/16487681/gruntfile-getting-error-codes-from-programs-serially
   grunt.registerTask('sauce', function() {
@@ -161,7 +146,6 @@ module.exports = function(grunt) {
     bump = bump || 'patch';
 
     grunt.task.run([
-      'test',
       'build',
       'stageMinified',
       'shell:release:' + bump

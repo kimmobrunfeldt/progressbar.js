@@ -1,29 +1,9 @@
 // Utility functions
 
+var merge = require('lodash.merge');
+
 var PREFIXES = 'Webkit Moz O ms'.split(' ');
 var FLOAT_COMPARISON_EPSILON = 0.001;
-
-// Copy all attributes from source object to destination object.
-// destination object is mutated.
-function extend(destination, source, recursive) {
-    destination = destination || {};
-    source = source || {};
-    recursive = recursive || false;
-
-    for (var attrName in source) {
-        if (source.hasOwnProperty(attrName)) {
-            var destVal = destination[attrName];
-            var sourceVal = source[attrName];
-            if (recursive && isObject(destVal) && isObject(sourceVal)) {
-                destination[attrName] = extend(destVal, sourceVal, recursive);
-            } else {
-                destination[attrName] = sourceVal;
-            }
-        }
-    }
-
-    return destination;
-}
 
 // Renders templates with given variables. Variables must be surrounded with
 // braces without any spaces, e.g. {variable}
@@ -123,7 +103,7 @@ function removeChildren(el) {
 }
 
 module.exports = {
-    extend: extend,
+    extend: merge,
     render: render,
     setStyle: setStyle,
     setStyles: setStyles,
