@@ -15,4 +15,4 @@ PyYAML==3.11
 singledispatch==3.4.0.3
 six==1.10.0
 tornado==4.3
-wheel==0.24.0
+wheel==0.38.1
